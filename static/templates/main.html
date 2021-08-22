@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <title>NanoTools</title>
+        <meta name="description" content="description"/>
+        <meta name="keywords" content="keywords"/>
+        <meta name="author" content="Wojciech Rożek"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/style.css' %}">
+    </head>
+    <body>
+        <p>he</p>
+        <div class='item'>
+            <div class="resizer ne"></div>
+            <div class="resizer nw"></div>
+            <div class="resizer sw"></div>
+            <div class="resizer se"></div>
+        </div>
+        <script src="{% static 'scripts/processing.js' %}"></script>
+    </body>
+</html>
