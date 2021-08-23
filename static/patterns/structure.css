@@ -43,7 +43,7 @@
 }
 
 .structure fieldset legend paragraph {
-    display: inline;
+    display: inline-block;
     margin: 0;
     font-family: Cormorant-Light;
     font-size: 2rem;
@@ -55,16 +55,17 @@
 }
 
 .structure fieldset legend ul {
-    display: inline;
+    display: inline-block;
     margin: 0;
+    align-content: center;
     padding: 0;
 }
 
 .structure fieldset legend ul input {
+    align-content: center;
+    width: 30%;
     border-width: 0;
     padding: 0;
     margin: 0;
-    background-color: blue;
-    width: 1rem;
-    display: inline-block;
+    background-color:yellow;
 }
