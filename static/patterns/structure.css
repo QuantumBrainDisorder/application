@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     bottom: 1rem;
-    width: 30vw;
+    width: 50vw;
     display:  flex;
     flex-direction: column;
     }
@@ -25,14 +25,60 @@
     scrollbar-width: 0;
 }
   
+/*to hide scrollbar*/
 .structure fieldset textarea::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
   }
 
 .structure fieldset legend {
-    font-size: 1.5rem;
+    font-size: 0;
     font-family: 'Didot';
     font-stretch: ultra-condensed;
-    background-color: rgb(165, 0, 180);
+    background-color: rgb(180, 0, 240);
+    z-index: 1;
+}
+
+.structure fieldset legend paragraph {
+    display: inline;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.structure fieldset legend ul {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.structure fieldset legend ul li {
+    display: inline-block;
+
+}
+.structure fieldset legend ul li:hover {
+    background: rgb(120, 0, 160);
+}
+
+.structure fieldset legend ul li:hover ul {
+    display: block;
+}
+
+.structure fieldset legend  ul li ul {
+    position: absolute;
+    width: 200px;
+    display: none;
+  }
+
+.structure fieldset legend  ul li ul li { 
+    background: rgb(180, 0, 240); 
+    display: block; 
+  }
+
+.structure fieldset legend ul li ul li paragraph{
+    display:block !important;
+} 
+
+.structure fieldset legend ul li ul li:hover {
+    background: rgb(120, 0, 160);
 }
