@@ -8,26 +8,16 @@
         <meta name="keywords" content="keywords"/>
         <meta name="author" content="Rabarbar Batman"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        p {
-            position: relative;
-            font-size: 3rem;
-            margin: 4rem;
-        }
-        p::before {
-            content: open-quote;
-            position: absolute;
-            left: -3.5rem;
-            top: -2rem;
-            font-size: 8rem;
-            color: rgba(0, 0, 0, 0.5)
-        }
-    </style>
+
     </head>
         
     <body>
         <p id="a" onclick="fun()">abc</p>
-        
+        <script>
+            function fun() {
+                document.getElementById("a").textContent = new Date();
+            }
+        </script>
         <script src="{% static 'scripts/processing.js' %}"></script>
         <script src="{% static 'scripts/structure.js' %}"></script>
     </body>
