@@ -24,15 +24,13 @@
     resize: none;
     flex: 1;
     border-width: 0;
-    background-color: lawngreen;
-    scrollbar-arrow-color: transparent;
     scrollbar-width: 0;
 }
   
 .properties fieldset textarea::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
-  }
+}
 
 .properties fieldset legend {
     background-color: rgb(135, 0, 180);

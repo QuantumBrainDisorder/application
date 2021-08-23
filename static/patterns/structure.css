@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 .structure {
     position: fixed;
     top: 0;
@@ -5,6 +7,7 @@
     width: 50vw;
     display:  flex;
     flex-direction: column;
+    font-family: Italiana-Regular;
     }
 
 .structure fieldset {
@@ -20,9 +23,6 @@
     position:relative;
     resize: none;
     flex: 1;
-    border-width: 0;
-    scrollbar-arrow-color: transparent;
-    scrollbar-width: 0;
 }
   
 /*to hide scrollbar*/
@@ -33,8 +33,6 @@
 
 .structure fieldset legend {
     font-size: 0;
-    font-family: 'Didot';
-    font-stretch: ultra-condensed;
     background-color: rgb(180, 0, 240);
     z-index: 1;
 }
@@ -44,6 +42,10 @@
     font-size: 1.5rem;
     margin: 0;
     padding: 0;
+}
+
+.structure fieldset legend paragraph:hover {
+    cursor: default;
 }
 
 .structure fieldset legend ul {
@@ -66,7 +68,7 @@
 
 .structure fieldset legend  ul li ul {
     position: absolute;
-    width: 200px;
+    width: inherit;
     display: none;
   }
 
@@ -77,6 +79,7 @@
 
 .structure fieldset legend ul li ul li paragraph{
     display:block !important;
+    text-align: center;
 } 
 
 .structure fieldset legend ul li ul li:hover {
