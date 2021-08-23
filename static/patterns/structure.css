@@ -72,6 +72,8 @@
     font-size: 2rem;
     background-color: transparent;
     text-align: center;
+    content: counter(text);
+    width: fit-content;
 }
 
 .structure fieldset legend ul span:hover {
