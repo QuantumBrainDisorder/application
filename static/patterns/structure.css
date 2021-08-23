@@ -4,10 +4,9 @@
     position: fixed;
     top: 0;
     bottom: 1rem;
-    width: 50vw;
+    width: 30vw;
     display:  flex;
     flex-direction: column;
-    font-family: Italiana-Regular;
     }
 
 .structure fieldset {
@@ -17,11 +16,17 @@
     display:  flex;
     flex-direction: column;
     min-width: auto;
+    border-color: rgb(180, 0, 240);
+    border-width: 0.4rem;
+    border-style: outset;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
 }
 
 .structure fieldset textarea {
     position:relative;
     resize: none;
+    border-width: 0;
     flex: 1;
 }
   
@@ -39,8 +44,9 @@
 
 .structure fieldset legend paragraph {
     display: inline;
-    font-size: 1.5rem;
     margin: 0;
+    font-family: Cormorant-Light;
+    font-size: 2rem;
     padding: 0;
 }
 
@@ -58,8 +64,20 @@
     display: inline-block;
 
 }
-.structure fieldset legend ul li:hover {
+
+.structure fieldset legend ul li button {
+    display: inline-block;
+    background: rgb(180, 0, 240);
+    border-width: 0;
+    font-family: Cormorant-Light;
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.structure fieldset legend ul li button:hover {
     background: rgb(120, 0, 160);
+    cursor: text;
 }
 
 .structure fieldset legend ul li:hover ul {
@@ -74,14 +92,18 @@
 
 .structure fieldset legend  ul li ul li { 
     background: rgb(180, 0, 240); 
-    display: block; 
+    display: block;
   }
 
-.structure fieldset legend ul li ul li paragraph{
-    display:block !important;
-    text-align: center;
+.structure fieldset legend ul li ul li button{
+    display: block !important;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: transparent;
 } 
 
-.structure fieldset legend ul li ul li:hover {
+.structure fieldset legend ul li ul li button:hover {
     background: rgb(120, 0, 160);
+    cursor: default;
 }
