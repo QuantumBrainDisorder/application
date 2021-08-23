@@ -60,51 +60,11 @@
     padding: 0;
 }
 
-.structure fieldset legend ul li {
-    display: inline-block;
-
-}
-
-.structure fieldset legend ul li button {
-    display: inline-block;
-    background: rgb(180, 0, 240);
+.structure fieldset legend ul input {
     border-width: 0;
-    font-family: Cormorant-Light;
-    font-size: 2rem;
     padding: 0;
     margin: 0;
-}
-
-.structure fieldset legend ul li button:hover {
-    background: rgb(120, 0, 160);
-    cursor: text;
-}
-
-.structure fieldset legend ul li:hover ul {
-    display: block;
-}
-
-.structure fieldset legend  ul li ul {
-    position: absolute;
-    width: inherit;
-    display: none;
-  }
-
-.structure fieldset legend  ul li ul li { 
-    background: rgb(180, 0, 240); 
-    display: block;
-  }
-
-.structure fieldset legend ul li ul li button{
-    display: block !important;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    background-color: transparent;
-    width: 100%;
-} 
-
-.structure fieldset legend ul li ul li button:hover {
-    background: rgb(120, 0, 160);
-    cursor: default;
+    background-color: blue;
+    width: 1rem;
+    display: inline-block;
 }

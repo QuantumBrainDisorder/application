@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <title>NanoTools</title>
+        <meta name="description" content="description"/>
+        <meta name="keywords" content="keywords"/>
+        <meta name="author" content="Rabarbar Batman"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/footer.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/structure.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/properties.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/aaa.css' %}">
+
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/arco-perpetuo" type="text/css"/>
+        </head>
+    <body>
+        <label for="ice-cream-choice">Choose a flavor:</label>
+        <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+
+        <datalist id="ice-cream-flavors">
+            <option value="Chocolate">
+            <option value="Coconut">
+            <option value="Mint">
+            <option value="Strawberry">
+            <option value="Vanilla">
+        </datalist>
+
+        <script src="{% static 'scripts/processing.js' %}"></script>
+        <script src="{% static 'scripts/structure.js' %}"></script>
+    </body>
+</html>

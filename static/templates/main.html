@@ -19,11 +19,11 @@
     <body>
         <div class="structure">
             <fieldset>
-                <legend>
+                <!-- <legend>
                     <paragraph>Structure (</paragraph>
                     <ul>
                       <li>
-                        <button>nm</button>
+                        <button id="structure__unit" ondblclick="structure__unit()">nm</button>
                         <ul>
                           <li><button>&#8491;</button></li>
                           <li><button>nm</button></li>
@@ -32,8 +32,69 @@
                       </li>
                     </ul>
                     <paragraph>):</paragraph>
+                </legend> -->
+                <legend>
+                    <paragraph>Structure (</paragraph>
+                    <ul>
+                      <li>
+                        <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+<!-- 
+                        <datalist id="ice-cream-flavors">
+                            <option value="Chocolate">
+                            <option value="Coconut">
+                            <option value="Mint">
+                            <option value="Strawberry">
+                            <option value="Vanilla">
+                        </datalist> -->
+                      </li>
+                    </ul>
+                    <paragraph>):</paragraph>
                 </legend>
-                <textarea >as asd d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj asj dads a k jask  kda ka asda dasd d</textarea>
+
+
+
+    <textarea >GaAs 400
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+        
+Ga0.80In0.20As 10
+Ga0.70In0.30Sb 20
+Al0.50Ga0.50As 15
+                </textarea>
             </fieldset>
         </div>
         <div class="properties">
@@ -154,6 +215,8 @@
         <footer>
             Ready!
         </footer>
+
         <script src="{% static 'scripts/processing.js' %}"></script>
+        <script src="{% static 'scripts/structure.js' %}"></script>
     </body>
 </html>
