@@ -1,0 +1,1 @@
+structure__unit.innerHTML = localStorage.getItem("structure__unit")
