@@ -154,7 +154,7 @@
 }
 
 .structure fieldset legend ul li{
-    display: inline-block;
+    display: inline-flex;
     margin: 0;
     padding: 0;
     font-size: 0;
@@ -169,14 +169,16 @@
     cursor: default;
 }
 
-.structure fieldset legend ul li input {
-
+.structure fieldset legend ul li form input {
+    text-align: center;
+    size: 2rem;
     background-color: tomato;
     border-width: 0;
     padding: 0;
     font-family: Cormorant-Light;
-    width: 50%;
     margin: 0;
+    font-size: 2rem;
+    width: 2rem;
 } 
 
 /* border-width: 0;
