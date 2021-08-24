@@ -37,7 +37,7 @@
                     <ul>
                         <li>Structure (</li>
                         <li>
-                            <span id="structure__unit" contenteditable="true" spellcheck="false" rows>nm</span>                          
+                            <span id="structure__unit" contenteditable="true" spellcheck="false"></span>                          
                             <ul contenteditable="false">
                                 <li onclick="set__structure__unit('A')">&#8491;</li>
                                 <li onclick="set__structure__unit('nm')">nm</li>
@@ -48,48 +48,7 @@
                     </ul>
                 </legend>
 
-    <textarea spellcheck="false">GaAs 400
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-        
-Ga0.80In0.20As 10
-Ga0.70In0.30Sb 20
-Al0.50Ga0.50As 15
-                </textarea>
+    <textarea id="structure" spellcheck="false"></textarea>
             </fieldset>
         </div>
         <div class="properties">
@@ -213,7 +172,7 @@ Al0.50Ga0.50As 15
 
         <script src="{% static 'scripts/processing.js' %}"></script>
         <script src="{% static 'scripts/structure.js' %}"></script>
-        
+
         <script src="{% static 'scripts/startapp.js' %}"></script>
     </body>
 </html>

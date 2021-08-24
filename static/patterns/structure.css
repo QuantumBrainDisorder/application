@@ -179,7 +179,11 @@ outline: 0px solid transparent;
     font-family: Cormorant-Light;
     font-size: 2rem;
     background-color: transparent;
+    max-width: 8rem;
+    max-height: 2.4rem;
+    vertical-align: top;
     text-align: center;
+    overflow: hidden;
 }
 
 .structure fieldset legend ul li ul {
