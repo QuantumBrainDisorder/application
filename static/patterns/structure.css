@@ -137,7 +137,6 @@
     flex: 1;
 }
   
-/*to hide scrollbar*/
 .structure fieldset textarea::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
@@ -162,44 +161,13 @@
 }
 
 .structure fieldset legend input {
-    display: inline-block;
-    width: 2rem;
-    margin: 0;
-    padding: 0;
-}
-
-.structure fieldset legend ul li span input {
-    border-width: 0;
+    display: inline;
+    /*border-width: 0;
     padding: 0;
     margin: 0;
     font-family: Cormorant-Light;
     font-size: 2rem;
     background-color: transparent;
     text-align: center;
-    content: counter(text);
-    width: fit-content;
-}
-
-.structure fieldset legend ul li span input:hover {
-    background-color: rgb(120, 0, 160);
-}
-
-.structure fieldset legend ul li span:hover ul {
-    display: block;
-}
-
-.structure fieldset legend ul li span ul {
-    position: absolute;
-    width: inherit;
-    display: none;
-}
-
-.structure fieldset legend ul li span ul li{
-    background: rgb(180, 0, 240); 
-    display: block; 
-}
-
-.structure fieldset legend ul li span ul li:hover{
-    background: rgb(120, 0, 160); 
-    cursor: pointer;
+    width: 2rem; */
 }
