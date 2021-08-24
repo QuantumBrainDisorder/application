@@ -32,7 +32,7 @@ structure__unit.oninput = function (event) {
   localStorage.setItem("structure__unit", structure__unit.textContent);
 }
 
-structure__unit. = function (event) {
+structure__unit.onfocusout = function (event) {
   if (structure__unit.textContent == "") {
     structure__unit.textContent = "nm";
   }
