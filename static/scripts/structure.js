@@ -1,11 +1,29 @@
-function structure__set__A() {
-  document.getElementById("structure__unit").textContent = 'Alpha<ul contenteditable="false"><li onclick="structure__set__A()">&#8491;</li><li onclick="structure__set__nm()">nm</li><li onclick="structure__set__um()">&#956;m</li></ul>';
+const structure__unit = document.getElementById("structure__unit");
+
+function set__structure__unit(unit) {
+  switch(unit) {
+    case 'A':
+      structure__unit.innerHTML = "&#8491;";
+      break;
+    case 'nm':
+      structure__unit.innerHTML = "nm";
+      break;
+    case 'um':
+      structure__unit.innerHTML = "&#956;m";
+      break;
+  };
+};
+
+structure__unit.addEventListener('change', updateValue);
+
+function updateValue(e) {
+  structure__unit.style.backgroundColor = "red";
 }
 
-function structure__set__nm() {
-    document.getElementById("structure__unit").style.color = "red";
+structure__unit.ondblclick = function () {
+  structure__unit.style.backgroundColor = "red";
 }
-  
-function structure__set__um() {
-    document.getElementById("structure__unit").style.color = "green";
- }
+
+structure__unit.onchange = function () {
+  structure__unit.style.backgroundColor = "green";
+}
