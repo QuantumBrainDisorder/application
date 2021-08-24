@@ -14,16 +14,8 @@ function set__structure__unit(unit) {
   };
 };
 
-structure__unit.addEventListener('change', updateValue);
-
-function updateValue(e) {
-  structure__unit.style.backgroundColor = "red";
-}
-
-structure__unit.ondblclick = function () {
-  structure__unit.style.backgroundColor = "red";
-}
-
-structure__unit.onchange = function () {
-  structure__unit.style.backgroundColor = "green";
+structure__unit.onkeypress = function (event) {
+    if (event.keyCode === 13) {
+      document.getElementById("structure__unit").blur();
+    }
 }

@@ -1,7 +1,7 @@
 /* @import "fonts.css";
 
 [contenteditable] {
-    outline: 0px solid transparent;
+outline: 0px solid transparent;
 }
 
 .structure {
@@ -11,7 +11,7 @@
     width: 30vw;
     display:  flex;
     flex-direction: column;
-    }
+}
 
 .structure fieldset {
     flex: 1;
@@ -33,11 +33,13 @@
     border-width: 0;
     flex: 1;
 }
-  
+
 .structure fieldset textarea::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
-  }
+}
+
+
 
 .structure fieldset legend {
     font-size: 0;
@@ -45,7 +47,11 @@
     z-index: 1;
 }
 
-.structure fieldset legend paragraph {
+.structure fieldset legend ul {
+    margin: 0;
+    padding: 0;
+}
+.structure fieldset legend ul li {
     display: inline-block;
     margin: 0;
     font-family: Cormorant-Light;
@@ -53,17 +59,12 @@
     padding: 0;
 }
 
-.structure fieldset legend paragraph:hover {
+.structure fieldset legend ul li:hover {
     cursor: default;
 }
 
-.structure fieldset legend ul {
+.structure fieldset legend ul li span {
     display: inline-block;
-    margin: 0;
-    padding: 0;
-}
-
-.structure fieldset legend ul span {
     border-width: 0;
     padding: 0;
     margin: 0;
@@ -71,40 +72,44 @@
     font-size: 2rem;
     background-color: transparent;
     text-align: center;
-    content: counter(text);
-    width: fit-content;
 }
 
-.structure fieldset legend ul span:hover {
-    background-color: rgb(120, 0, 160);
-}
-
-.structure fieldset legend ul span:hover ul {
-    display: block;
-}
-
-.structure fieldset legend ul span ul {
-    position: absolute;
-    width: inherit;
+.structure fieldset legend ul li ul {
     display: none;
 }
 
-.structure fieldset legend ul span ul li{
-    background: rgb(180, 0, 240); 
-    display: block; 
+.structure fieldset legend ul li span:hover {
+    background-color: rgb(120, 0, 160);
 }
 
-.structure fieldset legend ul span ul li:hover{
-    background: rgb(120, 0, 160); 
+.structure fieldset legend ul li span:hover + ul{
+    display: block;
+}
+
+.structure fieldset legend ul li ul {
+    position: absolute;
+    display: none;
+}
+
+.structure fieldset legend ul li ul:hover {
+    display: block;
+}
+
+.structure fieldset legend ul li ul li {
+    display: block;
+    text-align: center;
+    background-color: rgb(180, 0, 240);
+}
+
+.structure fieldset legend ul li ul li:hover {
+    background-color: rgb(120, 0, 160);
     cursor: pointer;
-}
+} */
 
- */
-
- @import "fonts.css";
+@import "fonts.css";
 
 [contenteditable] {
-    outline: 0px solid transparent;
+outline: 0px solid transparent;
 }
 
 .structure {
@@ -114,7 +119,7 @@
     width: 30vw;
     display:  flex;
     flex-direction: column;
-    }
+}
 
 .structure fieldset {
     flex: 1;
@@ -136,11 +141,13 @@
     border-width: 0;
     flex: 1;
 }
-  
+
 .structure fieldset textarea::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
-  }
+}
+
+
 
 .structure fieldset legend {
     font-size: 0;
@@ -152,41 +159,57 @@
     margin: 0;
     padding: 0;
 }
-
-.structure fieldset legend ul li{
-    display: inline-flex;
+.structure fieldset legend ul li {
+    display: inline-block;
     margin: 0;
-    padding: 0;
-    font-size: 0;
-}
-
-.structure fieldset legend ul li span {
     font-family: Cormorant-Light;
     font-size: 2rem;
+    padding: 0;
 }
 
-.structure fieldset legend ul li span:hover {
+.structure fieldset legend ul li:hover {
     cursor: default;
 }
 
-.structure fieldset legend ul li form input {
-    text-align: center;
-    size: 2rem;
-    background-color: tomato;
+.structure fieldset legend ul li span {
+    display: inline-block;
     border-width: 0;
     padding: 0;
-    font-family: Cormorant-Light;
     margin: 0;
+    font-family: Cormorant-Light;
     font-size: 2rem;
-    width: 2rem;
-} 
+    background-color: transparent;
+    text-align: center;
+}
 
-/* border-width: 0;
-padding: 0;
-margin: 0;
-font-family: Cormorant-Light;
-font-size: 2rem;
-background-color: transparent;
-text-align: center;
-content: counter(text);
-width: fit-content; */
+.structure fieldset legend ul li ul {
+    display: none;
+}
+
+.structure fieldset legend ul li span:hover {
+    background-color: rgb(120, 0, 160);
+}
+
+.structure fieldset legend ul li span:hover + ul{
+    display: block;
+}
+
+.structure fieldset legend ul li ul {
+    position: absolute;
+    display: none;
+}
+
+.structure fieldset legend ul li ul:hover {
+    display: block;
+}
+
+.structure fieldset legend ul li ul li {
+    display: block;
+    text-align: center;
+    background-color: rgb(180, 0, 240);
+}
+
+.structure fieldset legend ul li ul li:hover {
+    background-color: rgb(120, 0, 160);
+    cursor: pointer;
+}
