@@ -1,0 +1,22 @@
+@import "variables.css";
+
+.resizer {
+    margin: 0;
+    padding: 0;
+    position:fixed;
+    top: 0;
+    bottom: var(--margin);
+    width: var(--margin);
+    display:  flex;
+    background-color: rgba(94, 206, 3,0.3);
+    z-index: 1;
+    cursor: col-resize;
+}
+
+.resizer_l {
+    left: 30vw;
+}
+
+.resizer_r {
+    left: 60vw;
+}

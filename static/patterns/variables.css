@@ -1,0 +1,9 @@
+:root {
+    --theme1: rgb(160,0,240);
+    --theme2: rgb(120,0,180);
+    --theme3: rgb(0,0,0);
+
+    --margin: 1rem;
+    --fsize: 2rem;
+    --ffamily: Cormorant-Light;
+  }

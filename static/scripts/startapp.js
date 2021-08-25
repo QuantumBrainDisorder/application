@@ -1,21 +1,40 @@
-
-
-footer.style.color = "black";
 footer.textContent = "Storage loading...";
 
-if (localStorage.getItem("structure__unit")){
+if (localStorage.getItem("structure__unit") != null){
     structure__unit.innerHTML = localStorage.getItem("structure__unit");
 }
 else {
     structure__unit.innerHTML = "nm";
 }
 
-if (localStorage.getItem("structure")){
+if (localStorage.getItem("structure") != null){
     structure.innerHTML = localStorage.getItem("structure");
 }
 else {
-    structure.value = "GaAs 400\nGa0.80In0.20As 200A\nAl0.70Ga0.30As 10\nGa0.20In0.80As0.40Sb0.60 0.01um";
+    structure.value = default__structure;
 }
 
-footer.style.color = "green";
-footer.textContent = "Loaded!";
+if (localStorage.getItem("resizer_l") != null) {
+    resizer_l.style.left = localStorage.getItem("resizer_l");
+    properties__scope.style.left = localStorage.getItem("resizer_l");
+}
+
+if (localStorage.getItem("resizer_r") != null) {
+    resizer_r.style.left = localStorage.getItem("resizer_r");
+    panel__scope.style.left = localStorage.getItem("resizer_r");
+}
+
+if (localStorage.getItem("structure__width") != null) {
+    structure__scope.style.width = localStorage.getItem("structure__width");
+}
+
+// if (localStorage.getItem("panel__width") != null) {
+//     properties__scope.style.width = localStorage.getItem("panel__width");
+// }
+
+if (localStorage.getItem("properties__width") != null) {
+    properties__scope.style.width = localStorage.getItem("properties__width");
+}
+
+
+

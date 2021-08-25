@@ -1,4 +1,5 @@
 @import "fonts.css";
+@import "variables.css";
 
 /* [contenteditable] {
 outline: 0px solid transparent;
@@ -7,24 +8,27 @@ outline: 0px solid transparent;
 .structure {
     position: fixed;
     top: 0;
-    bottom: 1rem;
+    bottom: var(--margin);
     width: 30vw;
+    margin: 0;
     display:  flex;
     flex-direction: column;
     background-color: tomato;
+    padding-top: var(--margin);
+    padding-right: 0;
 }
 
 .structure fieldset {
     flex: 1;
-    margin: 1rem;
-    margin-bottom: 0;
+    margin-left: 1rem;
     display:  flex;
     flex-direction: column;
-    border-color: rgb(180, 0, 240);
+    border-color: var(--theme1);
     border-width: 0.4rem;
     border-style: outset;
     border-right-color: transparent;
     border-bottom-color: transparent;
+    background-color: blue;
 }
 
 .structure fieldset textarea {
@@ -43,7 +47,7 @@ outline: 0px solid transparent;
 
 .structure fieldset legend {
     font-size: 0;
-    background-color: rgb(180, 0, 240);
+    background-color: var(--theme1);
     z-index: 1;
 }
 
@@ -54,8 +58,8 @@ outline: 0px solid transparent;
 .structure fieldset legend ul li {
     display: inline-block;
     margin: 0;
-    font-family: Cormorant-Light;
-    font-size: 2rem;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
     padding: 0;
 }
 
@@ -68,8 +72,8 @@ outline: 0px solid transparent;
     border-width: 0;
     padding: 0;
     margin: 0;
-    font-family: Cormorant-Light;
-    font-size: 2rem;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
     background-color: transparent;
     max-width: 8rem;
     max-height: 2.4rem;
@@ -83,7 +87,7 @@ outline: 0px solid transparent;
 }
 
 .structure fieldset legend ul li span:hover {
-    background-color: rgb(120, 0, 160);
+    background-color: var(--theme2);
 }
 
 .structure fieldset legend ul li span:hover + ul{
@@ -102,10 +106,10 @@ outline: 0px solid transparent;
 .structure fieldset legend ul li ul li {
     display: block;
     text-align: center;
-    background-color: rgb(180, 0, 240);
+    background-color: var(--theme1);
 }
 
 .structure fieldset legend ul li ul li:hover {
-    background-color: rgb(120, 0, 160);
+    background-color: var(--theme2);
     cursor: pointer;
 }

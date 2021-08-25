@@ -8,23 +8,22 @@
         <meta name="keywords" content="keywords"/>
         <meta name="author" content="Rabarbar Batman"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/resizer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/footer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/structure.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/properties.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/aaa.css' %}">
-
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/arco-perpetuo" type="text/css"/>
-        
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/panel.css' %}">
     </head>
     <body>
-        <div id="structure___" class="structure">
-            <fieldset>
+        <div id="structure__scope" class="structure">
+            <fieldset id="structure__fieldset">
                 <legend>
                     <ul>
                         <li>Structure (</li>
                         <li>
-                            <span id="structure__unit" contenteditable="true" spellcheck="false"></span>                          
+                            <span id="structure__unit" contenteditable spellcheck="false"></span>                          
                             <ul contenteditable="false">
                                 <li onclick="set__structure__unit('A')">&#8491;</li>
                                 <li onclick="set__structure__unit('nm')">nm</li>
@@ -34,137 +33,136 @@
                         <li>):</li>
                     </ul>
                 </legend>
-
-    <textarea id="structure" title="structure" spellcheck="false"></textarea>
+                <textarea id="structure" spellcheck="false"></textarea>
             </fieldset>
         </div>
-        <div id="structure_" style="margin-left: 35vw; width:10vw; background-color: brown; height: 100%;">fwfwf</div>
-        <script>
-
-
-
-        </script>
-        <!-- <div class="properties">
+        <div id="resizer_l" class="resizer resizer_l"></div>
+        <div id="properties__scope" class="properties">
             <fieldset>
                 <legend>Properties (nm):</legend>
                 <textarea >as asd d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj asj dads a k jask  kda ka asda dasd d</textarea>
             </fieldset>
         </div>
-        <pre id="aa">
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-            asdasdasd
-
-            asdasdasd
-            asdasd
-            asdasd
-            
-        </pre> -->
-
+        
+        <div id="resizer_r" class="resizer resizer_r"></div>
+        <div id="panel__scope" class="panel">
+            <pre>
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+    
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+    
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+                asdasdasd
+    
+                asdasdasd
+                asdasd
+                asdasd
+                
+            </pre>
+        </div>
+        
         <footer><code id="footer"></code></footer>
 
-        <script type="js" src="{% static 'scripts/names.js' %}"></script>
-        <script src="{% static 'scripts/structure.js' %}"></script>
-
-        <script src="{% static 'scripts/startapp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  
+        <script type="text/javascript" src="{% static 'scripts/structure.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/resizers.js' %}"></script>
+        <script>footer.textContent = "Loaded!";</script>
     </body>
 </html>

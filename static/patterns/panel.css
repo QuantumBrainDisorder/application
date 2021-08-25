@@ -1,0 +1,6 @@
+.panel {
+    /* margin-left: 60vw; */
+    position: relative;
+    left: 60vw;
+    background-color: crimson;
+}
