@@ -1,116 +1,8 @@
-/* @import "fonts.css";
-
-[contenteditable] {
-outline: 0px solid transparent;
-}
-
-.structure {
-    position: fixed;
-    top: 0;
-    bottom: 1rem;
-    width: 30vw;
-    display:  flex;
-    flex-direction: column;
-}
-
-.structure fieldset {
-    flex: 1;
-    margin: 1rem;
-    margin-bottom: 0;
-    display:  flex;
-    flex-direction: column;
-    min-width: auto;
-    border-color: rgb(180, 0, 240);
-    border-width: 0.4rem;
-    border-style: outset;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-}
-
-.structure fieldset textarea {
-    position:relative;
-    resize: none;
-    border-width: 0;
-    flex: 1;
-}
-
-.structure fieldset textarea::-webkit-scrollbar { 
-    width: 0 !important;
-    display: none; 
-}
-
-
-
-.structure fieldset legend {
-    font-size: 0;
-    background-color: rgb(180, 0, 240);
-    z-index: 1;
-}
-
-.structure fieldset legend ul {
-    margin: 0;
-    padding: 0;
-}
-.structure fieldset legend ul li {
-    display: inline-block;
-    margin: 0;
-    font-family: Cormorant-Light;
-    font-size: 2rem;
-    padding: 0;
-}
-
-.structure fieldset legend ul li:hover {
-    cursor: default;
-}
-
-.structure fieldset legend ul li span {
-    display: inline-block;
-    border-width: 0;
-    padding: 0;
-    margin: 0;
-    font-family: Cormorant-Light;
-    font-size: 2rem;
-    background-color: transparent;
-    text-align: center;
-}
-
-.structure fieldset legend ul li ul {
-    display: none;
-}
-
-.structure fieldset legend ul li span:hover {
-    background-color: rgb(120, 0, 160);
-}
-
-.structure fieldset legend ul li span:hover + ul{
-    display: block;
-}
-
-.structure fieldset legend ul li ul {
-    position: absolute;
-    display: none;
-}
-
-.structure fieldset legend ul li ul:hover {
-    display: block;
-}
-
-.structure fieldset legend ul li ul li {
-    display: block;
-    text-align: center;
-    background-color: rgb(180, 0, 240);
-}
-
-.structure fieldset legend ul li ul li:hover {
-    background-color: rgb(120, 0, 160);
-    cursor: pointer;
-} */
-
 @import "fonts.css";
 
-[contenteditable] {
+/* [contenteditable] {
 outline: 0px solid transparent;
-}
+} */
 
 .structure {
     position: fixed;
@@ -119,6 +11,7 @@ outline: 0px solid transparent;
     width: 30vw;
     display:  flex;
     flex-direction: column;
+    background-color: tomato;
 }
 
 .structure fieldset {
@@ -127,7 +20,6 @@ outline: 0px solid transparent;
     margin-bottom: 0;
     display:  flex;
     flex-direction: column;
-    min-width: auto;
     border-color: rgb(180, 0, 240);
     border-width: 0.4rem;
     border-style: outset;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     {% load static %}
     <head>
         <meta charset="utf-8" />
@@ -18,22 +18,8 @@
         
     </head>
     <body>
-        <div class="structure">
+        <div id="structure___" class="structure">
             <fieldset>
-                <!-- <legend>
-                    <ul>
-                        <li>Structure (</li>
-                        <li>
-                            <span id="structure__unit" contenteditable="true" spellcheck="false">nm</span>                          
-                            <ul contenteditable="false">
-                                <li onclick="set__structure__unit('A')">&#8491;</li>
-                                <li onclick="set__structure__unit('nm')">nm</li>
-                                <li onclick="set__structure__unit('um')">&#956;m</li>
-                            </ul>
-                        </li>
-                        <li>):</li>
-                    </ul>
-                </legend> -->
                 <legend>
                     <ul>
                         <li>Structure (</li>
@@ -49,10 +35,16 @@
                     </ul>
                 </legend>
 
-    <textarea id="structure" spellcheck="false"></textarea>
+    <textarea id="structure" title="structure" spellcheck="false"></textarea>
             </fieldset>
         </div>
-        <div class="properties">
+        <div id="structure_" style="margin-left: 35vw; width:10vw; background-color: brown; height: 100%;">fwfwf</div>
+        <script>
+
+
+
+        </script>
+        <!-- <div class="properties">
             <fieldset>
                 <legend>Properties (nm):</legend>
                 <textarea >as asd d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj asj dads a k jask  kda ka asda dasd d</textarea>
@@ -166,15 +158,11 @@
             asdasd
             asdasd
             
-        </pre>
-        <footer>
-            <code id="footer">
-                Ready!
-            </code>
-        </footer>
+        </pre> -->
 
-        <script src="{% static 'scripts/names.js' %}"></script>
-        <script src="{% static 'scripts/processing.js' %}"></script>
+        <footer><code id="footer"></code></footer>
+
+        <script type="js" src="{% static 'scripts/names.js' %}"></script>
         <script src="{% static 'scripts/structure.js' %}"></script>
 
         <script src="{% static 'scripts/startapp.js' %}"></script>

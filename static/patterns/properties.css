@@ -25,7 +25,6 @@
     resize: none;
     flex: 1;
     border-width: 0;
-    scrollbar-width: 0;
 }
   
 .properties fieldset textarea::-webkit-scrollbar { 
@@ -61,7 +60,6 @@
     display:  flex;
     flex-direction: column;
     background-color: rgba(41, 28, 25,0.60);
-    min-width: auto;
 }
 
 .properties fieldset textarea {
@@ -69,7 +67,6 @@
     resize: none;
     flex: 1;
     border-width: 0;
-    scrollbar-width: 0;
 }
   
 .properties fieldset textarea::-webkit-scrollbar { 

@@ -1,5 +1,3 @@
-const structure__unit = document.getElementById("structure__unit");
-const structure = document.getElementById("structure");
 
 
 function set__structure__unit(unit) {
@@ -29,7 +27,7 @@ structure__unit.onkeypress = function (event) {
     if (event.keyCode === 13) {
       if (structure__unit.textContent == "") {
         structure__unit.textContent = "nm";
-      }
+      };
       document.getElementById("structure__unit").blur();
     }
 }
@@ -45,3 +43,5 @@ structure.oninput = function (event) {
   footer.style.color = "green";
   footer.textContent = "Structure changed!";
 }
+
+
