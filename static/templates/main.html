@@ -48,24 +48,20 @@
         
         <div id="resizer_r" class="resizer resizer_r"></div>
         <div id="panel__scope" class="panel">
-<!-- 
-            <form action="{% static 'fil.txt' %}" rel="external" method="GET">{% csrf_token %}
+
+            <form action=""  method="POST">{% csrf_token %}
                 <div style="margin-left: 50px; margin-right: 50px">
-                    <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" >
-                        {{ code }}
-                    </textarea>
+                    <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
                 </div>
                 <div style="margin-left: 50px; margin-right: 50px;">
-                    <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>
-                        {{ output }}
-                    </textarea>
+                    <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
-            </form> -->
+            </form>
 
-            <iframe src="{% static 'templates/index.html' %}" frameborder="0" ></iframe>
         </div>
 
+onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
 
 
                     <!-- onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}" -->
