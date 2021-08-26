@@ -45,30 +45,28 @@
                 </textarea>
             </fieldset>
         </div>
-        
         <div id="resizer_r" class="resizer resizer_r"></div>
         <div id="panel__scope" class="panel">
 
             <form action=""  method="POST">{% csrf_token %}
                 <div style="margin-left: 50px; margin-right: 50px">
-                    <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
-                </div>
+                    {% if code %}
+                        <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
+                    {% else %}
+                        {% with code="x = [3,4,6];y = [3,4,5];plt.xlabel('s')" %}
+                            <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
+                        {% endwith %}
+                    {% endif %}
+                 </div>
                 <div style="margin-left: 50px; margin-right: 50px;">
                     <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
             </form>
-
+            <img src="data:image/png;base64, {{plot}}" >
         </div>
 
-onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
-
-
-                    <!-- onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}" -->
-
-        
         <footer><code id="footer"></code></footer>
-
         <script type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  
         <script type="text/javascript" src="{% static 'scripts/structure.js' %}"></script>

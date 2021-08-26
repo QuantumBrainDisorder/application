@@ -113,3 +113,10 @@ outline: 0px solid transparent;
     background-color: var(--theme2);
     cursor: pointer;
 }
+
+.structure fieldset legend ul li ul li:active {
+    background-color: var(--theme3);
+    cursor: pointer;
+}
+
+
