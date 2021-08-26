@@ -48,8 +48,8 @@
         
         <div id="resizer_r" class="resizer resizer_r"></div>
         <div id="panel__scope" class="panel">
-
-            <form action="", method="POST">{% csrf_token %}
+<!-- 
+            <form action="{% static 'fil.txt' %}" rel="external" method="GET">{% csrf_token %}
                 <div style="margin-left: 50px; margin-right: 50px">
                     <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" >
                         {{ code }}
@@ -61,8 +61,9 @@
                     </textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
-            </form>
+            </form> -->
 
+            <iframe src="{% static 'templates/index.html' %}" frameborder="0" ></iframe>
         </div>
 
 
