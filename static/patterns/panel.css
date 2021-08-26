@@ -3,4 +3,11 @@
     position: relative;
     left: 60vw;
     background-color: crimson;
+    width: 100%;
+}
+
+#button {
+    position: relative;
+    left: 60vw;
+    top: 50%;
 }
