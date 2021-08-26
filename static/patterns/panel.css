@@ -1,13 +1,19 @@
 .panel {
-    /* margin-left: 60vw; */
-    position: relative;
+    position: fixed;
+    display: block;
     left: 60vw;
     background-color: crimson;
-    width: 100%;
+    bottom: var(--margin);
+    overflow-y: auto;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    padding-left: var(--margin);
+    right: 0;
+    overflow-x: auto;
 }
 
-#button {
-    position: relative;
-    left: 60vw;
-    top: 50%;
+.panel::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
 }

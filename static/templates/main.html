@@ -40,17 +40,36 @@
         <div id="properties__scope" class="properties">
             <fieldset>
                 <legend>Properties (nm):</legend>
-                <textarea >as asd d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj as d sa   g uu     kujb khbkbjhbbkhkasd as s dasd  asd  ask dkas dkajsdkajd kjs dka sdkj asj dads a k jask  kda ka asda dasd d</textarea>
+                <textarea >
+                    soon
+                </textarea>
             </fieldset>
         </div>
         
         <div id="resizer_r" class="resizer resizer_r"></div>
         <div id="panel__scope" class="panel">
-            <iframe src="{% static 'templates/plot.html' %}"></iframe>
-            <!-- <iframe src="{% static 'images/2.png' %}"></iframe> -->
+
+            <form action="", method="POST">{% csrf_token %}
+                <div style="margin-left: 50px; margin-right: 50px">
+                    <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" >
+                        {{ code }}
+                    </textarea>
+                </div>
+                <div style="margin-left: 50px; margin-right: 50px;">
+                    <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>
+                        {{ output }}
+                    </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
+            </form>
+
         </div>
+
+
+
+                    <!-- onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}" -->
+
         
-        <button type="button" id="button">submit</button>
         <footer><code id="footer"></code></footer>
 
         <script type="text/javascript" src="{% static 'scripts/names.js' %}"></script>

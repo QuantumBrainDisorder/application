@@ -4,6 +4,27 @@ from .plot import get_plot
 # Create your views here.
 
 def main(request):
+    if request.method == 'POST':
+        codereadata = request.POST['codearea']
+
+        try:
+            # save original standart outut reference'
+
+            original_stdout = sys.stdout
+            sys.stdout = open('file.txt', 'w')
+
+            exec(codereadata)
+
+            sys.stdout.close()
+
+            sys.stdout = original_stdout
+
+            output = open('file.txt', 'r').read()
+        except Exception as e:
+            sys.stdout = original_stdout
+            output = e
+
+        return render(request, 'main.html', {'code': codereadata, 'output':output})
     return render(request, "main.html")
 
 def x(request):
