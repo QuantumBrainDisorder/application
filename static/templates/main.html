@@ -36,7 +36,12 @@
                 <textarea id="structure" spellcheck="false"></textarea>
             </fieldset>
         </div>
-        <div id="resizer_l" class="resizer resizer_l"></div>
+        <div id="resizer_l" class="resizer resizer_l" onselectStart="return false">
+            <div style="display: block;">
+                <div id="resizer_l__button__on" class="on"></div>
+                <div id="resizer_l__button__off" class="off"></div>
+            </div>
+        </div>
         <div id="properties__scope" class="properties">
             <fieldset>
                 <legend>Properties (nm):</legend>
@@ -45,7 +50,9 @@
                 </textarea>
             </fieldset>
         </div>
-        <div id="resizer_r" class="resizer resizer_r"></div>
+        <div id="resizer_r" class="resizer resizer_r">
+            
+        </div>
         <div id="panel__scope" class="panel">
 
             <form action=""  method="POST">{% csrf_token %}

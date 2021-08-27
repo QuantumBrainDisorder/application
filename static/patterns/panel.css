@@ -2,7 +2,7 @@
     position: fixed;
     display: block;
     left: 60vw;
-    background-color: crimson;
+    background-color: transparent;
     bottom: var(--margin);
     overflow-y: auto;
     top: 0;

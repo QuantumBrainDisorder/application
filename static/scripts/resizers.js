@@ -64,3 +64,28 @@ function mousedown_r(e) {
     }
 
 }
+
+resizer_l__button__on.addEventListener("click", button__on__click);
+function button__on__click (event) {
+    structure__scope.style.display = "none";
+    localStorage.setItem("resizer_l__clicked", resizer_l.style.left);
+    resizer_l.style.left = 0;
+    localStorage.setItem("resizer_l", resizer_l.style.left);
+    resizer_l__button__on.style.display = "none";
+    resizer_l.style.cursor = "default";
+    resizer_l__button__off.parentElement.style.cursor = "default";
+    resizer_l__button__off.style.display = "block";
+    resizer_l.removeEventListener("mousedown", mousedown_l);
+}
+
+resizer_l__button__off.addEventListener("click", button__off__click);
+function button__off__click (event) {
+    resizer_l.addEventListener("mousedown", mousedown_l);
+    structure__scope.style.display = "flex";
+    resizer_l.style.left = localStorage.getItem("resizer_l__clicked");
+    localStorage.setItem("resizer_l", resizer_l.style.left);
+    resizer_l__button__on.style.display = "block";
+    resizer_l__button__off.style.display = "none";
+    resizer_l.style.cursor = "col-resize";
+    resizer_l__button__on.parentElement.style.cursor = "col-resize";
+}

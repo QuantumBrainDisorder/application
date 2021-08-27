@@ -1,11 +1,14 @@
 :root {
     --theme0: rgb(255,255,255);
-    --theme1: rgb(160,0,240);
-    --theme2: rgb(120,0,180);
-    --theme3: rgb(80,0,120);
+    --theme1: rgb(180,0,120);
+    --theme2: rgb(150,0,100);
+    --theme3: rgb(125,0,83);
     --theme4: rgb(0,0,0);
 
-    --margin: 1rem;
+    --margin: 2rem;
+    --margin__half: 1rem;
     --fsize: 2rem;
     --ffamily: Cormorant-Light;
+    --resizer__button__height: 7rem;
+    --footer__hight: 1rem;
   }

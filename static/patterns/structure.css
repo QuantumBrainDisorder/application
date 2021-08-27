@@ -13,22 +13,21 @@ outline: 0px solid transparent;
     margin: 0;
     display:  flex;
     flex-direction: column;
-    background-color: tomato;
     padding-top: var(--margin);
     padding-right: 0;
 }
 
 .structure fieldset {
     flex: 1;
-    margin-left: 1rem;
+    margin-left: var(--margin);
+    margin-right: var(--margin__half);
     display:  flex;
     flex-direction: column;
     border-color: var(--theme1);
-    border-width: 0.4rem;
+    border-width: 0.8rem;
     border-style: outset;
     border-right-color: transparent;
     border-bottom-color: transparent;
-    background-color: blue;
 }
 
 .structure fieldset textarea {

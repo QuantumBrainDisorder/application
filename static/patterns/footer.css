@@ -8,5 +8,5 @@ footer {
     padding: 0;
     margin: 0;
     bottom: 0;
-    height: var(--margin);
+    height: var(--footer__hight);
 }
