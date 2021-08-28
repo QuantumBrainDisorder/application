@@ -52,7 +52,7 @@ def main(request):
         # x = [1, 2, 3]
         # y = [3, 1, 4]
         plt.switch_backend('AGG')
-        plt.figure(figsize=(4,4))
+        plt.figure(figsize=(3,3))
         # x = [1,2,3]
         exec(codereadata, globals())
         plt.plot(x,y)

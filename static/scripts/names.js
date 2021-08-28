@@ -8,6 +8,8 @@ const resizer_l = document.getElementById("resizer_l");
 const resizer_l__button__on = document.getElementById("resizer_l__button__on");
 const resizer_l__button__off = document.getElementById("resizer_l__button__off");
 const resizer_r = document.getElementById("resizer_r");
+const resizer_r__button__on = document.getElementById("resizer_r__button__on");
+const resizer_r__button__off = document.getElementById("resizer_r__button__off");
 const panel__scope = document.getElementById("panel__scope");
 
 const structure__fieldset__rect = structure__fieldset.getBoundingClientRect();

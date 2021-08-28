@@ -45,9 +45,14 @@ outline: 0px solid transparent;
 
 
 .structure fieldset legend {
+    padding-left: var(--borders);
+    padding-right: var(--borders);
     font-size: 0;
     background-color: var(--theme1);
     z-index: 1;
+    border-width: var(--borders);
+    /* -webkit-clip-path: polygon(0% var(--borders), var(--borders) 0%, 100% 0%, 100% calc(100% - var(--borders)), calc(100% - var(--borders)) 100%, 0% 100%, 0% calc(100% - var(--borders)));
+    clip-path: polygon(0% var(--borders), var(--borders) 0%, 100% 0%, 100% calc(100% - var(--borders)), calc(100% - var(--borders)) 100%, 0% 100%, 0% calc(100% - var(--borders))); */
 }
 
 .structure fieldset legend ul {
@@ -79,6 +84,7 @@ outline: 0px solid transparent;
     vertical-align: top;
     text-align: center;
     overflow: hidden;
+    outline: none;
 }
 
 .structure fieldset legend ul li ul {
