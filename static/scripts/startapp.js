@@ -24,7 +24,7 @@ properties__char.innerHTML = "<i>E<sub>g</sub></i>";
 properties__property.innerHTML = "Energy Gap";
 properties__property.title = "energy__gap";
 properties__unit.innerHTML = "eV";
-properties__textarea.value = localStorage.getItem("properties__energy__gap");
+properties__textarea.value = localStorage.getItem("property__energy__gap");
 
 
 panel__scope.style.left = localStorage.getItem("resizer_r");

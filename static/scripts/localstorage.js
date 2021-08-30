@@ -34,9 +34,6 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__unit__spin__orbit__split", default__property__unit__spin__orbit__split);
         localStorage.setItem("property__unit__valence__band__offset", default__property__unit__valence__band__offset);
 
-        localStorage.setItem("properties__energy__gap", default__property__energy__gap);
-        localStorage.setItem("properties__lattice__constant", default__property__lattice__constant);
-
         localStorage.setItem("resizer_l", default__resizer_l);
         localStorage.setItem("resizer_r", default__resizer_r);
 
