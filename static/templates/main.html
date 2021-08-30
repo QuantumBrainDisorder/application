@@ -24,19 +24,19 @@
             <fieldset id="structure__fieldset">
                 <legend>
                     <ul>
-                        <li>Structure (</li>
+                        <li title="Structure">Structure (</li>
                         <li>
-                            <span id="structure__unit" contenteditable spellcheck="false"></span>                          
+                            <span id="structure__unit" title="Structure unit" contenteditable spellcheck="false"></span>                          
                             <ul contenteditable="false">
-                                <li onclick="set__structure__unit('A')">&#8491;</li>
-                                <li onclick="set__structure__unit('nm')">nm</li>
-                                <li onclick="set__structure__unit('um')">&#956;m</li>
+                                <li onclick="set__structure__unit('A')" title="Angstorm">&#8491;</li>
+                                <li onclick="set__structure__unit('nm')" title="Nanometer">nm</li>
+                                <li onclick="set__structure__unit('um')" title="Micrometer">&#956;m</li>
                             </ul>
                         </li>
                         <li>)</li>
                     </ul>
                 </legend>
-                <textarea id="structure" spellcheck="false"></textarea>
+                <textarea id="structure" title="Structure" spellcheck="false"></textarea>
             </fieldset>
         </div>
         <div id="resizer_l" class="resizer resizer_l" onselectStart="return false">
@@ -55,34 +55,34 @@
             <fieldset>
                 <legend>
                     <ul>
-                        <li id="properties__char"></li>
+                        <li id="properties__char" title="Property symbol"></li>
                         <li>|</li>
                         <li id="properties__properties">
-                            <span title="" id="properties__property" contenteditable="false" spellcheck="false"></span>                          
+                            <span id="properties__property" title="Material property" data-name="" contenteditable="false" spellcheck="false"></span>                          
                             <ul contenteditable="false">
-                                <li onclick="set__property(event, 'biaxial__deformation__potential')">Biaxial Deformation Potential</li>
-                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')">Conduction Band's Hydrostatic Deformation Potential</li>
-                                <li onclick="set__property(event, 'elastic__constant__11')">Elastic Constant (11)</li>
-                                <li onclick="set__property(event, 'elastic__constant__12')">Elastic Constant (12)</li>
-                                <li onclick="set__property(event, 'energy__gap')">Energy Gap</li>
-                                <li onclick="set__property(event, 'matrix__element__of__kane__operator')">Kane Operator's Matrix Element</li>
-                                <li onclick="set__property(event, 'kane__parameter')">Kane's Parameter</li>
-                                <li onclick="set__property(event, 'lattice__constant')">Lattice Constant</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__1')">Luttinger Parameter (1)</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__2')">Luttinger Parameter (2)</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__3')">Luttinger Parameter (3)</li>
-                                <li onclick="set__property(event, 'spin__orbit__split')">Spin-Orbit Split</li>
-                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__valence__band')">Valence Band's Hydrostatic Deformation Potential</li>
-                                <li onclick="set__property(event, 'valence__band__offset')">Valence Band Offset</li>
-                                <li onclick="set__property(event, 'alpha__varshni')">Varshni's Alpha</li>
-                                <li onclick="set__property(event, 'beta__varshni')">Varshni's Beta</li>
+                                <li onclick="set__property(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                                <li onclick="set__property(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                                <li onclick="set__property(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                                <li onclick="set__property(event, 'energy__gap')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                                <li onclick="set__property(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                                <li onclick="set__property(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                                <li onclick="set__property(event, 'lattice__constant')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                                <li onclick="set__property(event, 'spin__orbit__split')" title="Spin-Orbit Split &delta;_so (meV)">Spin-Orbit Split</li>
+                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                                <li onclick="set__property(event, 'valence__band__offset')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                                <li onclick="set__property(event, 'alpha__varshni')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                                <li onclick="set__property(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
                             </ul>
                         </li>
                         <li style="float: right;">|</li>
-                        <li id="properties__unit" style="padding-right: calc(var(--fsize)/4);"></li>
+                        <li id="properties__unit" title="Property unit" style="padding-right: calc(var(--fsize)/4);"></li>
                     </ul>
                 </legend>
-                <textarea id="properties__textarea"></textarea>
+                <textarea id="properties__textarea" title="Materials properties"></textarea>
             </fieldset>
         </div>
 

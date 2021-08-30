@@ -22,7 +22,7 @@ if (localStorage.getItem("resizer_r__clicked") != null) {
 
 properties__char.innerHTML = "<i>E<sub>g</sub></i>";
 properties__property.innerHTML = "Energy Gap";
-properties__property.title = "energy__gap";
+properties__property.dataset.name = "energy__gap";
 properties__unit.innerHTML = "eV";
 properties__textarea.value = localStorage.getItem("property__energy__gap");
 

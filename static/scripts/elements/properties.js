@@ -22,11 +22,11 @@ function set__property(event, property) {
 function set__property__body(event, char, property, unit) {
   properties__char.innerHTML = char;
   properties__property.innerHTML = event.target.textContent;
-  properties__property.title = property;
+  properties__property.dataset.name = property;
   properties__unit.innerHTML = unit;
   properties__textarea.value = localStorage.getItem("property__" + property);
 }
 
 properties__textarea.oninput = function (event) {
-  localStorage.setItem("property__" + properties__property.title, properties__textarea.value);
+  localStorage.setItem("property__" + properties__property.dataset.name, properties__textarea.value);
 }
