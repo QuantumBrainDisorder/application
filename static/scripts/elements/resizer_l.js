@@ -35,7 +35,6 @@ function mousedown_l(e) {
 
 
 resizer_l__button__on.addEventListener("click", button_l__on__click);
-
 function button_l__on__click (event) {
 
     var panel__scope__bounds = panel__scope.getBoundingClientRect();

@@ -8,8 +8,7 @@
     bottom: var(--margin);
     width: var(--margin);
     display:  flex;
-    background-color: transparent;
-    z-index: 2;
+    z-index: 4;
     cursor: col-resize;
     background-color: transparent;
 }
@@ -42,11 +41,11 @@
 }
 
 .on {
-    background-image: url("../images/arrow__left__theme4.svg");
+    background-image: url("../../images/arrow__left__theme4.svg");
 }
 
 .off{
-    background-image: url("../images/arrow__right__theme4.svg");
+    background-image: url("../../images/arrow__right__theme4.svg");
 }
 
 .resizer div div:hover {

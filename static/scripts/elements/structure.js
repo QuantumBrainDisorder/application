@@ -1,21 +1,14 @@
 function set__structure__unit (unit) {
   switch(unit) {
-    case 'A':
-      set__structure__unit__body("&#8491;");
-      break;
-    case 'nm':
-      set__structure__unit__body("nm");
-      break;
-    case 'um':
-      set__structure__unit__body("&#956;m");
-      break;
+    case 'A':   set__structure__unit__body("&#8491;"); break;
+    case 'nm':  set__structure__unit__body("nm");      break;
+    case 'um':  set__structure__unit__body("&#956;m"); break;
   };
 };
 
 function set__structure__unit__body (unit) {
   structure__unit.innerHTML = unit;
   localStorage.setItem("structure__unit", unit);
-  footer.textContent = "Structure unit changed!";
 }
 
 structure__unit.onkeypress = function (event) {
@@ -30,17 +23,13 @@ structure__unit.onkeypress = function (event) {
 structure__unit.addEventListener('focusout', function (e) {
       if (structure__unit.textContent == "") {
         structure__unit.textContent = "nm";
-        footer.textContent = "Structure unit changed!";
       };
 })
 
-
 structure__unit.oninput = function (event) {
   localStorage.setItem("structure__unit", structure__unit.textContent);
-  footer.textContent = "Structure unit changed!";
 };
 
 structure.oninput = function (event) {
   localStorage.setItem("structure", structure.value);
-  footer.textContent = "Structure changed!";
 }

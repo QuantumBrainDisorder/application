@@ -4,4 +4,5 @@ body {
     font-family: 'ArcoPerpetuoRegular';
     font-weight: normal;
     font-style: normal;
+    background-color: var(--theme0);
 }

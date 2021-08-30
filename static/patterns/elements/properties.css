@@ -1,0 +1,203 @@
+@import "variables.css";
+
+.properties {
+    position: fixed;
+    top: 0;
+    bottom: var(--margin);
+    left: 30vw;
+    width: 30vw;
+    display:  flex;
+    flex-direction: column;
+    padding: 0;
+    padding-top: var(--margin);
+    padding-right: 0;
+    background-color: transparent;
+    z-index: 2;
+}
+
+.properties fieldset {
+    flex: 1;
+    margin-left: var(--margin);
+    margin-right: var(--margin__half);
+    display:  flex;
+    flex-direction: column;
+    border-color: var(--theme1);
+    border-width: 0.8rem;
+    border-style: outset;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.properties fieldset textarea {
+    position:relative;
+    resize: none;
+    border-width: 0;
+    flex: 1;
+}
+
+.properties fieldset textarea::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+
+
+
+
+
+
+
+.properties fieldset legend {
+    padding-left: var(--borders);
+    padding-right: var(--borders);
+    font-size: 0;
+    background-color: var(--theme1);
+    border-width: var(--borders);
+    width: calc(100% - var(--fsize));
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 2;
+    max-width: 100%;
+}
+
+
+
+
+
+
+
+
+.properties fieldset legend ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%
+}
+
+
+
+
+
+
+.properties fieldset legend ul li {
+    display: inline;
+    margin: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    padding: 0;
+
+}
+
+.properties fieldset legend ul li:hover {
+    cursor: default;
+}
+
+
+
+
+
+
+
+.properties fieldset legend ul li span {
+    display: block;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.properties fieldset legend ul li span:hover {
+    background-color: var(--theme2);
+}
+
+.properties fieldset legend ul li span:hover + ul{
+    display: block;
+}
+
+
+
+
+
+
+
+
+.properties fieldset legend ul li ul {
+    position:fixed;
+    display: none;
+    overflow-y: scroll;
+    flex: 1;
+    height: calc(100vh - 2 * var(--margin) - var(--fsize) - var(--borders)/2);
+    width:  max-content;
+}
+
+.properties fieldset legend ul li ul:hover {
+    display: block;
+}
+
+.properties fieldset legend ul::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+
+
+
+
+
+
+
+.properties fieldset legend ul li ul li {
+    display: block;
+    text-align: left;
+    background-color: var(--theme1);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.properties fieldset legend ul li ul li:hover {
+    background-color: var(--theme2);
+    cursor: pointer;
+}
+
+.properties fieldset legend ul li ul li:active {
+    background-color: var(--theme3);
+    cursor: pointer;
+}
+
+
+
+
+
+
+#properties__unit {
+    float: right;
+    padding-left: calc(var(--fsize)/4);
+}
+
+
+#properties__properties {
+    width: 100%;
+    padding-left: calc(var(--fsize)/4);
+}
+
+#properties__char {
+    padding-right: calc(var(--fsize)/4);
+}
+

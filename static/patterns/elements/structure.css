@@ -51,6 +51,9 @@ outline: 0px solid transparent;
     background-color: var(--theme1);
     z-index: 1;
     border-width: var(--borders);
+    /* text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; */
     /* -webkit-clip-path: polygon(0% var(--borders), var(--borders) 0%, 100% 0%, 100% calc(100% - var(--borders)), calc(100% - var(--borders)) 100%, 0% 100%, 0% calc(100% - var(--borders)));
     clip-path: polygon(0% var(--borders), var(--borders) 0%, 100% 0%, 100% calc(100% - var(--borders)), calc(100% - var(--borders)) 100%, 0% 100%, 0% calc(100% - var(--borders))); */
 }
@@ -58,6 +61,7 @@ outline: 0px solid transparent;
 .structure fieldset legend ul {
     margin: 0;
     padding: 0;
+    
 }
 .structure fieldset legend ul li {
     display: inline-block;
@@ -89,6 +93,7 @@ outline: 0px solid transparent;
 
 .structure fieldset legend ul li ul {
     display: none;
+    
 }
 
 .structure fieldset legend ul li span:hover {
@@ -102,6 +107,7 @@ outline: 0px solid transparent;
 .structure fieldset legend ul li ul {
     position: absolute;
     display: none;
+    
 }
 
 .structure fieldset legend ul li ul:hover {

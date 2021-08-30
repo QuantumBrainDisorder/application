@@ -2,19 +2,22 @@
 <html lang="en">
     {% load static %}
     <head>
-        <meta charset="utf-8" />
         <title>NanoTools</title>
+        <meta charset="utf-8" />
         <meta name="description" content="description"/>
         <meta name="keywords" content="keywords"/>
         <meta name="author" content="Rabarbar Batman"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/fonts.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/main.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/resizer.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/footer.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/structure.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/properties.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/panel.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/resizer.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/footer.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/structure.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/properties.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel.css' %}">
     </head>
     <body>
         <div id="structure__scope" class="structure">
@@ -42,14 +45,53 @@
                 <div id="resizer_l__button__off" class="off"></div>
             </div>
         </div>
+
+
+
+
+
+
         <div id="properties__scope" class="properties">
             <fieldset>
-                <legend>Properties (nm):</legend>
-                <textarea >
-                    soon
-                </textarea>
+                <legend>
+                    <ul>
+                        <li id="properties__char"></li>
+                        <li>|</li>
+                        <li id="properties__properties">
+                            <span title="" id="properties__property" contenteditable="false" spellcheck="false"></span>                          
+                            <ul contenteditable="false">
+                                <li onclick="set__property(event, 'biaxial__deformation__potential')">Biaxial Deformation Potential</li>
+                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')">Conduction Band's Hydrostatic Deformation Potential</li>
+                                <li onclick="set__property(event, 'elastic__constant__11')">Elastic Constant (11)</li>
+                                <li onclick="set__property(event, 'elastic__constant__12')">Elastic Constant (12)</li>
+                                <li onclick="set__property(event, 'energy__gap')">Energy Gap</li>
+                                <li onclick="set__property(event, 'matrix__element__of__kane__operator')">Kane Operator's Matrix Element</li>
+                                <li onclick="set__property(event, 'kane__parameter')">Kane's Parameter</li>
+                                <li onclick="set__property(event, 'lattice__constant')">Lattice Constant</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__1')">Luttinger Parameter (1)</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__2')">Luttinger Parameter (2)</li>
+                                <li onclick="set__property(event, 'luttinger__parameter__3')">Luttinger Parameter (3)</li>
+                                <li onclick="set__property(event, 'spin__orbit__split')">Spin-Orbit Split</li>
+                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__valence__band')">Valence Band's Hydrostatic Deformation Potential</li>
+                                <li onclick="set__property(event, 'valence__band__offset')">Valence Band Offset</li>
+                                <li onclick="set__property(event, 'alpha__varshni')">Varshni's Alpha</li>
+                                <li onclick="set__property(event, 'beta__varshni')">Varshni's Beta</li>
+                            </ul>
+                        </li>
+                        <li style="float: right;">|</li>
+                        <li id="properties__unit" style="padding-right: calc(var(--fsize)/4);"></li>
+                    </ul>
+                </legend>
+                <textarea id="properties__textarea"></textarea>
             </fieldset>
         </div>
+
+
+
+
+
+
+
         <div id="resizer_r" class="resizer resizer_r"  onselectStart="return false">
             <div style="display: block;">
                 <div id="resizer_r__button__on" class="on"></div>
@@ -73,15 +115,64 @@
                 </div>
                 <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
             </form>
-            <img src="data:image/png;base64, {{plot}}" >
+            <img src="data:image/png;base64, {{plot}}" alt="pct">
+            <pre>
+                aasas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+
+                asas
+                asas
+                asas
+                asas
+                asas
+                asas
+                v
+            </pre>
         </div>
 
-        <footer><code id="footer"></code></footer>
+        <div id="footer" class="footer">
+            <span id="info__scope">
+                <code id="info"></code>
+            </span>
+            <ul>
+                <li style="flex: 1;">|</li>
+                <li id="ST">ST</li>
+                <li style="flex: 1;">|</li>
+                <li id="RDS">RDS</li>
+            </ul>
+        </div>
+
         <script type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
-        <script type="text/javascript" src="{% static 'scripts/structure.js' %}"></script>
-        <script type="text/javascript" src="{% static 'scripts/resizer_l.js' %}"></script>
-        <script type="text/javascript" src="{% static 'scripts/resizer_r.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/localstorage.js' %}"></script>  
+
+        <script type="text/javascript" src="{% static 'scripts/elements/structure.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/properties.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/resizer_l.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/resizer_r.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
+
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  
-        <script>footer.textContent = "Loaded!";</script>
     </body>
 </html>
