@@ -38,6 +38,9 @@
     resize: none;
     border-width: 0;
     flex: 1;
+    color: var(--theme4);
+    background-color: var(--theme0);
+    outline-width: 0;
 }
 
 .properties fieldset textarea::-webkit-scrollbar { 
@@ -57,13 +60,16 @@
     padding-right: var(--borders);
     font-size: 0;
     background-color: var(--theme1);
+    color: var(--theme4);
     border-width: var(--borders);
+    
     width: calc(100% - var(--fsize));
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     z-index: 2;
     max-width: 100%;
+    
 }
 
 

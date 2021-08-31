@@ -11,7 +11,7 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/fonts.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
-
+        <script type="text/javascript" src="{% static 'scripts/theme__initiation.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/main.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/resizer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/footer.css' %}">
@@ -82,7 +82,7 @@
                         <li id="properties__unit" title="Property unit" style="padding-right: calc(var(--fsize)/4);"></li>
                     </ul>
                 </legend>
-                <textarea id="properties__textarea" title="Materials properties"></textarea>
+                <textarea id="properties__textarea" title="Materials properties" spellcheck="false"></textarea>
             </fieldset>
         </div>
 
@@ -98,6 +98,12 @@
                 <div id="resizer_r__button__off" class="off"></div>
             </div>
         </div>
+
+
+
+
+
+
         <div id="panel__scope" class="panel">
 
             <form action=""  method="POST">{% csrf_token %}
@@ -158,9 +164,9 @@
             </span>
             <ul>
                 <li style="flex: 1;">|</li>
-                <li id="ST">ST</li>
+                <li id="ST" title="Switch to theme B">ST</li>
                 <li style="flex: 1;">|</li>
-                <li id="RDS">RDS</li>
+                <li id="RDS" title="Restore default settings">RDS</li>
             </ul>
         </div>
 

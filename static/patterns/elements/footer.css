@@ -45,22 +45,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--theme4);
 }
 
 #ST:hover {
-    background-color: var(--theme2);
+    /* background-color: var(--theme2); */
     cursor: pointer;
 }
 
 #ST:active {
-    background-color: var(--theme3);
+    /* background-color: var(--theme3); */
 }
 
 #RDS:hover {
-    background-color: var(--theme2);
+    /* background-color: var(--theme2); */
     cursor: pointer;
 }
 
 #RDS:active {
-    background-color: var(--theme3);
+    /* background-color: var(--theme3); */
 }

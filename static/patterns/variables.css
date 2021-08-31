@@ -1,9 +1,9 @@
 :root {
-    --theme0: rgb(255, 255, 255);
-    --theme1: rgb(180,0,120);
-    --theme2: rgb(150,0,100);
-    --theme3: rgb(125,0,83);
-    --theme4: rgb(0,0,0);
+    --theme0: #ffffff;
+    --theme1: #b40078;
+    --theme2: #9a0066;
+    --theme3: #840057;
+    --theme4: #000000;
 
     --margin: 2rem;
     --margin__half: 1rem;

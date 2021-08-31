@@ -35,6 +35,9 @@ outline: 0px solid transparent;
     resize: none;
     border-width: 0;
     flex: 1;
+    color: var(--theme4);
+    background-color: var(--theme0);
+    outline-width: 0;
 }
 
 .structure fieldset textarea::-webkit-scrollbar { 
@@ -51,6 +54,7 @@ outline: 0px solid transparent;
     background-color: var(--theme1);
     z-index: 1;
     border-width: var(--borders);
+    color: var(--theme4);
     /* text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; */
