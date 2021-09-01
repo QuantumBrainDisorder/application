@@ -2,7 +2,7 @@
     position: fixed;
     display: block;
     left: 60vw;
-    background-color: var(--theme0);
+    background-color:transparent;
     bottom: var(--margin);
     overflow-y: auto;
     top: 0;
@@ -10,8 +10,10 @@
     padding: 0;
     padding-left: var(--margin);
     right: 0;
+    /* overflow-x: hidden; */
     overflow-x: auto;
-    z-index: 3;
+    /* opacity: 0.4; */
+    z-index: 1;
 }
 
 .panel::-webkit-scrollbar { 

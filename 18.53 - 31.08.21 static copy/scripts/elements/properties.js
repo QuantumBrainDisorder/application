@@ -21,33 +21,12 @@ function set__property(event, property) {
 
 function set__property__body(event, char, property, unit) {
   properties__char.innerHTML = char;
-  if (localStorage.getItem('properties__property__dblclicked') == null) {
-    properties__property.innerHTML = event.target.textContent;
-  }
-  properties__property.dataset.content = event.target.textContent;
+  properties__property.innerHTML = event.target.textContent;
   properties__property.dataset.name = property;
   properties__unit.innerHTML = unit;
   properties__textarea.value = localStorage.getItem("property__" + property);
-
-  localStorage.setItem('properties__property__property', property);
-  localStorage.setItem('properties__property__char', char);
-  localStorage.setItem('properties__property__name', property);
-  localStorage.setItem('properties__property__unit', unit);
-  localStorage.setItem('properties__property__content', event.target.textContent);
 }
 
 properties__textarea.oninput = function (event) {
   localStorage.setItem("property__" + properties__property.dataset.name, properties__textarea.value);
-}
-
-
-properties__property.ondblclick = function(event) {
-  if (localStorage.getItem("properties__property__dblclicked") == null) {
-    properties__property.innerHTML = "...";
-    localStorage.setItem("properties__property__dblclicked",'true');
-  }
-  else {
-    properties__property.innerHTML = properties__property.dataset.content;    
-    localStorage.removeItem("properties__property__dblclicked");
-  }
 }

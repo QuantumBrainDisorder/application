@@ -8,9 +8,9 @@
     bottom: var(--margin);
     width: var(--margin);
     display:  flex;
-    z-index: 3;
+    z-index: 4;
     cursor: col-resize;
-    background-color: var(--theme0);
+    background-color: transparent;
 }
 
 .resizer:hover div {
@@ -63,5 +63,4 @@
 
 .resizer_r {
     left: 60vw;
-    z-index: 4;
 }

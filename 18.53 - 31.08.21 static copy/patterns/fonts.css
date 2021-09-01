@@ -1,0 +1,35 @@
+@font-face {
+    font-family: AnticDidone-Regular;
+    src: url(../fonts/Antic_Didone/AnticDidone-Regular.ttf);
+}
+
+@font-face {
+    font-family: Cormorant-Regular;
+    src: url(../fonts/Cormorant/Cormorant-Regular.ttf);
+}
+
+@font-face {
+    font-family: Cormorant-Light;
+    font-size: 2rem;
+    src: url(../fonts/Cormorant/Cormorant-Light.ttf);
+}
+
+@font-face {
+    font-family: Cormorant-Medium;
+    src: url(../fonts/Cormorant/Cormorant-Medium.ttf);
+}
+
+@font-face {
+    font-family: Forum-Regular;
+    src: url(../fonts/Forum/Forum-Regular.ttf);
+}
+
+@font-face {
+    font-family: Italiana-Regular;
+    src: url(../fonts/Italiana/Italiana-Regular.ttf)
+}
+
+@font-face {
+    font-family: Forum-Regular;
+    src: url(../fonts/Old_Standard_TT/OldStandardTT-Regular.ttf);
+}

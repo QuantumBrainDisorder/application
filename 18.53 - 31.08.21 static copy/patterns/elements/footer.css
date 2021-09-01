@@ -31,7 +31,6 @@
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: var(--theme1);
 }
 
 .footer:hover ul li {
@@ -50,19 +49,19 @@
 }
 
 #ST:hover {
-    background-color: var(--theme2);
+    /* background-color: var(--theme2); */
     cursor: pointer;
 }
 
 #ST:active {
-    background-color: var(--theme3);
+    /* background-color: var(--theme3); */
 }
 
 #RDS:hover {
-    background-color: var(--theme2);
+    /* background-color: var(--theme2); */
     cursor: pointer;
 }
 
 #RDS:active {
-    background-color: var(--theme3);
+    /* background-color: var(--theme3); */
 }

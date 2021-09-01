@@ -7,28 +7,64 @@ function mousedown_l(e) {
     init_x = e.clientX;
 
     function mousemove(e) {
-        let new_x = init_x - e.clientX
+        // let new_x = init_x - e.clientX
 
-        var resizer_l__bounds = resizer_l.getBoundingClientRect();
-        var structure__scope__bounds = structure__scope.getBoundingClientRect();
-        var properties__scope__bounds = properties__scope.getBoundingClientRect();
+        // var resizer_l__bounds = resizer_l.getBoundingClientRect();
+        // var structure__scope__bounds = structure__scope.getBoundingClientRect();
+        // var properties__scope__bounds = properties__scope.getBoundingClientRect();
 
-        resizer_l.style.left = resizer_l__bounds.left - new_x + "px";
+        // resizer_l.style.left = resizer_l__bounds.left - new_x + "px";
         
-        structure__scope.style.width = structure__scope__bounds.width - new_x + "px";
-        properties__scope.style.left = properties__scope__bounds.left - new_x + "px";
-        properties__scope.style.width = properties__scope__bounds.width + new_x + "px";
-        init_x = e.clientX;
+        // structure__scope.style.width = structure__scope__bounds.width - new_x + "px";
+        // properties__scope.style.left = properties__scope__bounds.left - new_x + "px";
+        // properties__scope.style.width = properties__scope__bounds.width + new_x + "px";
+        // init_x = e.clientX;
 
-
+        if (resizer_l.style.left >= "0px") {
+            let new_x = init_x - e.clientX;
+    
+            var resizer_l__bounds = resizer_l.getBoundingClientRect();
+            var structure__scope__bounds = structure__scope.getBoundingClientRect();
+            var properties__scope__bounds = properties__scope.getBoundingClientRect();
+    
+            resizer_l.style.left = resizer_l__bounds.left - new_x + "px";
+            
+            structure__scope.style.width = structure__scope__bounds.width - new_x + "px";
+            properties__scope.style.left = properties__scope__bounds.left - new_x + "px";
+            properties__scope.style.width = properties__scope__bounds.width + new_x + "px";
+            init_x = e.clientX;
+        }
     }
 
     function mouseup(e) {
+        if (resizer_l.style.left < "0px") {
+            var properties__scope__bounds = properties__scope.getBoundingClientRect();
+            properties__scope.style.width = properties__scope__bounds.width + properties__scope__bounds.left + "px";
+            properties__scope.style.left = "0px";
+            structure__scope.style.width = properties__scope.style.left;
+            resizer_l.style.left = "0px";
+        }
+        else if ( resizer_l.getBoundingClientRect().left > resizer_r.getBoundingClientRect().left ) {
+            if (resizer_l.getBoundingClientRect().left > window.innerWidth - resizer_r.getBoundingClientRect().width) {
+                var resizer_r__bounds = resizer_r.getBoundingClientRect();
+                properties__scope.style.left = resizer_r__bounds.left - resizer_r__bounds.width + "px";
+                properties__scope.style.width = properties__scope.getBoundingClientRect().width + resizer_r__bounds.width + "px";
+                resizer_l.style.left = resizer_r__bounds.left - resizer_r__bounds.width + "px";
+                structure__scope.style.width = resizer_r__bounds.left - resizer_r__bounds.width + "px";
+            }
+            else {
+                var resizer_r__bounds = resizer_r.getBoundingClientRect();
+                properties__scope.style.left = resizer_r__bounds.left + "px";
+                resizer_l.style.left = resizer_r__bounds.left + "px";
+                structure__scope.style.width = resizer_r__bounds.left + "px";
+            }
+        }
         window.removeEventListener('mousemove', mousemove);
         window.removeEventListener('mouseup', mouseup);
         localStorage.setItem("resizer_l", resizer_l.style.left);
         localStorage.setItem("structure__width", structure__scope.style.width);
         localStorage.setItem("properties__width", properties__scope.style.width);
+        
     }
 
 }

@@ -34,12 +34,6 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__unit__spin__orbit__split", default__property__unit__spin__orbit__split);
         localStorage.setItem("property__unit__valence__band__offset", default__property__unit__valence__band__offset);
 
-        localStorage.setItem('properties__property__property', 'energy__gap');
-        localStorage.setItem('properties__property__char', "<i>E<sub>g</sub></i>");
-        localStorage.setItem('properties__property__name', 'energy__gap');
-        localStorage.setItem('properties__property__unit', "eV");
-        localStorage.setItem('properties__property__content', "Energy Gap");
-
         localStorage.setItem("resizer_l", default__resizer_l);
         localStorage.setItem("resizer_r", default__resizer_r);
 

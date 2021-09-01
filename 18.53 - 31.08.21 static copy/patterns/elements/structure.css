@@ -126,18 +126,3 @@
     cursor: pointer;
 }
 
-
-
-
-.structure__legend__ul {
-    display: none;
-}
-
-.structure__legend__span {
-    display: block;
-    margin: 0;
-    font-family: var(--ffamily);
-    font-size: var(--fsize);
-    padding: 0;
-    cursor: default;
-}

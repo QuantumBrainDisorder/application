@@ -20,18 +20,11 @@ if (localStorage.getItem("resizer_r__clicked") != null) {
     resizer_l.style.display = "none";
 }
 
-
-properties__char.innerHTML = localStorage.getItem('properties__property__char');
-if (localStorage.getItem('properties__property__dblclicked') == null) {
-    properties__property.innerHTML = localStorage.getItem('properties__property__content');
-}
-else {
-    properties__property.innerHTML = '...';
-}
-properties__property.dataset.content = localStorage.getItem('properties__property__content');
-properties__property.dataset.name = localStorage.getItem('properties__property__name');
-properties__unit.innerHTML = localStorage.getItem('properties__property__unit');
-properties__textarea.value = localStorage.getItem("property__" + properties__property.dataset.name);
+properties__char.innerHTML = "<i>E<sub>g</sub></i>";
+properties__property.innerHTML = "Energy Gap";
+properties__property.dataset.name = "energy__gap";
+properties__unit.innerHTML = "eV";
+properties__textarea.value = localStorage.getItem("property__energy__gap");
 
 
 panel__scope.style.left = localStorage.getItem("resizer_r");
@@ -44,8 +37,4 @@ structure__unit.innerHTML = localStorage.getItem("structure__unit");
 structure__scope.style.width = localStorage.getItem("structure__width");
 
 
-if (localStorage.getItem("structure__legend__dblclicked") != null) {
-    structure__legend__ul.classList.add('structure__legend__ul');
-    structure__legend__span.classList.add('structure__legend__span');
-    structure__legend__span.title = "Structure (" + structure__unit.textContent + ')';
-}
+    

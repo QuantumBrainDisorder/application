@@ -8,35 +8,19 @@ function mousedown_r(e) {
     init_x = e.clientX;
 
     function mousemove(e) {
-        let new_x = init_x - e.clientX;
+        let new_x = init_x - e.clientX
 
         var resizer_r__bounds = resizer_r.getBoundingClientRect();
         var properties__scope__bounds = properties__scope.getBoundingClientRect();
         var panel__scope__bounds = panel__scope.getBoundingClientRect();
 
         resizer_r.style.left = resizer_r__bounds.left - new_x + "px";
-        if (panel__scope__bounds.left > properties__scope__bounds.left){
-            properties__scope.style.width = panel__scope__bounds.left - properties__scope__bounds.left + "px";
-        }
-
-        // properties__scope.style.width = properties__scope__bounds.width - new_x + "px";
+        properties__scope.style.width = properties__scope__bounds.width - new_x + "px";
         panel__scope.style.left = panel__scope__bounds.left - new_x + "px";
         init_x = e.clientX;
     }
 
     function mouseup(e) {
-        if (resizer_r.style.left < "0px") {
-            var panel__scope__bounds = panel__scope.getBoundingClientRect();
-            panel__scope.style.width = panel__scope__bounds.width + panel__scope__bounds.left + "px";
-            panel__scope.style.left = "0px";
-            properties__scope.style.width = panel__scope.style.left;
-            resizer_r.style.left = "0px";
-        }
-        else if (resizer_r.getBoundingClientRect().left > window.innerWidth - resizer_r.getBoundingClientRect().width){
-            resizer_r.style.left = window.innerWidth - resizer_r.getBoundingClientRect().width + "px";
-            panel__scope.style.left = window.innerWidth - resizer_r.getBoundingClientRect().width + "px";
-            properties__scope.style.width = resizer_r.getBoundingClientRect().left - structure__scope.getBoundingClientRect().width + "px";
-        }
         window.removeEventListener('mousemove', mousemove);
         window.removeEventListener('mouseup', mouseup);
         localStorage.setItem("resizer_r", resizer_r.style.left);

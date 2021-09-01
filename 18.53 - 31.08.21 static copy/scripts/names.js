@@ -8,9 +8,6 @@ const properties__textarea = document.getElementById("properties__textarea");
 const structure = document.getElementById("structure");
 const structure__scope = document.getElementById("structure__scope");
 const structure__fieldset = document.getElementById("structure__fieldset");
-const structure__legend = document.getElementById("structure__legend");
-const structure__legend__span = document.getElementById("structure__legend__span");
-const structure__legend__ul = document.getElementById("structure__legend__ul");
 const structure__unit = document.getElementById("structure__unit");
 const structure__fieldset__rect = structure__fieldset.getBoundingClientRect();
 
