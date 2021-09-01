@@ -31,7 +31,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: var(--theme1);
+    /* background-color: var(--theme1); */
 }
 
 .footer:hover ul li {

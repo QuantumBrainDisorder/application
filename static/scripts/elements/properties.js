@@ -34,6 +34,12 @@ function set__property__body(event, char, property, unit) {
   localStorage.setItem('properties__property__name', property);
   localStorage.setItem('properties__property__unit', unit);
   localStorage.setItem('properties__property__content', event.target.textContent);
+  
+  properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+  localStorage.setItem('properties__list__width', properties__list.style.width);
+  
+  localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
+  properties__list.style.height = localStorage.getItem('properties__list__height');
 }
 
 properties__textarea.oninput = function (event) {
@@ -45,9 +51,13 @@ properties__property.ondblclick = function(event) {
   if (localStorage.getItem("properties__property__dblclicked") == null) {
     properties__property.innerHTML = "...";
     localStorage.setItem("properties__property__dblclicked",'true');
+    localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
+    properties__list.style.height = localStorage.getItem('properties__list__height');  
   }
   else {
     properties__property.innerHTML = properties__property.dataset.content;    
     localStorage.removeItem("properties__property__dblclicked");
+    localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
+    properties__list.style.height = localStorage.getItem('properties__list__height');  
   }
 }

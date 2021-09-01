@@ -4,6 +4,8 @@ const properties__char = document.getElementById("properties__char");
 const properties__properties = document.getElementById("properties__properties");
 const properties__property = document.getElementById("properties__property");
 const properties__textarea = document.getElementById("properties__textarea");
+const properties__list = document.getElementById("properties__list");
+const properties__right__wall = document.getElementById("properties__right__wall");
 
 const structure = document.getElementById("structure");
 const structure__scope = document.getElementById("structure__scope");
@@ -63,6 +65,12 @@ const default__property__unit__luttinger__parameter__3 = "";
 const default__property__unit__matrix__element__of__kane__operator = "eV";
 const default__property__unit__spin__orbit__split = "meV";
 const default__property__unit__valence__band__offset = "eV";
+
+const default__properties__property__property = 'energy__gap';
+const default__properties__property__char = "<i>E<sub>g</sub></i>";
+const default__properties__property__name = 'energy__gap';
+const default__properties__property__unit = "eV";
+const default__properties__property__content = "Energy Gap";
 
 const default__resizer_l = "30vw";
 const default__resizer_r = "60vw";

@@ -49,3 +49,15 @@ if (localStorage.getItem("structure__legend__dblclicked") != null) {
     structure__legend__span.classList.add('structure__legend__span');
     structure__legend__span.title = "Structure (" + structure__unit.textContent + ')';
 }
+
+
+
+if (localStorage.getItem('properties__list__width') == null) {
+    localStorage.setItem('properties__list__width', properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px");
+}
+properties__list.style.width = localStorage.getItem('properties__list__width');
+
+if (localStorage.getItem('properties__list__height') == null) {
+    localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
+}
+properties__list.style.height = localStorage.getItem('properties__list__height');

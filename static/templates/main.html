@@ -61,7 +61,7 @@
                         <li>|</li>
                         <li id="properties__properties">
                             <span id="properties__property" title="Material property" data-name="" contenteditable="false" spellcheck="false"></span>                          
-                            <ul contenteditable="false">
+                            <ul id="properties__list" contenteditable="false">
                                 <li onclick="set__property(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
                                 <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
                                 <li onclick="set__property(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
@@ -80,7 +80,7 @@
                                 <li onclick="set__property(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
                             </ul>
                         </li>
-                        <li style="float: right;">|</li>
+                        <li id="properties__right__wall" style="float: right;">|</li>
                         <li id="properties__unit" title="Property unit" style="padding-right: calc(var(--fsize)/4);"></li>
                     </ul>
                 </legend>

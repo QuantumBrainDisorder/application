@@ -7,19 +7,6 @@ function mousedown_l(e) {
     init_x = e.clientX;
 
     function mousemove(e) {
-        // let new_x = init_x - e.clientX
-
-        // var resizer_l__bounds = resizer_l.getBoundingClientRect();
-        // var structure__scope__bounds = structure__scope.getBoundingClientRect();
-        // var properties__scope__bounds = properties__scope.getBoundingClientRect();
-
-        // resizer_l.style.left = resizer_l__bounds.left - new_x + "px";
-        
-        // structure__scope.style.width = structure__scope__bounds.width - new_x + "px";
-        // properties__scope.style.left = properties__scope__bounds.left - new_x + "px";
-        // properties__scope.style.width = properties__scope__bounds.width + new_x + "px";
-        // init_x = e.clientX;
-
         if (resizer_l.style.left >= "0px") {
             let new_x = init_x - e.clientX;
     
@@ -43,7 +30,7 @@ function mousedown_l(e) {
             properties__scope.style.left = "0px";
             structure__scope.style.width = properties__scope.style.left;
             resizer_l.style.left = "0px";
-        }
+            }
         else if ( resizer_l.getBoundingClientRect().left > resizer_r.getBoundingClientRect().left ) {
             if (resizer_l.getBoundingClientRect().left > window.innerWidth - resizer_r.getBoundingClientRect().width) {
                 var resizer_r__bounds = resizer_r.getBoundingClientRect();
@@ -65,6 +52,8 @@ function mousedown_l(e) {
         localStorage.setItem("structure__width", structure__scope.style.width);
         localStorage.setItem("properties__width", properties__scope.style.width);
         
+        properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+        localStorage.setItem('properties__list__width', properties__list.style.width);
     }
 
 }
@@ -91,6 +80,8 @@ function button_l__on__click (event) {
     localStorage.setItem("properties__width", properties__scope.style.width);
     localStorage.setItem("structure__scope__display", "false");
     resizer_l.removeEventListener("mousedown", mousedown_l);
+    properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+    localStorage.setItem('properties__list__width', properties__list.style.width);
 }
 
 resizer_l__button__off.addEventListener("click", button_l__off__click);
@@ -111,4 +102,6 @@ function button_l__off__click (event) {
     localStorage.setItem("properties__width", properties__scope.style.width);
     localStorage.removeItem("resizer_l__clicked");
     structure__scope.style.display = "flex";
+    properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+    localStorage.setItem('properties__list__width', properties__list.style.width);
 }

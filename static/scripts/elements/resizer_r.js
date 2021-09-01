@@ -41,6 +41,8 @@ function mousedown_r(e) {
         window.removeEventListener('mouseup', mouseup);
         localStorage.setItem("resizer_r", resizer_r.style.left);
         localStorage.setItem("properties__width", properties__scope.style.width);
+        properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+        localStorage.setItem('properties__list__width', properties__list.style.width);
     }
 
 }
