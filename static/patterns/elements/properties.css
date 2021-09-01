@@ -133,8 +133,8 @@
     display: none;
     overflow-y: scroll;
     flex: 1;
-    height: calc(100vh - 2 * var(--margin) - var(--fsize) - var(--borders)/2);
-    background-color: lawngreen;
+    /* height: calc(100vh - 2 * var(--margin) - var(--fsize) - var(--borders)/2); */
+    background-color: transparent;
 }
 
 .properties fieldset legend ul li ul:hover {
