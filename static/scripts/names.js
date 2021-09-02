@@ -13,6 +13,7 @@ const structure__fieldset = document.getElementById("structure__fieldset");
 const structure__legend = document.getElementById("structure__legend");
 const structure__legend__span = document.getElementById("structure__legend__span");
 const structure__legend__ul = document.getElementById("structure__legend__ul");
+const structure_legend__structure = document.getElementById("structure_legend__structure");
 const structure__unit = document.getElementById("structure__unit");
 const structure__fieldset__rect = structure__fieldset.getBoundingClientRect();
 
@@ -27,6 +28,11 @@ const resizer_r__button__on = document.getElementById("resizer_r__button__on");
 const resizer_r__button__off = document.getElementById("resizer_r__button__off");
 
 const panel__scope = document.getElementById("panel__scope");
+const panel__bar = document.getElementById("panel__bar");
+const panel__bar__list = document.getElementById("panel__bar__list");
+const panel__bar__type = document.getElementById("panel__bar__type");
+const panel__bar__type__list = document.getElementById('panel__bar__type__list');
+const panel__bar__run = document.getElementById("panel__bar__run");
 
 const RDS = document.getElementById("RDS");
 const ST = document.getElementById("ST");
@@ -71,6 +77,9 @@ const default__properties__property__char = "<i>E<sub>g</sub></i>";
 const default__properties__property__name = 'energy__gap';
 const default__properties__property__unit = "eV";
 const default__properties__property__content = "Energy Gap";
+
+const default__panel__bar__type = "distributions__energy__gap";
+const default__panel__bar__type__content = "Distribution: Energy Gap";
 
 const default__resizer_l = "30vw";
 const default__resizer_r = "60vw";

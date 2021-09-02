@@ -17,6 +17,14 @@ function set__property(event, property) {
     case "spin__orbit__split": set__property__body(event, "<i>&Delta;<sub>so</sub></i>", property, "meV"); break;
     case "valence__band__offset": set__property__body(event, "<i>VBO</i>", property, "eV"); break;
   }
+  properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
+  localStorage.setItem('properties__list__width', properties__list.style.width);
+
+  localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
+  properties__list.style.height = localStorage.getItem('properties__list__height');
+
+  // properties__list.classList.add('')
+
 }
 
 function set__property__body(event, char, property, unit) {
@@ -24,6 +32,7 @@ function set__property__body(event, char, property, unit) {
   if (localStorage.getItem('properties__property__dblclicked') == null) {
     properties__property.innerHTML = event.target.textContent;
   }
+  properties__property.title = event.target.textContent;
   properties__property.dataset.content = event.target.textContent;
   properties__property.dataset.name = property;
   properties__unit.innerHTML = unit;
@@ -34,13 +43,7 @@ function set__property__body(event, char, property, unit) {
   localStorage.setItem('properties__property__name', property);
   localStorage.setItem('properties__property__unit', unit);
   localStorage.setItem('properties__property__content', event.target.textContent);
-  
-  properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
-  localStorage.setItem('properties__list__width', properties__list.style.width);
-  
-  localStorage.setItem('properties__list__height', properties__scope.getBoundingClientRect().bottom - properties__properties.getBoundingClientRect().bottom + "px");
-  properties__list.style.height = localStorage.getItem('properties__list__height');
-}
+  }
 
 properties__textarea.oninput = function (event) {
   localStorage.setItem("property__" + properties__property.dataset.name, properties__textarea.value);

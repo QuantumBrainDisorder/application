@@ -46,5 +46,8 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("structure", default__structure);
         localStorage.setItem("structure__unit", default__structure__unit);
 
+        localStorage.setItem("panel__bar__type", default__panel__bar__type);
+        localStorage.setItem("panel__bar__type__content", default__panel__bar__type__content);
+
         localStorage.setItem("local__storage__initialized", "true");
 }

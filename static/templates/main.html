@@ -2,12 +2,15 @@
 <html lang="en">
     {% load static %}
     <head>
-        <title>NanoTools</title>
+        <title>NanoTools - Material engineering application</title>
         <meta charset="utf-8" />
         <meta name="description" content="description"/>
         <meta name="keywords" content="keywords"/>
         <meta name="author" content="Rabarbar Batman"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- <link rel="icon" type="image/png" href="{% static 'images/1.png' %}" /> -->
+        <link rel="shortcut icon" href="{% static 'images/site__icon.ico' %}"> 
 
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/fonts.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
@@ -25,17 +28,16 @@
                 <legend id="structure__legend">
                     <span id="structure__legend__span">...</span>
                     <ul id="structure__legend__ul">
-                        <li title="Structure">Structure</li>
-                        <li>&ZeroWidthSpace; (</li>
-                        <li>
-                            <span id="structure__unit" title="Structure unit" contenteditable spellcheck="false"></span>                          
+                        <li id="structure_legend__structure" title="Structure">Structure</li>
+                        <li style="float: right;">
+                            <span id="structure__unit" title="Structure unit" spellcheck="false"></span>                          
                             <ul contenteditable="false">
                                 <li onclick="set__structure__unit('A')" title="Angstorm">&#8491;</li>
                                 <li onclick="set__structure__unit('nm')" title="Nanometer">nm</li>
                                 <li onclick="set__structure__unit('um')" title="Micrometer">&#956;m</li>
                             </ul>
                         </li>
-                        <li>)</li>
+                        <li style="float: right;padding-right: calc(var(--fsize)/4);">|</li>
                     </ul>
                 </legend>
                 <textarea id="structure" title="Structure" spellcheck="false"></textarea>
@@ -107,9 +109,29 @@
 
 
         <div id="panel__scope" class="panel">
+            <div class="aaa"></div>
+            <div id="panel__bar" class="panel__bar">
+                <ul id="panel__bar__list">
+                    <li>|</li>
+                    <li id="panel__bar__run">Run</li>
+                    <li>|</li>
+                    <li>
+                        <span id="panel__bar__type">Body</span>
+                        <ul id="panel__bar__type__list">
+                            <optgroup label="Profiles">
+                                <option onclick="set__panel__bar__type(event,'profiles__energy')" title="Structure Energy Profile">Energy</option>
+                            </optgroup>
+                            <optgroup label="Distributions">
+                                <option onclick="set__panel__bar__type(event,'distributions__energy__gap')" title="Fixed Energy Gaps">Energy Gap</option>
+                                <option onclick="set__panel__bar__type(event,'distributions__lattice__constant')" title="Fixed Lattice Constants">Lattice Constant</option>
+                            </optgroup>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-            <form action=""  method="POST">{% csrf_token %}
-                <div style="margin-left: 50px; margin-right: 50px">
+            <form action=""  method="POST" style="margin-top: 10vw;">{% csrf_token %}
+                <div style="margin-left: 50px; margin-right: 50px;z-index: 2;">
                     {% if code %}
                         <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
                     {% else %}
@@ -121,7 +143,7 @@
                 <div style="margin-left: 50px; margin-right: 50px;">
                     <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
+                <button id="butbut" type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
             </form>
             <img src="data:image/png;base64, {{plot}}" alt="pct">
             <pre>
@@ -160,6 +182,12 @@
             </pre>
         </div>
 
+
+
+
+
+
+
         <div id="footer" class="footer">
             <span id="info__scope">
                 <code id="info"></code>
@@ -179,6 +207,7 @@
         <script type="text/javascript" src="{% static 'scripts/elements/properties.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_l.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_r.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  

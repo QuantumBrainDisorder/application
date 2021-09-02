@@ -63,6 +63,7 @@
     width: calc(100% - var(--fsize));
     z-index: 2;
     max-width: 100%;
+    user-select: none;
     
 }
 
@@ -187,6 +188,7 @@
 #properties__properties {
     width: 100%;
     padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4);
 }
 
 #properties__char {

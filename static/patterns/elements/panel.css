@@ -1,3 +1,7 @@
+.aaa {
+    margin-top: var(--margin);
+}
+
 .panel {
     position: fixed;
     display: block;
@@ -12,9 +16,163 @@
     right: 0;
     overflow-x: auto;
     z-index: 3;
+    right: 0;
 }
 
 .panel::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
 }
+
+
+
+
+
+
+
+.panel__bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    display: block;
+    z-index: 3;
+    padding: 0;
+    margin: 0;
+
+    background-color: var(--theme1);
+
+    font-size: 0;
+    width: 100%;
+}
+
+
+.panel__bar ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: var(--theme1);
+    display: flex;
+    justify-content: left;
+    height: 100%;
+}
+
+
+
+.panel__bar ul li {
+    position: relative;
+    display: inline;
+    margin: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    padding: 0;
+    background-color: transparent;
+    
+    float: left;
+    white-space: nowrap;
+    height: 100%;
+    padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4);
+}
+
+
+.panel__bar ul li span {
+    
+    display: block;
+    position: relative;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    height: 100%;
+    cursor: pointer;
+}
+
+.panel__bar ul li span:hover {
+    background-color: var(--theme2);
+}
+
+.panel__bar ul li span:active {
+    background-color: var(--theme3);
+}
+
+.panel__bar ul li span:hover + ul {
+    display: block;
+}
+
+
+
+
+
+.panel__bar ul li ul {
+    display: none;
+    position: relative;
+    background-color: var(--theme1);
+    overflow-y: scroll;
+    width: fit-content;
+}
+
+.panel__bar ul li ul::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+.panel__bar ul li ul:hover {
+    display: block;
+}
+
+
+
+
+
+
+
+.panel__bar ul li ul optgroup {
+    background-color: var(--theme1);
+    cursor: default;
+}
+
+
+
+
+
+
+.panel ul li ul option {
+    cursor: pointer;
+    padding-left: calc(var(--fsize)/2);
+    padding-right: calc(var(--fsize)/2);
+}
+
+
+.panel ul li ul option:hover {
+    background-color: var(--theme2);
+}
+
+.panel ul li ul option:active {
+    background-color: var(--theme3);
+}
+
+
+
+
+
+
+#panel__bar__run {
+    cursor: pointer;
+}
+
+#panel__bar__run:hover {
+    background-color: var(--theme2);
+}
+
+#panel__bar__run:active {
+    background-color: var(--theme3);
+}
+
+
+
+
+
+.panel form div {
+    z-index: 2;
+}
+
