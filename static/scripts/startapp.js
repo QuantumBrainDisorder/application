@@ -40,8 +40,10 @@ if (localStorage.getItem('panel__bar__type__list__height') == null) {
 panel__bar__type__list.style.height = localStorage.getItem('panel__bar__type__list__height');
 panel__bar.style.height = 1.3 * margin + "px";
 panel__scope.style.left = localStorage.getItem("resizer_r");
-panel__bar__type.textContent = localStorage.getItem("panel__bar__type__content");
+panel__bar__type.innerHTML = localStorage.getItem("panel__bar__type__content");
 panel__bar__type.dataset.type = localStorage.getItem("panel__bar__type");
+panel__bar__type.dataset.form = localStorage.getItem("panel__bar__type__form");
+
 
 properties__scope.style.left = localStorage.getItem("resizer_l");
 properties__scope.style.width = localStorage.getItem("properties__width");
@@ -70,3 +72,23 @@ if (localStorage.getItem('properties__list__height') == null) {
 }
 properties__list.style.height = localStorage.getItem('properties__list__height');
 
+
+if (localStorage.getItem("panel__form__orint__orint") != null) {
+    
+    panel__form__orint__orint.checked = true;
+}
+
+if (localStorage.getItem("panel__form__distribution__al") != null) {
+    panel__form__distribution__al.checked = true;
+}
+if (localStorage.getItem("panel__form__distribution__ii") != null) {
+    panel__form__distribution__ii.checked = true;
+}
+
+if (localStorage.getItem("panel__form__profile__al") != null) {
+    panel__form__profile__al.checked = true;
+}
+
+
+// local storage size
+//var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");

@@ -34,9 +34,30 @@ const panel__bar__type = document.getElementById("panel__bar__type");
 const panel__bar__type__list = document.getElementById('panel__bar__type__list');
 const panel__bar__run = document.getElementById("panel__bar__run");
 
+const panel__form__orint = document.getElementById("panel__form__orint");
+const panel__form__distribution = document.getElementById("panel__form__distribution");
+const panel__form__profile = document.getElementById("panel__form__profile");
+
+const panel__form__orint__orint = document.getElementById("panel__form__orint__orint");
+
+const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
+const panel__form__distribution__ii = document.getElementById("panel__form__distribution__ii");
+const panel__form__distribution__submit = document.getElementById("panel__form__distribution__submit")
+
+const panel__form__profile__al = document.getElementById("panel__form__profile__al");
+const panel__form__profile__submit = document.getElementById("panel__form__profile__submit")
+
+const panel__form__meta = document.getElementById("panel__form__meta");
+const panel__output = document.getElementById("panel__output")
+
 const RDS = document.getElementById("RDS");
 const ST = document.getElementById("ST");
 const info = document.getElementById("info");
+
+
+
+
+
 
 const default__property__alpha__varshni = "GaAs 541\nGaSb 417\nInSb 320\nAlAs 885\nAlSb 420";
 const default__property__beta__varshni = "GaAs 204\nGaSb 140\nInSb 170\nAlAs 530\nAlSb 140";
@@ -80,6 +101,7 @@ const default__properties__property__content = "Energy Gap";
 
 const default__panel__bar__type = "distributions__energy__gap";
 const default__panel__bar__type__content = "Distribution: Energy Gap";
+const default__panel__bar__type__form = 'distribution';
 
 const default__resizer_l = "30vw";
 const default__resizer_r = "60vw";

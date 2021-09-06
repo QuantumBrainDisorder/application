@@ -1,4 +1,4 @@
-.aaa {
+.white__space {
     margin-top: var(--margin);
 }
 
@@ -25,6 +25,23 @@
 }
 
 
+.panel fieldset {
+    flex: 1;
+    /* margin-left: var(--margin); */
+    margin-right: var(--margin__half);
+    display:  flex;
+    flex-direction: column;
+    border-color: var(--theme1);
+    border-width: 0.8rem;
+    border-style: outset;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    color: var(--theme4);
+}
+
+
+
+
 
 
 
@@ -38,7 +55,7 @@
     z-index: 3;
     padding: 0;
     margin: 0;
-
+    color: var(--theme4);
     background-color: var(--theme1);
 
     font-size: 0;
@@ -102,7 +119,7 @@
 
 
 
-
+/* 
 .panel__bar ul li ul {
     display: none;
     position: relative;
@@ -150,6 +167,95 @@
 .panel ul li ul option:active {
     background-color: var(--theme3);
 }
+ */
+
+ 
+.panel__bar ul li ul {
+    position:fixed;
+    display: none;
+    overflow-y: scroll;
+    flex: 1;
+    background-color: transparent;
+    height: auto;
+}
+
+.panel__bar ul li ul::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+
+
+
+
+
+
+.panel__bar ul li ul optgroup {
+    background-color: var(--theme1);
+    cursor: default;
+
+    position: relative;
+    display: block;
+    text-align: left;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel__bar ul li ul:hover {
+    display: block;
+}
+
+
+
+
+
+.panel ul li ul option {
+    cursor: pointer;
+    padding-left: calc(var(--fsize)/2);
+    padding-right: calc(var(--fsize)/2);
+
+    position: relative;
+    display: block;
+    text-align: left;
+    background-color: var(--theme1);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.panel ul li ul option:hover {
+    background-color: var(--theme2);
+}
+
+.panel ul li ul option:active {
+    background-color: var(--theme3);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

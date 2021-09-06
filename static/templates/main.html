@@ -21,6 +21,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/structure.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/properties.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/orint.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/profile.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/distribution.css' %}">
     </head>
     <body>
         <div id="structure__scope" class="structure">
@@ -109,7 +112,7 @@
 
 
         <div id="panel__scope" class="panel">
-            <div class="aaa"></div>
+            <!-- <div class="aaa"></div>
             <div id="panel__bar" class="panel__bar">
                 <ul id="panel__bar__list">
                     <li>|</li>
@@ -128,9 +131,91 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> -->
+            <div class="white__space"></div>
+            <fieldset>
+                <legend id="panel__bar" class="panel__bar">
+                    <ul id="panel__bar__list">
+                        <li></li>
+                        <li id="panel__bar__run">Run</li>
+                        <li>|</li>
+                        <li>
+                            <span id="panel__bar__type">Body</span>
+                            <ul id="panel__bar__type__list">
+                                <optgroup label="Profiles">
+                                    <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Profile">Energy</option>
+                                </optgroup>
+                                <optgroup label="Distributions">
+                                    <option onclick="set__panel__bar__type(event,'distributions__energy__gap', 'distribution')" title="Feeded Energy Gaps">Energy Gap</option>
+                                    <option onclick="set__panel__bar__type(event,'distributions__lattice__constant', 'distribution')" title="Feeded Lattice Constants">Lattice Constant</option>
+                                </optgroup>
+                            </ul>
+                        </li>
+                    </ul>
+                </legend>
 
-            <form action=""  method="POST" style="margin-top: 10vw;">{% csrf_token %}
+                <form id="panel__form__orint" class="panel__form__orint">{% csrf_token %}
+                    <hr>
+                    <label class="panel__form__orint__label">Open result in new tab
+                        <input type="checkbox" id="panel__form__orint__orint" name="panel__form__orint__input">
+                        <span class="panel__form__orint__span"></span>
+                    </label><br>
+                </form>
+
+                <form id="panel__form__distribution" class="panel__form__distribution" action=""  method="POST">{% csrf_token %}
+                    <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
+                    <hr>
+                    <label class="panel__form__distribution__label">Add data labels
+                        <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al">
+                        <span class="panel__form__distribution__span"></span>
+                    </label><br>
+                    <label class="panel__form__distribution__label">Include interpolations
+                        <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii">
+                        <span class="panel__form__distribution__span"></span>
+                    </label><br>
+                </form>
+
+                <form id="panel__form__profile" class="panel__form__profile" action=""  method="POST">{% csrf_token %}
+                    <button id="panel__form__profile__submit" type="submit" style="display: none;"></button>
+                    <hr>
+                    <label class="panel__form__profile__label">var1231
+                        <input type="checkbox" id="panel__form__profile__al" name="panel__form__profile__al">
+                        <span class="panel__form__profile__span"></span>
+                    </label><br>
+                </form>
+
+                    
+                <!-- <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled ></textarea>
+                <div>
+                    {% if code %}
+                        <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
+                    {% else %}
+                        {% with code="x = [3,4,6];y = [3,4,5];plt.xlabel('s')" %}
+                            <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
+                        {% endwith %}
+                    {% endif %}
+                 </div>
+                 <textarea id="xxx" name="xxxname" type="text">{{ xxx }}</textarea>
+            
+                <button id="butbut" type="submit" class="btn btn-primary" style="margin-left: 50px; display: none;">Submit</button>
+            
+
+                    <div id="panel__output">
+                        <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
+                    </div> -->
+        
+                    <img src="data:image/png;base64, {{plot}}" alt="pct">
+                   
+                
+                
+                
+            </fieldset>
+        </div>
+
+
+
+
+            <!-- <form action=""  method="POST" style="margin-top: 10vw;">{% csrf_token %}
                 <div style="margin-left: 50px; margin-right: 50px;z-index: 2;">
                     {% if code %}
                         <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
@@ -145,6 +230,7 @@
                 </div>
                 <button id="butbut" type="submit" class="btn btn-primary" style="margin-left: 50px;">Submit</button>
             </form>
+
             <img src="data:image/png;base64, {{plot}}" alt="pct">
             <pre>
                 aasas
@@ -180,12 +266,7 @@
                 asas
                 v
             </pre>
-        </div>
-
-
-
-
-
+ -->
 
 
         <div id="footer" class="footer">
@@ -208,6 +289,9 @@
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_l.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_r.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/orint.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/distribution.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/profile.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  

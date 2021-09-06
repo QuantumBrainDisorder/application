@@ -1,4 +1,4 @@
-@import "variables.css";
+@import "../variables.css";
 
 .properties {
     position: fixed;
@@ -27,7 +27,6 @@
     border-style: outset;
     border-right-color: transparent;
     border-bottom-color: transparent;
-
 }
 
 .properties fieldset textarea {
