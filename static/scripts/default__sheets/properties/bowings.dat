@@ -1,0 +1,20 @@
+{
+    "energy__gap": {
+        "AlGaAs": "-0.12",
+        "AlGaSb": "-0.04",
+        "AlAsSb": "0.80",
+        "GaAsSb": "1.43",
+        "GaInSb": "0.41"
+    },
+    "spin__orbit_split": {
+        "AlGaAs": "0.00",
+        "AlGaSb": "0.30",
+        "AlAsSb": "0.15",
+        "GaAsSb": "0.60",
+        "GaInSb": "0.10"
+    },
+    "valence__band__offset": {
+        "AlAsSb": "-1.71",
+        "GaAsSb": "-1.06"
+    }
+}

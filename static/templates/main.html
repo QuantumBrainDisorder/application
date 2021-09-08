@@ -83,6 +83,7 @@
                                 <li onclick="set__property(event, 'valence__band__offset')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                                 <li onclick="set__property(event, 'alpha__varshni')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                                 <li onclick="set__property(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                                <li onclick="set__property(event, 'bowings')" title="Alloys Bowings Parameters (*)">Alloys Bowings Parameters</li>
                             </ul>
                         </li>
                         <li id="properties__right__wall" style="float: right;">|</li>
@@ -281,8 +282,8 @@
             </ul>
         </div>
 
-        <script type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
-        <script type="text/javascript" src="{% static 'scripts/localstorage.js' %}"></script>  
+        <script id="scripts__names" data-default__sheets__path="{% static 'scripts/default__sheets/' %}"  type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/localstorage.js' %}"></script> 
 
         <script type="text/javascript" src="{% static 'scripts/elements/structure.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/properties.js' %}"></script>
@@ -294,6 +295,7 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/profile.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
-        <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>  
+        <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>
+
     </body>
 </html>

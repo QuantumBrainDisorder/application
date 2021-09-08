@@ -90,5 +90,41 @@ if (localStorage.getItem("panel__form__profile__al") != null) {
 }
 
 
+
 // local storage size
 //var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+
+
+
+// const objeee = document.getElementById('bbb');
+// path = objeee.dataset.path;
+// console.log(path);
+// fetch(path)
+// .then(function(response){
+//     return response.text();
+// })
+// .then(function(data){
+//     console.log(data);
+// });
+
+// const objeee = document.getElementById('bbb');
+// path = objeee.dataset.path;
+// fetch(path).then(function(response){return response.text();}).then(function(data){console.log(data);});
+
+// const objeee = document.getElementById('bbb');
+// path = objeee.dataset.path;
+// console.log(path);
+
+// fetch(path).then(fuu).then(fuu2);
+
+// function fuu(response) {
+//     return response.text();
+// }
+
+// function fuu2(data) {
+//     console.log(data);
+// }
+
+// let response = fetch(path);
+// let text = response.text(); // read response body as text
+// alert(text);
