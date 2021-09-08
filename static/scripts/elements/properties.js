@@ -1,5 +1,6 @@
 function set__property(event, property) {
   switch (property) {     
+    case "bowings": set__property__body(event, "<i>C</i>", property, "(*)"); break;
     case "alpha__varshni": set__property__body(event, "<i>&alpha;</i>", property, "&mu;eV/K"); break;
     case "beta__varshni": set__property__body(event, "<i>&beta;</i>", property, "K"); break;
     case "biaxial__deformation__potential": set__property__body(event, "<i>b</i>", property, "eV"); break;

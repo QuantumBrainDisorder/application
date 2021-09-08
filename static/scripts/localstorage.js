@@ -19,6 +19,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         const default__property__unit__alpha__varshni = "ueV/K";
         const default__property__unit__beta__varshni = "K";
+        const default__property__unit__bowings = "(*)";
         const default__property__unit__biaxial__deformation__potential = "eV";
         const default__property__unit__elastic__constant__11 = "TPa";
         const default__property__unit__elastic__constant__12 = "GPa";
@@ -69,6 +70,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
 
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
+        localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
         localStorage.setItem("property__biaxial__deformation__potential", set__default__property('biaxial__deformation__potential'));
         localStorage.setItem("property__elastic__constant__11", set__default__property('elastic__constant__11'));
@@ -87,6 +89,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         localStorage.setItem("property__unit__alpha__varshni", default__property__unit__alpha__varshni);
         localStorage.setItem("property__unit__beta__varshni", default__property__unit__beta__varshni);
+        localStorage.setItem("property__unit__bowings", default__property__unit__bowings);
         localStorage.setItem("property__unit__biaxial__deformation__potential", default__property__unit__biaxial__deformation__potential);
         localStorage.setItem("property__unit__elastic__constant__11", default__property__unit__elastic__constant__11);
         localStorage.setItem("property__unit__elastic__constant__12", default__property__unit__elastic__constant__12);
@@ -126,16 +129,19 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("local__storage__initialized", "true");
 }
 
-async function set__default__property(property) {
+function set__default__property(property) {
         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
-        await fetch(path).then(step__one).then(step__two);
+        fetch(path).then(step__one).then(step__two);
         function step__one(response) {  return response.text()}
         function step__two(data){       localStorage.setItem('property__' + property, data)}
 };
 
-async function set__default__structure() {
+function set__default__structure() {
         var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
-         await fetch(path).then(step__one).then(step__two);
+        fetch(path).then(step__one).then(step__two);
         function step__one(response) {  return response.text()}
-        function step__two(data){       localStorage.setItem('structure', data)}             
+        function step__two(data){       
+                localStorage.setItem('structure', data);
+                document.location.reload();
+        }  
 };

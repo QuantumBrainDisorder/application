@@ -51,14 +51,11 @@ panel__bar__run.onclick = function (event) {
   switch(panel__bar__type.dataset.form) {
     case "distribution":
       if (panel__bar__type.dataset.type == 'distributions__energy__gap') {
-
-        content = '{' + '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\n', '\\n') + '"' + '}';  
+        content = '{' + '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"' + '}';  
       }
       else if (panel__bar__type.dataset.type = 'distributions__lattice__constant') {
-        content = '{' + '"lattice__constant":' + '"' + localStorage.getItem('property__lattice__constant').replaceAll('\n', '\\n') + '"' + '}';
+        content = '{' + '"lattice__constant":' + '"' + localStorage.getItem('property__lattice__constant').replaceAll('\r', '').replaceAll('\n', '\\n') + '"' + '}';
       }
-
-
       panel__form__distribution__submit.value = content;
       panel__form__distribution__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
       break;
