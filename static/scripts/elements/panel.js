@@ -1,7 +1,7 @@
 function set__panel__bar__type(event, type, form) {
   clean__panel();
 
-    switch (type) {     
+    switch (type) {
       case "profiles__energy": 
         set__panel__bar__type__body(event, "Profile: ", type, form); 
         panel__form__orint.style.display = "initial";
@@ -60,6 +60,11 @@ panel__bar__run.onclick = function (event) {
       panel__form__distribution__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
       break;
     case "profile":
+      content__A = '"structure": ' + '"' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+      content__B = '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+      content__C = '"bowings": ' + localStorage.getItem('property__bowings').replaceAll('\r', '') ;
+      content = '{' + content__A + ', ' + content__B + ', ' + content__C + '}';
+      panel__form__profile__submit.value = content;
       panel__form__profile__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
       break;
   }

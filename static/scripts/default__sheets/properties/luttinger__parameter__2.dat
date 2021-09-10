@@ -1,5 +1,14 @@
 GaAs 2.06
-GaSb 4.70
-InSb 15.5
 AlAs 0.82
+InAs 8.50
+GaP  0.49
+AlP  0.71
+InP  1.60
+GaSb 4.70
 AlSb 1.19
+InSb 15.5
+
+# zinc blende nitrides
+GaN  0.75
+AlN  0.47
+InN  1.26

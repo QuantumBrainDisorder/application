@@ -1,5 +1,19 @@
 GaAs 5.64
-GaSb 6.08
-InSb 6.47
 AlAs 5.65
+InAs 6.06
+GaP  5.45
+AlP  5.46
+InP  5.87
+GaSb 6.08
 AlSb 6.13
+InSb 6.47
+
+# wurtzite nitrides
+#GaN  3.19  # T=300K
+#AlN  3.11  # T=300K
+#InN  3.54  # T=300K
+
+# zinc blende nitrides
+GaN  4.50  # T=300K
+AlN  4.38  # T=300K
+InN  4.98  # T=300K

@@ -122,6 +122,7 @@
 from django.shortcuts import render
 import sys
 import chemical_QBD as cqbd
+import material_engineering_QBD as meqbd
 import json
 
 import matplotlib.pyplot as plt
@@ -152,26 +153,60 @@ def get_plot(x,y):
 
 def main(request):
     if request.method == 'POST':
-        dat = json.loads(request.POST.get('panel__form__distribution__submit'))
-        
-        # x, y = cqbd.read__sheet(dat['energy__gap'])
-        x, y = cqbd.read__sheet(dat[list(dat.keys())[0]])
-        plt.switch_backend('AGG')
-        plt.figure(figsize=(3,3))
-        plt.plot(x,y)
-        plt.tight_layout()
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
-        buffer.seek(0)
-        image_png = buffer.getvalue()
-        graph = base64.b64encode(image_png)
-        graph = graph.decode('utf-8')
-        buffer.close()
-        plot = graph
+        # print('+++++++++++++++++++++++++++++++', sys.stderr)
+        # # print(request.POST.get('panel__form__profile__submit'),sys.stderr)
+        # print('+++++++++++++++++++++', sys.stderr)
+        if 'panel__form__distribution__submit' in request.POST.keys():
+            dat = json.loads(request.POST.get('panel__form__distribution__submit'))
+            
+            # x, y = cqbd.read__sheet(dat['energy__gap'])
+            x, y = cqbd.read__sheet(dat[list(dat.keys())[0]])
+            plt.switch_backend('AGG')
+            plt.figure(figsize=(3,3))
+            plt.scatter(x,y)
+            plt.tight_layout()
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            image_png = buffer.getvalue()
+            graph = base64.b64encode(image_png)
+            graph = graph.decode('utf-8')
+            buffer.close()
+            plot = graph
 
-        plot = get_plot(x, y)
-        # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
-        return render(request, 'main.html', {'plot': plot})
+            plot = get_plot(x, y)
+            # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
+            return render(request, 'main.html', {'plot': plot})
+        elif "panel__form__profile__submit" in request.POST.keys():
+            dat = json.loads(request.POST.get('panel__form__profile__submit'))
+            x, y = meqbd.read__sheet(dat['structure'], 'nm')
+            params = cqbd.read__sheet(dat['energy__gap'], 'dict')
+            fence = []
+            for i in x:
+                vel = meqbd.interpolation__exception(i, params, dat['bowings']['energy__gap'])
+                fence.append(vel)
+            x, y = meqbd.profile__plain(y, fence)
+            # print('----------------',sys.stderr)
+            # print(x, sys.stderr)
+            # print(y, sys.stderr)
+            # print('-------------', sys.stderr)
+
+            plt.switch_backend('AGG')
+            plt.figure(figsize=(3,3))
+            plt.scatter(x,y)
+            plt.tight_layout()
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            image_png = buffer.getvalue()
+            graph = base64.b64encode(image_png)
+            graph = graph.decode('utf-8')
+            buffer.close()
+            plot = graph
+
+            plot = get_plot(x, y)
+            # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
+            return render(request, 'main.html', {'plot': plot})
 
     con = """x = [3,4,6]
 y = [3,4,5]

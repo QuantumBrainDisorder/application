@@ -1,5 +1,19 @@
 GaAs 566
-GaSb 402
-InSb 373
 AlAs 534
+InAs 453
+GaP  620
+AlP  630
+InP  561
+GaSb 402
 AlSb 434
+InSb 373
+
+# wurtzite nitrides
+#GaN  145
+#AlN  137
+#InN  115
+
+# zinc blende nitrides
+GaN  159
+AlN  160
+InN  125

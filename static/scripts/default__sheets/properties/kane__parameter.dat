@@ -1,5 +1,19 @@
 GaAs -1.94
-GaSb -1.64
-InSb -0.23
 AlAs -0.48
+InAs -2.90
+GaP  -2.04
+AlP  -0.65
+InP  -1.31
+GaSb -1.64
 AlSb -0.56
+InSb -0.23
+
+# wurtzite nitrides
+#GaN  0.00
+#AlN  0.00
+#InN  0.00
+
+# zinc blende nitrides
+GaN  -0.92
+AlN  0.76
+InN  -0.92

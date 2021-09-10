@@ -1,20 +1,90 @@
 {
-    "energy__gap": {
-        "AlGaAs": "-0.12",
-        "AlGaSb": "-0.04",
-        "AlAsSb": "0.80",
-        "GaAsSb": "1.43",
-        "GaInSb": "0.41"
-    },
-    "spin__orbit_split": {
-        "AlGaAs": "0.00",
-        "AlGaSb": "0.30",
-        "AlAsSb": "0.15",
-        "GaAsSb": "0.60",
-        "GaInSb": "0.10"
-    },
-    "valence__band__offset": {
-        "AlAsSb": "-1.71",
-        "GaAsSb": "-1.06"
-    }
+  "units": {
+    "energy__gap": "eV",
+    "spin__orbit__split": "eV",
+    "valence__band__offset": "eV",
+    "mass__electrones": "",
+    "mass__heavy__holes__001": "",
+    "mass__light__holes__001": "",
+    "matrix__element__of__kane__operator": "eV",
+    "kane__parameter": "",
+    "hydrostatic__deformation__potential__of__conduction__band": "eV"
+  },
+  "energy__gap": {
+    "AlGaAs": "-0.13",
+    "AlGaSb": "-0.04",
+    "AlAsSb": "0.80",
+    "GaInAs": "0.477",
+    "GaAsSb": "1.43",
+    "GaInSb": "0.41",
+    "AlInAs": "0.70",
+    "GaInP": "0.65",
+    "AlInP": "-0.48",
+    "AlGaP": "0.00",
+    "AlInSb": "0.43",
+    "InAsSb": "0.67",
+    "GaAsP": "0.19",
+    "InAsP": "0.10",
+    "AlAsP": "0.22",
+    "GaPSb": "2.7",
+    "AlPSb": "2.7",
+    "InPSb": "1.9",
+    "GaInN": "3.0",
+    "AlGaN": "0.0",
+    "AlInN": "14",
+    "GaAsN": "70",
+    "GaPN": "3.9",
+    "InPN": "15",
+    "InAsN": "4.22"
+  },
+  "spin__orbit__split": {
+    "AlGaAs": "0.00",
+    "AlGaSb": "0.30",
+    "AlAsSb": "0.15",
+    "GaInAs": "0.15",
+    "GaAsSb": "0.60",
+    "GaInSb": "0.10",
+    "AlInAs": "0.15",
+    "GaInP": "0.00",
+    "AlInP": "-0.19",
+    "AlInSb": "0.25",
+    "InAsSb": "1.2",
+    "InAsP": "0.16",
+    "InPSb": "0.75"
+  },
+  "valence__band__offset": {
+    "AlAsSb": "-1.71",
+    "GaInAs": "-0.38",
+    "GaAsSb": "-1.06",
+    "AlInAs": "-0.64"
+  },
+  "mass__electrones": {
+    "GaInAs": "0.0091",
+    "AlInAs": "0.049",
+    "GaInP": "0.051",
+    "AlInP": "0.22",
+    "GaInSb": "0.0092",
+    "InAsSb": "0.035"
+  },
+  "mass__heavy__holes__001": {
+    "GaInAs": "-0.145"
+  },
+  "mass__light__holes__001": {
+    "GaInAs": "0.02",
+    "GaInSb": "0.011"
+  },
+  "matrix__element__of__kane__operator": {
+    "GaInAs": "-1.48",
+    "AlInAs": "-4.81"
+  },
+  "kane__parameter": {
+    "GaInAs": "1.77",
+    "AlInAs": "-4.44",
+    "GaInP": "0.78",
+    "GaInSb": "-6.84"
+  },
+  "hydrostatic__deformation__potential__of__conduction__band": {
+    "GaInAs": "2.61",
+    "AlInAs": "-1.4"
+  }
 }
