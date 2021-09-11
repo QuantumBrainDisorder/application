@@ -65,3 +65,4 @@ properties__property.ondblclick = function(event) {
     properties__list.style.height = localStorage.getItem('properties__list__height');  
   }
 }
+

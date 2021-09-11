@@ -27,6 +27,13 @@ if (localStorage.getItem('properties__property__dblclicked') == null) {
 else {
     properties__property.innerHTML = '...';
 }
+
+switch (localStorage.getItem('footer__theme')) {
+    case 'A':   ST.title = 'Switch theme to the B'; break;
+    case 'B':   ST.title = 'Switch theme to the C'; break;
+    case 'C':   ST.title = 'Switch theme to the A'; break;
+}
+
 properties__char.innerHTML = localStorage.getItem('properties__property__char');
 properties__property.title = localStorage.getItem('properties__property__content');
 properties__property.dataset.content = localStorage.getItem('properties__property__content');
@@ -90,8 +97,7 @@ if (localStorage.getItem("panel__form__profile__al") != null) {
 }
 
 
-// local storage size
-//var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+
 
 
 

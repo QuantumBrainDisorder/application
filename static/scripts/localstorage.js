@@ -1,5 +1,15 @@
 if (localStorage.getItem("local__storage__initialized") == null) {
-                
+        var i = 0;
+        try {
+                for (i = 0; i <= 10000; i += 250) {
+                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
+                }
+        } 
+        catch (e) {
+                localStorage.removeItem('test');
+                localStorage.setItem('local__storage__max__size', i - 250);            
+        }
+        
         // const default__property__alpha__varshni = "GaAs 541\nGaSb 417\nInSb 320\nAlAs 885\nAlSb 420";
         // const default__property__beta__varshni = "GaAs 204\nGaSb 140\nInSb 170\nAlAs 530\nAlSb 140";
         // const default__property__biaxial__deformation__potential = "GaAs -2.00\nGaSb -2.00\nInSb -2.00\nAlAs -2.30\nAlSb -1.35";

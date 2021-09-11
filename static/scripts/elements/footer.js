@@ -12,20 +12,89 @@ function ST__clicked(event) {
             // in theme__initiation.js
             set__theme("#242e31", "#4ad5ff", "#3fb6da", "#369cba", "#ffffff");
             localStorage.setItem("footer__theme", "B");
-            ST.title = "Switch to theme C"
+            ST.title = "Switch theme to the C"
             // location.reload();
             break;
         case 'B': 
             set__theme("#1d1b22", "#813dff", "#6e34da", "#5e2cba", "#ffffff");
             localStorage.setItem("footer__theme", "C");
-            ST.title = "Switch to theme A"
+            ST.title = "Switch theme to the A"
             // location.reload();
             break;
         case 'C': 
             set__theme("#ffffff", "#b40078", "#9a0066", "#840057", "#000000");
             localStorage.setItem("footer__theme", "A");
-            ST.title = "Switch to theme B"
+            ST.title = "Switch theme to the B"
             // location.reload();
             break;
     }
+}
+
+
+function get__local__storage__size() {
+    var _lsTotal = 0, _xLen, _x; 
+    for (_x in localStorage) { 
+        _xLen = (((localStorage[_x].length || 0) + (_x.length || 0)) * 2);
+        _lsTotal += _xLen;
+    }
+    return (_lsTotal / 1024).toFixed(2);
+}
+
+footer.addEventListener("mouseenter", footer__hover);
+
+function footer__hover (event) {
+    LS.innerHTML = 'LS: ' + String((100 * get__local__storage__size() / localStorage.getItem("local__storage__max__size")).toFixed(1)) + '%';
+}
+
+
+
+
+
+
+
+LC__input.addEventListener("input", LC__inputed);
+function LC__inputed(event) {
+    if (this.files[0].name != 'nanotools__configuration.json') {
+        alert('the nanotools__configuration.json file required');
+    }
+    else {
+        var fr=new FileReader();
+        fr.onload=function(){
+            const x = JSON.parse(fr.result, (key, value) => {localStorage.setItem(key, value)}  );
+            document.location.reload();
+        }
+        fr.readAsText(this.files[0]);
+    }
+}
+
+
+SC.addEventListener("click", SC__clicked);
+function SC__clicked(event) {
+
+    var configuration = '{';
+    for(let i=0; i<localStorage.length; i++) {
+        let key = localStorage.key(i);
+        switch(key){
+            case "structure": 
+                configuration += '"' + key + '":' + '"' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '\\n')  + '",';
+                break;
+            case "structure__unit": 
+                configuration += '"' + key + '":' + '"' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '\\n')  + '",';
+                break;
+            case "property__bowings": 
+                configuration += '"' + key + '":' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '').replaceAll(' ', '') + ',';
+                break;
+            default:
+                if (key.startsWith('property__')) {
+                    configuration += '"' + key + '":' + '"' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '\\n') + '",';
+                };
+        };
+    }
+    configuration += '"local__storage__initialized":' + '"true"';
+    configuration += '}';
+
+    var nanotools__configuration = document.createElement('a');
+    nanotools__configuration.href = 'data:attachment/json,' + encodeURIComponent(configuration);
+    nanotools__configuration.download = 'nanotools__configuration.json';
+    nanotools__configuration.click();
 }

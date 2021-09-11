@@ -50,9 +50,14 @@ const panel__form__profile__submit = document.getElementById("panel__form__profi
 const panel__form__meta = document.getElementById("panel__form__meta");
 const panel__output = document.getElementById("panel__output")
 
+const footer = document.getElementById("footer");
 const RDS = document.getElementById("RDS");
 const ST = document.getElementById("ST");
 const info = document.getElementById("info");
+const LS = document.getElementById("LS");
+const LC = document.getElementById("LC");
+const LC__input = document.getElementById('LC__input');
+const SC = document.getElementById("SC");
 
 
 var css__vars = getComputedStyle(document.body);

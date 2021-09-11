@@ -29,7 +29,7 @@
         <div id="structure__scope" class="structure">
             <fieldset id="structure__fieldset">
                 <legend id="structure__legend">
-                    <span id="structure__legend__span">...</span>
+                    <span id="structure__legend__span" title="Structure">...</span>
                     <ul id="structure__legend__ul">
                         <li id="structure_legend__structure" title="Structure">Structure</li>
                         <li style="float: right;">
@@ -276,7 +276,18 @@
             </span>
             <ul>
                 <li style="flex: 1;">|</li>
-                <li id="ST" title="Switch to theme B">ST</li>
+                <li id="SC" title="Save the structure and all properties">SC</li>
+                <li style="flex: 1;">/</li>
+                <li id="LC" title="Load the structure and all properties">
+                    <label style="padding: 0; margin: 0; display: block; cursor: pointer;">
+                        LC
+                        <input pattern="thx" id="LC__input" type="file" style="display: none; padding: 0; margin: 0;" accept=".json">
+                    </label>
+                </li>
+                <li style="flex: 1;">|</li>
+                <li id="LS" title="Usage of the local storage"></li>
+                <li style="flex: 1;">|</li>
+                <li id="ST">ST</li>
                 <li style="flex: 1;">|</li>
                 <li id="RDS" title="Restore default settings">RDS</li>
             </ul>

@@ -32,6 +32,10 @@ structure__unit.oninput = function (event) {
 
 structure.oninput = function (event) {
   localStorage.setItem("structure", structure.value);
+  // if (event.keyCode === 34) {
+  //   alert('undesirable character');
+  //   // structure.innerHTML = "structure.textContent.replace('"', '');"
+  // }
 }
 
 structure__legend.ondblclick = function(event) {
@@ -47,5 +51,31 @@ structure__legend.ondblclick = function(event) {
     // structure__legend__span.classList.remove('structure__legend__span');
     structure_legend__structure.innerHTML = "Structure";
     localStorage.removeItem("structure__legend__dblclicked");
+  }
+}
+
+
+structure.onkeypress = function (event) {
+  switch(event.keyCode){
+    case 34:
+      structure.blur()
+      alert('undesirable character');
+      structure.innerHTML = localStorage.getItem('structure').replaceAll('\"','');
+      break;
+    case 58:
+      structure.blur()
+      alert('undesirable character');
+      structure.innerHTML = localStorage.getItem('structure').replaceAll(':','');
+      break;
+    case 123:
+      structure.blur()
+      alert('undesirable character');
+      structure.innerHTML = localStorage.getItem('structure').replaceAll('{','');
+      break;
+    case 125:
+      structure.blur()
+      alert('undesirable character');
+      structure.innerHTML = localStorage.getItem('structure').replaceAll('}','');
+      break;
   }
 }

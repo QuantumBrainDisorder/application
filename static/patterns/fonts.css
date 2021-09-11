@@ -30,6 +30,36 @@
 }
 
 @font-face {
-    font-family: Forum-Regular;
+    font-family: OldStandardTT-Regular;
     src: url(../fonts/Old_Standard_TT/OldStandardTT-Regular.ttf);
+}
+
+@font-face {
+    font-family: NanumMyeongjo-Regular;
+    src: url(../fonts/Nanum_Myeongjo/NanumMyeongjo-Regular.ttf);
+}
+
+@font-face {
+    font-family: CormorantInfant-Light;
+    src: url(../fonts/Cormorant_Infant/CormorantInfant-Light.ttf);
+}
+
+@font-face {
+    font-family: Lato-Light;
+    src: url(../fonts/Lato/Lato-Light.ttf);
+}
+
+@font-face {
+    font-family: GildaDisplay-Regular;
+    src: url(../fonts/Gilda_Display/GildaDisplay-Regular.ttf);
+}
+
+@font-face {
+    font-family: Spectral-Light;
+    src: url(../fonts/Spectral/Spectral-Light.ttf);
+}
+
+@font-face {
+    font-family: Spectral-ExtraLight;
+    src: url(../fonts/Spectral/Spectral-ExtraLight.ttf);
 }

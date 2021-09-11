@@ -1,3 +1,156 @@
+/* @import "../fonts.css";
+@import "../variables.css";
+
+.structure {
+    position: fixed;
+    top: 0;
+    bottom: var(--margin);
+    width: 30vw;
+    margin: 0;
+    display:  flex;
+    flex-direction: column;
+    padding-top: var(--margin);
+    padding-right: 0;
+}
+
+.structure fieldset {
+    flex: 1;
+    margin-left: var(--margin);
+    margin-right: var(--margin__half);
+    display:  flex;
+    flex-direction: column;
+    border-color: var(--theme1);
+    border-width: 0.8rem;
+    border-style: outset;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.structure fieldset textarea {
+    position:relative;
+    resize: none;
+    border-width: 0;
+    flex: 1;
+    color: var(--theme4);
+    background-color: var(--theme0);
+    outline-color: var(--theme4);
+    outline-width: 0;
+}
+
+.structure fieldset textarea::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+
+
+.structure fieldset legend {
+    padding-left: var(--borders);
+    padding-right: var(--borders);
+    font-size: 0;
+    background-color: var(--theme1);
+    z-index: 1;
+    border-width: var(--borders);
+    color: var(--theme4);
+    width: calc(100% - var(--fsize));
+    user-select: none;
+}
+
+.structure fieldset legend ul {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.structure fieldset legend ul li:hover {
+    background-color: lightblue;
+}
+.structure fieldset legend ul li {
+    display: inline-block;
+    margin: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    padding: 0;
+}
+
+.structure fieldset legend ul li:hover {
+    cursor: default;
+}
+
+.structure fieldset legend ul li span {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    background-color: lawngreen;
+    max-width: 8rem;
+    max-height: 2.4rem;
+    vertical-align: top;
+    text-align: center;
+    overflow: hidden;
+    outline: none;
+}
+
+.structure fieldset legend ul li ul {
+    display: none;
+    
+}
+
+.structure fieldset legend ul li span:hover {
+    background-color: var(--theme2);
+}
+
+.structure fieldset legend ul li span:hover + ul{
+    display: block;
+}
+
+.structure fieldset legend ul li ul {
+    position: absolute;
+    display: none;
+    
+}
+
+.structure fieldset legend ul li ul:hover {
+    display: block;
+}
+
+.structure fieldset legend ul li ul li {
+    display: block;
+    text-align: center;
+    background-color: var(--theme1);
+}
+
+.structure fieldset legend ul li ul li:hover {
+    background-color: var(--theme2);
+    cursor: pointer;
+}
+
+.structure fieldset legend ul li ul li:active {
+    background-color: var(--theme3);
+    cursor: pointer;
+}
+
+
+
+
+.structure__legend__ul {
+    display: none;
+}
+
+.structure__legend__span {
+    display: block;
+    margin: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    padding: 0;
+    cursor: default;
+} */
+
+
 @import "../fonts.css";
 @import "../variables.css";
 
@@ -61,6 +214,10 @@
     padding: 0;
     
 }
+
+.structure fieldset legend ul li:hover {
+    background-color: transparent;
+}
 .structure fieldset legend ul li {
     display: inline-block;
     margin: 0;
@@ -71,9 +228,12 @@
 
 .structure fieldset legend ul li:hover {
     cursor: default;
+    background-color: var(--theme2);
 }
 
 .structure fieldset legend ul li span {
+    position: relative;
+    height: 100%;
     display: inline-block;
     border-width: 0;
     padding: 0;
@@ -94,11 +254,8 @@
     
 }
 
-.structure fieldset legend ul li span:hover {
-    background-color: var(--theme2);
-}
 
-.structure fieldset legend ul li span:hover + ul{
+.structure fieldset legend ul li:hover ul{
     display: block;
 }
 
