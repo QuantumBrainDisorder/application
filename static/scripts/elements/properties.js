@@ -66,3 +66,48 @@ properties__property.ondblclick = function(event) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+properties__textarea.onkeypress = function (event) {
+  if (properties__property.dataset.name != 'bowings'){
+    switch(event.keyCode){
+      case 34:
+        properties__textarea.blur()
+        alert('undesirable character');
+        break;
+      case 58:
+        properties__textarea.blur()
+        alert('undesirable character');
+        break;
+      case 123:
+        properties__textarea.blur()
+        alert('undesirable character');
+        break;
+      case 125:
+        properties__textarea.blur()
+        alert('undesirable character');
+        break;
+    }
+  }
+  else {
+    switch(event.keyCode){
+      case 39:
+        properties__textarea.blur()
+        alert('undesirable character');
+        break;
+    }
+  }
+}
+

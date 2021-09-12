@@ -11,9 +11,9 @@ const structure = document.getElementById("structure");
 const structure__scope = document.getElementById("structure__scope");
 const structure__fieldset = document.getElementById("structure__fieldset");
 const structure__legend = document.getElementById("structure__legend");
-const structure__legend__span = document.getElementById("structure__legend__span");
 const structure__legend__ul = document.getElementById("structure__legend__ul");
-const structure_legend__structure = document.getElementById("structure_legend__structure");
+const structure__legend__structure = document.getElementById("structure__legend__structure");
+const structure__legend__unit = document.getElementById("structure__legend__unit");
 const structure__unit = document.getElementById("structure__unit");
 const structure__fieldset__rect = structure__fieldset.getBoundingClientRect();
 

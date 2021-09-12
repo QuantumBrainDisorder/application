@@ -228,7 +228,6 @@
 
 .structure fieldset legend ul li:hover {
     cursor: default;
-    background-color: var(--theme2);
 }
 
 .structure fieldset legend ul li span {
@@ -262,8 +261,8 @@
 .structure fieldset legend ul li ul {
     position: absolute;
     display: none;
-    
 }
+
 
 .structure fieldset legend ul li ul:hover {
     display: block;
@@ -291,7 +290,7 @@
 .structure__legend__ul {
     display: none;
 }
-
+/* 
 .structure__legend__span {
     display: block;
     margin: 0;
@@ -299,4 +298,13 @@
     font-size: var(--fsize);
     padding: 0;
     cursor: default;
+} */
+
+
+#structure__legend__unit:hover {
+    background-color: var(--theme2);
 }
+
+
+
+

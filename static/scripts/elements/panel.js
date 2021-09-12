@@ -63,7 +63,14 @@ panel__bar__run.onclick = function (event) {
       content__A = '"structure": ' + '"' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
       content__B = '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
       content__C = '"bowings": ' + localStorage.getItem('property__bowings').replaceAll('\r', '') ;
-      content = '{' + content__A + ', ' + content__B + ', ' + content__C + '}';
+      let unit = null;
+      switch (localStorage.getItem('structure__unit')) {
+        case 'nm': unit = 'nm'; break;
+        case '&#8491;': unit = 'Angs'; break;
+        case '&#956;m': unit = 'um'; break;
+      }
+      content__D = '"structure__unit": ' + '"' + unit + '"';
+      content = '{' + content__A + ', ' + content__B + ', ' + content__C + ', ' + content__D + '}';
       panel__form__profile__submit.value = content;
       panel__form__profile__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
       break;

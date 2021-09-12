@@ -6,6 +6,7 @@ function set__structure__unit (unit) {
   };
 };
 
+const thc = document.getElementById('thc');
 function set__structure__unit__body (unit) {
   structure__unit.innerHTML = unit;
   localStorage.setItem("structure__unit", unit);
@@ -40,16 +41,11 @@ structure.oninput = function (event) {
 
 structure__legend.ondblclick = function(event) {
   if (localStorage.getItem("structure__legend__dblclicked") == null) {
-    // structure__legend__ul.classList.add('structure__legend__ul');
-    // structure__legend__span.classList.add('structure__legend__span');
-    // structure__legend__span.title = "Structure (" + structure__unit.textContent + ')';
-    structure_legend__structure.textContent = "...";
+    structure__legend__structure.textContent = "...";
     localStorage.setItem("structure__legend__dblclicked",'true');
   }
   else {
-    // structure__legend__ul.classList.remove('structure__legend__ul');
-    // structure__legend__span.classList.remove('structure__legend__span');
-    structure_legend__structure.innerHTML = "Structure";
+    structure__legend__structure.innerHTML = "Structure";
     localStorage.removeItem("structure__legend__dblclicked");
   }
 }
@@ -60,22 +56,22 @@ structure.onkeypress = function (event) {
     case 34:
       structure.blur()
       alert('undesirable character');
-      structure.innerHTML = localStorage.getItem('structure').replaceAll('\"','');
+      // structure.innerHTML = localStorage.getItem('structure').replaceAll('\"','');
       break;
     case 58:
       structure.blur()
       alert('undesirable character');
-      structure.innerHTML = localStorage.getItem('structure').replaceAll(':','');
+      // structure.innerHTML = localStorage.getItem('structure').replaceAll(':','');
       break;
     case 123:
       structure.blur()
       alert('undesirable character');
-      structure.innerHTML = localStorage.getItem('structure').replaceAll('{','');
+      // structure.innerHTML = localStorage.getItem('structure').replaceAll('{','');
       break;
     case 125:
       structure.blur()
       alert('undesirable character');
-      structure.innerHTML = localStorage.getItem('structure').replaceAll('}','');
+      // structure.innerHTML = localStorage.getItem('structure').replaceAll('}','');
       break;
   }
 }

@@ -154,7 +154,7 @@ def get_plot(x,y):
 def main(request):
     if request.method == 'POST':
         # print('+++++++++++++++++++++++++++++++', sys.stderr)
-        # # print(request.POST.get('panel__form__profile__submit'),sys.stderr)
+        # print(request.POST.get('panel__form__profile__submit'),sys.stderr)
         # print('+++++++++++++++++++++', sys.stderr)
         if 'panel__form__distribution__submit' in request.POST.keys():
             dat = json.loads(request.POST.get('panel__form__distribution__submit'))
@@ -179,7 +179,7 @@ def main(request):
             return render(request, 'main.html', {'plot': plot})
         elif "panel__form__profile__submit" in request.POST.keys():
             dat = json.loads(request.POST.get('panel__form__profile__submit'))
-            x, y = meqbd.read__sheet(dat['structure'], 'nm')
+            x, y = meqbd.read__sheet(dat['structure'], dat['structure__unit'])
             params = cqbd.read__sheet(dat['energy__gap'], 'dict')
             fence = []
             for i in x:

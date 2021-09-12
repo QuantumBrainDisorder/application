@@ -78,25 +78,6 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         // localStorage.setItem("property__spin__orbit__split", default__property__spin__orbit__split);
         // localStorage.setItem("property__valence__band__offset", default__property__valence__band__offset);
 
-
-        localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
-        localStorage.setItem("property__bowings", set__default__property('bowings'));
-        localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
-        localStorage.setItem("property__biaxial__deformation__potential", set__default__property('biaxial__deformation__potential'));
-        localStorage.setItem("property__elastic__constant__11", set__default__property('elastic__constant__11'));
-        localStorage.setItem("property__elastic__constant__12", set__default__property('elastic__constant__12'));
-        localStorage.setItem("property__energy__gap", set__default__property('energy__gap'));
-        localStorage.setItem("property__hydrostatic__deformation__potential__of__conduction__band", set__default__property('hydrostatic__deformation__potential__of__conduction__band'));
-        localStorage.setItem("property__hydrostatic__deformation__potential__of__valence__band", set__default__property('hydrostatic__deformation__potential__of__valence__band'));
-        localStorage.setItem("property__kane__parameter", set__default__property('kane__parameter'));
-        localStorage.setItem("property__lattice__constant", set__default__property('lattice__constant'));
-        localStorage.setItem("property__luttinger__parameter__1", set__default__property('luttinger__parameter__1'));
-        localStorage.setItem("property__luttinger__parameter__2", set__default__property('luttinger__parameter__2'));
-        localStorage.setItem("property__luttinger__parameter__3", set__default__property('luttinger__parameter__3'));
-        localStorage.setItem("property__matrix__element__of__kane__operator", set__default__property('matrix__element__of__kane__operator'));
-        localStorage.setItem("property__spin__orbit__split", set__default__property('spin__orbit__split'));
-        localStorage.setItem("property__valence__band__offset", set__default__property('valence__band__offset'));
-
         localStorage.setItem("property__unit__alpha__varshni", default__property__unit__alpha__varshni);
         localStorage.setItem("property__unit__beta__varshni", default__property__unit__beta__varshni);
         localStorage.setItem("property__unit__bowings", default__property__unit__bowings);
@@ -124,8 +105,6 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("resizer_l", default__resizer_l);
         localStorage.setItem("resizer_r", default__resizer_r);
 
-        // localStorage.setItem("structure", default__structure);
-        set__default__structure();
 
         localStorage.setItem("structure__unit", default__structure__unit);
 
@@ -133,10 +112,27 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("panel__bar__type__content", default__panel__bar__type__content);
         localStorage.setItem("panel__bar__type__form", default__panel__bar__type__form);
 
-
-
-
         localStorage.setItem("local__storage__initialized", "true");
+
+        localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
+        localStorage.setItem("property__bowings", set__default__property('bowings'));
+        localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
+        localStorage.setItem("property__biaxial__deformation__potential", set__default__property('biaxial__deformation__potential'));
+        localStorage.setItem("property__elastic__constant__11", set__default__property('elastic__constant__11'));
+        localStorage.setItem("property__elastic__constant__12", set__default__property('elastic__constant__12'));
+        localStorage.setItem("property__energy__gap", set__default__property('energy__gap'));
+        localStorage.setItem("property__hydrostatic__deformation__potential__of__conduction__band", set__default__property('hydrostatic__deformation__potential__of__conduction__band'));
+        localStorage.setItem("property__hydrostatic__deformation__potential__of__valence__band", set__default__property('hydrostatic__deformation__potential__of__valence__band'));
+        localStorage.setItem("property__kane__parameter", set__default__property('kane__parameter'));
+        localStorage.setItem("property__lattice__constant", set__default__property('lattice__constant'));
+        localStorage.setItem("property__luttinger__parameter__1", set__default__property('luttinger__parameter__1'));
+        localStorage.setItem("property__luttinger__parameter__2", set__default__property('luttinger__parameter__2'));
+        localStorage.setItem("property__luttinger__parameter__3", set__default__property('luttinger__parameter__3'));
+        localStorage.setItem("property__matrix__element__of__kane__operator", set__default__property('matrix__element__of__kane__operator'));
+        localStorage.setItem("property__spin__orbit__split", set__default__property('spin__orbit__split'));
+        localStorage.setItem("property__valence__band__offset", set__default__property('valence__band__offset'));
+
+        set__default__structure();
 }
 
 function set__default__property(property) {

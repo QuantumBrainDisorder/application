@@ -27,7 +27,6 @@
 
 .panel fieldset {
     flex: 1;
-    /* margin-left: var(--margin); */
     margin-right: var(--margin__half);
     display:  flex;
     flex-direction: column;
@@ -56,8 +55,7 @@
     padding: 0;
     margin: 0;
     color: var(--theme4);
-    background-color: var(--theme1);
-
+    background-color:var(--theme1);
     font-size: 0;
     width: 100%;
 }
@@ -70,7 +68,6 @@
     background-color: var(--theme1);
     display: flex;
     justify-content: left;
-    /* height: 100%; */
 }
 
 
@@ -82,7 +79,7 @@
     font-family: var(--ffamily);
     font-size: var(--fsize);
     padding: 0;
-    background-color: transparent;
+    background-color:transparent;
     
     float: left;
     white-space: nowrap;
@@ -99,9 +96,10 @@
     border-width: 0;
     padding: 0;
     margin: 0;
-    background-color: transparent;
+    background-color:transparent;
     height: 100%;
     cursor: pointer;
+    width: 100%;
 }
 
 .panel__bar ul li span:hover {
@@ -119,64 +117,19 @@
 
 
 
-/* 
-.panel__bar ul li ul {
-    display: none;
-    position: relative;
-    background-color: var(--theme1);
-    overflow-y: scroll;
-    width: fit-content;
-}
-
-.panel__bar ul li ul::-webkit-scrollbar { 
-    width: 0 !important;
-    display: none; 
-}
-
-.panel__bar ul li ul:hover {
-    display: block;
-}
 
 
-
-
-
-
-
-.panel__bar ul li ul optgroup {
-    background-color: var(--theme1);
-    cursor: default;
-}
-
-
-
-
-
-
-.panel ul li ul option {
-    cursor: pointer;
-    padding-left: calc(var(--fsize)/2);
-    padding-right: calc(var(--fsize)/2);
-}
-
-
-.panel ul li ul option:hover {
-    background-color: var(--theme2);
-}
-
-.panel ul li ul option:active {
-    background-color: var(--theme3);
-}
- */
 
  
 .panel__bar ul li ul {
-    position:fixed;
+    position:absolute;
+
     display: none;
     overflow-y: scroll;
     flex: 1;
-    background-color: transparent;
+    background-color:transparent;
     height: auto;
+    
 }
 
 .panel__bar ul li ul::-webkit-scrollbar { 
@@ -203,7 +156,7 @@
 }
 
 .panel__bar ul li ul:hover {
-    display: block;
+    display: inline-block;
 }
 
 
@@ -281,4 +234,3 @@
 .panel form div {
     z-index: 2;
 }
-

@@ -54,13 +54,22 @@ function footer__hover (event) {
 
 LC__input.addEventListener("input", LC__inputed);
 function LC__inputed(event) {
-    if (this.files[0].name != 'nanotools__configuration.json') {
-        alert('the nanotools__configuration.json file required');
+    if (this.files[0].name != 'nt__cfg.json') {
+        alert('the nt__cfg.json file required');
     }
     else {
         var fr=new FileReader();
         fr.onload=function(){
-            const x = JSON.parse(fr.result, (key, value) => {localStorage.setItem(key, value)}  );
+            const x = JSON.parse(fr.result, (key, value) => {
+                if(key != 'property__bowings') {
+                    localStorage.setItem(key, value)
+                }
+                else{
+                    let content = JSON.parse(value.replaceAll('\'', '"'));
+                    var content__syntaxed = JSON.stringify(content, null, 2);
+                    localStorage.setItem(key, content__syntaxed);
+                }
+            });
             document.location.reload();
         }
         fr.readAsText(this.files[0]);
@@ -82,7 +91,7 @@ function SC__clicked(event) {
                 configuration += '"' + key + '":' + '"' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '\\n')  + '",';
                 break;
             case "property__bowings": 
-                configuration += '"' + key + '":' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '').replaceAll(' ', '') + ',';
+                configuration += '"' + key + '":' + '"' + localStorage.getItem(key).replaceAll('\r', '').replaceAll('\n', '').replaceAll(' ', '').replaceAll('"', '\'') + '"' + ',';
                 break;
             default:
                 if (key.startsWith('property__')) {
@@ -95,6 +104,6 @@ function SC__clicked(event) {
 
     var nanotools__configuration = document.createElement('a');
     nanotools__configuration.href = 'data:attachment/json,' + encodeURIComponent(configuration);
-    nanotools__configuration.download = 'nanotools__configuration.json';
+    nanotools__configuration.download = 'nt__cfg.json';
     nanotools__configuration.click();
 }

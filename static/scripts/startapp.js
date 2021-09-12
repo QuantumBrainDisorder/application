@@ -64,9 +64,7 @@ structure__scope.style.width = localStorage.getItem("structure__width");
 
 
 if (localStorage.getItem("structure__legend__dblclicked") != null) {
-    structure__legend__ul.classList.add('structure__legend__ul');
-    structure__legend__span.classList.add('structure__legend__span');
-    structure__legend__span.title = "Structure (" + structure__unit.textContent + ')';
+    structure__legend__structure.textContent = "...";
 }
 
 if (localStorage.getItem('properties__list__width') == null) {
