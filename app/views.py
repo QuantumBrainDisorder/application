@@ -122,6 +122,7 @@
 from django.shortcuts import render
 import sys
 import chemical_QBD as cqbd
+import quantum_QBD as qqbd
 import material_engineering_QBD as meqbd
 import json
 
@@ -185,6 +186,8 @@ def main(request):
             for i in x:
                 vel = meqbd.interpolation__exception(i, params, dat['bowings']['energy__gap'])
                 fence.append(vel)
+            # x, y = meqbd.profile__gridded(y, fence)
+            # ev = qqbd.eigenvalues_1(x, y, )
             x, y = meqbd.profile__plain(y, fence)
             # print('----------------',sys.stderr)
             # print(x, sys.stderr)
