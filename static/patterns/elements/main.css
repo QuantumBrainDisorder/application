@@ -6,3 +6,7 @@ body {
     font-style: normal;
     background-color: var(--theme0);
 }
+
+hr {
+    border-color: var(--theme1);
+}

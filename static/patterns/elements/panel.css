@@ -161,11 +161,35 @@
 
 
 
+.panel ul li ul optgroup option {
+    cursor: pointer;
+    padding-left: calc(var(--fsize)/2);
+    padding-right: calc(var(--fsize)/2);
+
+    position: relative;
+    display: block;
+    text-align: left;
+    background-color: var(--theme1);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.panel ul li ul optgroup option:hover {
+    background-color: var(--theme2);
+}
+
+.panel ul li ul optgroup option:active {
+    background-color: var(--theme3);
+}
+
+
 
 
 .panel ul li ul option {
     cursor: pointer;
-    padding-left: calc(var(--fsize)/2);
+    /* padding-left: calc(var(--fsize)/2); */
     padding-right: calc(var(--fsize)/2);
 
     position: relative;
@@ -195,24 +219,47 @@
 
 
 
+.panel__form__meta {
+    margin-top: var(--margin__half);
+    display: none;
+    background-color: transparent;
+    color: var(--theme4);
+    border-color: var(--theme1);
+    border-bottom: 0;
+    border-width: 0;
+    resize: none;
+}
+
+
+.panel__form__meta::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+.panel__form__input {
+    margin-top: var(--margin__half);
+    display: none;
+    background-color: transparent;
+    color: var(--theme4);
+    resize: vertical;
+    border-color: var(--theme1);
+    border-width: 0;
+    outline-width: 0;
+}
+
+
+.panel__form__input::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.panel__form__figure {
+    display: none;
+}
 
 
 #panel__bar__run {

@@ -1,11 +1,15 @@
 # material, thickness
 
-Si.0 500
+GaAs.0 2
+InAs.0 1
+GaAs.0 2
 
-GaAs.0 400
+#Si.0 500
 
-Ga.8In.2As.0 200A
-Al.7Ga.3As.0 10
-Ga.2In.8As.4Sb.6 0.01um
+#GaAs.0 400
 
-InSb.0 5
+#Ga.8In.2As.0 200A
+#Al.7Ga.3As.0 10
+#Ga.2In.8As.4Sb.6 0.01um
+
+#InSb.0 5

@@ -35,20 +35,27 @@ const panel__bar__type__list = document.getElementById('panel__bar__type__list')
 const panel__bar__run = document.getElementById("panel__bar__run");
 
 const panel__form__orint = document.getElementById("panel__form__orint");
-const panel__form__distribution = document.getElementById("panel__form__distribution");
-const panel__form__profile = document.getElementById("panel__form__profile");
-
 const panel__form__orint__orint = document.getElementById("panel__form__orint__orint");
 
+const panel__form__distribution = document.getElementById("panel__form__distribution");
 const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
 const panel__form__distribution__ii = document.getElementById("panel__form__distribution__ii");
 const panel__form__distribution__submit = document.getElementById("panel__form__distribution__submit")
 
+const panel__form__profile = document.getElementById("panel__form__profile");
 const panel__form__profile__al = document.getElementById("panel__form__profile__al");
 const panel__form__profile__submit = document.getElementById("panel__form__profile__submit")
 
+const panel__form__energy__profile = document.getElementById("panel__form__energy__profile")
+const panel__form__energy__profile__del = document.getElementById("panel__form__energy__profile__del")
+const panel__form__energy__profile__dwf = document.getElementById("panel__form__energy__profile__dwf")
+const panel__form__energy__profile__deb = document.getElementById("panel__form__energy__profile__deb")
+const panel__form__energy__profile__submit = document.getElementById("panel__form__energy__profile__submit")
+
 const panel__form__meta = document.getElementById("panel__form__meta");
-const panel__output = document.getElementById("panel__output")
+const panel__form__input = document.getElementById("panel__form__input");
+const panel__form__figure = document.getElementById("panel__form__figure");
+const panel__output = document.getElementById("panel__output");
 
 const footer = document.getElementById("footer");
 const RDS = document.getElementById("RDS");

@@ -1,14 +1,21 @@
 {
-  "units": {
-    "energy__gap": "eV",
-    "spin__orbit__split": "eV",
-    "valence__band__offset": "eV",
-    "mass__electrones": "",
-    "mass__heavy__holes__001": "",
-    "mass__light__holes__001": "",
-    "matrix__element__of__kane__operator": "eV",
-    "kane__parameter": "",
-    "hydrostatic__deformation__potential__of__conduction__band": "eV"
+  "effective__mass": {
+    "el": {
+      "GaInAs": "0.0091",
+      "AlInAs": "0.049",
+      "GaInP": "0.051",
+      "AlInP": "0.22",
+      "GaInSb": "0.0092",
+      "InAsSb": "0.035"
+    },
+    "lh": {
+      "GaInAs": "0.02",
+      "GaInSb": "0.011"
+    },
+    "hh": {
+      "GaInAs": "-0.145"
+    },
+    "so": {}
   },
   "energy__gap": {
     "AlGaAs": "-0.13",
@@ -57,21 +64,6 @@
     "GaInAs": "-0.38",
     "GaAsSb": "-1.06",
     "AlInAs": "-0.64"
-  },
-  "mass__electrones": {
-    "GaInAs": "0.0091",
-    "AlInAs": "0.049",
-    "GaInP": "0.051",
-    "AlInP": "0.22",
-    "GaInSb": "0.0092",
-    "InAsSb": "0.035"
-  },
-  "mass__heavy__holes__001": {
-    "GaInAs": "-0.145"
-  },
-  "mass__light__holes__001": {
-    "GaInAs": "0.02",
-    "GaInSb": "0.011"
   },
   "matrix__element__of__kane__operator": {
     "GaInAs": "-1.48",

@@ -85,23 +85,3 @@ transform: rotate(45deg);
 
 
 
-.panel__form__meta {
-    display: none;
-    width: 100%;
-    background-color: yellow;
-    resize: none;
-}
-
-
-.panel__form__meta::-webkit-scrollbar { 
-    width: 0 !important;
-    display: none; 
-}
-
-
-
-
-
-
-
-

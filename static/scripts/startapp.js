@@ -86,6 +86,7 @@ if (localStorage.getItem("panel__form__orint__orint") != null) {
 if (localStorage.getItem("panel__form__distribution__al") != null) {
     panel__form__distribution__al.checked = true;
 }
+
 if (localStorage.getItem("panel__form__distribution__ii") != null) {
     panel__form__distribution__ii.checked = true;
 }
@@ -94,40 +95,26 @@ if (localStorage.getItem("panel__form__profile__al") != null) {
     panel__form__profile__al.checked = true;
 }
 
+if (localStorage.getItem("panel__form__energy__profile__del") != null) {
+    panel__form__energy__profile__del.checked = true;
+}
+
+if (localStorage.getItem("panel__form__energy__profile__dwf") != null) {
+    panel__form__energy__profile__dwf.checked = true;
+}
+
+if (localStorage.getItem("panel__form__energy__profile__deb") != null) {
+    panel__form__energy__profile__deb.checked = true;
+}
 
 
+if (localStorage.getItem("panel__form__input") != null) {
+    panel__form__input.style.display = "block";
+}
+if (localStorage.getItem("panel__form__meta") != null) {
+    panel__form__meta.style.display = "block";
+}
+if (localStorage.getItem("panel__form__figure") != null) {
+    panel__form__figure.style.display = "block";
+}
 
-
-
-// const objeee = document.getElementById('bbb');
-// path = objeee.dataset.path;
-// console.log(path);
-// fetch(path)
-// .then(function(response){
-//     return response.text();
-// })
-// .then(function(data){
-//     console.log(data);
-// });
-
-// const objeee = document.getElementById('bbb');
-// path = objeee.dataset.path;
-// fetch(path).then(function(response){return response.text();}).then(function(data){console.log(data);});
-
-// const objeee = document.getElementById('bbb');
-// path = objeee.dataset.path;
-// console.log(path);
-
-// fetch(path).then(fuu).then(fuu2);
-
-// function fuu(response) {
-//     return response.text();
-// }
-
-// function fuu2(data) {
-//     console.log(data);
-// }
-
-// let response = fetch(path);
-// let text = response.text(); // read response body as text
-// alert(text);
