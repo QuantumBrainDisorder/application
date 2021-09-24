@@ -267,7 +267,7 @@ y = [3,4,5]
 plt.xlabel('x ax')
 plt.ylabel('y ax')"""
 
-            return render(request, 'main.html', {'plot': plot, 'input': input, 'plpl': plpl})
+            return render(request, 'main.html', {'plot': plot, 'input': input})
 
     con = """x = [3,4,6]
 y = [3,4,5]
