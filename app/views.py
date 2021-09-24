@@ -122,10 +122,11 @@
 from django.shortcuts import render
 import sys
 import chemical_QBD as cqbd
+import matplotlib
 import quantum_QBD as qqbd
 import material_engineering_QBD as meqbd
 import json
-
+import mpld3
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
@@ -266,14 +267,26 @@ def main(request):
 y = [3,4,5]
 plt.xlabel('x ax')
 plt.ylabel('y ax')"""
-            return render(request, 'main.html', {'plot': plot, 'input': input})
+
+            fi = plt.figure(figsize=(4,3)) # 10 is width, 7 is height
+            plt.plot([1,2,3,4,5], [1,2,3,4,10], 'go', label='GreenDots')  # green dots
+            plt.plot([1,2,3,4,5], [2,3,4,5,11], 'b*', label='Bluestars')  # blue stars
+            plt.title('A Simple Scatterplot')  
+            plt.xlabel('X')
+            plt.ylabel('Y')
+            plt.xlim(0, 6)
+            plt.ylim(0, 12)
+            plt.legend(loc='best')
+
+            plpl = mpld3.fig_to_html(fi)
+            return render(request, 'main.html', {'plot': plot, 'input': input, 'plpl': plpl})
 
     con = """x = [3,4,6]
 y = [3,4,5]
 plt.xlabel('x ax')
 plt.ylabel('y ax')"""
     content= {
-        'code': con
+        'code': con, 'plpl': ''
         }
     return render(request, "main.html", content)
 
