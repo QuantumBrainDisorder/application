@@ -4,8 +4,8 @@
     position: fixed;
     top: 0;
     bottom: var(--margin);
-    left: 30vw;
-    width: 30vw;
+    left: 25vw;
+    width: 32vw;
     display:  flex;
     flex-direction: column;
     padding: 0;

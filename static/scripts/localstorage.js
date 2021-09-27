@@ -10,79 +10,72 @@ if (localStorage.getItem("local__storage__initialized") == null) {
                 localStorage.setItem('local__storage__max__size', i - 250);            
         }
 
-        const default__property__unit__alpha__varshni = "ueV/K";
-        const default__property__unit__beta__varshni = "K";
-        const default__property__unit__bowings = "(*)";
-        const default__property__unit__biaxial__deformation__potential = "eV";
-        const default__property__unit__effective__mass = "m_e";
-        const default__property__unit__elastic__constant__11 = "TPa";
-        const default__property__unit__elastic__constant__12 = "GPa";
-        const default__property__unit__energy__gap = "eV";
-        const default__property__unit__hydrostatic__deformation__potential__of__conduction__band = "eV";
-        const default__property__unit__hydrostatic__deformation__potential__of__valence__band = "eV";
-        const default__property__unit__kane__parameter = "";
-        const default__property__unit__lattice__constant = "Angs.";
-        const default__property__unit__luttinger__parameter__1 = "";
-        const default__property__unit__luttinger__parameter__2 = "";
-        const default__property__unit__luttinger__parameter__3 = "";
-        const default__property__unit__matrix__element__of__kane__operator = "eV";
-        const default__property__unit__relative__permittivity = "";
-        const default__property__unit__spin__orbit__split = "meV";
-        const default__property__unit__valence__band__offset = "eV";
+        // const default__property__unit__alpha__varshni = "ueV/K";
+        // const default__property__unit__beta__varshni = "K";
+        // const default__property__unit__bowings = "(*)";
+        // const default__property__unit__biaxial__deformation__potential = "eV";
+        // const default__property__unit__effective__mass = "m_e";
+        // const default__property__unit__elastic__constant__11 = "TPa";
+        // const default__property__unit__elastic__constant__12 = "GPa";
+        // const default__property__unit__energy__gap = "eV";
+        // const default__property__unit__hydrostatic__deformation__potential__of__conduction__band = "eV";
+        // const default__property__unit__hydrostatic__deformation__potential__of__valence__band = "eV";
+        // const default__property__unit__kane__parameter = "";
+        // const default__property__unit__lattice__constant = "Angs.";
+        // const default__property__unit__luttinger__parameter__1 = "";
+        // const default__property__unit__luttinger__parameter__2 = "";
+        // const default__property__unit__luttinger__parameter__3 = "";
+        // const default__property__unit__matrix__element__of__kane__operator = "eV";
+        // const default__property__unit__relative__permittivity = "";
+        // const default__property__unit__spin__orbit__split = "meV";
+        // const default__property__unit__valence__band__offset = "eV";
 
-        const default__properties__property__property = 'energy__gap';
-        const default__properties__property__char = "<i>E<sub>g</sub></i>";
-        const default__properties__property__name = 'energy__gap';
-        const default__properties__property__unit = "eV";
-        const default__properties__property__content = "Energy Gap";
+        // const default__properties__property__property = 'energy__gap';
+        // const default__properties__property__char = "<i>E<sub>g</sub></i>";
+        // const default__properties__property__name = 'energy__gap';
+        // const default__properties__property__unit = "eV";
+        // const default__properties__property__content = "Energy Gap";
 
-        const default__panel__bar__type = "distributions__energy__gap";
-        const default__panel__bar__type__content = "Distribution: Energy Gap";
-        const default__panel__bar__type__form = 'distribution';
+        // const default__resizer_l = "30vw";
+        // const default__resizer_r = "60vw";
 
-        const default__resizer_l = "30vw";
-        const default__resizer_r = "60vw";
-
-        const default__structure = "GaAs 400\nGa0.80In0.20As 200A\nAl0.70Ga0.30As 10\nGa0.20In0.80As0.40Sb0.60 0.01um";
-        const default__structure__unit = "nm";
+        // const default__structure = "GaAs 400\nGa0.80In0.20As 200A\nAl0.70Ga0.30As 10\nGa0.20In0.80As0.40Sb0.60 0.01um";
+        // const default__structure__unit = "nm";
         
-        localStorage.setItem("property__unit__alpha__varshni", default__property__unit__alpha__varshni);
-        localStorage.setItem("property__unit__beta__varshni", default__property__unit__beta__varshni);
-        localStorage.setItem("property__unit__bowings", default__property__unit__bowings);
-        localStorage.setItem("property__unit__biaxial__deformation__potential", default__property__unit__biaxial__deformation__potential);
-        localStorage.setItem("property__unit__effective__mass", default__property__unit__effective__mass);
-        localStorage.setItem("property__unit__elastic__constant__11", default__property__unit__elastic__constant__11);
-        localStorage.setItem("property__unit__elastic__constant__12", default__property__unit__elastic__constant__12);
-        localStorage.setItem("property__unit__energy__gap", default__property__unit__energy__gap);
-        localStorage.setItem("property__unit__hydrostatic__deformation__potential__of__conduction__band", default__property__unit__hydrostatic__deformation__potential__of__conduction__band);
-        localStorage.setItem("property__unit__hydrostatic__deformation__potential__of__valence__band", default__property__unit__hydrostatic__deformation__potential__of__valence__band);
-        localStorage.setItem("property__unit__kane__parameter", default__property__unit__kane__parameter);
-        localStorage.setItem("property__unit__lattice__constant", default__property__unit__lattice__constant);
-        localStorage.setItem("property__unit__luttinger__parameter__1", default__property__unit__luttinger__parameter__1);
-        localStorage.setItem("property__unit__luttinger__parameter__2", default__property__unit__luttinger__parameter__2);
-        localStorage.setItem("property__unit__luttinger__parameter__3", default__property__unit__luttinger__parameter__3);
-        localStorage.setItem("property__unit__matrix__element__of__kane__operator", default__property__unit__matrix__element__of__kane__operator);
-        localStorage.setItem("property__unit__relative__permittivity", default__property__unit__relative__permittivity);
-        localStorage.setItem("property__unit__spin__orbit__split", default__property__unit__spin__orbit__split);
-        localStorage.setItem("property__unit__valence__band__offset", default__property__unit__valence__band__offset);
+        localStorage.setItem("property__unit__alpha__varshni", "ueV/K");// default__property__unit__alpha__varshni);
+        localStorage.setItem("property__unit__beta__varshni", "K");// default__property__unit__beta__varshni);
+        localStorage.setItem("property__unit__bowings", "(*)");//default__property__unit__bowings);
+        localStorage.setItem("property__unit__biaxial__deformation__potential", "eV");// default__property__unit__biaxial__deformation__potential);
+        localStorage.setItem("property__unit__effective__mass", "m_e");// default__property__unit__effective__mass);
+        localStorage.setItem("property__unit__elastic__constant__11", "TPa");//default__property__unit__elastic__constant__11);
+        localStorage.setItem("property__unit__elastic__constant__12", "GPa");//default__property__unit__elastic__constant__12);
+        localStorage.setItem("property__unit__energy__gap", "eV");//default__property__unit__energy__gap);
+        localStorage.setItem("property__unit__hydrostatic__deformation__potential__of__conduction__band", "eV");// default__property__unit__hydrostatic__deformation__potential__of__conduction__band);
+        localStorage.setItem("property__unit__hydrostatic__deformation__potential__of__valence__band", "eV");// default__property__unit__hydrostatic__deformation__potential__of__valence__band);
+        localStorage.setItem("property__unit__kane__parameter", "");// default__property__unit__kane__parameter);
+        localStorage.setItem("property__unit__lattice__constant", "Angs");// default__property__unit__lattice__constant);
+        localStorage.setItem("property__unit__luttinger__parameter__1", "");//default__property__unit__luttinger__parameter__1);
+        localStorage.setItem("property__unit__luttinger__parameter__2", "");//default__property__unit__luttinger__parameter__2);
+        localStorage.setItem("property__unit__luttinger__parameter__3", "");//default__property__unit__luttinger__parameter__3);
+        localStorage.setItem("property__unit__matrix__element__of__kane__operator", "eV");// default__property__unit__matrix__element__of__kane__operator);
+        localStorage.setItem("property__unit__relative__permittivity", "");//default__property__unit__relative__permittivity);
+        localStorage.setItem("property__unit__spin__orbit__split", "meV");//default__property__unit__spin__orbit__split);
+        localStorage.setItem("property__unit__valence__band__offset", "eV");//default__property__unit__valence__band__offset);
 
-        localStorage.setItem('properties__property__property', default__properties__property__property);
-        localStorage.setItem('properties__property__char', default__properties__property__char);
-        localStorage.setItem('properties__property__name', default__properties__property__name);
-        localStorage.setItem('properties__property__unit', default__properties__property__unit);
-        localStorage.setItem('properties__property__content', default__properties__property__content);
+        localStorage.setItem('properties__property__property', 'energy__gap');//default__properties__property__property);
+        localStorage.setItem('properties__property__char', "<i>E<sub>g</sub></i>");//default__properties__property__char);
+        localStorage.setItem('properties__property__name', 'energy__gap');// default__properties__property__name);
+        localStorage.setItem('properties__property__unit', "eV");//default__properties__property__unit);
+        localStorage.setItem('properties__property__content', "Energy Gap");//default__properties__property__content);
 
-        localStorage.setItem("resizer_l", default__resizer_l);
-        localStorage.setItem("resizer_r", default__resizer_r);
+        localStorage.setItem("resizer_l", "25vw");//default__resizer_l);
+        localStorage.setItem("resizer_r", "57vw");//default__resizer_r);
 
 
-        localStorage.setItem("structure__unit", default__structure__unit);
+        localStorage.setItem("structure__unit", "nm");//default__structure__unit);
 
-        localStorage.setItem('panel__bar__type', default__panel__bar__type);
-        localStorage.setItem("panel__bar__type__content", default__panel__bar__type__content);
-        localStorage.setItem("panel__bar__type__form", default__panel__bar__type__form);
-
-        localStorage.setItem("local__storage__initialized", "true");
+        localStorage.setItem('panel__bar__type',"energies");
+        localStorage.setItem("panel__bar__type__content", 'Energies');
 
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
@@ -104,8 +97,66 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__spin__orbit__split", set__default__property('spin__orbit__split'));
         localStorage.setItem("property__valence__band__offset", set__default__property('valence__band__offset'));
 
-        set__default__structure();
+        // set__default__structure();
+        localStorage.setItem("local__storage__initialized", "true");
+
+
+
+
+
+
+        
+
+function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    
+        // Example POST method implementation:
+    async function data__exchange(url = '', data = {}) {
+        const response = await fetch(url, {
+            data: { 
+              csrfmiddlewaretoken: "{{ csrf_token }}", 
+              state:"inactive" 
+            },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken')
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+      
+        var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
+        data__exchange('get__structure', {'path': path}).then(data => {
+                localStorage.setItem('structure', data['structure'])});
+      
+      
+      
+
 }
+
+
 
 function set__default__property(property) {
         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
@@ -113,6 +164,10 @@ function set__default__property(property) {
         function step__one(response) {  return response.text()}
         function step__two(data){       localStorage.setItem('property__' + property, data)}
 };
+
+
+
+
 
 function set__default__structure() {
         var path = scripts__names.dataset.default__sheets__path + 'structure.dat';

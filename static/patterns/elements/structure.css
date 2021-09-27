@@ -158,7 +158,7 @@
     position: fixed;
     top: 0;
     bottom: var(--margin);
-    width: 30vw;
+    width: 25vw;
     margin: 0;
     display:  flex;
     flex-direction: column;

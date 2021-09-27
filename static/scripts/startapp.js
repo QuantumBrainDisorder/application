@@ -49,7 +49,6 @@ panel__bar.style.height = 1.3 * margin + "px";
 panel__scope.style.left = localStorage.getItem("resizer_r");
 panel__bar__type.innerHTML = localStorage.getItem("panel__bar__type__content");
 panel__bar__type.dataset.type = localStorage.getItem("panel__bar__type");
-panel__bar__type.dataset.form = localStorage.getItem("panel__bar__type__form");
 
 
 properties__scope.style.left = localStorage.getItem("resizer_l");
@@ -95,15 +94,15 @@ if (localStorage.getItem("panel__form__profile__al") != null) {
     panel__form__profile__al.checked = true;
 }
 
-if (localStorage.getItem("panel__form__energy__profile__del") != null) {
+if (localStorage.getItem("panel__form__energies__del") != null) {
     panel__form__energy__profile__del.checked = true;
 }
 
-if (localStorage.getItem("panel__form__energy__profile__dwf") != null) {
+if (localStorage.getItem("panel__form__energies__dwf") != null) {
     panel__form__energy__profile__dwf.checked = true;
 }
 
-if (localStorage.getItem("panel__form__energy__profile__deb") != null) {
+if (localStorage.getItem("panel__form__energies__deb") != null) {
     panel__form__energy__profile__deb.checked = true;
 }
 
@@ -117,4 +116,17 @@ if (localStorage.getItem("panel__form__meta") != null) {
 if (localStorage.getItem("panel__form__figure") != null) {
     panel__form__figure.style.display = "block";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

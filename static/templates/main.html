@@ -24,7 +24,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/orint.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/profile.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/distribution.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/energy__profile.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/energies.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/dos.css' %}">
     </head>
     <body>
         <div id="structure__scope" class="structure">
@@ -119,22 +120,27 @@
             <fieldset>
                 <legend id="panel__bar" class="panel__bar">
                     <ul id="panel__bar__list">
-                        <li></li>
-                        <li id="panel__bar__run">Run</li>
-                        <li>|</li>
-                        <li>
+                        <li id="panel__bar__type__base">
                             <span id="panel__bar__type">Body</span>
                             <ul id="panel__bar__type__list">
-                                <option onclick="set__panel__bar__type(event, 'energy__profile', 'energy__profile')" title="Structure Energy Profile">Energy Profile</option>
-                                <optgroup label="Profiles">
+                                <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
+                                <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Distribution</option>
+                                <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
+                                <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
+                                <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup>
                                 <optgroup label="Distributions">
                                     <option onclick="set__panel__bar__type(event,'distributions__energy__gap', 'distribution')" title="Feeded Energy Gaps">Energy Gap</option>
                                     <option onclick="set__panel__bar__type(event,'distributions__lattice__constant', 'distribution')" title="Feeded Lattice Constants">Lattice Constant</option>
-                                </optgroup>
+                                </optgroup> -->
                             </ul>
                         </li>
+                        <li>|</li>
+                        <li id="panel__bar__run">Run</li>
+                        <li>|</li>
+                        <li id="panel__bar__save">Save</li>
+                        <li></li>
                     </ul>
                 </legend>
 
@@ -155,20 +161,20 @@
                     <button id="panel__form__profile__submit" name="panel__form__profile__submit" type="submit" style="display: none;"></button>
                 </form>
 
-                <form id="panel__form__energy__profile" class="panel__form__energy__profile" action=""  method="POST">{% csrf_token %}
-                    <button id="panel__form__energy__profile__submit" name="panel__form__energy__profile__submit" type="submit" style="display: none;"></button>
+                <form id="panel__form__energies" class="panel__form__energies" action=""  method="POST">{% csrf_token %}
+                    <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button>
                     <hr>
-                    <label class="panel__form__energy__profile__label">Draw energy levels
-                        <input type="checkbox" id="panel__form__energy__profile__del">
-                        <span class="panel__form__energy__profile__span"></span>
+                    <label class="panel__form__energies__label">Draw energy levels
+                        <input type="checkbox" id="panel__form__energies__del">
+                        <span class="panel__form__energies__span"></span>
                     </label><br>
-                    <label class="panel__form__energy__profile__label">Draw wave functions
-                        <input type="checkbox" id="panel__form__energy__profile__dwf">
-                        <span class="panel__form__energy__profile__span"></span>
+                    <label class="panel__form__energies__label">Draw wave functions
+                        <input type="checkbox" id="panel__form__energies__dwf">
+                        <span class="panel__form__energies__span"></span>
                     </label><br>
-                    <label class="panel__form__energy__profile__label">Draw electrons band
-                        <input type="checkbox" id="panel__form__energy__profile__deb">
-                        <span class="panel__form__energy__profile__span"></span>
+                    <label class="panel__form__energies__label">Draw electrons band
+                        <input type="checkbox" id="panel__form__energies__deb">
+                        <span class="panel__form__energies_span"></span>
                     </label><br>
                 </form>
 
@@ -178,6 +184,9 @@
                         <input type="checkbox" id="panel__form__orint__orint" name="panel__form__orint__input">
                         <span class="panel__form__orint__span"></span>
                     </label><br>
+                </form>
+
+                <form id="panel__form__dos" class="panel__form__dos">
                 </form>
                     
                 <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled>plt.xlim(0,11)</textarea>
@@ -196,7 +205,7 @@
                 </div> -->
         
                 <img id="panel__form__figure" name="panel__form__figure" class="panel__form__figure" src="data:image/png;base64, {{plot}}" alt="broken picture">
-                <iframe srcdoc="{{ plpl }}" style="display:block"></iframe>
+                <!-- <iframe srcdoc="{{ plot }}" style="display:block"></iframe> -->
             </fieldset>
         </div>
 
@@ -205,6 +214,10 @@
                 <code id="info"></code>
             </span>
             <ul>
+                <li style="flex: 1;">|</li>
+                <li id="LN" title="Language">EN</li>
+                <li style="flex: 1;">|</li>
+                <li id="ST">ST</li>
                 <li style="flex: 1;">|</li>
                 <li id="SC" title="Save the structure and all properties">SC</li>
                 <li style="flex: 1;">/</li>
@@ -215,11 +228,11 @@
                     </label>
                 </li>
                 <li style="flex: 1;">|</li>
+                <li id="RDS" title="Restore default settings">RDS</li>
+                <li style="flex: 1;">|</li>
                 <li id="LS" title="Usage of the local storage"></li>
                 <li style="flex: 1;">|</li>
-                <li id="ST">ST</li>
-                <li style="flex: 1;">|</li>
-                <li id="RDS" title="Restore default settings">RDS</li>
+                <li id="VERSION" title="Application version">0.0.1</li>
             </ul>
         </div>
 
@@ -234,7 +247,8 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/orint.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/distribution.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/profile.js' %}"></script>
-        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energy__profile.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energies.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>

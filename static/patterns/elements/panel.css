@@ -5,7 +5,7 @@
 .panel {
     position: fixed;
     display: block;
-    left: 60vw;
+    left: 57vw;
     background-color: var(--theme0);
     bottom: var(--margin);
     overflow-y: auto;
@@ -67,6 +67,8 @@
     padding: 0;
     background-color: var(--theme1);
     display: flex;
+    /* width: 100%; */
+    /* justify-content: space-between; */
     justify-content: left;
 }
 
@@ -81,7 +83,6 @@
     padding: 0;
     background-color:transparent;
     
-    float: left;
     white-space: nowrap;
     height: 100%;
     padding-left: calc(var(--fsize)/4);
@@ -90,7 +91,6 @@
 
 
 .panel__bar ul li span {
-    
     display: block;
     position: relative;
     border-width: 0;
@@ -98,7 +98,7 @@
     margin: 0;
     background-color:transparent;
     height: 100%;
-    cursor: pointer;
+    cursor: default;
     width: 100%;
 }
 
@@ -275,6 +275,17 @@
 }
 
 
+#panel__bar__save {
+    cursor: pointer;
+}
+
+#panel__bar__save:hover {
+    background-color: var(--theme2);
+}
+
+#panel__bar__save:active {
+    background-color: var(--theme3);
+}
 
 
 

@@ -115,9 +115,8 @@
 
 
 
-
-
-
+import io
+from django.http import HttpResponseRedirect
 
 from django.shortcuts import render
 import sys
@@ -130,7 +129,30 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 
+from django.http import JsonResponse
+
 import units_QBD
+
+def get__structure(request):
+    # file = open(json.load(request)['path'])
+    # structure = file.readlines()
+    structure = "abcs ss"
+    print(structure, sys.stderr)
+    result = {"structure": structure}
+    return JsonResponse(result)
+
+
+
+def run__distribution(request):
+    x = json.load(request)['input']
+    print('-------------',sys.stderr)
+    print(x,sys.stderr)
+    print('-------------',sys.stderr)
+    y = float(x) * 2
+    result = {"dat": str(y)}
+    return JsonResponse(result)
+
+
 
 
 def get_graph():
@@ -156,9 +178,9 @@ def get_plot(x,y):
 
 def main(request):
     if request.method == 'POST':
-        # print('+++++++++++++++++++++++++++++++', sys.stderr)
-        # print(request.POST.get('panel__form__profile__submit'),sys.stderr)
-        # print('+++++++++++++++++++++', sys.stderr)
+        print('+++++++++++++++++++++++++++++++', sys.stderr)
+        print(request.POST.keys(),sys.stderr)
+        print('+++++++++++++++++++++', sys.stderr)
         if 'panel__form__distribution__submit' in request.POST.keys():
             dat = json.loads(request.POST.get('panel__form__distribution__submit'))
             
@@ -277,6 +299,7 @@ plt.ylabel('y ax')"""
         'code': con, 'plpl': ''
         }
     return render(request, "main.html", content)
+
 
 
 

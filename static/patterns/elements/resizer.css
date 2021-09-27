@@ -58,10 +58,10 @@
 
 
 .resizer_l {
-    left: 30vw;
+    left: 25vw;
 }
 
 .resizer_r {
-    left: 60vw;
+    left: 57vw;
     z-index: 4;
 }
