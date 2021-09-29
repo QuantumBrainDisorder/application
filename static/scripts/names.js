@@ -43,6 +43,14 @@ const panel__form__distribution = document.getElementById("panel__form__distribu
 const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
 const panel__form__distribution__ii = document.getElementById("panel__form__distribution__ii");
 const panel__form__distribution__submit = document.getElementById("panel__form__distribution__submit");
+const panel__form__distribution__w__axis = document.getElementById("panel__form__distribution__w__axis");
+const panel__form__distribution__x__axis = document.getElementById("panel__form__distribution__x__axis");
+const panel__form__distribution__y__axis = document.getElementById("panel__form__distribution__y__axis");
+const panel__form__distribution__z__axis = document.getElementById("panel__form__distribution__z__axis");
+const panel__form__distribution__w__axis__property = document.getElementById('panel__form__distribution__w__axis__property');
+const panel__form__distribution__x__axis__property = document.getElementById('panel__form__distribution__x__axis__property');
+const panel__form__distribution__y__axis__property = document.getElementById('panel__form__distribution__y__axis__property');
+const panel__form__distribution__z__axis__property = document.getElementById('panel__form__distribution__z__axis__property');
 
 const panel__form__profile = document.getElementById("panel__form__profile");
 // const panel__form__profile__al = document.getElementById("panel__form__profile__al");
@@ -56,9 +64,10 @@ const panel__form__energies__submit = document.getElementById("panel__form__ener
 
 const panel__form__dos = document.getElementById('panel__form__dos');
 
+const panel__form__input__label = document.getElementById("panel__form__input__label");
 const panel__form__meta = document.getElementById("panel__form__meta");
 const panel__form__input = document.getElementById("panel__form__input");
-const panel__form__figure = document.getElementById("panel__form__figure");
+const panel__form__output__label = document.getElementById("panel__form__output__label");
 const panel__form__output = document.getElementById("panel__form__output");
 
 const footer = document.getElementById("footer");

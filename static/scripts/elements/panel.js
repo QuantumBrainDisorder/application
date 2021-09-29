@@ -39,9 +39,11 @@ function set__panel__bar__type__body(event, type) {
 }
   
 function clean__panel() {
+  panel__form__input__label.style.display = "none";
   panel__form__input.style.display = "none";
   panel__form__meta.style.display = "none";
-  panel__form__figure.style.display = "none";
+  panel__form__output__label.style.display = "none";
+  panel__form__output.style.display = "none";
   panel__form__orint.style.display = "none";
   panel__form__distribution.style.display = "none";
   panel__form__profile.style.display = "none";
@@ -51,41 +53,178 @@ function clean__panel() {
 
 
 
+panel__form__input.onkeydown = function (event) {
+  if (event.keyCode == 9) {
+    var v = this.value;
+    var s = this.selectionStart;
+    var e = this.selectionEnd;
+    this.value = v.substring(0, s) + '\t' + v.substring(e);
+    this.selectionStart = this.selectionEnd = s+1;
+    return false;
+  }
+} 
 
-// Example POST method implementation:
-async function postData(url = '', data = {}) {
-  const response = await fetch(url, {
-      data: { 
-        csrfmiddlewaretoken: "{{ csrf_token }}", 
-        state:"inactive" 
-      },
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
+
+
+// panel__bar__run.onclick = function (event) {
+//   var content = null;
+//   switch(panel__bar__type.dataset.form) {
+//     case "energy__profile":
+//       content__A = '"structure": ' + '"' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+//       content__B = '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+//       content__C = '"effective__mass": ' + localStorage.getItem('property__effective__mass').replaceAll('\r', '') ;
+//       content__D = '"bowings": ' + localStorage.getItem('property__bowings').replaceAll('\r', '') ;
+      
+//       var unit__structure = null;
+//       switch (localStorage.getItem('structure__unit')) {
+//         case 'nm': unit__structure = 'nm'; break;
+//         case '&#8491;': unit__structure = 'Angs'; break;
+//         case '&#956;m': unit__structure = 'um'; break;
+//       }
+//       content__E = '"unit__structure": ' + '"' + unit__structure + '"';
+//       content__F = '"unit__energy__gap": ' + '"' + localStorage.getItem('property__unit__energy__gap') + '"';
+//       content__G = '"unit__effective__mass": ' + '"' + localStorage.getItem('property__unit__effective__mass') + '"';
+
+//       content__H = '"checkbox__del": ' + '"' + String(panel__form__energy__profile__del.value) + '"';
+//       content__I = '"checkbox__dwf": ' + '"' + String(panel__form__energy__profile__dwf.value) + '"';
+//       content__J = '"checkbox__deb": ' + '"' + String(panel__form__energy__profile__deb.value) + '"';
+
+//       content = '{' + content__A + ', ' + content__B + ', ' + content__C + ', ' + content__D + ', ' + content__E + ', ' + content__F + ', ' + content__G + ', ' + content__H + ', ' +  content__I + ', ' +  content__J + '}';
+//       panel__form__energy__profile__submit.value = content;
+//       set__interface();
+//       panel__form__energy__profile__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
+//       break;
+
+//     case "distribution":
+//       if (panel__bar__type.dataset.type == 'distributions__energy__gap') {
+//         content = '{' + '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"' + '}';  
+//       }
+//       else if (panel__bar__type.dataset.type = 'distributions__lattice__constant') {
+//         content = '{' + '"lattice__constant":' + '"' + localStorage.getItem('property__lattice__constant').replaceAll('\r', '').replaceAll('\n', '\\n') + '"' + '}';
+//       }
+//       panel__form__distribution__submit.value = content;
+//       set__interface();
+//       panel__form__distribution__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
+//       break;
+
+//     case "profile":
+//       content__A = '"structure": ' + '"' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+//       content__B = '"energy__gap": ' + '"' + localStorage.getItem('property__energy__gap').replaceAll('\r', '').replaceAll('\n', '\\n') + '"';
+//       content__C = '"bowings": ' + localStorage.getItem('property__bowings').replaceAll('\r', '') ;
+//       var unit = null;
+//       switch (localStorage.getItem('structure__unit')) {
+//         case 'nm': unit = 'nm'; break;
+//         case '&#8491;': unit = 'Angs'; break;
+//         case '&#956;m': unit = 'um'; break;
+//       }
+//       content__D = '"structure__unit": ' + '"' + unit + '"';
+//       content = '{' + content__A + ', ' + content__B + ', ' + content__C + ', ' + content__D + '}';
+//       panel__form__profile__submit.value = content;
+//       set__interface();
+//       panel__form__profile__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
+//       break;
+//   }
+// }
+
+
+
+
+function get__property(property) {
+  return '"' + localStorage.getItem(property) + '": "' + localStorage.getItem('property__' + localStorage.getItem(property)).replaceAll('\r', '').replaceAll('\n', '\\n') + '",'
+}
+
+function get__property__unit(property) {
+  return '"' + localStorage.getItem(property) + '": "' + localStorage.getItem('property__unit__' + localStorage.getItem(property)) + '",'
 }
 
 
+function set__interface() {
+  panel__form__input__label.style.display = "block";
+  panel__form__input.style.display = "block";
+  panel__form__meta.style.display = "block";
+  panel__form__output__label.style.display = "block";
+  panel__form__output.style.display = "block";
+  localStorage.setItem('panel__form__input', 'true');
+  localStorage.setItem('panel__form__meta', 'true');
+  localStorage.setItem('panel__form__output', 'true');
+}
+
 panel__bar__run.onclick = function (event) {
-  postData('run__distribution', { 'input': '12' })
-  .then(data => {
-      structure.innerHTML = data['dat'];
-      console.log(data)
-    });
+  switch(panel__bar__type.dataset.type) {
+    case 'distribution':
+      var input = "";
+      var input_ = "";
+      if (panel__form__distribution__w__axis.checked) { 
+        input += get__property('panel__form__distribution__w__axis__property');
+        input_ += get__property__unit('panel__form__distribution__w__axis__property')
+      }
+      if (panel__form__distribution__x__axis.checked) { 
+        input += get__property('panel__form__distribution__x__axis__property');
+        input_ += get__property__unit('panel__form__distribution__x__axis__property')
+      }
+      if (panel__form__distribution__y__axis.checked) { 
+        input += get__property('panel__form__distribution__y__axis__property');
+        input_ += get__property__unit('panel__form__distribution__y__axis__property')
+      }
+      if (panel__form__distribution__z__axis.checked) { 
+        input += get__property('panel__form__distribution__z__axis__property');
+        input_ += get__property__unit('panel__form__distribution__z__axis__property')
+      }
 
+      if (input != '') { 
+        input  = '"axes": {' + input.slice(0, input.length - 1) + '},';
+        input += '"units": {' + input_.slice(0, input_.length - 1) + '},'
+      }
+      else { 
+        input  = '"axes": {},';
+        input += '"units": {},'
+     };
 
+      if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+      if (panel__form__distribution__al.checked) {input += '"al": "",'}
+      if (panel__form__distribution__ii.checked) {input += '"ii": "",'}
+      input += '"code": "' + panel__form__input.value + '",' 
+      input = '{' + input.slice(0, input.length - 1) + '}';
 
+      set__interface()
+      data__exchange('run__distribution', { 'input': input })
+      .then(data => {
+        if (data != null) {
+          if (data['error'] != null) {
+            panel__form__output.srcdoc = '<code>' + data['error'] + '</code>';
+          }
+          else {
+            panel__form__output.srcdoc = data['plot'];
+          }
+        }
+        // panel__form__output.srcdoc = data['plot'];
+        // console.log(data['plot']);
+        // console.log(panel__form__figure.contentWindow.document.body.scrollHeight);
+        // console.log(panel__form__figure.getBoundingClientRect().height);
+        // console.log(panel__form__figure.offsetHeight);
+        // panel__form__figure.style.height = '450px';//panel__form__figure.contentWindow.document.body.scrollHeight + 'px';
+        // panel__bar__run.innerHTML = "Push";
+          // structure.innerHTML = data['dat'];
+          // console.log(data)
+      });
+      break;
+    case 'dos':
+      break;
+    case 'energies':
+      break;
+    case 'profile':
+      break;
+  }
+}
+
+panel__form__output.onload = function (event) {
+  panel__form__output.style.height = (20 + panel__form__output.contentWindow.document.body.scrollHeight) + 'px';
+}
+  // data__exchange('run__distribution', { 'input': '12' })
+  // .then(data => {
+  //     structure.innerHTML = data['dat'];
+  //     console.log(data)
+  //   });
 
 
 
@@ -147,24 +286,3 @@ panel__bar__run.onclick = function (event) {
   //     panel__form__profile__submit.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view:window}));
   //     break;
   // }
-}
-
-
-
-function set__interface() {
-  localStorage.setItem('panel__form__input', 'true');
-  localStorage.setItem('panel__form__meta', 'true');
-  localStorage.setItem('panel__form__figure', 'true');
-}
-
-
-panel__form__input.onkeydown = function (event) {
-  if (event.keyCode == 9) {
-    var v = this.value;
-    var s = this.selectionStart;
-    var e = this.selectionEnd;
-    this.value = v.substring(0, s) + '\t' + v.substring(e);
-    this.selectionStart = this.selectionEnd = s+1;
-    return false;
-  }
-} 

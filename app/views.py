@@ -128,28 +128,74 @@ import json
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+import pandas
+import plotly.graph_objects
+import plotly.io
+import plotly
+import plotly.express
 
 from django.http import JsonResponse
 
 import units_QBD
 
-def get__structure(request):
-    # file = open(json.load(request)['path'])
-    # structure = file.readlines()
-    structure = "abcs ss"
-    print(structure, sys.stderr)
-    result = {"structure": structure}
-    return JsonResponse(result)
+import plotly.graph_objects as go
+import numpy as np
 
 
 
+
+
+        # exec(x, glb)
+        # plot = globals()["plot"]
+        # try:
+        #     exec('2+2', globals())
+        # except Exception as e:
+        #     plot = str(e).replace('<', '&lt;').replace('>', '&gt;')
 def run__distribution(request):
-    x = json.load(request)['input']
-    print('-------------',sys.stderr)
-    print(x,sys.stderr)
-    print('-------------',sys.stderr)
-    y = float(x) * 2
-    result = {"dat": str(y)}
+
+    input = json.load(request)
+    input = json.loads(input['input'])
+
+    plot_, error_, result_, meta_ = None, None, None, None
+    code_ = input['code']
+
+    if len(input['axes']) == 0:
+        result = {"plot": plot_, "code": code_, "meta": meta_, "error": error_}
+    elif len(input['axes']) == 1:
+        property__name = list(input['axes'].keys())[0]
+        materials, values = cqbd.read__sheet(input['axes'][property__name], 'list')
+        fig = plotly.express.histogram(x = materials,y = values)
+        config = dict({'scrollZoom': True})
+        fig.update_xaxes(title_text = "Material")
+        fig.update_yaxes(title_text = property__name + ' (' + input['units'][property__name] + ')')
+        plot_ = plotly.io.to_html(fig, config)
+        if 'orint' in input:
+            fig.show()
+            plot_ = ''
+        result_ = {"plot": plot_, "code": code_, "meta": meta_, "error": error_}
+    elif len(input['axes']) == 2:
+        print('2',sys.stderr)
+    elif len(input['axes']) == 3:
+        print('3',sys.stderr)
+    elif len(input['axes']) == 4:
+        print('4',sys.stderr)
+        
+    return JsonResponse(result_, safe = False)
+
+    # df = plotly.express.data.gapminder().query("country=='Canada'")
+    # fig = plotly.express.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    # config = dict({'scrollZoom': True, 'displayModeBar': False})
+    # x = plotly.io.to_html(fig, config)
+
+    # Helix equation
+    t = np.linspace(0, 10, 50)
+    x, y, z = np.cos(t), np.sin(t), t
+
+    fig = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z, mode='markers')])
+    # y = 12
+    config = dict({'scrollZoom': True, 'displayModeBar': False})
+    x = plotly.io.to_html(fig, config)
+    result = {"plot": x}
     return JsonResponse(result)
 
 

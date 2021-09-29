@@ -78,7 +78,6 @@ properties__list.style.height = localStorage.getItem('properties__list__height')
 
 
 if (localStorage.getItem("panel__form__orint__orint") != null) {
-    
     panel__form__orint__orint.checked = true;
 }
 
@@ -113,14 +112,98 @@ if (localStorage.getItem("panel__form__input") != null) {
 if (localStorage.getItem("panel__form__meta") != null) {
     panel__form__meta.style.display = "block";
 }
-if (localStorage.getItem("panel__form__figure") != null) {
+if (localStorage.getItem("panel__form__output") != null) {
     panel__form__figure.style.display = "block";
+}
+
+panel__form__distribution__w__axis__property.innerHTML = localStorage.getItem('panel__form__distribution__w__axis__property__content');
+panel__form__distribution__w__axis__property.dataset.property = localStorage.getItem('panel__form__distribution__w__axis__property');
+panel__form__distribution__x__axis__property.innerHTML = localStorage.getItem('panel__form__distribution__x__axis__property__content');
+panel__form__distribution__x__axis__property.dataset.property = localStorage.getItem('panel__form__distribution__x__axis__property');
+panel__form__distribution__y__axis__property.innerHTML = localStorage.getItem('panel__form__distribution__y__axis__property__content');
+panel__form__distribution__y__axis__property.dataset.property = localStorage.getItem('panel__form__distribution__y__axis__property');
+panel__form__distribution__z__axis__property.innerHTML = localStorage.getItem('panel__form__distribution__z__axis__property__content');
+panel__form__distribution__z__axis__property.dataset.property = localStorage.getItem('panel__form__distribution__z__axis__property');
+if (localStorage.getItem("panel__form__distribution__w__axis") != null) {
+    panel__form__distribution__w__axis.checked = true;
+}
+else {
+    panel__form__distribution__w__axis.checked = false;
+}
+if (localStorage.getItem("panel__form__distribution__x__axis") != null) {
+    panel__form__distribution__x__axis.checked = true;
+}
+else {
+    panel__form__distribution__x__axis.checked = false;
+}
+if (localStorage.getItem("panel__form__distribution__y__axis") != null) {
+    panel__form__distribution__y__axis.checked = true;
+}
+else {
+    panel__form__distribution__y__axis.checked = false;
+}
+if (localStorage.getItem("panel__form__distribution__z__axis") != null) {
+    panel__form__distribution__z__axis.checked = true;
+}
+else {
+    panel__form__distribution__z__axis.checked = false;
 }
 
 
 
+class panel__bar__type__textContent {constructor(textContent){this.textContent = textContent}};
+class panel__bar__type__target {     constructor(target)     {this.target = new panel__bar__type__textContent(target)}};
+event__target__textContent = new panel__bar__type__target(localStorage.getItem('panel__bar__type__content'));
+set__panel__bar__type(event__target__textContent, localStorage.getItem('panel__bar__type'));
 
 
+
+
+
+
+
+
+
+
+
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+// Example POST method implementation:
+async function data__exchange(url = '', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+  
 
 
 

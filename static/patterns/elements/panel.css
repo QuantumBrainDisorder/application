@@ -81,12 +81,12 @@
     font-family: var(--ffamily);
     font-size: var(--fsize);
     padding: 0;
-    background-color:transparent;
+    background-color: var(--theme1);
     
-    white-space: nowrap;
+    /* white-space: nowrap; */
     height: 100%;
-    padding-left: calc(var(--fsize)/4);
-    padding-right: calc(var(--fsize)/4);
+    /* padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4); */
 }
 
 
@@ -96,10 +96,11 @@
     border-width: 0;
     padding: 0;
     margin: 0;
-    background-color:transparent;
+    background-color: var(--theme1);
     height: 100%;
     cursor: default;
-    width: 100%;
+    padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4);
 }
 
 .panel__bar ul li span:hover {
@@ -123,11 +124,12 @@
  
 .panel__bar ul li ul {
     position:absolute;
-
     display: none;
     overflow-y: scroll;
     flex: 1;
     background-color:transparent;
+    font-family: var(--ffamily);
+    font-size: 0;
     height: auto;
     
 }
@@ -191,7 +193,10 @@
     cursor: pointer;
     /* padding-left: calc(var(--fsize)/2); */
     padding-right: calc(var(--fsize)/2);
-
+    margin: 0;
+    padding: 0;
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
     position: relative;
     display: block;
     text-align: left;
@@ -227,13 +232,21 @@
     border-color: var(--theme1);
     border-bottom: 0;
     border-width: 0;
-    resize: none;
+    resize: vertical;
 }
 
 
 .panel__form__meta::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
+}
+
+#panel__form__input__label {
+    display: none;
+    font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
+    background-color: transparent;
+    color: var(--theme4);
 }
 
 .panel__form__input {
@@ -255,15 +268,39 @@
 
 
 
-
-
-.panel__form__figure {
+#panel__form__output__label {
     display: none;
+    font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
+    background-color: transparent;
+    color: var(--theme4);
 }
+
+.panel__form__output {
+    display: none;
+    position: relative;
+    resize: vertical;
+    border-width: 0;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+
+.panel__form__output::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
 
 
 #panel__bar__run {
     cursor: pointer;
+    padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4);
 }
 
 #panel__bar__run:hover {
@@ -277,6 +314,8 @@
 
 #panel__bar__save {
     cursor: pointer;
+    padding-left: calc(var(--fsize)/4);
+    padding-right: calc(var(--fsize)/4);
 }
 
 #panel__bar__save:hover {

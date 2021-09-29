@@ -1,0 +1,12 @@
+.panel__form__dos {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    font-family: var(--ffamily);
+    font-size: var(--fsize);
+    
+    color: var(--theme4);
+    display: none;
+}

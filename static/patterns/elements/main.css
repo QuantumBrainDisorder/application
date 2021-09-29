@@ -9,4 +9,5 @@ body {
 
 hr {
     border-color: var(--theme1);
+    margin-top: calc(var(--fsize) * 5 / 16);
 }

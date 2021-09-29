@@ -77,6 +77,17 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__bar__type',"energies");
         localStorage.setItem("panel__bar__type__content", 'Energies');
 
+        localStorage.setItem('panel__form__distribution__w__axis__property__content', 'Energy Gap');
+        localStorage.setItem('panel__form__distribution__w__axis__property', 'energy__gap');
+        localStorage.setItem('panel__form__distribution__x__axis__property__content', 'Lattice Constant');
+        localStorage.setItem('panel__form__distribution__x__axis__property', 'lattice__constant');
+        localStorage.setItem('panel__form__distribution__y__axis__property__content', 'Valence Band Offset');
+        localStorage.setItem('panel__form__distribution__y__axis__property', 'valence__band__offset');
+        localStorage.setItem('panel__form__distribution__z__axis__property__content', 'Spin-Orbit Split');
+        localStorage.setItem('panel__form__distribution__z__axis__property', 'spin__orbit__split');
+        localStorage.setItem("panel__form__distribution__w__axis", 'true');
+        localStorage.setItem("panel__form__distribution__x__axis", 'true');
+
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
@@ -97,63 +108,8 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__spin__orbit__split", set__default__property('spin__orbit__split'));
         localStorage.setItem("property__valence__band__offset", set__default__property('valence__band__offset'));
 
-        // set__default__structure();
         localStorage.setItem("local__storage__initialized", "true");
-
-
-
-
-
-
-        
-
-function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    
-    
-        // Example POST method implementation:
-    async function data__exchange(url = '', data = {}) {
-        const response = await fetch(url, {
-            data: { 
-              csrfmiddlewaretoken: "{{ csrf_token }}", 
-              state:"inactive" 
-            },
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-              'Accept': 'application/json',
-              'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-              'Content-Type': 'application/json',
-              'X-CSRFToken': getCookie('csrftoken')
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        return response.json(); // parses JSON response into native JavaScript objects
-    }
-      
-        var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
-        data__exchange('get__structure', {'path': path}).then(data => {
-                localStorage.setItem('structure', data['structure'])});
-      
-      
-      
-
+        set__default__structure();        
 }
 
 
@@ -164,7 +120,6 @@ function set__default__property(property) {
         function step__one(response) {  return response.text()}
         function step__two(data){       localStorage.setItem('property__' + property, data)}
 };
-
 
 
 

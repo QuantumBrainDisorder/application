@@ -121,7 +121,7 @@
                 <legend id="panel__bar" class="panel__bar">
                     <ul id="panel__bar__list">
                         <li id="panel__bar__type__base">
-                            <span id="panel__bar__type">Body</span>
+                            <span id="panel__bar__type"></span>
                             <ul id="panel__bar__type__list">
                                 <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Distribution</option>
@@ -148,13 +148,110 @@
                     <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
                     <hr>
                     <label class="panel__form__distribution__label">Add data labels
-                        <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al">
+                        <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al" disabled>
                         <span class="panel__form__distribution__span"></span>
                     </label><br>
                     <label class="panel__form__distribution__label">Include interpolations
-                        <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii">
+                        <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
                         <span class="panel__form__distribution__span"></span>
                     </label><br>
+                    <hr>
+                    <label class="panel__form__distribution__label">W-axis:&ThickSpace;
+                        <input type="checkbox" id="panel__form__distribution__w__axis" name="panel__form__distribution__w__axis" checked>
+                        <span class="panel__form__distribution__span"></span>                         
+                    </label>
+                    <span id="panel__form__distribution__w__axis__property" class="panel__form__distribution__axis__property">Energy Gap</span> 
+                    <ul id="panel__form__distribution__w__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
+                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'w')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'w')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'w')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'w')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'w')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'w')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'w')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'w')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'w')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'w')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'w')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'w')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'w')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'w')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'w')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'w')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'w')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                    </ul><br>
+                    <label class="panel__form__distribution__label">X-axis:&ThickSpace;
+                        <input type="checkbox" id="panel__form__distribution__x__axis" name="panel__form__distribution__x__axis" checked>
+                        <span class="panel__form__distribution__span"></span>                         
+                    </label>
+                    <span id="panel__form__distribution__x__axis__property" class="panel__form__distribution__axis__property">Lattice Constant</span> 
+                    <ul id="panel__form__distribution__x__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
+                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'x')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'x')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'x')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'x')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'x')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'x')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'x')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'x')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'x')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'x')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'x')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'x')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'x')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'x')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'x')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'x')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                    </ul><br>
+                    <label class="panel__form__distribution__label">Y-axis:&ThickSpace;
+                        <input type="checkbox" id="panel__form__distribution__y__axis" name="panel__form__distribution__y__axis">
+                        <span class="panel__form__distribution__span"></span>                         
+                    </label>
+                    <span id="panel__form__distribution__y__axis__property" class="panel__form__distribution__axis__property">Valence Band Offset</span> 
+                    <ul id="panel__form__distribution__y__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
+                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'y')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'y')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'y')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'y')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'y')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'y')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'y')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'y')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'y')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'y')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'y')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'y')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'y')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'y')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'y')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'y')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                    </ul><br>
+                    <label class="panel__form__distribution__label">Z-axis:&ThickSpace;
+                        <input type="checkbox" id="panel__form__distribution__z__axis" name="panel__form__distribution__z__axis">
+                        <span class="panel__form__distribution__span"></span>                         
+                    </label>
+                    <span id="panel__form__distribution__z__axis__property" class="panel__form__distribution__axis__property">Spin-Orbit Split</span> 
+                    <ul id="panel__form__distribution__z__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
+                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'z')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'z')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'z')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'z')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'z')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'z')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'z')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'z')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'z')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'z')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'z')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'z')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'z')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'z')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'z')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'z')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                        <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'z')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                    </ul>
                 </form>
 
                 <form id="panel__form__profile" class="panel__form__profile" action=""  method="POST">{% csrf_token %}
@@ -189,6 +286,8 @@
                 <form id="panel__form__dos" class="panel__form__dos">
                 </form>
                     
+                <label id="panel__form__input__label" for="panel__form__meta">
+                <hr>Input:</label>
                 <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled>plt.xlim(0,11)</textarea>
                 <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" rows="10">{{ input }}</textarea>
                 <!-- <div>
@@ -203,9 +302,12 @@
                 <div id="panel__output">
                     <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
                 </div> -->
-        
-                <img id="panel__form__figure" name="panel__form__figure" class="panel__form__figure" src="data:image/png;base64, {{plot}}" alt="broken picture">
+                <!-- <img id="panel__form__figure" name="panel__form__figure" class="panel__form__figure" src="data:image/png;base64, {{plot}}" alt="broken picture"> -->
                 <!-- <iframe srcdoc="{{ plot }}" style="display:block"></iframe> -->
+               
+                <label id="panel__form__output__label" for="panel__form__output">
+                <hr>Output:</label>
+                <iframe id="panel__form__output" class="panel__form__output" name="panel__form__output"></iframe>
             </fieldset>
         </div>
 
