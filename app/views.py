@@ -141,7 +141,7 @@ import units_QBD
 import plotly.graph_objects as go
 import numpy as np
 
-
+from django.template import RequestContext
 
 
 
@@ -180,7 +180,7 @@ def run__distribution(request):
     elif len(input['axes']) == 4:
         print('4',sys.stderr)
         
-    return JsonResponse(result_, safe = False)
+    return JsonResponse(result_, safe = False, context_instance = RequestContext(request))
 
     # df = plotly.express.data.gapminder().query("country=='Canada'")
     # fig = plotly.express.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')

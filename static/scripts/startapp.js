@@ -113,7 +113,7 @@ if (localStorage.getItem("panel__form__meta") != null) {
     panel__form__meta.style.display = "block";
 }
 if (localStorage.getItem("panel__form__output") != null) {
-    panel__form__figure.style.display = "block";
+    panel__form__output.style.display = "block";
 }
 
 panel__form__distribution__w__axis__property.innerHTML = localStorage.getItem('panel__form__distribution__w__axis__property__content');
