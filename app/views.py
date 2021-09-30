@@ -158,32 +158,20 @@ import numpy as np
 plot_, error_, result_, meta_ = None, None, None, None
 def run__distribution(request):
     
-    print('------------------------',sys.stderr)
+    sys.stdout = mystdout = io.StringIO()
     input = json.load(request)
     input = json.loads(input['input'])
-    print('----------------',sys.stderr)
 
     plot_, error_, result_, meta_ = None, None, None, None
     code_ = input['code']
 
-    print('aaaaaaaaaaaaaaaaa',sys.stderr)
-    print(input['code'],sys.stderr)
-    print('aaaaaaaaaaaaaaaaaaa',sys.stderr)
     if len(input['axes']) == 0:
-        sys.stdout = mystdout = io.StringIO()
-
         if input['code'] != '':
             try:
                 exec(input['code'], globals())
-                # result_ = {"plot": globals()['plot_'], "meta": meta_, "code": code_, "error": error_}
             except Exception as e:
                 error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
-
-        code_ = mystdout.getvalue()
-        print('+++++++++++++++++=',sys.stderr)
-        print(code_,sys.stderr)
-        print('++++++++++++++++++++++',sys.stderr)
-        
+        code_ = mystdout.getvalue()        
         result_ = {"plot": globals()['plot_'], "meta": meta_, "code": code_, "error": error_}
     elif len(input['axes']) == 1:
         property__name = list(input['axes'].keys())[0]

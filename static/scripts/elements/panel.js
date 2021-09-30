@@ -189,25 +189,19 @@ panel__bar__run.onclick = function (event) {
       set__interface()
       data__exchange('run__distribution', { 'input': input })
       .then(data => {
-        console.log(data);
         if (data != null) {
           if (data['error'] != null) {
             panel__form__output.srcdoc = '<code>' + data['error'] + '</code>';
           }
           else {
-            panel__form__output.srcdoc = data['plot'];
-            // panel__form__output.srcdoc = data['code'];
+            if (data['plot'] != null) {
+              panel__form__output.srcdoc = data['plot'];
+            }
+            else {
+              panel__form__output.srcdoc = data['code'];
+            }
           }
         }
-        // panel__form__output.srcdoc = data['plot'];
-        // console.log(data['plot']);
-        // console.log(panel__form__figure.contentWindow.document.body.scrollHeight);
-        // console.log(panel__form__figure.getBoundingClientRect().height);
-        // console.log(panel__form__figure.offsetHeight);
-        // panel__form__figure.style.height = '450px';//panel__form__figure.contentWindow.document.body.scrollHeight + 'px';
-        // panel__bar__run.innerHTML = "Push";
-          // structure.innerHTML = data['dat'];
-          // console.log(data)
       });
       break;
     case 'dos':
