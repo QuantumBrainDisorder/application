@@ -183,18 +183,20 @@ panel__bar__run.onclick = function (event) {
       if (panel__form__orint__orint.checked) { input += '"orint": "",'}
       if (panel__form__distribution__al.checked) {input += '"al": "",'}
       if (panel__form__distribution__ii.checked) {input += '"ii": "",'}
-      input += '"code": "' + panel__form__input.value + '",' 
+      input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
       input = '{' + input.slice(0, input.length - 1) + '}';
-
+     console.log(input);
       set__interface()
       data__exchange('run__distribution', { 'input': input })
       .then(data => {
+        console.log(data);
         if (data != null) {
           if (data['error'] != null) {
             panel__form__output.srcdoc = '<code>' + data['error'] + '</code>';
           }
           else {
             panel__form__output.srcdoc = data['plot'];
+            // panel__form__output.srcdoc = data['code'];
           }
         }
         // panel__form__output.srcdoc = data['plot'];

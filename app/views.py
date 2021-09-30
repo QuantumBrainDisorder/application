@@ -143,23 +143,48 @@ import numpy as np
 
 
 
-
         # exec(x, glb)
         # plot = globals()["plot"]
         # try:
         #     exec('2+2', globals())
         # except Exception as e:
         #     plot = str(e).replace('<', '&lt;').replace('>', '&gt;')
-def run__distribution(request):
 
+
+
+# blah blah lots of code ...
+
+
+plot_, error_, result_, meta_ = None, None, None, None
+def run__distribution(request):
+    
+    print('------------------------',sys.stderr)
     input = json.load(request)
     input = json.loads(input['input'])
+    print('----------------',sys.stderr)
 
     plot_, error_, result_, meta_ = None, None, None, None
     code_ = input['code']
 
+    print('aaaaaaaaaaaaaaaaa',sys.stderr)
+    print(input['code'],sys.stderr)
+    print('aaaaaaaaaaaaaaaaaaa',sys.stderr)
     if len(input['axes']) == 0:
-        result = {"plot": plot_, "code": code_, "meta": meta_, "error": error_}
+        sys.stdout = mystdout = io.StringIO()
+
+        if input['code'] != '':
+            try:
+                exec(input['code'], globals())
+                # result_ = {"plot": globals()['plot_'], "meta": meta_, "code": code_, "error": error_}
+            except Exception as e:
+                error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
+
+        code_ = mystdout.getvalue()
+        print('+++++++++++++++++=',sys.stderr)
+        print(code_,sys.stderr)
+        print('++++++++++++++++++++++',sys.stderr)
+        
+        result_ = {"plot": globals()['plot_'], "meta": meta_, "code": code_, "error": error_}
     elif len(input['axes']) == 1:
         property__name = list(input['axes'].keys())[0]
         materials, values = cqbd.read__sheet(input['axes'][property__name], 'list')
@@ -171,13 +196,94 @@ def run__distribution(request):
         if 'orint' in input:
             fig.show()
             plot_ = ''
-        result_ = {"plot": plot_, "code": code_, "meta": meta_, "error": error_}
+        result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
     elif len(input['axes']) == 2:
-        print('2',sys.stderr)
+        property__name_0 = list(input['axes'].keys())[0]
+        property__name_1 = list(input['axes'].keys())[1]
+        materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
+        materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
+        dict_0 = dict(zip(materials_0, values_0))
+        dict_1 = dict(zip(materials_1, values_1))
+        materials = [i for i in materials_0 if i in materials_1]
+
+        w = [float(dict_0[i]) for i in materials]
+        x = [float(dict_1[i]) for i in materials]
+        fig = plotly.express.scatter(x=w, y=x, text=materials)
+
+        config = dict({'scrollZoom': True})
+        fig.update_traces(textposition="bottom right")
+        fig.update_xaxes(title_text = property__name_0 + ' (' + input['units'][property__name_0] + ')')
+        fig.update_yaxes(title_text = property__name_1 + ' (' + input['units'][property__name_1] + ')')
+
+
+        plot_ = plotly.io.to_html(fig, config)
+        if 'orint' in input:
+            fig.show()
+            plot_ = ''
+        result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
     elif len(input['axes']) == 3:
-        print('3',sys.stderr)
+        property__name_0 = list(input['axes'].keys())[0]
+        property__name_1 = list(input['axes'].keys())[1]
+        property__name_2 = list(input['axes'].keys())[2]
+        materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
+        materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
+        materials_2, values_2 = cqbd.read__sheet(input['axes'][property__name_2], 'list')
+        dict_0 = dict(zip(materials_0, values_0))
+        dict_1 = dict(zip(materials_1, values_1))
+        dict_2 = dict(zip(materials_2, values_2))
+        materials = [i for i in materials_0 if i in materials_1 and i in materials_2]
+
+        w = [float(dict_0[i]) for i in materials]
+        x = [float(dict_1[i]) for i in materials]
+        y = [float(dict_2[i]) for i in materials]
+
+        config = dict({'scrollZoom': True})
+        ax_0 = property__name_0 + ' (' + input['units'][property__name_0] + ')'
+        ax_1 = property__name_1 + ' (' + input['units'][property__name_1] + ')'
+        ax_2 = property__name_2 + ' (' + input['units'][property__name_2] + ')'
+        labels = {'x': ax_0, 'y': ax_1, 'z': ax_2}
+        fig = plotly.express.scatter_3d(x=w, y=x, z=y, text=materials, labels=labels)
+
+
+        plot_ = plotly.io.to_html(fig, config)
+        if 'orint' in input:
+            fig.show()
+            plot_ = ''
+        result_ = {"plot": plot_, "meta": meta_, "error": error_}
     elif len(input['axes']) == 4:
-        print('4',sys.stderr)
+        property__name_0 = list(input['axes'].keys())[0]
+        property__name_1 = list(input['axes'].keys())[1]
+        property__name_2 = list(input['axes'].keys())[2]
+        property__name_3 = list(input['axes'].keys())[3]
+        materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
+        materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
+        materials_2, values_2 = cqbd.read__sheet(input['axes'][property__name_2], 'list')
+        materials_3, values_3 = cqbd.read__sheet(input['axes'][property__name_3], 'list')
+        dict_0 = dict(zip(materials_0, values_0))
+        dict_1 = dict(zip(materials_1, values_1))
+        dict_2 = dict(zip(materials_2, values_2))
+        dict_3 = dict(zip(materials_3, values_3))
+        materials = [i for i in materials_0 if i in materials_1 and i in materials_2 and i in materials_3]
+
+        w = [float(dict_0[i]) for i in materials]
+        x = [float(dict_1[i]) for i in materials]
+        y = [float(dict_2[i]) for i in materials]
+        z = [float(dict_3[i]) for i in materials]
+        ax_0 = property__name_0 + ' (' + input['units'][property__name_0] + ')'
+        ax_1 = property__name_1 + ' (' + input['units'][property__name_1] + ')'
+        ax_2 = property__name_2 + ' (' + input['units'][property__name_2] + ')'
+        ax_3 = property__name_3 + ' (' + input['units'][property__name_3] + ')'
+        labels = {'x': ax_0, 'y': ax_1, 'z': ax_2, 'color': ax_3}
+        fig = plotly.express.scatter_3d(x=w, y=x, z=y, color=z, text=materials, labels=labels)
+        config = dict({'scrollZoom': True})
+        fig.update_traces(textposition="bottom right")
+
+
+        plot_ = plotly.io.to_html(fig, config)
+        if 'orint' in input:
+            fig.show()
+            plot_ = ''
+        result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
         
     return JsonResponse(result_, safe = False)
 
