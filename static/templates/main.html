@@ -129,10 +129,6 @@
                                 <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
-                                </optgroup>
-                                <optgroup label="Distributions">
-                                    <option onclick="set__panel__bar__type(event,'distributions__energy__gap', 'distribution')" title="Feeded Energy Gaps">Energy Gap</option>
-                                    <option onclick="set__panel__bar__type(event,'distributions__lattice__constant', 'distribution')" title="Feeded Lattice Constants">Lattice Constant</option>
                                 </optgroup> -->
                             </ul>
                         </li>
@@ -147,10 +143,10 @@
                 <form id="panel__form__distribution" class="panel__form__distribution" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
                     <hr>
-                    <label class="panel__form__distribution__label">Add data labels
+                    <!-- <label class="panel__form__distribution__label">Add data labels
                         <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al" disabled>
                         <span class="panel__form__distribution__span"></span>
-                    </label><br>
+                    </label><br> -->
                     <label class="panel__form__distribution__label">Include interpolations
                         <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
                         <span class="panel__form__distribution__span"></span>
@@ -288,23 +284,9 @@
                     
                 <label id="panel__form__input__label" for="panel__form__meta">
                 <hr>Input:</label>
-                <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled>plt.xlim(0,11)</textarea>
-                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" rows="10">{{ input }}</textarea>
-                <!-- <div>
-                    {% if code %}
-                        <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
-                    {% else %}
-                        {% with code="x = [3,4,6];y = [3,4,5];plt.xlabel('s')" %}
-                            <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode==9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{ code }}</textarea>
-                        {% endwith %}
-                    {% endif %}
-                 </div>
-                <div id="panel__output">
-                    <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
-                </div> -->
-                <!-- <img id="panel__form__figure" name="panel__form__figure" class="panel__form__figure" src="data:image/png;base64, {{plot}}" alt="broken picture"> -->
-                <!-- <iframe srcdoc="{{ plot }}" style="display:block"></iframe> -->
-               
+                <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled></textarea>
+                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" rows="10"></textarea>
+
                 <label id="panel__form__output__label" for="panel__form__output">
                 <hr>Output:</label>
                 <iframe id="panel__form__output" class="panel__form__output" name="panel__form__output"></iframe>

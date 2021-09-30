@@ -1,11 +1,11 @@
-panel__form__distribution__al.onclick = function(event) {
-    if (localStorage.getItem('panel__form__distribution__al') == null) {
-        localStorage.setItem('panel__form__distribution__al', 'true');
-    }
-    else {
-        localStorage.removeItem("panel__form__distribution__al");
-    }
-}
+// panel__form__distribution__al.onclick = function(event) {
+//     if (localStorage.getItem('panel__form__distribution__al') == null) {
+//         localStorage.setItem('panel__form__distribution__al', 'true');
+//     }
+//     else {
+//         localStorage.removeItem("panel__form__distribution__al");
+//     }
+// }
 
 panel__form__distribution__ii.onclick = function(event) {
     if (localStorage.getItem('panel__form__distribution__ii') == null) {

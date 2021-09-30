@@ -81,9 +81,9 @@ if (localStorage.getItem("panel__form__orint__orint") != null) {
     panel__form__orint__orint.checked = true;
 }
 
-if (localStorage.getItem("panel__form__distribution__al") != null) {
-    panel__form__distribution__al.checked = true;
-}
+// if (localStorage.getItem("panel__form__distribution__al") != null) {
+//     panel__form__distribution__al.checked = true;
+// }
 
 if (localStorage.getItem("panel__form__distribution__ii") != null) {
     panel__form__distribution__ii.checked = true;

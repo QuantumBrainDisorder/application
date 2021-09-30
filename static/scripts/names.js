@@ -40,7 +40,7 @@ const panel__form__orint = document.getElementById("panel__form__orint");
 const panel__form__orint__orint = document.getElementById("panel__form__orint__orint");
 
 const panel__form__distribution = document.getElementById("panel__form__distribution");
-const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
+// const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
 const panel__form__distribution__ii = document.getElementById("panel__form__distribution__ii");
 const panel__form__distribution__submit = document.getElementById("panel__form__distribution__submit");
 const panel__form__distribution__w__axis = document.getElementById("panel__form__distribution__w__axis");
