@@ -22,6 +22,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/properties.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/orint.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/al.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/space__resolution.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/profile.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/distribution.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/energies.css' %}">
@@ -143,15 +145,6 @@
                 <form id="panel__form__distribution" class="panel__form__distribution" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
                     <hr>
-                    <!-- <label class="panel__form__distribution__label">Add data labels
-                        <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al" disabled>
-                        <span class="panel__form__distribution__span"></span>
-                    </label><br> -->
-                    <label class="panel__form__distribution__label">Include interpolations
-                        <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
-                        <span class="panel__form__distribution__span"></span>
-                    </label><br>
-                    <hr>
                     <label class="panel__form__distribution__label">W-axis:&ThickSpace;
                         <input type="checkbox" id="panel__form__distribution__w__axis" name="panel__form__distribution__w__axis" checked>
                         <span class="panel__form__distribution__span"></span>                         
@@ -248,28 +241,142 @@
                         <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'z')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'z')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
                     </ul>
+                    <hr>
+                    <!-- <label class="panel__form__distribution__label">Add data labels
+                        <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al" disabled>
+                        <span class="panel__form__distribution__span"></span>
+                    </label><br> -->
+                    <label class="panel__form__distribution__label">Include interpolations
+                        <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
+                        <span class="panel__form__distribution__span"></span>
+                    </label><br>
                 </form>
+
+
+
+
+
+
+
+
+
 
                 <form id="panel__form__profile" class="panel__form__profile" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__profile__submit" name="panel__form__profile__submit" type="submit" style="display: none;"></button>
+                    <hr>
+                    <label class="panel__form__profile__parameter__label">Property:&ThickSpace;</label>
+                    <span id="panel__form__profile__property" class="panel__form__profile__property">Energy Gap</span> 
+                    <ul id="panel__form__profile__list" class="panel__form__profile__list" contenteditable="false">
+                        <li onclick="panel__form__profile__set(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                        <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__profile__set(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
+                        <li onclick="panel__form__profile__set(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <li onclick="panel__form__profile__set(event, 'energy__gap')" title="Energy Gap E_g (eV)">Energy Gap</li>
+                        <li onclick="panel__form__profile__set(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
+                        <li onclick="panel__form__profile__set(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <li onclick="panel__form__profile__set(event, 'lattice__constant')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
+                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
+                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
+                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <li onclick="panel__form__profile__set(event, 'relative__permittivity')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
+                        <li onclick="panel__form__profile__set(event, 'spin__orbit__split')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
+                        <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <li onclick="panel__form__profile__set(event, 'valence__band__offset')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
+                        <li onclick="panel__form__profile__set(event, 'alpha__varshni')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
+                        <li onclick="panel__form__profile__set(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
+                    </ul>
+                </form>
+                
+
+
+
+
+                <form id="panel__form__al" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Add layers labels
+                        <input type="checkbox" id="panel__form__al__input" disabled>
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+                <form id="panel__form__space__resolution" class="panel__form__space__resolution">
+                    <hr>
+                    <label id="panel__form__space__resolution__label" for="panel__form__space__resolution__input" class="panel__form__space__resolution__label">Space interval (m):&ThickSpace;</label>
+                    <span id="panel__form__space__resolution__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1e-11</span>
+                    <!-- <input type="text" id="panel__form__space__resolution__input"> -->
                 </form>
 
-                <form id="panel__form__energies" class="panel__form__energies" action=""  method="POST">{% csrf_token %}
-                    <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button>
+
+                
+
+
+                <form id="panel__form__band__electrons" class="panel__form__al" action=""  method="POST">{% csrf_token %}
+                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
                     <hr>
-                    <label class="panel__form__energies__label">Draw energy levels
-                        <input type="checkbox" id="panel__form__energies__del">
-                        <span class="panel__form__energies__span"></span>
+                    <label class="panel__form__al__label">Draw electrons band
+                        <input type="checkbox" id="panel__form__band__electrons__input">
+                        <span class="panel__form__al__span"></span>
                     </label><br>
-                    <label class="panel__form__energies__label">Draw wave functions
-                        <input type="checkbox" id="panel__form__energies__dwf">
-                        <span class="panel__form__energies__span"></span>
+                    <label id="panel__form__band__electrons__del__label" class="panel__form__band__electrons__label_sub">Draw energy levels
+                        <input type="checkbox" id="panel__form__band__electrons__del">
+                        <span class="panel__form__band__electrons__span_sub"></span>
                     </label><br>
-                    <label class="panel__form__energies__label">Draw electrons band
-                        <input type="checkbox" id="panel__form__energies__deb">
-                        <span class="panel__form__energies_span"></span>
+                    <label id="panel__form__band__electrons__dwf__label" class="panel__form__band__electrons__label_sub">Draw wave functions
+                        <input type="checkbox" id="panel__form__band__electrons__dwf">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__electrons__dwf__normalised__label" class="panel__form__band__electrons__label_sub_sub">Normalised
+                        <input type="checkbox" id="panel__form__band__electrons__dwf__normalised" checked disabled>
+                        <span class="panel__form__band__electrons__span_sub_sub"></span>
                     </label><br>
                 </form>
+
+                <form id="panel__form__band__holes" class="panel__form__al" action=""  method="POST">{% csrf_token %}
+                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
+                    <hr>
+                    <label class="panel__form__al__label">Draw holes band
+                        <input type="checkbox" id="panel__form__band__holes__input">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label id="panel__form__band__holes__del__label" class="panel__form__band__electrons__label_sub">Draw energy levels
+                        <input type="checkbox" id="panel__form__band__holes__del">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__holes__del__lh__label" class="panel__form__band__electrons__label_sub_sub">for light holes
+                        <input type="checkbox" id="panel__form__band__holes__del__lh">
+                        <span class="panel__form__band__electrons__span_sub_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__holes__del__hh__label" class="panel__form__band__electrons__label_sub_sub">for heavy holes
+                        <input type="checkbox" id="panel__form__band__holes__del__hh">
+                        <span class="panel__form__band__electrons__span_sub_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__holes__dwf__label" class="panel__form__band__electrons__label_sub">Draw wave functions
+                        <input type="checkbox" id="panel__form__band__holes__dwf">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__holes__dwf__normalised__label" class="panel__form__band__electrons__label_sub_sub">Normalised
+                        <input type="checkbox" id="panel__form__band__holes__dwf__normalised" checked disabled>
+                        <span class="panel__form__band__electrons__span_sub_sub"></span>
+                    </label><br>
+                </form>
+
+                <form id="panel__form__band__parameters" class="panel__form__space__resolution" action=""  method="POST">{% csrf_token %}
+                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
+                    <hr>
+                    <label for="panel__form__band__parameters__tle" class="panel__form__space__resolution__label">Top limit of energy levels (eV):&ThickSpace;</label>
+                    <span id="panel__form__band__parameters__tle" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>12</span><br>
+                    <label for="panel__form__band__parameters__ble" class="panel__form__space__resolution__label">Bottom limit of energy levels (eV):&ThickSpace;</label>
+                    <span id="panel__form__band__parameters__ble" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-6</span><br>
+                    <label for="panel__form__band__parameters__elr" class="panel__form__space__resolution__label">Energy levels resolution (eV):&ThickSpace;</label>
+                    <span id="panel__form__band__parameters__elr" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.01</span>
+                </form>
+                                         
+
+                <form id="panel__form__wave__vector" class="panel__form__space__resolution">
+                    <hr>
+                    <label id="panel__form__wave__vector__label" for="panel__form__wave__vector__input" class="panel__form__space__resolution__label">Wave vector (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0e+9</span>
+                </form>
+
 
                 <form id="panel__form__orint" class="panel__form__orint">
                     <hr>
@@ -282,10 +389,22 @@
                 <form id="panel__form__dos" class="panel__form__dos">
                 </form>
                     
+
+
+
+
+
+
+
+
+
+
+
+
                 <label id="panel__form__input__label" for="panel__form__meta">
                 <hr>Input:</label>
-                <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" disabled></textarea>
-                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" rows="10"></textarea>
+                <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" spellcheck="false" disabled></textarea>
+                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" spellcheck="false" rows="10"></textarea>
 
                 <label id="panel__form__output__label" for="panel__form__output">
                 <hr>Output:</label>
@@ -328,10 +447,13 @@
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_l.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_r.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/al.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/space__resolution.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/orint.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/distribution.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/profile.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energies.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 

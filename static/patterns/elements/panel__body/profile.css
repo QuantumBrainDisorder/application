@@ -5,8 +5,8 @@
     padding: 0;
     
     font-family: var(--ffamily);
-    font-size: var(--fsize);
-    
+    /* font-size: var(--fsize); */
+    font-size: 0;
     color: var(--theme4);
     display: none;
 }
@@ -14,12 +14,12 @@
 
 
 
-
-
-
 .panel__form__profile__label {
     display: inline-block;
     position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
     padding-left: calc(var(--fsize) * 5 / 4);
     cursor: pointer;
     font-size: calc(0.75 * var(--fsize));
@@ -37,43 +37,51 @@
     width: 0;
 }
 
+
+
+
+
+
+
+
+
 .panel__form__profile__span {
-position: absolute;
-top: 0;
-left: 0;
-height: calc(1 * var(--fsize));
-width: calc(1 * var(--fsize));
-background-color: var(--theme1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(1 * var(--fsize));
+    width: calc(1 * var(--fsize));
+    background-color: var(--theme1);
 }
 
 .panel__form__profile__label:hover input ~ .panel__form__profile__span {
-background-color: var(--theme2);
+    background-color: var(--theme2);   
 }
 
 .panel__form__profile__label input:checked ~ .panel__form__profile__span {
-background-color: var(--theme1);
+    background-color: var(--theme1);
 }
 
 .panel__form__profile__span:after {
-content: "";
-position: absolute;
-display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
 
 .panel__form__profile__label input:checked ~ .panel__form__profile__span:after {
-display: block;
+    display: block;
 }
 
 .panel__form__profile__label .panel__form__profile__span:after {
-left: calc(9 * var(--fsize) / 25);
-top: calc(5 * var(--fsize) / 25);
-width: calc(5 * var(--fsize) / 25);
-height: calc(10 * var(--fsize) / 25);
-border: solid var(--theme4);
-border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
--webkit-transform: rotate(45deg);
--ms-transform: rotate(45deg);
-transform: rotate(45deg);
+    left: calc(9 * var(--fsize) / 25);
+    top: calc(5 * var(--fsize) / 25);
+    width: calc(5 * var(--fsize) / 25);
+    height: calc(10 * var(--fsize) / 25);
+    border: solid var(--theme4);
+    border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 
@@ -84,3 +92,83 @@ transform: rotate(45deg);
 
 
 
+
+.panel__form__profile__parameter__label{
+    cursor: default;
+    font-size: calc(0.75 * var(--fsize));
+    display: inline-block;
+    position: relative;
+    border-width: 0;
+    background-color:transparent;
+    margin-top: calc(var(--fsize) * 5 / 16);
+}
+
+
+.panel__form__profile__property{
+    cursor: default;
+    font-size: calc(0.75 * var(--fsize));
+    display: inline-block;
+    position: relative;
+    border-width: 0;
+    background-color:transparent;
+}
+
+
+.panel__form__profile__property:hover {
+    background-color: var(--theme2);
+}
+.panel__form__profile__property:active {
+    background-color: var(--theme3);
+}
+.panel__form__profile__property:hover + ul {
+    display: block;
+}
+
+
+
+.panel__form__profile__list {
+    position: relative;
+    display: none;
+    overflow-y: scroll;
+    flex: 1;
+    
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    font-size: calc(0.75 * var(--fsize));
+    /* height: calc(100vh - 2 * var(--margin) - var(--fsize) - var(--borders)/2); */
+    background-color: var(--theme1);
+    width: 100%;
+}
+.panel__form__profile__list::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+}
+
+.panel__form__profile__list:hover {
+    display: block;
+}
+
+
+.panel__form__profile__list li:hover {
+    background-color: var(--theme2);
+}
+
+.panel__form__profile__list li:active {
+    background-color: var(--theme3);
+}
+
+
+.panel__form__profile__list li {
+    
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: block;
+    text-align: left;
+    background-color: var(--theme1);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}

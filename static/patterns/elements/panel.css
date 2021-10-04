@@ -232,7 +232,11 @@
     border-color: var(--theme1);
     border-bottom: 0;
     border-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     resize: vertical;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -240,6 +244,7 @@
     width: 0 !important;
     display: none; 
 }
+
 
 #panel__form__input__label {
     display: none;
@@ -250,7 +255,7 @@
 }
 
 .panel__form__input {
-    margin-top: var(--margin__half);
+    /* margin-top: var(--margin__half); */
     display: none;
     background-color: transparent;
     color: var(--theme4);
@@ -258,6 +263,8 @@
     border-color: var(--theme1);
     border-width: 0;
     outline-width: 0;
+    padding: 0;
+    margin: 0;
 }
 
 

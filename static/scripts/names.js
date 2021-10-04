@@ -53,14 +53,61 @@ const panel__form__distribution__y__axis__property = document.getElementById('pa
 const panel__form__distribution__z__axis__property = document.getElementById('panel__form__distribution__z__axis__property');
 
 const panel__form__profile = document.getElementById("panel__form__profile");
-// const panel__form__profile__al = document.getElementById("panel__form__profile__al");
 const panel__form__profile__submit = document.getElementById("panel__form__profile__submit");
 
-const panel__form__energies = document.getElementById("panel__form__energies");
-const panel__form__energies__del = document.getElementById("panel__form__energies__del");
-const panel__form__energies__dwf = document.getElementById("panel__form__energies__dwf");
-const panel__form__energies__deb = document.getElementById("panel__form__energies__deb");
-const panel__form__energies__submit = document.getElementById("panel__form__energies__submit");
+const panel__form__al = document.getElementById("panel__form__al");
+const panel__form__al__input = document.getElementById("panel__form__al__input");
+const panel__form__al__label = document.getElementById("panel__form__al__label");
+
+const panel__form__space__resolution = document.getElementById("panel__form__space__resolution");
+const panel__form__space__resolution__input = document.getElementById('panel__form__space__resolution__input');
+
+const panel__form__wave__vector = document.getElementById('panel__form__wave__vector');
+const panel__form__wave__vector__input = document.getElementById('panel__form__wave__vector__input');
+// panel__form__band__electrons
+// panel__form__band__electrons__input
+// panel__form__band__electrons__del
+// panel__form__band__electrons__dwf
+// panel__form__band__electrons__dwf__normalised
+// panel__form__band__holes
+// panel__form__band__holes__input
+// panel__form__band__holes__del
+// panel__form__band__holes__dwf
+// panel__form__band__holes__dwf__normalised
+// panel__form__band__parameters
+// panel__form__band__parameters__tle
+// panel__form__band__parameters__ble
+// panel__form__band__parameters__elr
+// panel__form__band__electrons__del__label
+// panel__form__band__electrons__dwf__label
+// panel__form__band__electrons__dwf__normalised__label
+const panel__form__band__electrons = document.getElementById("panel__form__band__electrons");
+const panel__form__band__electrons__input = document.getElementById("panel__form__band__electrons__input");
+const panel__form__band__electrons__del = document.getElementById("panel__form__band__electrons__del");
+const panel__form__band__electrons__del__label = document.getElementById("panel__form__band__electrons__del__label");
+const panel__form__band__electrons__dwf = document.getElementById("panel__form__band__electrons__dwf");
+const panel__form__band__electrons__dwf__label = document.getElementById("panel__form__band__electrons__dwf__label");
+const panel__form__band__electrons__dwf__normalised = document.getElementById("panel__form__band__electrons__dwf__normalised");
+const panel__form__band__electrons__dwf__normalised__label = document.getElementById("panel__form__band__electrons__dwf__normalised__label");
+
+const panel__form__band__holes = document.getElementById("panel__form__band__holes");
+const panel__form__band__holes__input = document.getElementById("panel__form__band__holes__input");
+const panel__form__band__holes__del = document.getElementById("panel__form__band__holes__del");
+const panel__form__band__holes__del__label = document.getElementById("panel__form__band__holes__del__label");
+const panel__form__band__holes__del__lh = document.getElementById('panel__form__band__holes__del__lh');
+const panel__form__band__holes__del__lh__label = document.getElementById('panel__form__band__holes__del__lh__label');
+const panel__form__band__holes__del__hh = document.getElementById('panel__form__band__holes__del__hh');
+const panel__form__band__holes__del__hh__label = document.getElementById('panel__form__band__holes__del__hh__label');
+const panel__form__band__holes__dwf = document.getElementById("panel__form__band__holes__dwf");
+const panel__form__band__holes__dwf__label = document.getElementById("panel__form__band__holes__dwf__label");
+const panel__form__band__holes__dwf__normalised = document.getElementById("panel__form__band__holes__dwf__normalised");
+const panel__form__band__holes__dwf__normalised__label = document.getElementById("panel__form__band__holes__dwf__normalised__label");
+
+const panel__form__band__parameters = document.getElementById("panel__form__band__parameters");
+const panel__form__band__parameters__tle = document.getElementById("panel__form__band__parameters__tle");
+const panel__form__band__parameters__ble = document.getElementById("panel__form__band__parameters__ble");
+const panel__form__band__parameters__elr = document.getElementById("panel__form__band__parameters__elr");
+
 
 const panel__form__dos = document.getElementById('panel__form__dos');
 

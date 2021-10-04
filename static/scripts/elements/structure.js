@@ -6,7 +6,6 @@ function set__structure__unit (unit) {
   };
 };
 
-const thc = document.getElementById('thc');
 function set__structure__unit__body (unit) {
   structure__unit.innerHTML = unit;
   localStorage.setItem("structure__unit", unit);

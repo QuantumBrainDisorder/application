@@ -71,11 +71,23 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("resizer_l", "25vw");//default__resizer_l);
         localStorage.setItem("resizer_r", "57vw");//default__resizer_r);
 
-
         localStorage.setItem("structure__unit", "nm");//default__structure__unit);
 
         localStorage.setItem('panel__bar__type',"energies");
         localStorage.setItem("panel__bar__type__content", 'Energies');
+
+        localStorage.setItem('panel__form__profile__property__content', 'Lattice Constant');
+        localStorage.setItem('panel__form__profile__property', 'lattice__constant');
+        
+        localStorage.setItem('panel__form__band__electrons__input', 'true');
+
+        localStorage.setItem('panel__form__space__resolution__input', '1e-11');
+
+        localStorage.setItem('panel__form__wave__vector__input', '0e+9');
+        
+        localStorage.setItem('panel__form__band__parameters__tle', '12');
+        localStorage.setItem('panel__form__band__parameters__ble', '-6');
+        localStorage.setItem('panel__form__band__parameters__elr', '0.01');
 
         localStorage.setItem('panel__form__distribution__w__axis__property__content', 'Energy Gap');
         localStorage.setItem('panel__form__distribution__w__axis__property', 'energy__gap');

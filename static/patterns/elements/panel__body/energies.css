@@ -1,35 +1,33 @@
-.panel__form__energies {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    
-    font-family: var(--ffamily);
-    font-size: var(--fsize);
-    
-    color: var(--theme4);
-    display: none;
-}
+/* panel__form__band__electrons
+panel__form__band__electrons__label
+panel__form__band__electrons__span
+panel__form__band__electrons__label_sub
+panel__form__band__electrons__span_sub
+panel__form__band__electrons__label_sub
+panel__form__band__electrons__span_sub
+panel__form__band__electrons__label_sub_sub
+panel__form__band__electrons__span_sub_sub */
 
 
 
-
-
-
-
-.panel__form__energies__label {
+.panel__form__band__electrons__label_sub {
     display: inline-block;
     position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    margin-left: calc(var(--fsize) * 5 / 4);
     padding-left: calc(var(--fsize) * 5 / 4);
     cursor: pointer;
     font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.panel__form__energies__label input {
+.panel__form__band__electrons__label_sub input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -37,46 +35,120 @@
     width: 0;
 }
 
-.panel__form__energies__span {
-position: absolute;
-top: 0;
-left: 0;
-height: calc(1 * var(--fsize));
-width: calc(1 * var(--fsize));
-background-color: var(--theme1);
+.panel__form__band__electrons__span_sub {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(1 * var(--fsize));
+    width: calc(1 * var(--fsize));
+    background-color: var(--theme1);
 }
 
-.panel__form__energies__label:hover input ~ .panel__form__energies__span {
-background-color: var(--theme2);
+.panel__form__band__electrons__label_sub:hover input ~ .panel__form__band__electrons__span_sub {
+    background-color: var(--theme2);   
 }
 
-.panel__form__energies__label input:checked ~ .panel__form__energies__span {
-background-color: var(--theme1);
+.panel__form__band__electrons__label_sub input:checked ~ .panel__form__band__electrons__span_sub {
+    background-color: var(--theme1);
 }
 
-.panel__form__energies__span:after {
-content: "";
-position: absolute;
-display: none;
+.panel__form__band__electrons__span_sub:after {
+    content: "";
+    position: absolute;
+    display: none;
 }
 
-.panel__form__energies__label input:checked ~ .panel__form__energies__span:after {
-display: block;
+.panel__form__band__electrons__label_sub input:checked ~ .panel__form__band__electrons__span_sub:after {
+    display: block;
 }
 
-.panel__form__energies__label .panel__form__energies__span:after {
-left: calc(9 * var(--fsize) / 25);
-top: calc(5 * var(--fsize) / 25);
-width: calc(5 * var(--fsize) / 25);
-height: calc(10 * var(--fsize) / 25);
-border: solid var(--theme4);
-border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
--webkit-transform: rotate(45deg);
--ms-transform: rotate(45deg);
-transform: rotate(45deg);
+.panel__form__band__electrons__label_sub .panel__form__band__electrons__span_sub:after {
+    left: calc(9 * var(--fsize) / 25);
+    top: calc(5 * var(--fsize) / 25);
+    width: calc(5 * var(--fsize) / 25);
+    height: calc(10 * var(--fsize) / 25);
+    border: solid var(--theme4);
+    border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+.panel__form__band__electrons__label_sub_sub {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    margin-left: calc(var(--fsize) * 10 / 4);
+    padding-left: calc(var(--fsize) * 5 / 4);
+    cursor: pointer;
+    font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.panel__form__band__electrons__label_sub_sub input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.panel__form__band__electrons__span_sub_sub {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(1 * var(--fsize));
+    width: calc(1 * var(--fsize));
+    background-color: var(--theme1);
+}
+
+.panel__form__band__electrons__label_sub_sub:hover input ~ .panel__form__band__electrons__span_sub_sub {
+    background-color: var(--theme2);  
+}
+
+.panel__form__band__electrons__label_sub_sub input:checked ~ .panel__form__band__electrons__span_sub_sub {
+    background-color: var(--theme1);
+}
+
+.panel__form__band__electrons__span_sub_sub:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.panel__form__band__electrons__label_sub_sub input:checked ~ .panel__form__band__electrons__span_sub_sub:after {
+    display: block;
+}
+
+.panel__form__band__electrons__label_sub_sub .panel__form__band__electrons__span_sub_sub:after {
+    left: calc(9 * var(--fsize) / 25);
+    top: calc(5 * var(--fsize) / 25);
+    width: calc(5 * var(--fsize) / 25);
+    height: calc(10 * var(--fsize) / 25);
+    border: solid var(--theme4);
+    border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
 
 
 

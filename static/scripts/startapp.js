@@ -61,7 +61,6 @@ structure.innerHTML = localStorage.getItem("structure");
 structure__unit.innerHTML = localStorage.getItem("structure__unit");
 structure__scope.style.width = localStorage.getItem("structure__width");
 
-
 if (localStorage.getItem("structure__legend__dblclicked") != null) {
     structure__legend__structure.textContent = "...";
 }
@@ -77,6 +76,13 @@ if (localStorage.getItem('properties__list__height') == null) {
 properties__list.style.height = localStorage.getItem('properties__list__height');
 
 
+
+
+
+
+
+
+
 if (localStorage.getItem("panel__form__orint__orint") != null) {
     panel__form__orint__orint.checked = true;
 }
@@ -89,21 +95,85 @@ if (localStorage.getItem("panel__form__distribution__ii") != null) {
     panel__form__distribution__ii.checked = true;
 }
 
-if (localStorage.getItem("panel__form__profile__al") != null) {
-    panel__form__profile__al.checked = true;
+
+
+panel__form__space__resolution__input.textContent = localStorage.getItem('panel__form__space__resolution__input');
+
+panel__form__wave__vector__input.textContent = localStorage.getItem('panel__form__wave__vector__input');
+
+
+if (localStorage.getItem("panel__form__al") != null) {
+    panel__form__al__input.checked = true;
+}
+panel__form__profile__property.innerHTML = localStorage.getItem('panel__form__profile__property__content');
+panel__form__profile__property.dataset.property = localStorage.getItem('panel__form__profile__property');
+
+
+// panel__form__band__electrons__del__label
+// panel__form__band__electrons__dwf__label
+// panel__form__band__electrons__dwf__normalised__label
+if (localStorage.getItem("panel__form__band__electrons__input") != null) {
+    panel__form__band__electrons__input.checked = true;
+    panel__form__band__electrons__dwf__label.style.display = 'initial';
+    panel__form__band__electrons__del__label.style.display = 'initial';
+}
+else {
+    panel__form__band__electrons__del__label.style.display = 'none';
+    panel__form__band__electrons__dwf__label.style.display = 'none';
+}
+if (localStorage.getItem("panel__form__band__electrons__del") != null) {
+    panel__form__band__electrons__del.checked = true;
+}
+if (localStorage.getItem("panel__form__band__electrons__dwf") != null) {
+    panel__form__band__electrons__dwf.checked = true;
+    panel__form__band__electrons__dwf__normalised__label.style.display = 'initial';
+}
+else {
+    panel__form__band__electrons__dwf__normalised__label.style.display = 'none';
+}
+if (localStorage.getItem("panel__form__band__electrons__dwf__normalised") != null) {
+    panel__form__band__electrons__dwf__normalised.checked = true;
 }
 
-if (localStorage.getItem("panel__form__energies__del") != null) {
-    panel__form__energy__profile__del.checked = true;
+
+if (localStorage.getItem("panel__form__band__holes__input") != null) {
+    panel__form__band__holes__input.checked = true;
+    panel__form__band__holes__del__label.style.display = 'initial';
+    panel__form__band__holes__dwf__label.style.display = 'initial';
+}
+else {
+    panel__form__band__holes__del__label.style.display = 'none';
+    panel__form__band__holes__dwf__label.style.display = 'none';
+}
+if (localStorage.getItem("panel__form__band__holes__del") != null) {
+    panel__form__band__holes__del.checked = true;
+    panel__form__band__holes__del__lh__label.style.display = 'initial';
+    panel__form__band__holes__del__hh__label.style.display = 'initial';
+}
+else {
+    panel__form__band__holes__del__lh__label.style.display = 'none';
+    panel__form__band__holes__del__hh__label.style.display = 'none';
+}
+if (localStorage.getItem("panel__form__band__holes__del__lh") != null) {
+    panel__form__band__holes__del__lh.checked = true;
+}
+if (localStorage.getItem("panel__form__band__holes__del__hh") != null) {
+    panel__form__band__holes__del__hh.checked = true;
+}
+if (localStorage.getItem("panel__form__band__holes__dwf") != null) {
+    panel__form__band__holes__dwf.checked = true;
+    panel__form__band__holes__dwf__normalised__label.style.display = 'initial';
+}
+else {
+    panel__form__band__holes__dwf__normalised__label.style.display = 'none';
+}
+if (localStorage.getItem("panel__form__band__holes__dwf__normalised") != null) {
+    panel__form__band__holes__dwf__normalised.checked = true;
 }
 
-if (localStorage.getItem("panel__form__energies__dwf") != null) {
-    panel__form__energy__profile__dwf.checked = true;
-}
-
-if (localStorage.getItem("panel__form__energies__deb") != null) {
-    panel__form__energy__profile__deb.checked = true;
-}
+panel__form__band__parameters__tle.textContent = localStorage.getItem('panel__form__band__parameters__tle');
+panel__form__band__parameters__ble.textContent = localStorage.getItem('panel__form__band__parameters__ble');
+panel__form__band__parameters__elr.textContent = localStorage.getItem('panel__form__band__parameters__elr');
 
 
 if (localStorage.getItem("panel__form__input") != null) {
