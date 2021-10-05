@@ -89,6 +89,13 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__form__band__parameters__ble', '-6');
         localStorage.setItem('panel__form__band__parameters__elr', '0.01');
 
+        localStorage.setItem('panel__form__wave__vector__parameters__tx', '2.5e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__bx', '0e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__rx', '1e+7');
+        localStorage.setItem('panel__form__wave__vector__parameters__ty', '2.5e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__by', '0e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__ry', '1e+7');
+
         localStorage.setItem('panel__form__distribution__w__axis__property__content', 'Energy Gap');
         localStorage.setItem('panel__form__distribution__w__axis__property', 'energy__gap');
         localStorage.setItem('panel__form__distribution__x__axis__property__content', 'Lattice Constant');

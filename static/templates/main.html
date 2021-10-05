@@ -9,8 +9,8 @@
         <meta name="author" content="Rabarbar Batman"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <!-- <link rel="icon" type="image/png" href="{% static 'images/1.png' %}" /> -->
-        <link rel="shortcut icon" href="{% static 'images/site__icon.ico' %}"> 
+        <!-- <link rel="shortcut icon" href="{% static 'images/site__icon.ico' %}">  -->
+        <link rel="icon" type="gif" href="{% static 'images/site__icon.ico' %}" />
 
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/fonts.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
@@ -129,6 +129,7 @@
                                 <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Distribution</option>
                                 <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
                                 <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
+                                <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Energy paraboloids">Energy paraboloids</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup> -->
@@ -377,6 +378,22 @@
                     <span id="panel__form__wave__vector__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0e+9</span>
                 </form>
 
+                <form id="panel__form__wave__vector__parameters" class="panel__form__space__resolution" action=""  method="POST">{% csrf_token %}
+                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
+                    <hr>
+                    <label for="panel__form__wave__vector__parameters__tx" class="panel__form__space__resolution__label">X-axis top limit of wave vector (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__tx" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>2.5e+9</span><br>
+                    <label for="panel__form__wave__vector__parameters__bx" class="panel__form__space__resolution__label">X-axis bottom limit of wave vector (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__bx" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0e+9</span><br>
+                    <label for="panel__form__wave__vector__parameters__rx" class="panel__form__space__resolution__label">X-axis wave vector resolution (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__rx" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1e+7</span><hr>
+                    <label for="panel__form__wave__vector__parameters__ty" class="panel__form__space__resolution__label">Y-axis top limit of wave vector (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__ty" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>2.5e+9</span><br>
+                    <label for="panel__form__wave__vector__parameters__by" class="panel__form__space__resolution__label">Y-axis bottom limit of wave vector (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__by" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0e+9</span><br>
+                    <label for="panel__form__wave__vector__parameters__ry" class="panel__form__space__resolution__label">Y-axis wave vector resolution (1/m):&ThickSpace;</label>
+                    <span id="panel__form__wave__vector__parameters__ry" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1e+7</span>
+                </form>
 
                 <form id="panel__form__orint" class="panel__form__orint">
                     <hr>
@@ -455,6 +472,7 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energies.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>

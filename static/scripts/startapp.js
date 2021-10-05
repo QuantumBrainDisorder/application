@@ -175,6 +175,12 @@ panel__form__band__parameters__tle.textContent = localStorage.getItem('panel__fo
 panel__form__band__parameters__ble.textContent = localStorage.getItem('panel__form__band__parameters__ble');
 panel__form__band__parameters__elr.textContent = localStorage.getItem('panel__form__band__parameters__elr');
 
+panel__form__wave__vector__parameters__tx.textContent = localStorage.getItem('panel__form__wave__vector__parameters__tx');
+panel__form__wave__vector__parameters__bx.textContent = localStorage.getItem('panel__form__wave__vector__parameters__bx');
+panel__form__wave__vector__parameters__rx.textContent = localStorage.getItem('panel__form__wave__vector__parameters__rx');
+panel__form__wave__vector__parameters__ty.textContent = localStorage.getItem('panel__form__wave__vector__parameters__ty');
+panel__form__wave__vector__parameters__by.textContent = localStorage.getItem('panel__form__wave__vector__parameters__by');
+panel__form__wave__vector__parameters__ry.textContent = localStorage.getItem('panel__form__wave__vector__parameters__ry');
 
 if (localStorage.getItem("panel__form__input") != null) {
     panel__form__input.style.display = "block";

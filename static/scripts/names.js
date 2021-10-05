@@ -108,6 +108,13 @@ const panel__form__band__parameters__tle = document.getElementById("panel__form_
 const panel__form__band__parameters__ble = document.getElementById("panel__form__band__parameters__ble");
 const panel__form__band__parameters__elr = document.getElementById("panel__form__band__parameters__elr");
 
+const panel__form__wave__vector__parameters = document.getElementById('panel__form__wave__vector__parameters');
+const panel__form__wave__vector__parameters__tx = document.getElementById('panel__form__wave__vector__parameters__tx');
+const panel__form__wave__vector__parameters__bx = document.getElementById('panel__form__wave__vector__parameters__bx');
+const panel__form__wave__vector__parameters__rx = document.getElementById('panel__form__wave__vector__parameters__rx');
+const panel__form__wave__vector__parameters__ty = document.getElementById('panel__form__wave__vector__parameters__ty');
+const panel__form__wave__vector__parameters__by = document.getElementById('panel__form__wave__vector__parameters__by');
+const panel__form__wave__vector__parameters__ry = document.getElementById('panel__form__wave__vector__parameters__ry');
 
 const panel__form__dos = document.getElementById('panel__form__dos');
 

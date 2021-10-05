@@ -28,6 +28,13 @@ function set__panel__bar__type(event, type) {
       panel__form__al.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       break;
+    case 'energy__paraboloids':
+      set__panel__bar__type__body(event, type);
+      panel__form__orint.style.display = "initial";
+      panel__form__band__parameters.style.display = "initial";
+      panel__form__space__resolution.style.display = 'initial';
+      panel__form__wave__vector__parameters.style.display = 'initial';
+
   }
     // properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
     // localStorage.setItem('properties__list__width', properties__list.style.width);
@@ -61,6 +68,7 @@ function clean__panel() {
   panel__form__al.style.display = 'none';
   panel__form__space__resolution.style.display = 'none';
   panel__form__wave__vector.style.display = 'none';
+  panel__form__wave__vector__parameters.display = 'none';
 }
 
 
@@ -225,6 +233,9 @@ panel__bar__run.onclick = function (event) {
     case 'profile':
       panel__bar__run__profile(event);
       break;
+    case 'energy__paraboloids':
+      panel__bar__run__energy__paraboloids(event);
+      break;
   }
 }
 
@@ -279,7 +290,6 @@ function panel__bar__run__energies(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  console.log(input);
   print__output('run__energies', input)
 }
 
@@ -350,3 +360,54 @@ function panel__bar__run__distribution (event) {
   print__output('run__distribution', input);
 }
 
+
+
+
+
+
+
+function panel__bar__run__energy__paraboloids(event) {
+  input = ''
+  input_ = ''
+
+  input += get__sheet('energy__gap')
+  input_ += get__sheet__unit('energy__gap');
+  input += get__sheet('valence__band__offset');
+  input_ += get__sheet__unit('valence__band__offset');  
+  input += get__sheet('valence__band__offset');
+  input_ += get__sheet__unit('valence__band__offset');
+  
+  input += get__sheet__json('bowings');
+  input += get__sheet__json('effective__mass');
+  input += get__structure();
+
+  input_ += get__sheet__unit('effective__mass');
+  input_ += get__structure__unit();
+   
+  input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
+
+  input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
+  input_ += '"space__resolution": "m",'; 
+  input += '"wave__vector": "' + localStorage.getItem('panel__form__wave__vector__input') + '",'; 
+  input_ += '"wave__vector__parameters": "1/m",'; 
+  input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
+  input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
+  input += '"energy__levels__resolution": "' + localStorage.getItem("panel__form__band__parameters__elr") + '",'; 
+  input += '"units": {' + input_.slice(0, input_.length - 1) + '},';
+  
+  input += '"wave__vector__parameters__tx": "' + localStorage.getItem("panel__form__wave__vector__parameters__tx") + '",'; 
+  input += '"wave__vector__parameters__bx": "' + localStorage.getItem("panel__form__wave__vector__parameters__bx") + '",'; 
+  input += '"wave__vector__parameters__rx": "' + localStorage.getItem("panel__form__wave__vector__parameters__rx") + '",'; 
+  
+  input += '"wave__vector__parameters__ty": "' + localStorage.getItem("panel__form__wave__vector__parameters__ty") + '",';
+  input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
+  input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
+
+  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+
+  input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
+  input += get__theme();
+
+  input = '{' + input.slice(0, input.length - 1) + '}';
+  print__output('run__energy__paraboloids', input)
+}
