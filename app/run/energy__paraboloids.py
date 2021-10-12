@@ -17,7 +17,7 @@ import plotly.io
 import plotly
 import plotly.express as px
 from django.http import JsonResponse
-from quantum_QBD.tools import adjust__energy__profile__to__2D__wave__vector__grid
+# from quantum_QBD.tools import adjust__energy__profile__to__2D__wave__vector__grid
 import units_QBD
 import plotly.graph_objects as go
 import numpy as np
@@ -32,7 +32,6 @@ text = None
 color = None
 
 def energy__paraboloids(request):
-    print('tuuuuuuuuu',sys.stderr)
     glob_ = list(globals().keys()).copy()
     input = json.load(request)
     input = json.loads(input['input'])
@@ -151,13 +150,11 @@ def energy__paraboloids(request):
     while kx[-1] < kxt: kx.append(kx[-1] + kxr)
     ky = [kyb]
     while ky[-1] < kyt: ky.append(ky[-1] + kyr)
-    print('tuuuuuuuuu2',sys.stderr)
 
-    profiles__lh = adjust__energy__profile__to__2D__wave__vector__grid([-i for i in y1], lh, kx, ky)
-    profiles__hh = adjust__energy__profile__to__2D__wave__vector__grid([-i for i in y1], hh, kx, ky)
-    profiles__el = adjust__energy__profile__to__2D__wave__vector__grid(y2, el, kx, ky)  #(energy__profile__fence, effective__mass__profile__fence, wave__vector__grid__A, wave__vector__grid__B):
+    profiles__lh = qqbd.adjust__energy__profile__to__2D__wave__vector__grid([-i for i in y1], lh, kx, ky)
+    profiles__hh = qqbd.adjust__energy__profile__to__2D__wave__vector__grid([-i for i in y1], hh, kx, ky)
+    profiles__el = qqbd.adjust__energy__profile__to__2D__wave__vector__grid(y2, el, kx, ky)  #(energy__profile__fence, effective__mass__profile__fence, wave__vector__grid__A, wave__vector__grid__B):
  
-    print('tuuuuuuuuu3',sys.stderr)
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     elt = float(input['energy__levels__limit__top']) * multiplier
     elb = float(input['energy__levels__limit__bottom']) * multiplier
@@ -270,7 +267,7 @@ def energy__paraboloids(request):
 for level in range(0,len(z[0])):
     fig.add_trace(go.Scatter3d(x=x[0][level], y=y[0][level], z=z[0][level], mode='markers', name='for lh' + str(level+1)))
 for level in range(0,len(z[1])):
-    fig.add_trace(go.Scatter3d(x=x[1][level], y=y[1][level], z=z[1][level], mode='markers', name='for el' + str(level+1)))
+    fig.add_trace(go.Scatter3d(x=x[1][level], y=y[1][level], z=z[1][level], mode='markers', name='for hh' + str(level+1)))
 for level in range(0,len(z[2])):
     fig.add_trace(go.Scatter3d(x=x[2][level], y=y[2][level], z=z[2][level], mode='markers', name='for el' + str(level+1)))
 

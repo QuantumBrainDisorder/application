@@ -182,6 +182,64 @@ panel__form__wave__vector__parameters__ty.textContent = localStorage.getItem('pa
 panel__form__wave__vector__parameters__by.textContent = localStorage.getItem('panel__form__wave__vector__parameters__by');
 panel__form__wave__vector__parameters__ry.textContent = localStorage.getItem('panel__form__wave__vector__parameters__ry');
 
+
+if (localStorage.getItem('panel__form__dos__2d') != null) {
+    panel__form__dos__2d.checked = true;
+}
+
+if (localStorage.getItem('panel__form__dos__3d') != null) {
+    panel__form__dos__3d.checked = true;
+}
+if (localStorage.getItem('panel__form__dos__merged') != null) {
+    panel__form__dos__merged.checked = true;
+}
+
+if (localStorage.getItem('panel__form__for__lh') != null) {
+    panel__form__for__lh.checked = true;
+}
+if (localStorage.getItem('panel__form__for__hh') != null) {
+    panel__form__for__hh.checked = true;
+}
+if (localStorage.getItem('panel__form__for__el') != null) {
+    panel__form__for__el.checked = true;
+}
+
+panel__form__dos__parameters__et.textContent = localStorage.getItem('panel__form__dos__parameters__et');
+panel__form__dos__parameters__eb.textContent = localStorage.getItem('panel__form__dos__parameters__eb');
+panel__form__dos__parameters__er.textContent = localStorage.getItem('panel__form__dos__parameters__er');
+
+
+
+if (localStorage.getItem('panel__form__ldos__2d') != null) {
+    panel__form__ldos__2d.checked = true;
+}
+
+if (localStorage.getItem('panel__form__ldos__3d') != null) {
+    panel__form__ldos__3d.checked = true;
+}
+if (localStorage.getItem('panel__form__ldos__merged') != null) {
+    panel__form__ldos__merged.checked = true;
+}
+
+if (localStorage.getItem('panel__form__for___lh') != null) {
+    panel__form__for___lh.checked = true;
+}
+if (localStorage.getItem('panel__form__for___hh') != null) {
+    panel__form__for___hh.checked = true;
+}
+if (localStorage.getItem('panel__form__for___el') != null) {
+    panel__form__for___el.checked = true;
+}
+panel__form__ldos__parameters__et.textContent = localStorage.getItem('panel__form__ldos__parameters__et');
+panel__form__ldos__parameters__eb.textContent = localStorage.getItem('panel__form__ldos__parameters__eb');
+panel__form__ldos__parameters__er.textContent = localStorage.getItem('panel__form__ldos__parameters__er');
+
+
+
+
+
+
+
 if (localStorage.getItem("panel__form__input") != null) {
     panel__form__input.style.display = "block";
 }

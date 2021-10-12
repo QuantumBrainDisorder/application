@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <!-- <link rel="shortcut icon" href="{% static 'images/site__icon.ico' %}">  -->
-        <link rel="icon" type="gif" href="{% static 'images/site__icon.ico' %}" />
+        <link rel="icon" href="{% static 'images/site__icon.ico' %}"> 
 
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/fonts.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/variables.css' %}">
@@ -125,11 +125,12 @@
                         <li id="panel__bar__type__base">
                             <span id="panel__bar__type"></span>
                             <ul id="panel__bar__type__list">
-                                <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Distribution</option>
-                                <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
                                 <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
+                                <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
                                 <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Energy paraboloids">Energy paraboloids</option>
+                                <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
+                                <option onclick="set__panel__bar__type(event, 'ldos')" title="Density of states in the structure">Local density of states</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup> -->
@@ -364,9 +365,9 @@
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
                     <hr>
                     <label for="panel__form__band__parameters__tle" class="panel__form__space__resolution__label">Top limit of energy levels (eV):&ThickSpace;</label>
-                    <span id="panel__form__band__parameters__tle" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>12</span><br>
+                    <span id="panel__form__band__parameters__tle" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>8</span><br>
                     <label for="panel__form__band__parameters__ble" class="panel__form__space__resolution__label">Bottom limit of energy levels (eV):&ThickSpace;</label>
-                    <span id="panel__form__band__parameters__ble" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-6</span><br>
+                    <span id="panel__form__band__parameters__ble" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-3</span><br>
                     <label for="panel__form__band__parameters__elr" class="panel__form__space__resolution__label">Energy levels resolution (eV):&ThickSpace;</label>
                     <span id="panel__form__band__parameters__elr" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.01</span>
                 </form>
@@ -395,6 +396,106 @@
                     <span id="panel__form__wave__vector__parameters__ry" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1e+7</span>
                 </form>
 
+
+
+
+                <form id="panel__form__dos" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw DOS 2D
+                        <input type="checkbox" id="panel__form__dos__2d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw DOS 3D &#215; L
+                        <input type="checkbox" id="panel__form__dos__3d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw merged DOSes
+                        <input type="checkbox" id="panel__form__dos__merged">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+                <form id="panel__form__for" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">For light holes
+                        <input type="checkbox" id="panel__form__for__lh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For heavy holes
+                        <input type="checkbox" id="panel__form__for__hh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For electrons
+                        <input type="checkbox" id="panel__form__for__el">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
+
+                <form id="panel__form__dos__parameters" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__dos__parameters__et" class="panel__form__space__resolution__label">Top limit of DOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__dos__parameters__et" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>8</span><br>
+                    <label for="panel__form__dos__parameters__eb" class="panel__form__space__resolution__label">Bottom limit of DOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__dos__parameters__eb" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-3</span><br>
+                    <label for="panel__form__dos__parameters__er" class="panel__form__space__resolution__label"> DOS energy resolution(eV):&ThickSpace;</label>
+                    <span id="panel__form__dos__parameters__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.1</span>
+                </form>
+
+
+
+                <form id="panel__form__ldos" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw LDOS 2D
+                        <input type="checkbox" id="panel__form__ldos__2d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw LDOS 3D &#215; L
+                        <input type="checkbox" id="panel__form__ldos__3d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw merged LDOSes
+                        <input type="checkbox" id="panel__form__ldos__merged">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+                <form id="panel__form__for_" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">For light holes
+                        <input type="checkbox" id="panel__form__for___lh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For heavy holes
+                        <input type="checkbox" id="panel__form__for___hh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For electrons
+                        <input type="checkbox" id="panel__form__for___el">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+                <form id="panel__form__ldos__parameters" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__ldos__parameters__et" class="panel__form__space__resolution__label">Top limit of LDOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__et" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>3</span><br>
+                    <label for="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__label">Bottom limit of LDOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-1.2</span><br>
+                    <label for="panel__form__ldos__parameters__er" class="panel__form__space__resolution__label"> LDOS energy resolution(eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.06</span>
+                </form>
+
+
+
+
+
+
+
+
                 <form id="panel__form__orint" class="panel__form__orint">
                     <hr>
                     <label class="panel__form__orint__label">Open result in new tab
@@ -402,17 +503,6 @@
                         <span class="panel__form__orint__span"></span>
                     </label><br>
                 </form>
-
-                <form id="panel__form__dos" class="panel__form__dos">
-                </form>
-                    
-
-
-
-
-
-
-
 
 
 
@@ -472,6 +562,11 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energies.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos__parameters.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos__parameters.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/for.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/for_.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 

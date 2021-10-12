@@ -22,305 +22,139 @@ import units_QBD
 
 import plotly.graph_objects as go
 import numpy as np
+from django.http import FileResponse
 
 
-
-        # exec(x, glb)
-        # plot = globals()["plot"]
-        # try:
-        #     exec('2+2', globals())
-        # except Exception as e:
-        #     plot = str(e).replace('<', '&lt;').replace('>', '&gt;')
-
-
-
-# blah blah lots of code ...
-
-
-# plot_, error_, result_, meta_ = None, None, None, None
-# def run__distribution(request):
-    
-    # sys.stdout = mystdout = io.StringIO()
-    # input = json.load(request)
-    # input = json.loads(input['input'])
-
-    # plot_, error_, result_, meta_ = None, None, None, None
-    # globals()['plot_'], globals()['error_'], globals()['result_'], globals()['meta_'] = None, None, None, None
-    # config_ = {}
-    # code_ = input['code']
-
-    # if len(input['axes']) == 0:
-    #     if input['code'] != '':
-    #         try:
-    #             exec(input['code'], globals())
-    #         except Exception as e:
-    #             error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
-    #     code_ = mystdout.getvalue()        
-    #     result_ = {"plot": globals()['plot_'], "meta": meta_, "code": code_, "error": error_}
-
-    # elif len(input['axes']) == 1:
-    #     # property__name = list(input['axes'].keys())[0]
-    #     # materials, values = cqbd.read__sheet(input['axes'][property__name], 'list')
-    #     # fig = plotly.express.histogram(x = materials,y = values)
-    #     # config = dict({'scrollZoom': True})
-    #     # fig.update_xaxes(title_text = "Material")
-    #     # fig.update_yaxes(title_text = property__name + ' (' + input['units'][property__name] + ')')
-    #     # fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=input['theme']['--theme4'], paper_bgcolor='rgba(0,0,0,0)')
-    #     # plot_ = plotly.io.to_html(fig, config)
-    #     # if 'orint' in input:
-    #     #     fig.show()
-    #     #     plot_ = ''
-    #     # result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
-
-        
-    #     property__name = list(input['axes'].keys())[0]
-    #     materials, values = cqbd.read__sheet(input['axes'][property__name], 'list')
-
-    #     fig = plotly.express.histogram(x = materials,y = values)
-    #     config = dict({'scrollZoom': True})
-    #     fig.update_xaxes(title_text = "Material")
-    #     fig.update_yaxes(title_text = property__name + ' (' + input['units'][property__name] + ')')
-    #     fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=input['theme']['--theme4'], paper_bgcolor='rgba(0,0,0,0)')
-    #     plot_ = plotly.io.to_html(fig, config)
-    #     if 'orint' in input:
-    #         fig.show()
-    #         plot_ = ''
-
-    #     result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
-
-    # elif len(input['axes']) == 2:
-    #     property__name_0 = list(input['axes'].keys())[0]
-    #     property__name_1 = list(input['axes'].keys())[1]
-    #     materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
-    #     materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
-    #     dict_0 = dict(zip(materials_0, values_0))
-    #     dict_1 = dict(zip(materials_1, values_1))
-    #     materials = [i for i in materials_0 if i in materials_1]
-
-    #     w = [float(dict_0[i]) for i in materials]
-    #     x = [float(dict_1[i]) for i in materials]
-    #     fig = plotly.express.scatter(x=w, y=x, text=materials)
-
-    #     config = dict({'scrollZoom': True})
-    #     fig.update_traces(textposition="bottom right")
-    #     fig.update_xaxes(title_text = property__name_0 + ' (' + input['units'][property__name_0] + ')')
-    #     fig.update_yaxes(title_text = property__name_1 + ' (' + input['units'][property__name_1] + ')')
-
-
-    #     plot_ = plotly.io.to_html(fig, config)
-    #     if 'orint' in input:
-    #         fig.show()
-    #         plot_ = ''
-    #     result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
-    # elif len(input['axes']) == 3:
-    #     property__name_0 = list(input['axes'].keys())[0]
-    #     property__name_1 = list(input['axes'].keys())[1]
-    #     property__name_2 = list(input['axes'].keys())[2]
-    #     materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
-    #     materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
-    #     materials_2, values_2 = cqbd.read__sheet(input['axes'][property__name_2], 'list')
-    #     dict_0 = dict(zip(materials_0, values_0))
-    #     dict_1 = dict(zip(materials_1, values_1))
-    #     dict_2 = dict(zip(materials_2, values_2))
-    #     materials = [i for i in materials_0 if i in materials_1 and i in materials_2]
-
-    #     w = [float(dict_0[i]) for i in materials]
-    #     x = [float(dict_1[i]) for i in materials]
-    #     y = [float(dict_2[i]) for i in materials]
-
-    #     config = dict({'scrollZoom': True})
-    #     ax_0 = property__name_0 + ' (' + input['units'][property__name_0] + ')'
-    #     ax_1 = property__name_1 + ' (' + input['units'][property__name_1] + ')'
-    #     ax_2 = property__name_2 + ' (' + input['units'][property__name_2] + ')'
-    #     labels = {'x': ax_0, 'y': ax_1, 'z': ax_2}
-    #     fig = plotly.express.scatter_3d(x=w, y=x, z=y, text=materials, labels=labels)
-
-
-    #     plot_ = plotly.io.to_html(fig, config)
-    #     if 'orint' in input:
-    #         fig.show()
-    #         plot_ = ''
-    #     result_ = {"plot": plot_, "meta": meta_, "error": error_}
-    # elif len(input['axes']) == 4:
-    #     property__name_0 = list(input['axes'].keys())[0]
-    #     property__name_1 = list(input['axes'].keys())[1]
-    #     property__name_2 = list(input['axes'].keys())[2]
-    #     property__name_3 = list(input['axes'].keys())[3]
-    #     materials_0, values_0 = cqbd.read__sheet(input['axes'][property__name_0], 'list')
-    #     materials_1, values_1 = cqbd.read__sheet(input['axes'][property__name_1], 'list')
-    #     materials_2, values_2 = cqbd.read__sheet(input['axes'][property__name_2], 'list')
-    #     materials_3, values_3 = cqbd.read__sheet(input['axes'][property__name_3], 'list')
-    #     dict_0 = dict(zip(materials_0, values_0))
-    #     dict_1 = dict(zip(materials_1, values_1))
-    #     dict_2 = dict(zip(materials_2, values_2))
-    #     dict_3 = dict(zip(materials_3, values_3))
-    #     materials = [i for i in materials_0 if i in materials_1 and i in materials_2 and i in materials_3]
-
-    #     w = [float(dict_0[i]) for i in materials]
-    #     x = [float(dict_1[i]) for i in materials]
-    #     y = [float(dict_2[i]) for i in materials]
-    #     z = [float(dict_3[i]) for i in materials]
-    #     ax_0 = property__name_0 + ' (' + input['units'][property__name_0] + ')'
-    #     ax_1 = property__name_1 + ' (' + input['units'][property__name_1] + ')'
-    #     ax_2 = property__name_2 + ' (' + input['units'][property__name_2] + ')'
-    #     ax_3 = property__name_3 + ' (' + input['units'][property__name_3] + ')'
-    #     labels = {'x': ax_0, 'y': ax_1, 'z': ax_2, 'color': ax_3}
-    #     fig = plotly.express.scatter_3d(x=w, y=x, z=y, color=z, text=materials, labels=labels)
-    #     config = dict({'scrollZoom': True})
-    #     fig.update_traces(textposition="bottom right")
-
-
-    #     plot_ = plotly.io.to_html(fig, config)
-    #     if 'orint' in input:
-    #         fig.show()
-    #         plot_ = ''
-    #     result_ = {"plot": plot_, "meta": meta_, "code": code_, "error": error_}
-        
-    # return JsonResponse(result_, safe = False)
-
-    # df = plotly.express.data.gapminder().query("country=='Canada'")
-    # fig = plotly.express.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
-    # config = dict({'scrollZoom': True, 'displayModeBar': False})
-    # x = plotly.io.to_html(fig, config)
-
-    # Helix equation
-    # t = np.linspace(0, 10, 50)
-    # x, y, z = np.cos(t), np.sin(t), t
-
-    # fig = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z, mode='markers')])
-    # # y = 12
-    # config = dict({'scrollZoom': True, 'displayModeBar': False})
-    # x = plotly.io.to_html(fig, config)
-    # result = {"plot": x}
-    # return JsonResponse(result)
-
-
+def site__icon_(request):
+    return FileResponse(open('./static/images/site__icon_.ico', 'rb'))
+def site__icon(request):
+    return FileResponse(open('./static/images/site__icon.ico', 'rb'))
 
 
 
 def main(request):
-    if request.method == 'POST':
-        print('+++++++++++++++++++++++++++++++', sys.stderr)
-        print(request.POST.keys(),sys.stderr)
-        print('+++++++++++++++++++++', sys.stderr)
-        if 'panel__form__distribution__submit' in request.POST.keys():
-            dat = json.loads(request.POST.get('panel__form__distribution__submit'))
+#     if request.method == 'POST':
+#         print('+++++++++++++++++++++++++++++++', sys.stderr)
+#         print(request.POST.keys(),sys.stderr)
+#         print('+++++++++++++++++++++', sys.stderr)
+#         if 'panel__form__distribution__submit' in request.POST.keys():
+#             dat = json.loads(request.POST.get('panel__form__distribution__submit'))
             
-            # x, y = cqbd.read__sheet(dat['energy__gap'])
-            x, y = cqbd.read__sheet(dat[list(dat.keys())[0]])
-            plt.switch_backend('AGG')
-            plt.figure(figsize=(3,3))
-            plt.scatter(x,y)
-            plt.tight_layout()
-            buffer = BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            image_png = buffer.getvalue()
-            graph = base64.b64encode(image_png)
-            graph = graph.decode('utf-8')
-            buffer.close()
-            plot = graph
-
-            # plot = get_plot(x, y)
-            # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
-            return render(request, 'main.html', {'plot': plot})
-        elif "panel__form__profile__submit" in request.POST.keys():
-            dat = json.loads(request.POST.get('panel__form__profile__submit'))
-            x, y = meqbd.read__sheet(dat['structure'], dat['structure__unit'])
-            params = cqbd.read__sheet(dat['energy__gap'], 'dict')
-            fence = []
-            for i in x:
-                vel = meqbd.interpolation__exception(i, params, dat['bowings']['energy__gap'])
-                fence.append(vel)
-            # x, y = meqbd.profile__gridded(y, fence)
-            # ev = qqbd.eigenvalues_1(x, y, )
-            x, y = meqbd.profile__plain(y, fence)
-            # print('----------------',sys.stderr)
-            # print(x, sys.stderr)
-            # print(y, sys.stderr)
-            # print('-------------', sys.stderr)
-
-            plt.switch_backend('AGG')
-            plt.figure(figsize=(3,3))
-            plt.scatter(x,y)
-            plt.tight_layout()
-            buffer = BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            image_png = buffer.getvalue()
-            graph = base64.b64encode(image_png)
-            graph = graph.decode('utf-8')
-            buffer.close()
-            plot = graph
-
-            # plot = get_plot(x, y)
-            # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
-            return render(request, 'main.html', {'plot': plot})
-
-
-        elif "panel__form__energy__profile__submit" in request.POST.keys():
-            dat = json.loads(request.POST.get('panel__form__energy__profile__submit'))
-            structure__materials, structure__thicknesses = meqbd.read__sheet(dat['structure'], dat['unit__structure'])
-            energy__gap = cqbd.read__sheet(dat['energy__gap'], 'dict')
-            effective__mass = {key: float(value) for (key, value) in dat['effective__mass']['el'].items()}
-            # effective__mass = dat['effective__mass']['el']
-            fence__energy__gap = []
-            fence__effective__mass = []
-            for i in structure__materials:
-                fence1 = meqbd.interpolation__exception(i, energy__gap, dat['bowings']['energy__gap'])
-                fence__energy__gap.append(fence1 * units_QBD.SI_['eV'][0])
-                fence2 = meqbd.interpolation__exception(i, effective__mass, dat['bowings']['effective__mass'])
-                fence__effective__mass.append(fence2 * units_QBD.SI_['m_e'][0])
-
-            x1, y1 = meqbd.profile__gridded(structure__thicknesses, fence__energy__gap)
-            x2, y2 = meqbd.profile__gridded(structure__thicknesses, fence__effective__mass)
-            print(y1,sys.stderr)
-            print(y2,sys.stderr)
-            ev = qqbd.eigenvalues_1(x1, y1, y2)
-            print('\n\n------',sys.stderr)
-            # print([x1[0],x1[-1]],sys.stderr)
-            # print(y1,sys.stderr)
-            # print('------\n',sys.stderr)
-
-            plt.switch_backend('AGG')
-            plt.figure(figsize=(3,3))
-            plt.plot(x1,y1)
-            for i in ev:
-                plt.plot([x1[0],x1[-1]], [i,i])
-                yy = qqbd.eigenfunctions_1(x1,y1,y2,i)
-                yyy = [ii + i for ii in yy]
-                plt.plot(x1, yyy)
-
-            
-            # plt.plot(x2,y2)
-            plt.tight_layout()
-            buffer = BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            image_png = buffer.getvalue()
-            graph = base64.b64encode(image_png)
-            graph = graph.decode('utf-8')
-            buffer.close()
-            plot = graph
+#             # x, y = cqbd.read__sheet(dat['energy__gap'])
+#             x, y = cqbd.read__sheet(dat[list(dat.keys())[0]])
+#             plt.switch_backend('AGG')
+#             plt.figure(figsize=(3,3))
+#             plt.scatter(x,y)
+#             plt.tight_layout()
+#             buffer = BytesIO()
+#             plt.savefig(buffer, format='png')
+#             buffer.seek(0)
+#             image_png = buffer.getvalue()
+#             graph = base64.b64encode(image_png)
+#             graph = graph.decode('utf-8')
+#             buffer.close()
+#             plot = graph
 
 #             # plot = get_plot(x, y)
 #             # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
+#             return render(request, 'main.html', {'plot': plot})
+#         elif "panel__form__profile__submit" in request.POST.keys():
+#             dat = json.loads(request.POST.get('panel__form__profile__submit'))
+#             x, y = meqbd.read__sheet(dat['structure'], dat['structure__unit'])
+#             params = cqbd.read__sheet(dat['energy__gap'], 'dict')
+#             fence = []
+#             for i in x:
+#                 vel = meqbd.interpolation__exception(i, params, dat['bowings']['energy__gap'])
+#                 fence.append(vel)
+#             # x, y = meqbd.profile__gridded(y, fence)
+#             # ev = qqbd.eigenvalues_1(x, y, )
+#             x, y = meqbd.profile__plain(y, fence)
+#             # print('----------------',sys.stderr)
+#             # print(x, sys.stderr)
+#             # print(y, sys.stderr)
+#             # print('-------------', sys.stderr)
+
+#             plt.switch_backend('AGG')
+#             plt.figure(figsize=(3,3))
+#             plt.scatter(x,y)
+#             plt.tight_layout()
+#             buffer = BytesIO()
+#             plt.savefig(buffer, format='png')
+#             buffer.seek(0)
+#             image_png = buffer.getvalue()
+#             graph = base64.b64encode(image_png)
+#             graph = graph.decode('utf-8')
+#             buffer.close()
+#             plot = graph
+
+#             # plot = get_plot(x, y)
+#             # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
+#             return render(request, 'main.html', {'plot': plot})
+
+
+#         elif "panel__form__energy__profile__submit" in request.POST.keys():
+#             dat = json.loads(request.POST.get('panel__form__energy__profile__submit'))
+#             structure__materials, structure__thicknesses = meqbd.read__sheet(dat['structure'], dat['unit__structure'])
+#             energy__gap = cqbd.read__sheet(dat['energy__gap'], 'dict')
+#             effective__mass = {key: float(value) for (key, value) in dat['effective__mass']['el'].items()}
+#             # effective__mass = dat['effective__mass']['el']
+#             fence__energy__gap = []
+#             fence__effective__mass = []
+#             for i in structure__materials:
+#                 fence1 = meqbd.interpolation__exception(i, energy__gap, dat['bowings']['energy__gap'])
+#                 fence__energy__gap.append(fence1 * units_QBD.SI_['eV'][0])
+#                 fence2 = meqbd.interpolation__exception(i, effective__mass, dat['bowings']['effective__mass'])
+#                 fence__effective__mass.append(fence2 * units_QBD.SI_['m_e'][0])
+
+#             x1, y1 = meqbd.profile__gridded(structure__thicknesses, fence__energy__gap)
+#             x2, y2 = meqbd.profile__gridded(structure__thicknesses, fence__effective__mass)
+#             print(y1,sys.stderr)
+#             print(y2,sys.stderr)
+#             ev = qqbd.eigenvalues_1(x1, y1, y2)
+#             print('\n\n------',sys.stderr)
+#             # print([x1[0],x1[-1]],sys.stderr)
+#             # print(y1,sys.stderr)
+#             # print('------\n',sys.stderr)
+
+#             plt.switch_backend('AGG')
+#             plt.figure(figsize=(3,3))
+#             plt.plot(x1,y1)
+#             for i in ev:
+#                 plt.plot([x1[0],x1[-1]], [i,i])
+#                 yy = qqbd.eigenfunctions_1(x1,y1,y2,i)
+#                 yyy = [ii + i for ii in yy]
+#                 plt.plot(x1, yyy)
+
             
-#             input = """x = [3,4,6]
+#             # plt.plot(x2,y2)
+#             plt.tight_layout()
+#             buffer = BytesIO()
+#             plt.savefig(buffer, format='png')
+#             buffer.seek(0)
+#             image_png = buffer.getvalue()
+#             graph = base64.b64encode(image_png)
+#             graph = graph.decode('utf-8')
+#             buffer.close()
+#             plot = graph
+
+# #             # plot = get_plot(x, y)
+# #             # return render(request, 'main.html', {'code': codereadata, 'output':output, 'plot': plot})
+            
+# #             input = """x = [3,4,6]
+# # y = [3,4,5]
+# # plt.xlabel('x ax')
+# # plt.ylabel('y ax')"""
+
+# #             return render(request, 'main.html', {'plot': plot, 'input': input})
+
+#     con = """x = [3,4,6]
 # y = [3,4,5]
 # plt.xlabel('x ax')
 # plt.ylabel('y ax')"""
-
-#             return render(request, 'main.html', {'plot': plot, 'input': input})
-
-    con = """x = [3,4,6]
-y = [3,4,5]
-plt.xlabel('x ax')
-plt.ylabel('y ax')"""
-    content= {
-        'code': con, 'plpl': ''
-        }
-    return render(request, "main.html", content)
+#     content= {
+#         'code': con, 'plpl': ''
+#         }
+    return render(request, "main.html")
 
 
 

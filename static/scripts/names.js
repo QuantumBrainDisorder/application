@@ -117,6 +117,34 @@ const panel__form__wave__vector__parameters__by = document.getElementById('panel
 const panel__form__wave__vector__parameters__ry = document.getElementById('panel__form__wave__vector__parameters__ry');
 
 const panel__form__dos = document.getElementById('panel__form__dos');
+const panel__form__dos__2d = document.getElementById('panel__form__dos__2d');
+const panel__form__dos__3d = document.getElementById('panel__form__dos__3d');
+const panel__form__dos__merged = document.getElementById('panel__form__dos__merged');
+
+const panel__form__for = document.getElementById('panel__form__for');
+const panel__form__for__lh = document.getElementById('panel__form__for__lh');
+const panel__form__for__hh = document.getElementById('panel__form__for__hh');
+const panel__form__for__el = document.getElementById('panel__form__for__el');
+
+const panel__form__dos__parameters = document.getElementById('panel__form__dos__parameters');
+const panel__form__dos__parameters__et = document.getElementById('panel__form__dos__parameters__et');
+const panel__form__dos__parameters__eb = document.getElementById('panel__form__dos__parameters__eb');
+const panel__form__dos__parameters__er = document.getElementById('panel__form__dos__parameters__er');
+
+const panel__form__ldos = document.getElementById('panel__form__ldos');
+const panel__form__ldos__2d = document.getElementById('panel__form__ldos__2d');
+const panel__form__ldos__3d = document.getElementById('panel__form__ldos__3d');
+const panel__form__ldos__merged = document.getElementById('panel__form__ldos__merged');
+
+const panel__form__for_ = document.getElementById('panel__form__for_');
+const panel__form__for___lh = document.getElementById('panel__form__for___lh');
+const panel__form__for___hh = document.getElementById('panel__form__for___hh');
+const panel__form__for___el = document.getElementById('panel__form__for___el');
+
+const panel__form__ldos__parameters = document.getElementById('panel__form__ldos__parameters');
+const panel__form__ldos__parameters__et = document.getElementById('panel__form__ldos__parameters__et');
+const panel__form__ldos__parameters__eb = document.getElementById('panel__form__ldos__parameters__eb');
+const panel__form__ldos__parameters__er = document.getElementById('panel__form__ldos__parameters__er');
 
 const panel__form__input__label = document.getElementById("panel__form__input__label");
 const panel__form__meta = document.getElementById("panel__form__meta");
@@ -136,6 +164,7 @@ const VERSION = document.getElementById('VERSION');
 const LN = document.getElementById('LN');
 
 
+const favicon = document.querySelector('[rel=icon]');
 var css__vars = getComputedStyle(document.body);
 
 

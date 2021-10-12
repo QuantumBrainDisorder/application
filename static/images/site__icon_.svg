@@ -1,0 +1,10 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+	<title>site__icon_-svg</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #fff000;stroke: #c2dbd0 } 
+	</style>
+	<g id="BxdEmzZboIbnCydDf_qhx">
+		<path id="Layer" class="shp0" d="M128 44C174.37 44 212 81.6 212 127.92C212 174.25 174.37 211.85 128 211.85C81.63 211.85 44 174.25 44 127.92C44 81.6 81.63 44 128 44Z" />
+	</g>
+</svg>

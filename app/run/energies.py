@@ -192,54 +192,72 @@ def energies(request):
 
 
     
-    y4 = ...
-    names4 = []
+    y4 = []
     if 'del__holes__lh' in input.keys():
-        y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, elb, elt, elr)
-        y4 = [-i for i in y4]
-        y4 = [[i / multiplier,i / multiplier] for i in y4]
-        for i in range(1,len(y4) + 1):
-            names4.append('lh' + str(i))
-    y5 = ...
-    names5 = []
+        y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, -elt, -elb, elr)
+        # y4 = [-i for i in y4]
+        # y4 = [[i / multiplier,i / multiplier] for i in y4]
+        # for i in range(1,len(y4) + 1):
+        #     names4.append('lh' + str(i))
+    y5 = []
     if 'del__holes__hh' in input.keys():
-        y5 = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, elb, elt, elr)
-        y5 = [-i for i in y5]
-        y5 = [[i / multiplier,i / multiplier] for i in y5]
-        for i in range(1,len(y5) + 1):
-            names5.append('hh' + str(i))
-    y6 = ...
-    names6 = []
+        y5 = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, -elt, -elb, elr)
+        # y5 = [-i for i in y5]
+        # y5 = [[i / multiplier,i / multiplier] for i in y5]
+        # for i in range(1,len(y5) + 1):
+        #     names5.append('hh' + str(i))
+    y6 = []
     if 'del__electrons' in input.keys():
         y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
-        y6 = [[i / multiplier,i / multiplier] for i in y6]
-        for i in range(1,len(y6) + 1):
-            names6.append('el' + str(i))
+        # y6 = [[i / multiplier,i / multiplier] for i in y6]
+        # for i in range(1,len(y6) + 1):
+        #     names6.append('el' + str(i))
 
     
 
 
     y7 = []
     if 'dwf__holes' in input.keys() and 'del__holes__lh' in input.keys():
-        enes = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, elb, elt, elr)
-        for ene in enes:
+        # enes = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, elb, elt, elr)
+        # for ene in enes:
+        #     y7.append(qqbd.eigenfunctions_1(x1, [-i for i in y1], lh, ene))
+        #     y7[-1] = [-i for i in y7[-1]]
+        for ene in y4:
             y7.append(qqbd.eigenfunctions_1(x1, [-i for i in y1], lh, ene))
             y7[-1] = [-i for i in y7[-1]]
 
     y8 = []
     if 'dwf__holes' in input.keys() and 'del__holes__hh' in input.keys():
-        enes = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, elb, elt, elr)
-        for ene in enes:
+        # enes = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, elb, elt, elr)
+        # for ene in enes:
+        #     y8.append(qqbd.eigenfunctions_1(x1, [-i for i in y2], hh, ene))
+        #     y8[-1] = [-i for i in y8[-1]]
+        for ene in y5:
             y8.append(qqbd.eigenfunctions_1(x1, [-i for i in y2], hh, ene))
             y8[-1] = [-i for i in y8[-1]]
 
     y9 = []
     if 'dwf__electrons' in input.keys() and 'del__electrons' in input.keys():
-        enes = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
-        for ene in enes:
+        # enes = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
+        # for ene in enes:
+        #     y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene))
+        for ene in y6:
             y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene))
             
 
+
+    names4 = []
+    y4 = [[-i / multiplier,-i / multiplier] for i in y4]
+    for i in range(1,len(y4) + 1):
+        names4.append('lh' + str(i))
+    names5 = []
+    y5 = [[-i / multiplier,-i / multiplier] for i in y5]
+    for i in range(1,len(y5) + 1):
+        names5.append('hh' + str(i))
+    names6 = []
+    y6 = [[i / multiplier,i / multiplier] for i in y6]
+    for i in range(1,len(y6) + 1):
+        names6.append('el' + str(i))
 
 
 

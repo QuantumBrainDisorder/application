@@ -85,16 +85,16 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         localStorage.setItem('panel__form__wave__vector__input', '0e+9');
         
-        localStorage.setItem('panel__form__band__parameters__tle', '12');
-        localStorage.setItem('panel__form__band__parameters__ble', '-6');
-        localStorage.setItem('panel__form__band__parameters__elr', '0.01');
+        localStorage.setItem('panel__form__band__parameters__tle', '3');
+        localStorage.setItem('panel__form__band__parameters__ble', '-1.2');
+        localStorage.setItem('panel__form__band__parameters__elr', '0.0001');
 
-        localStorage.setItem('panel__form__wave__vector__parameters__tx', '2.5e+9');
-        localStorage.setItem('panel__form__wave__vector__parameters__bx', '0e+9');
-        localStorage.setItem('panel__form__wave__vector__parameters__rx', '1e+7');
-        localStorage.setItem('panel__form__wave__vector__parameters__ty', '2.5e+9');
-        localStorage.setItem('panel__form__wave__vector__parameters__by', '0e+9');
-        localStorage.setItem('panel__form__wave__vector__parameters__ry', '1e+7');
+        localStorage.setItem('panel__form__wave__vector__parameters__tx', '2e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__bx', '-2e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__rx', '0.05e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__ty', '2e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__by', '-2e+9');
+        localStorage.setItem('panel__form__wave__vector__parameters__ry', '0.05e+9');
 
         localStorage.setItem('panel__form__distribution__w__axis__property__content', 'Energy Gap');
         localStorage.setItem('panel__form__distribution__w__axis__property', 'energy__gap');
@@ -107,6 +107,22 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("panel__form__distribution__w__axis", 'true');
         localStorage.setItem("panel__form__distribution__x__axis", 'true');
 
+        localStorage.setItem("panel__form__dos__2d", 'true');
+        localStorage.setItem("panel__form__for__el", 'true');
+
+        localStorage.setItem('panel__form__dos__parameters__et', '3');
+        localStorage.setItem('panel__form__dos__parameters__eb', '-1.2');
+        localStorage.setItem('panel__form__dos__parameters__er', '0.06');
+
+        
+        localStorage.setItem("panel__form__ldos__2d", 'true');
+        localStorage.setItem("panel__form__for___el", 'true');
+
+        localStorage.setItem('panel__form__ldos__parameters__et', '3');
+        localStorage.setItem('panel__form__ldos__parameters__eb', '-1.2');
+        localStorage.setItem('panel__form__ldos__parameters__er', '0.06');
+
+        
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));

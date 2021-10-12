@@ -20,6 +20,7 @@ panel__form__band__electrons__input.onclick = function(event) {
 panel__form__band__electrons__del.onclick = function(event) {
     if (panel__form__band__electrons__dwf.checked) {
       panel__form__band__electrons__del.checked = true;
+      pane
     }
     else {
       if (localStorage.getItem('panel__form__band__electrons__del') == null) {
