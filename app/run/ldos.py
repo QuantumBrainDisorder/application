@@ -234,7 +234,7 @@ def ldos(request):
             ldos__lh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
             for i in range(0, len(ldos__lh__2d)):
                 ldos__lh__2d[i].reverse()
-        if 'dos__3d' in input.keys():
+        if 'ldos__3d' in input.keys():
             ldos__lh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__lh[index], -valence__band__offset[index])
             for i in range(0, len(ldos__lh__3d)):
                 ldos__lh__3d[i].reverse()
