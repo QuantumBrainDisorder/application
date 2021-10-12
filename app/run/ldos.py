@@ -384,7 +384,7 @@ fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['hh']['2d']))"""
 fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['el']['2d']))"""
 
     if 'ldos__3d' in flags:
-        if 'for__lh' in flags:
+        if 'for___lh' in flags:
             code += """
 fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['lh']['3d']))"""
         if 'for___hh' in flags:
