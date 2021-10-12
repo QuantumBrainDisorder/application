@@ -121,6 +121,11 @@ const panel__form__dos__2d = document.getElementById('panel__form__dos__2d');
 const panel__form__dos__3d = document.getElementById('panel__form__dos__3d');
 const panel__form__dos__merged = document.getElementById('panel__form__dos__merged');
 
+const panel__form__cos = document.getElementById('panel__form__cos');
+const panel__form__cos__2d = document.getElementById('panel__form__cos__2d');
+const panel__form__cos__3d = document.getElementById('panel__form__cos__3d');
+const panel__form__cos__merged = document.getElementById('panel__form__cos__merged');
+
 const panel__form__for = document.getElementById('panel__form__for');
 const panel__form__for__lh = document.getElementById('panel__form__for__lh');
 const panel__form__for__hh = document.getElementById('panel__form__for__hh');
@@ -145,6 +150,9 @@ const panel__form__ldos__parameters = document.getElementById('panel__form__ldos
 const panel__form__ldos__parameters__et = document.getElementById('panel__form__ldos__parameters__et');
 const panel__form__ldos__parameters__eb = document.getElementById('panel__form__ldos__parameters__eb');
 const panel__form__ldos__parameters__er = document.getElementById('panel__form__ldos__parameters__er');
+
+const panel__form__temperature = document.getElementById("panel__form__temperature");
+const panel__form__temperature__input = document.getElementById("panel__form__temperature__input");
 
 const panel__form__input__label = document.getElementById("panel__form__input__label");
 const panel__form__meta = document.getElementById("panel__form__meta");

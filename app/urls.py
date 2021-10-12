@@ -6,6 +6,7 @@ from .run import energies
 from .run import energy__paraboloids
 from .run import dos
 from .run import ldos
+from .run import cos
 
 urlpatterns = [
     path('', views.main, name="main"),
@@ -18,6 +19,7 @@ urlpatterns = [
     path('run__energy__paraboloids', energy__paraboloids.energy__paraboloids, name="energy__paraboloids"),
     path('run__dos', dos.dos, name="dos"),
     path('run__ldos', ldos.ldos, name="ldos"),
+    path('run__cos', cos.cos, name="cos"),
 ]
 
 

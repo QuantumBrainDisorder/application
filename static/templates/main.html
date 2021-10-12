@@ -131,6 +131,8 @@
                                 <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Energy paraboloids">Energy paraboloids</option>
                                 <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'ldos')" title="Density of states in the structure">Local density of states</option>
+                                <option onclick="set__panel__bar__type(event, 'cos')" title="Concentration of states">Concentration of states</option>
+                                <option onclick="set__panel__bar__type(event, 'cc')" title="Carriers concentration">Carriers concentration</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup> -->
@@ -143,6 +145,18 @@
                         <li></li>
                     </ul>
                 </legend>
+
+
+                
+
+
+                <form id="panel__form__temperature" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__temperature__input" class="panel__form__space__resolution__label">Structure temperature (K):&ThickSpace;</label>
+                    <span id="panel__form__temperature__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                </form>
+
+
 
                 <form id="panel__form__distribution" class="panel__form__distribution" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
@@ -479,6 +493,31 @@
                 </form>
 
 
+
+                
+
+                <form id="panel__form__cos" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw concentration of states from LDOS 2D
+                        <input type="checkbox" id="panel__form__cos__2d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw concentration of states from LDOS 3D &#215; L
+                        <input type="checkbox" id="panel__form__cos__3d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw concentration of states from merged LDOSes
+                        <input type="checkbox" id="panel__form__cos__merged">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
+
+
+
+
                 <form id="panel__form__ldos__parameters" class="panel__form__al">
                     <hr>
                     <label for="panel__form__ldos__parameters__et" class="panel__form__space__resolution__label">Top limit of LDOS energy (eV):&ThickSpace;</label>
@@ -495,7 +534,6 @@
 
 
 
-
                 <form id="panel__form__orint" class="panel__form__orint">
                     <hr>
                     <label class="panel__form__orint__label">Open result in new tab
@@ -503,6 +541,9 @@
                         <span class="panel__form__orint__span"></span>
                     </label><br>
                 </form>
+
+
+
 
 
 
@@ -562,11 +603,13 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/energies.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/cos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/for.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/for_.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/temperature.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 

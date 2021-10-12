@@ -6,6 +6,25 @@ function set__panel__bar__type(event, type) {
       panel__form__orint.style.display = "initial";
       panel__form__distribution.style.display = "initial";
       break;
+    case "cc": 
+      set__panel__bar__type__body(event, type); 
+      panel__form__temperature.style.display = 'initial';
+      panel__form__orint.style.display = "initial";
+      panel__form__ldos__parameters.style.display = 'initial';
+      panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__space__resolution.style.display = 'initial';
+      panel__form__band__parameters.style.display = 'initial';
+      break;
+    case "cos": 
+      set__panel__bar__type__body(event, type); 
+      panel__form__orint.style.display = "initial";
+      panel__form__cos.style.display = "initial";
+      panel__form__for.style.display = 'initial';
+      panel__form__ldos__parameters.style.display = 'initial';
+      panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__space__resolution.style.display = 'initial';
+      panel__form__band__parameters.style.display = 'initial';
+      break;
     case "dos": 
       set__panel__bar__type__body(event, type); 
       panel__form__orint.style.display = "initial";
@@ -85,10 +104,12 @@ function clean__panel() {
   panel__form__wave__vector__parameters.style.display = 'none';
   panel__form__for.style.display = 'none';
   panel__form__dos.style.display = 'none';
+  panel__form__cos.style.display = 'none';
   panel__form__for_.style.display = 'none';
   panel__form__ldos.style.display = 'none';
   panel__form__dos__parameters.style.display = 'none';
   panel__form__ldos__parameters.style.display = 'none';
+  panel__form__temperature.style.display = 'none';
 }
 
 
@@ -248,6 +269,9 @@ panel__bar__run.onclick = function (event) {
   switch(panel__bar__type.dataset.type) {
     case 'distribution':
       panel__bar__run__distribution(event);
+      break;
+    case 'cos':
+      panel__bar__run__cos(event);
       break;
     case 'dos':
       panel__bar__run__dos(event);
@@ -585,4 +609,76 @@ function panel__bar__run__ldos(event) {
 
   input = '{' + input.slice(0, input.length - 1) + '}';
   print__output('run__ldos', input)
+}
+
+
+
+
+
+function panel__bar__run__cos(event) {
+  input = ''
+  input_ = ''
+
+  if (panel__form__for__el.checked) {
+    input += get__sheet('energy__gap')
+    input_ += get__sheet__unit('energy__gap');
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset');  
+  }
+  else if (panel__form__for__lh.checked) {
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset')
+  }
+  else if (panel__form__for__hh.checked) {
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset');
+  }
+  
+  input += get__sheet__json('bowings');
+  input += get__sheet__json('effective__mass');
+  input += get__structure();
+
+  input_ += get__sheet__unit('effective__mass');
+  input_ += get__structure__unit();
+   
+  input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
+
+  input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
+  input_ += '"space__resolution": "m",'; 
+
+  input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
+  input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
+  input += '"energy__levels__resolution": "' + localStorage.getItem("panel__form__band__parameters__elr") + '",'; 
+
+  input += '"energy__ldos__t": "' + localStorage.getItem("panel__form__ldos__parameters__et") + '",'; 
+  input += '"energy__ldos__b": "' + localStorage.getItem("panel__form__ldos__parameters__eb") + '",'; 
+  input += '"energy__ldos__r": "' + localStorage.getItem("panel__form__ldos__parameters__er") + '",'; 
+  
+  input += '"units": {' + input_.slice(0, input_.length - 1) + '},';
+
+  input += '"wave__vector__parameters__tx": "' + localStorage.getItem("panel__form__wave__vector__parameters__tx") + '",'; 
+  input += '"wave__vector__parameters__bx": "' + localStorage.getItem("panel__form__wave__vector__parameters__bx") + '",'; 
+  input += '"wave__vector__parameters__rx": "' + localStorage.getItem("panel__form__wave__vector__parameters__rx") + '",'; 
+  
+  input += '"wave__vector__parameters__ty": "' + localStorage.getItem("panel__form__wave__vector__parameters__ty") + '",';
+  input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
+  input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
+
+
+  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+  if (panel__form__al__input.checked) {input += '"al": "",'}
+
+  if (panel__form__for__lh.checked) {input += '"for__lh": "",'}
+  if (panel__form__for__hh.checked) {input += '"for__hh": "",'}
+  if (panel__form__for__el.checked) {input += '"for__el": "",'}
+
+  if (panel__form__cos__2d.checked) {input += '"cos__2d": "",'}
+  if (panel__form__cos__3d.checked) {input += '"cos__3d": "",'}
+  if (panel__form__cos__merged.checked) {input += '"cos__merged": "",'}
+
+  input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
+  input += get__theme();
+
+  input = '{' + input.slice(0, input.length - 1) + '}';
+  print__output('run__cos', input)
 }

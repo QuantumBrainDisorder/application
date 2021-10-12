@@ -115,6 +115,8 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__form__dos__parameters__er', '0.06');
 
         
+        localStorage.setItem("panel__form__cos__2d", 'true');
+
         localStorage.setItem("panel__form__ldos__2d", 'true');
         localStorage.setItem("panel__form__for___el", 'true');
 
@@ -122,6 +124,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__form__ldos__parameters__eb', '-1.2');
         localStorage.setItem('panel__form__ldos__parameters__er', '0.06');
 
+        localStorage.setItem("panel__form__temperature__input", '0');
         
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));

@@ -208,7 +208,7 @@ panel__form__dos__parameters__et.textContent = localStorage.getItem('panel__form
 panel__form__dos__parameters__eb.textContent = localStorage.getItem('panel__form__dos__parameters__eb');
 panel__form__dos__parameters__er.textContent = localStorage.getItem('panel__form__dos__parameters__er');
 
-
+panel__form__temperature__input.textContent = localStorage.getItem('panel__form__temperature__input');
 
 if (localStorage.getItem('panel__form__ldos__2d') != null) {
     panel__form__ldos__2d.checked = true;
@@ -235,6 +235,15 @@ panel__form__ldos__parameters__eb.textContent = localStorage.getItem('panel__for
 panel__form__ldos__parameters__er.textContent = localStorage.getItem('panel__form__ldos__parameters__er');
 
 
+if (localStorage.getItem('panel__form__cos__2d') != null) {
+    panel__form__cos__2d.checked = true;
+}
+if (localStorage.getItem('panel__form__cos__3d') != null) {
+    panel__form__cos__3d.checked = true;
+}
+if (localStorage.getItem('panel__form__cos__merged') != null) {
+    panel__form__cos__merged.checked = true;
+}
 
 
 
