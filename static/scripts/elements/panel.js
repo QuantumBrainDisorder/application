@@ -237,7 +237,7 @@ function render__html(code) {
 
 var xhr = null;
 
-async function data__exchange(url_ = '', data_ = {}) {
+async function data__exchange(url_ = '', data_ = {}, name) {
     data_ = JSON.stringify(data_)
     xhr = $.ajax({
         cache: false,
@@ -246,12 +246,12 @@ async function data__exchange(url_ = '', data_ = {}) {
         url: url_,
         data: data_,
         dataType: 'json',
-        success: function(data){ data__recived(data) }
+        success: function(data){ data__recived(data, name) }
     });
-    panel__bar__run.innerHTML = "Leave";
+    panel__bar__run.innerHTML = "Pass";
 }
 
-function data__recived(data) {
+function data__recived(data, name) {
   if (data != null) {
     if (data['meta'] != null) {
       set__interface('meta');
@@ -268,8 +268,18 @@ function data__recived(data) {
     }
     else {
       if (data['plot'] != null) {
-        set__interface('output')
-        panel__form__output.srcdoc = data['plot'];
+        if (panel__form__orint__orint.checked) {
+          panel__form__output.style.display = 'none';
+          panel__form__output__label.style.display = 'none';
+
+          const index = data['plot'].search('</head>');
+          panel__form__orint__orint.value = data['plot'].slice(0,index) + '<title>' + name + '</title>' + data['plot'].slice(index);
+          panel__form__orint.submit();
+        }
+        else {
+          set__interface('output');
+          panel__form__output.srcdoc = data['plot']
+        }
       }
       else {
         if (data['output'] != null){
@@ -440,14 +450,13 @@ function panel__bar__run__energies(event) {
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__energies', { 'input': input })
+  data__exchange('run__energies', { 'input': input }, 'Energies');
   // print__output('run__energies', input)
 }
 
@@ -462,7 +471,6 @@ function panel__bar__run__profile (event) {
     input  = '"sheets": {' + input.slice(0, input.length - 1) + '},';
     input += '"units": {' + input_.slice(0, input_.length - 1) + '},';
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
   
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
@@ -470,7 +478,7 @@ function panel__bar__run__profile (event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__profile', { 'input': input })
+  data__exchange('run__profile', { 'input': input }, 'Profile');
   // print__output('run__profile', input)
 }
 
@@ -507,7 +515,6 @@ function panel__bar__run__distribution (event) {
     input += '"units": {},'
  };
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   // if (panel__form__distribution__al.checked) {input += '"al": "",'}
   if (panel__form__distribution__ii.checked) {input += '"ii": "",'}
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
@@ -516,7 +523,7 @@ function panel__bar__run__distribution (event) {
 
   input = '{' + input.slice(0, input.length - 1) + '}';
 
-  data__exchange('run__distribution', { 'input': input })
+  data__exchange('run__distribution', { 'input': input }, 'Properties');
   // print__output('run__distribution', input);
 }
 
@@ -569,8 +576,6 @@ function panel__bar__run__energy__paraboloids(event) {
   input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
-
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
 
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
@@ -578,7 +583,7 @@ function panel__bar__run__energy__paraboloids(event) {
 
   input = '{' + input.slice(0, input.length - 1) + '}';
   
-  data__exchange('run__energy__paraboloids', { 'input': input })
+  data__exchange('run__energy__paraboloids', { 'input': input }, 'Energy Paraboloids');
   // print__output('run__energy__paraboloids', input)
 }
 
@@ -638,8 +643,7 @@ function panel__bar__run__dos(event) {
   input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
-
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+ 
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
@@ -656,7 +660,7 @@ function panel__bar__run__dos(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__dos', { 'input': input })
+  data__exchange('run__dos', { 'input': input }, 'DOS');
   // print__output('run__dos', input)
 }
 
@@ -724,7 +728,6 @@ function panel__bar__run__ldos(event) {
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
@@ -741,7 +744,7 @@ function panel__bar__run__ldos(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__ldos', { 'input': input })
+  data__exchange('run__ldos', { 'input': input }, 'LDOS');
   // print__output('run__ldos', input)
 }
 
@@ -805,7 +808,6 @@ function panel__bar__run__cos(event) {
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   if (panel__form__for__lh.checked) {input += '"for__lh": "",'}
@@ -822,7 +824,7 @@ function panel__bar__run__cos(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__cos', { 'input': input })
+  data__exchange('run__cos', { 'input': input }, 'Concentration of states');
   // print__output('run__cos', input)
 }
 
@@ -894,7 +896,6 @@ function panel__bar__run__cc(event) {
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
 
@@ -912,7 +913,7 @@ function panel__bar__run__cc(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__cc', { 'input': input })
+  data__exchange('run__cc', { 'input': input }, 'Carriers concentration');
   // print__output('run__cc', input)
 }
 
@@ -992,7 +993,6 @@ function panel__bar__run__phi(event) {
   input += '"phi__L": "' + localStorage.getItem("panel__form__phi__L") + '",'; 
 
 
-  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
 
@@ -1003,7 +1003,7 @@ function panel__bar__run__phi(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  data__exchange('run__phi', { 'input': input })
+  data__exchange('run__phi', { 'input': input }, 'Electric potential');
   // print__output('run__phi', input)
 }
 

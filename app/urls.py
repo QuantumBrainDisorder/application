@@ -13,9 +13,12 @@ from .run import phi
 
 urlpatterns = [
     path('', views.main, name="main"),
-    # path('run__distribution', views.run__distribution, name="run__distribution"),
+    
+    path('figure', views.figure, name="plot"),
+
     path('site__icon_.ico', views.site__icon_, name="site__icon_"),
     path('site__icon.ico', views.site__icon, name="site__icon"),
+
     path('run__distribution', distribution.distribution, name="distribution"),
     path('run__profile', profile.profile, name="profile"),
     path('run__energies', energies.energies, name="energies"),

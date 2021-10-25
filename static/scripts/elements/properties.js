@@ -84,7 +84,7 @@ properties__property.ondblclick = function(event) {
 
 
 properties__textarea.onkeypress = function (event) {
-  if (properties__property.dataset.name != 'bowings' && properties__property.dataset.name != 'effective__mass'){
+  if (properties__property.dataset.name != 'carriers__mobility' && properties__property.dataset.name != 'bowings' && properties__property.dataset.name != 'effective__mass'){
     switch(event.keyCode){
       case 34:
         properties__textarea.blur()

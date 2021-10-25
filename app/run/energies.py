@@ -59,6 +59,7 @@ def energies(request):
 
 
     if not 'valence__band__offset' in names:
+        sys.stdout = mystdout = io.StringIO()
         try:
             exec(code_, globals())
         except Exception as e:
@@ -425,6 +426,7 @@ for i in range(0,len(yyy[-1])):
 fig.update_xaxes(title_text = name[0], gridcolor = color, zerolinecolor = color)
 fig.update_yaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
 fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
+fig.update_traces(showlegend=True)
 config = dict({'scrollZoom': True})"""
 
     return code

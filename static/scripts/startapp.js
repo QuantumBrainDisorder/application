@@ -323,13 +323,6 @@ set__panel__bar__type(event__target__textContent, localStorage.getItem('panel__b
 
 
 
-
-
-
-
-
-
-
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

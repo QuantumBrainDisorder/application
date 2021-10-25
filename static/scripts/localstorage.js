@@ -1,15 +1,4 @@
 if (localStorage.getItem("local__storage__initialized") == null) {
-        var i = 0;
-        try {
-                for (i = 0; i <= 10000; i += 250) {
-                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
-                }
-        } 
-        catch (e) {
-                localStorage.removeItem('test');
-                localStorage.setItem('local__storage__max__size', i - 250);            
-        }
-
         // const default__property__unit__alpha__varshni = "ueV/K";
         // const default__property__unit__beta__varshni = "K";
         // const default__property__unit__bowings = "(*)";
@@ -155,29 +144,62 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__relative__permittivity", set__default__property('relative__permittivity'));
         localStorage.setItem("property__spin__orbit__split", set__default__property('spin__orbit__split'));
         localStorage.setItem("property__valence__band__offset", set__default__property('valence__band__offset'));
+        
+        set__default__structure();  
 
-        localStorage.setItem("local__storage__initialized", "true");
-        set__default__structure();        
+        localStorage.setItem("local__storage__initialized", "true");  
+
+        var i = 0;
+        try {
+                for (i = 0; i <= 10000; i += 250) {
+                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
+                }
+        } 
+        catch (e) {
+                localStorage.removeItem('test');
+                localStorage.setItem('local__storage__max__size', i - 250);            
+        }    
 }
 
 
+async function set__default__property(property) {
+        $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "text",
+                url: scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat',
+                dataType: 'text',
+                success: function(data){ localStorage.setItem('property__' + property, data) }
+        })
+}
+async function set__default__structure() {
+        $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "text",
+                url: scripts__names.dataset.default__sheets__path + 'structure.dat',
+                dataType: 'text',
+                success: function(data){ localStorage.setItem('structure', data) }
+        })
+}
 
-function set__default__property(property) {
-        var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
-        fetch(path).then(step__one).then(step__two);
-        function step__one(response) {  return response.text()}
-        function step__two(data){       localStorage.setItem('property__' + property, data)}
-};
+// function set__default__property(property) {
+//         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
+//         fetch(path).then(step__one).then(step__two);
+//         function step__one(response) {  return response.text()}
+//         function step__two(data){       localStorage.setItem('property__' + property, data)}
+// };
 
 
 
 
-function set__default__structure() {
-        var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
-        fetch(path).then(step__one).then(step__two);
-        function step__one(response) {  return response.text()}
-        function step__two(data){       
-                localStorage.setItem('structure', data);
-                document.location.reload();
-        }  
-};
+
+// function set__default__structure() {
+//         var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
+//         fetch(path).then(step__one).then(step__two);
+//         function step__one(response) {  return response.text()}
+//         function step__two(data){       
+//                 localStorage.setItem('structure', data);
+//                 document.location.reload();
+//         }  
+// };

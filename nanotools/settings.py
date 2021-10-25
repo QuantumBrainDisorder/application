@@ -129,3 +129,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 4294967296

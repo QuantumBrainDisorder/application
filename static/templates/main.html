@@ -574,10 +574,10 @@
 
 
 
-                <form id="panel__form__orint" class="panel__form__orint">
+                <form id="panel__form__orint" class="panel__form__orint" target="_blank" action = "/figure" method = "POST">
                     <hr>
                     <label class="panel__form__orint__label">Open result in new tab
-                        <input type="checkbox" id="panel__form__orint__orint" name="panel__form__orint__input" disabled>
+                        <input type="checkbox" id="panel__form__orint__orint" name="panel__form__orint__input">
                         <span class="panel__form__orint__span"></span>
                     </label><br>
                 </form>
@@ -623,7 +623,7 @@
                 <li style="flex: 1;">|</li>
                 <li id="LS" title="Usage of the local storage"></li>
                 <li style="flex: 1;">|</li>
-                <li id="VERSION" title="Application version">0.0.1</li>
+                <li id="VERSION" title="Application version">0.0.76</li>
             </ul>
         </div>
 
@@ -657,6 +657,5 @@
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>
-
     </body>
 </html>
