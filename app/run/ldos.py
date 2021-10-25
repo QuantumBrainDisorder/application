@@ -160,7 +160,17 @@ def ldos(request):
     effective__mass__el = []
     y3, el = ..., ...
     if 'energy__gap' in input.keys():
+        
+        alpha__varshni__dict = cqbd.read__sheet(input['sheets']['alpha__varshni'], 'dict')
+        beta__varshni__dict = cqbd.read__sheet(input['sheets']['beta__varshni'], 'dict')
+        T = float(input['temperature'])
+
         energy__gap__dict = cqbd.read__sheet(input['sheets']['energy__gap'], 'dict')
+        
+        for m in alpha__varshni__dict.keys():
+            if m in beta__varshni__dict.keys():
+                energy__gap__dict[m] -= alpha__varshni__dict[m] * 1e-6 * T * T / (beta__varshni__dict[m] + T)
+
         energy__gap__unit = input['units']['energy__gap']
         try:
             energy__gap__bowings = input['sheets']['bowings']['energy__gap']

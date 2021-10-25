@@ -45,6 +45,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("property__unit__alpha__varshni", "ueV/K");// default__property__unit__alpha__varshni);
         localStorage.setItem("property__unit__beta__varshni", "K");// default__property__unit__beta__varshni);
         localStorage.setItem("property__unit__bowings", "(*)");//default__property__unit__bowings);
+        localStorage.setItem("property__unit__carriers__mobility", "m^2/(V*s)");// default__property__unit__carriers__mobility);
         localStorage.setItem("property__unit__biaxial__deformation__potential", "eV");// default__property__unit__biaxial__deformation__potential);
         localStorage.setItem("property__unit__effective__mass", "m_e");// default__property__unit__effective__mass);
         localStorage.setItem("property__unit__elastic__constant__11", "TPa");//default__property__unit__elastic__constant__11);
@@ -124,11 +125,20 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__form__ldos__parameters__eb', '-1.2');
         localStorage.setItem('panel__form__ldos__parameters__er', '0.06');
 
-        localStorage.setItem("panel__form__temperature__input", '0');
+        localStorage.setItem("panel__form__temperature__input", '300');
+        
+        localStorage.setItem("panel__form__cc__el", 'true');
+
+        localStorage.setItem("panel__form__qfl__ho", '-1.1');
+        localStorage.setItem("panel__form__qfl__el", '2.4');
+
+        localStorage.setItem("panel__form__phi__0", '0');
+        localStorage.setItem("panel__form__phi__L", '0');
         
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
+        localStorage.setItem("property__carriers__mobility", set__default__property('carriers__mobility'));
         localStorage.setItem("property__biaxial__deformation__potential", set__default__property('biaxial__deformation__potential'));
         localStorage.setItem("property__effective__mass", set__default__property('effective__mass'));
         localStorage.setItem("property__elastic__constant__11", set__default__property('elastic__constant__11'));

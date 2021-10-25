@@ -154,6 +154,19 @@ const panel__form__ldos__parameters__er = document.getElementById('panel__form__
 const panel__form__temperature = document.getElementById("panel__form__temperature");
 const panel__form__temperature__input = document.getElementById("panel__form__temperature__input");
 
+const panel__form__cc = document.getElementById("panel__form__cc");
+const panel__form__cc__ho = document.getElementById("panel__form__cc__ho");
+const panel__form__cc__el = document.getElementById("panel__form__cc__el");
+const panel__form__cc__di = document.getElementById("panel__form__cc__di");
+
+const panel__form__qfl = document.getElementById("panel__form__qfl");
+const panel__form__qfl__ho = document.getElementById("panel__form__qfl__ho");
+const panel__form__qfl__el = document.getElementById("panel__form__qfl__el");
+
+const panel__form__phi = document.getElementById("panel__form__phi");
+const panel__form__phi__0 = document.getElementById("panel__form__phi__0");
+const panel__form__phi__L = document.getElementById("panel__form__phi__L");
+
 const panel__form__input__label = document.getElementById("panel__form__input__label");
 const panel__form__meta = document.getElementById("panel__form__meta");
 const panel__form__input = document.getElementById("panel__form__input");

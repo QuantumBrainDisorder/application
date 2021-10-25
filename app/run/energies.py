@@ -34,7 +34,6 @@ color = None
 
 def energies(request):
     glob_ = list(globals().keys()).copy()
-    sys.stdout = mystdout = io.StringIO()
     input = json.load(request)
     input = json.loads(input['input'])
 
@@ -84,6 +83,9 @@ def energies(request):
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
+
+
+
 
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
@@ -143,7 +145,16 @@ def energies(request):
     effective__mass__el = []
     y3, el = ..., ...
     if 'energy__gap' in names:
+        alpha__varshni__dict = cqbd.read__sheet(input['sheets']['alpha__varshni'], 'dict')
+        beta__varshni__dict = cqbd.read__sheet(input['sheets']['beta__varshni'], 'dict')
+        T = float(input['temperature'])
         energy__gap__dict = cqbd.read__sheet(input['sheets']['energy__gap'], 'dict')
+
+        for m in alpha__varshni__dict.keys():
+            if m in beta__varshni__dict.keys():
+                energy__gap__dict[m] -= alpha__varshni__dict[m] * 1e-6 * T * T / (beta__varshni__dict[m] + T)
+
+
         energy__gap__unit = input['units']['energy__gap']
         try:
             energy__gap__bowings = input['sheets']['bowings']['energy__gap']
@@ -316,6 +327,8 @@ def energies(request):
     code = get__code(input.keys())
 
     meta_ = code
+    
+    sys.stdout = mystdout = io.StringIO()
     try:
         exec(code + '\n' + code_, globals())
     except Exception as e:

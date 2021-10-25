@@ -235,6 +235,10 @@ panel__form__ldos__parameters__eb.textContent = localStorage.getItem('panel__for
 panel__form__ldos__parameters__er.textContent = localStorage.getItem('panel__form__ldos__parameters__er');
 
 
+panel__form__phi__0.textContent = localStorage.getItem('panel__form__phi__0');
+panel__form__phi__L.textContent = localStorage.getItem('panel__form__phi__L');
+
+
 if (localStorage.getItem('panel__form__cos__2d') != null) {
     panel__form__cos__2d.checked = true;
 }
@@ -243,6 +247,21 @@ if (localStorage.getItem('panel__form__cos__3d') != null) {
 }
 if (localStorage.getItem('panel__form__cos__merged') != null) {
     panel__form__cos__merged.checked = true;
+}
+
+
+
+panel__form__qfl__ho.textContent = localStorage.getItem('panel__form__qfl__ho');
+panel__form__qfl__el.textContent = localStorage.getItem('panel__form__qfl__el');
+
+if (localStorage.getItem('panel__form__cc__ho') != null) {
+    panel__form__cc__ho.checked = true;
+}
+if (localStorage.getItem('panel__form__cc__el') != null) {
+    panel__form__cc__el.checked = true;
+}
+if (localStorage.getItem('panel__form__cc__di') != null) {
+    panel__form__cc__di.checked = true;
 }
 
 
@@ -327,32 +346,44 @@ function getCookie(name) {
 }
 
 
-// Example POST method implementation:
-async function data__exchange(url = '', data = {}) {
-    const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Accept': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookie('csrftoken')
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
+
+
+// var resres = null;
+// var xhr = null;
+// async function data__exchange(url_ = '', data_ = {}) {
+//     data_ = JSON.stringify(data_)
+//     xhr = $.ajax({
+//         cache: false,
+//         type: "POST",
+//         contentType: "json",
+//         url: url_,
+//         data: data_,
+//         dataType: 'json',
+//         success: function(data){
+//             resres = data;
+//         },
+//     });
+//     // //kill the request
+//     // xhr.abort()
+// }
+
+// // Example POST method implementation:
+// async function data__exchange(url = '', data = {}) {
+//     const response = await fetch(url, {
+//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//         mode: 'cors', // no-cors, *cors, same-origin
+//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//         credentials: 'same-origin', // include, *same-origin, omit
+//         headers: {
+//           'Accept': 'application/json',
+//           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+//           'Content-Type': 'application/json',
+//           'X-CSRFToken': getCookie('csrftoken')
+//         },
+//         redirect: 'follow', // manual, *follow, error
+//         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//         body: JSON.stringify(data) // body data type must match "Content-Type" header
+//     });
+//     return response.json(); // parses JSON response into native JavaScript objects
+//   }
   
-
-
-
-
-
-
-
-
-

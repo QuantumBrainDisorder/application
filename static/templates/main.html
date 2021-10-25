@@ -28,6 +28,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/distribution.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/energies.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/dos.css' %}">
+
+        
+        <script src="{% static 'scripts/jquery-3.6.0.min.js' %}"></script>
     </head>
     <body>
         <div id="structure__scope" class="structure">
@@ -72,6 +75,7 @@
                             <ul id="properties__list" contenteditable="false">
                                 <li onclick="set__property(event, 'bowings')" title="Alloys Bowings Parameters (*)">Alloys Bowings Parameters</li>
                                 <li onclick="set__property(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
+                                <li onclick="set__property(event, 'carriers__mobility')" title="Carriers Mobility u (cm^2/(V*s))">Carriers Mobility</li>
                                 <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
                                 <li onclick="set__property(event, 'effective__mass')" title="Effective Mass m* (m_e)">Effective Mass</li>
                                 <li onclick="set__property(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
@@ -122,10 +126,12 @@
             <fieldset>
                 <legend id="panel__bar" class="panel__bar">
                     <ul id="panel__bar__list">
+                        <li id="panel__bar__run">Send</li>
+                        <li>|</li>
                         <li id="panel__bar__type__base">
                             <span id="panel__bar__type"></span>
                             <ul id="panel__bar__type__list">
-                                <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Distribution</option>
+                                <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Properties</option>
                                 <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
                                 <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
                                 <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Energy paraboloids">Energy paraboloids</option>
@@ -133,15 +139,14 @@
                                 <option onclick="set__panel__bar__type(event, 'ldos')" title="Density of states in the structure">Local density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'cos')" title="Concentration of states">Concentration of states</option>
                                 <option onclick="set__panel__bar__type(event, 'cc')" title="Carriers concentration">Carriers concentration</option>
+                                <option onclick="set__panel__bar__type(event, 'phi')" title="Electric field">Electric field</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup> -->
                             </ul>
                         </li>
-                        <li>|</li>
-                        <li id="panel__bar__run">Run</li>
-                        <li>|</li>
-                        <li id="panel__bar__save">Save</li>
+                        <!-- <li>|</li> -->
+                        <li id="panel__bar__save"></li>
                         <li></li>
                     </ul>
                 </legend>
@@ -498,15 +503,15 @@
 
                 <form id="panel__form__cos" class="panel__form__al">
                     <hr>
-                    <label class="panel__form__al__label">Draw concentration of states from LDOS 2D
+                    <label class="panel__form__al__label">Draw concentration from LDOS 2D
                         <input type="checkbox" id="panel__form__cos__2d">
                         <span class="panel__form__al__span"></span>
                     </label><br>
-                    <label class="panel__form__al__label">Draw concentration of states from LDOS 3D &#215; L
+                    <label class="panel__form__al__label">Draw concentration from LDOS 3D &#215; L
                         <input type="checkbox" id="panel__form__cos__3d">
                         <span class="panel__form__al__span"></span>
                     </label><br>
-                    <label class="panel__form__al__label">Draw concentration of states from merged LDOSes
+                    <label class="panel__form__al__label">Draw concentration from merged LDOSes
                         <input type="checkbox" id="panel__form__cos__merged">
                         <span class="panel__form__al__span"></span>
                     </label><br>
@@ -515,6 +520,41 @@
 
 
 
+                <form id="panel__form__cc" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw holes concentration
+                        <input type="checkbox" id="panel__form__cc__ho">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw electrons concentration
+                        <input type="checkbox" id="panel__form__cc__el">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw concentrations difference
+                        <input type="checkbox" id="panel__form__cc__di">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+                <form id="panel__form__phi" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__phi__0" class="panel__form__space__resolution__label">&phi;(0) (V):&ThickSpace;</label>
+                    <span id="panel__form__phi__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                    <br>
+                    <label for="panel__form__phi__L" class="panel__form__space__resolution__label">&phi;(L) (V):&ThickSpace;</label>
+                    <span id="panel__form__phi__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                </form>
+
+
+
+                <form id="panel__form__qfl" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__qfl__ho" class="panel__form__space__resolution__label">Quasi-Fermi Level for holes (eV):&ThickSpace;</label>
+                    <span id="panel__form__qfl__ho" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>2</span><br>
+                    <label for="panel__form__qfl__el" class="panel__form__space__resolution__label">Quasi-Fermi Level for electrons (eV):&ThickSpace;</label>
+                    <span id="panel__form__qfl__el" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1</span><br>
+                </form>
 
 
 
@@ -604,6 +644,9 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/cos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/cc.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/qfl.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/phi.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ldos__parameters.js' %}"></script>

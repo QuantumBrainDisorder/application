@@ -20,6 +20,7 @@ from django.http import JsonResponse
 import units_QBD
 import plotly.graph_objects as go
 import numpy as np
+import math
 
 fig, config, names = None, None, None
 x = []
@@ -29,7 +30,7 @@ unit = []
 text = None
 color = None
 
-def dos(request):
+def cc(request):
     glob_ = list(globals().keys()).copy()
     input = json.load(request)
     input = json.loads(input['input'])
@@ -51,8 +52,12 @@ def dos(request):
 
 
 
+    flag1 = 'cc__el' in input.keys()
+    flag2 = 'cc__ho' in input.keys()
+    flag3 = 'cc__di' in input.keys()
+    flag = flag1 or flag2 or flag3
 
-    if not 'valence__band__offset' in names:
+    if not 'valence__band__offset' in names or not flag:
         sys.stdout = mystdout = io.StringIO()
         try:
             exec(code_, globals())
@@ -100,7 +105,11 @@ def dos(request):
     effective__mass__lh__dict = ...
     effective__mass__lh__bowings = ...
     effective__mass__lh = []
-    if 'for__lh' in input.keys():
+
+    effective__mass__hh__dict = ...
+    effective__mass__hh__bowings = ...
+    effective__mass__hh = []
+    if 'cc__ho' in input.keys():
         effective__mass__lh__dict = input['sheets']['effective__mass']['lh']
         effective__mass__lh__dict = {key: float(value) for (key, value) in effective__mass__lh__dict.items()}
         effective__mass__lh__bowings = ...
@@ -113,11 +122,6 @@ def dos(request):
         multiplier = units_QBD.standardise(effective__mass__unit).value
         effective__mass__lh = [val * multiplier for val in effective__mass__lh]
 
-
-    effective__mass__hh__dict = ...
-    effective__mass__hh__bowings = ...
-    effective__mass__hh = []
-    if 'for__hh' in input.keys():
         effective__mass__hh__dict = input['sheets']['effective__mass']['hh']
         effective__mass__hh__dict = {key: float(value) for (key, value) in effective__mass__hh__dict.items()}
         try:
@@ -135,10 +139,8 @@ def dos(request):
     y1 = ...
     y2 = ...
     xx = ...
-    if 'for__lh' in input.keys():
+    if 'cc__ho' in input.keys():
         xx, lh = meqbd.profile__gridded(structure__thicknesses, effective__mass__lh, float(input['space__resolution']))
-
-    if 'for__hh' in input.keys():
         xx, hh = meqbd.profile__gridded(structure__thicknesses, effective__mass__hh, float(input['space__resolution']))
 
     del xx
@@ -153,11 +155,12 @@ def dos(request):
     effective__mass__el__bowings = ...
     effective__mass__el = []
     y3, el = ..., ...
-    if 'energy__gap' in input.keys():
-            
+    T = float(input['temperature'])
+    if T == 0: T = 1e-9
+    if 'cc__el' in input.keys():
+        
         alpha__varshni__dict = cqbd.read__sheet(input['sheets']['alpha__varshni'], 'dict')
         beta__varshni__dict = cqbd.read__sheet(input['sheets']['beta__varshni'], 'dict')
-        T = float(input['temperature'])
 
         energy__gap__dict = cqbd.read__sheet(input['sheets']['energy__gap'], 'dict')
         
@@ -189,14 +192,10 @@ def dos(request):
         xx, el = meqbd.profile__gridded(structure__thicknesses, effective__mass__el, float(input['space__resolution']))
         y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
 
-
-
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     elt = float(input['energy__levels__limit__top']) * multiplier
     elb = float(input['energy__levels__limit__bottom']) * multiplier
     elr = float(input['energy__levels__resolution']) * multiplier
-
-
 
     kxb = float(input['wave__vector__parameters__bx'])
     kxt = float(input['wave__vector__parameters__tx'])
@@ -211,116 +210,174 @@ def dos(request):
     while ky[-1] < kyt: ky.append(ky[-1] + kyr)
     
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    dos__grid__t = float(input['energy__dos__t']) * multiplier
-    dos__grid__b = float(input['energy__dos__b']) * multiplier
-    dos__grid__r = float(input['energy__dos__r']) * multiplier
-    dos__grid = [dos__grid__b]
-    maxgrid = dos__grid__t - dos__grid__r
-    while dos__grid[-1] <= maxgrid: dos__grid.append(dos__grid[-1] + dos__grid__r)
+    ldos__grid__t = float(input['energy__ldos__t']) * multiplier
+    ldos__grid__b = float(input['energy__ldos__b']) * multiplier
+    ldos__grid__r = float(input['energy__ldos__r']) * multiplier
+    ldos__grid = [ldos__grid__b]
+    maxgrid = ldos__grid__t - ldos__grid__r
+    while ldos__grid[-1] <= maxgrid: ldos__grid.append(ldos__grid[-1] + ldos__grid__r)
 
-    dos__lh__2d = ...
-    dos__lh__3d = ...
-    dos__lh__merged = ...
-    dos__hh__2d = ...
-    dos__hh__3d = ...
-    dos__hh__merged = ...
-    dos__el__2d = ...
-    dos__el__3d = ...
-    dos__el__merged = ...
+    F_v = float(input['qfl__ho']) * multiplier
+    F_c = float(input['qfl__el']) * multiplier
 
-    name = {
-        'lh': {
-            '2d': 'lh DOS 2D',
-            '3d': 'lh DOS 3D x L',
-            'merged': 'lh DOS 2D & DOS 3D x L'
-            },
-        'hh': {
-            '2d': 'hh DOS 2D',
-            '3d': 'hh DOS 3D x L',
-            'merged': 'hh DOS 2D & DOS 3D x L'
-            },
-        'el': {
-            '2d': 'el DOS 2D',
-            '3d': 'el DOS 3D x L',
-            'merged': 'el DOS 2D & DOS 3D x L'
-            }
-        }
-    name = [name, 'energy (eV)', 'DOS (m^-2*J^-1)']
+    cc__ho__2d = []
+    cc__ho__3d = []
+    cc__ho__merged = []
+    cc__el__2d = []
+    cc__el__3d = []
+    cc__el__merged = []
+    cc__di__2d = []
+    cc__di__3d = []
+    cc__di__merged = []
+
+    ldos__lh__2d = ...
+    ldos__lh__3d = ...
+    ldos__lh__merged = ...
+    ldos__hh__2d = ...
+    ldos__hh__3d = ...
+    ldos__hh__merged = ...
+    ldos__ho__2d = []
+    ldos__ho__3d = []
+    ldos__ho__merged = []
+    ldos__el__2d = ...
+    ldos__el__3d = ...
+    ldos__el__merged = ...
 
     vbo__temp = [-i for i in valence__band__offset]
     index = vbo__temp.index(max(vbo__temp))
-    eg__temp = [-i for i in dos__grid]
+    eg__temp = [-i for i in ldos__grid]
     eg__temp.reverse()
-    if 'for__lh' in input.keys():
-        if 'dos__2d' in input.keys():
-            dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
-            dos__lh__2d.reverse()
-        if 'dos__3d' in input.keys():
-            base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
-            dos__lh__3d.reverse()
-        if 'dos__merged' in input.keys():
-            if dos__el__2d == ...:
-                dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
-                dos__lh__2d.reverse()
-            if dos__el__3d == ...:
-                base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
-                dos__lh__3d.reverse()
-        base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
-    
-    if 'for__hh' in input.keys():
-        if 'dos__2d' in input.keys():
-            dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
-            dos__hh__2d.reverse()
-        if 'dos__3d' in input.keys():
-            base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
-            dos__hh__3d.reverse()
-        if 'dos__merged' in input.keys():
-            if dos__hh__2d == ...:
-                dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
-                dos__hh__2d.reverse()
-            if dos__hh__3d == ...:
-                base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
-                dos__hh__3d.reverse()
-        base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
-    
-    if 'for__el' in input.keys():
+    de = eg__temp[1] - eg__temp[0]
+    if 'cc__ho' in input.keys() or 'cc__di' in input.keys():
+        if 'cos__2d' in input.keys():
+            ldos__lh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+            ldos__hh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+            for i in range(0, len(ldos__lh__2d)):
+                ldos__lh__2d[i].reverse()
+                ldos__hh__2d[i].reverse()
+                ldos__ho__2d.append([])
+                for j in range(0,len(ldos__lh__2d[i])):
+                    ldos__ho__2d[-1].append(ldos__lh__2d[i][j] + ldos__hh__2d[i][j])
+            cc__ho__2d = qqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
+        if 'cos__3d' in input.keys():
+            ldos__lh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__lh[index], -valence__band__offset[index])
+            ldos__hh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__hh[index], -valence__band__offset[index])
+            for i in range(0, len(ldos__lh__3d)):
+                ldos__lh__3d[i].reverse()
+                ldos__hh__3d[i].reverse()
+                ldos__ho__3d.append([])
+                for j in range(0,len(ldos__lh__3d[i])):
+                    ldos__ho__3d[-1].append(ldos__lh__3d[i][j] + ldos__hh__3d[i][j])
+            cc__ho__3d = qqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
+        if 'cos__merged' in input.keys():
+            if ldos__lh__2d == ...:
+                ldos__lh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+                ldos__hh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+                for i in range(0, len(ldos__lh__2d)):
+                    ldos__lh__2d[i].reverse()
+                    ldos__hh__2d[i].reverse()
+                    ldos__ho__2d.append([])
+                    for j in range(0,len(ldos__lh__2d[i])):
+                        ldos__ho__2d[-1].append(ldos__lh__2d[i][j] + ldos__hh__2d[i][j])
+                cc__ho__2d = qqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
+
+            if ldos__lh__3d == ...:
+                ldos__lh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__lh[index], -valence__band__offset[index])
+                ldos__hh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__hh[index], -valence__band__offset[index])
+                for i in range(0, len(ldos__lh__3d)):
+                    ldos__lh__3d[i].reverse()
+                    ldos__hh__3d[i].reverse()
+                    ldos__ho__3d.append([])
+                    for j in range(0,len(ldos__lh__3d[i])):
+                        ldos__ho__3d[-1].append(ldos__lh__3d[i][j] + ldos__hh__3d[i][j])
+                cc__ho__3d = qqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
+
+            ldos__lh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__lh__2d, ldos__lh__3d, valence__band__offset[index])
+            ldos__hh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__hh__2d, ldos__hh__3d, valence__band__offset[index])
+            for i in range(0, len(ldos__lh__merged)):
+                ldos__lh__merged[i].reverse()
+                ldos__hh__merged[i].reverse()
+                ldos__ho__merged.append([])
+                for j in range(0,len(ldos__lh__merged[i])):
+                    ldos__ho__merged[-1].append(ldos__lh__merged[i][j] + ldos__hh__merged[i][j])
+            cc__ho__merged = qqbd.p(ldos__grid, ldos__ho__merged, F_v, T)
+
+
+    if 'cc__el' in input.keys() or 'cc__di' in input.keys():
         temp = []
         for i in range(0,len(valence__band__offset)):
             temp.append(energy__gap[i] + valence__band__offset[i])
         index = temp.index(max(temp))
-        if 'dos__2d' in input.keys():
-            dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
-        if 'dos__3d' in input.keys():
-            base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
-        if 'dos__merged' in input.keys():
-            if dos__el__2d == ...:
-                dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
-            if dos__el__3d == ...:
-                base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
-            base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
+        if 'cos__2d' in input.keys():
+            ldos__el__2d = qqbd.ldos__gridded__2D(ldos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+            cc__el__2d = qqbd.n(ldos__grid, ldos__el__2d, F_c, T)
+        if 'cos__3d' in input.keys():
+            ldos__el__3d = qqbd.ldos__gridded__3D(ldos__grid, x1, effective__mass__el[index],  temp[index])
+            cc__el__3d = qqbd.n(ldos__grid, ldos__el__3d, F_c, T)
+        if 'cos__merged' in input.keys():
+            if ldos__el__2d == ...:
+                ldos__el__2d = qqbd.ldos__gridded__2D(ldos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+                cc__el__2d = qqbd.n(ldos__grid, ldos__el__2d, F_c, T)
+            if ldos__el__3d == ...:
+                ldos__el__3d = qqbd.ldos__gridded__3D(ldos__grid, x1, effective__mass__el[index],  temp[index])
+                cc__el__3d = qqbd.n(ldos__grid, ldos__el__3d, F_c, T)
+            ldos__el__merged = qqbd.ldos__merge(x1, ldos__grid, ldos__el__2d, ldos__el__3d, temp[index])
+            cc__el__merged = qqbd.n(ldos__grid, ldos__el__merged, F_c, T)
        
+    if 'cc__di' in input.keys():
+        if 'cos__2d' in input.keys():
+            for i in range(0,len(cc__ho__2d)):
+                cc__di__2d.append(cc__ho__2d[i] - cc__el__2d[i])
+        if 'cos__3d' in input.keys():
+            for i in range(0,len(cc__ho__3d)):
+                cc__di__3d.append(cc__ho__3d[i] - cc__el__3d[i])
+        if 'cos__merged' in input.keys():
+            for i in range(0,len(cc__ho__merged)):
+                cc__di__merged.append(cc__ho__merged[i] - cc__el__merged[i])
+
+
     globals()['color'] = colors['--theme4']
     # globals()['text'] = common
-    multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    globals()['x'].append([i / multiplier for i in dos__grid])
+    multiplier = units_QBD.standardise(structure__unit).value
+    globals()['x'].append([i / multiplier for i in x1])
     globals()['y'] = {
-        'lh': {
-            '2d': dos__lh__2d,
-            '3d': dos__lh__3d,
-            'merged': dos__lh__merged
-            },
-        'hh': {
-            '2d': dos__hh__2d,
-            '3d': dos__hh__3d,
-            'merged': dos__hh__merged
+        'ho': {
+            '2d': cc__ho__2d,
+            '3d': cc__ho__3d,
+            'merged': cc__ho__merged
             },
         'el': {
-            '2d': dos__el__2d,
-            '3d': dos__el__3d,
-            'merged': dos__el__merged
+            '2d': cc__el__2d,
+            '3d': cc__el__3d,
+            'merged': cc__el__merged
+            },
+        'di': {
+            '2d': cc__di__2d,
+            '3d': cc__di__3d,
+            'merged': cc__di__merged
             }
         }
-    globals()['name'] = name
+
+    
+    name = {
+        'ho': {
+            '2d': 'holes concentration p for 2D',
+            '3d': 'holes concentration p for 3D x L',
+            'merged': 'holes concentration p for 2D & DOS 3D x L'
+            },
+        'el': {
+            '2d': 'electrons concentration n for 2D',
+            '3d': 'electrons concentration n for 3D x L',
+            'merged': 'electrons concentration n for 2D & DOS 3D x L'
+            },
+        'di': {
+            '2d': 'p-n concentration for 2D',
+            '3d': 'p-n concentration for 3D x L',
+            'merged': 'p-n concentration for 2D & DOS 3D x L'
+            }
+        }
+
+    globals()['name'] = [name, 'structure growth direction Z (' + structure__unit + ')', 'carriers concentration (m^-3)']
 
     code = get__code(input.keys())
 
@@ -381,39 +438,38 @@ def dos(request):
 def get__code(flags):
     code = """fig = go.Figure()"""
 
-    if 'dos__2d' in flags:
-        if 'for__lh' in flags:
+    if 'cos__2d' in flags:
+        if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['2d'], mode='lines', name=name[0]['lh']['2d']))"""
-        if 'for__hh' in flags:
-            code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['2d'], mode='lines', name=name[0]['hh']['2d']))"""
-        if 'for__el' in flags:
+fig.add_trace(go.Scatter(x=x[0], y = y['ho']['2d'], mode='lines', name=name[0]['ho']['2d']))"""
+        if 'cc__el' in flags:
             code += """
 fig.add_trace(go.Scatter(x=x[0], y = y['el']['2d'], mode='lines', name=name[0]['el']['2d']))"""
+        if 'cc__di' in flags:
+            code += """
+fig.add_trace(go.Scatter(x=x[0], y = y['di']['2d'], mode='lines', name=name[0]['di']['2d']))"""
 
-    if 'dos__3d' in flags:
-        if 'for__lh' in flags:
+    if 'cos__3d' in flags:
+        if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['3d'], mode='lines', name=name[0]['lh']['3d']))"""
-        if 'for__hh' in flags:
-            code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['3d'], mode='lines', name=name[0]['hh']['3d']))"""
-        if 'for__el' in flags:
+fig.add_trace(go.Scatter(x=x[0], y = y['ho']['3d'], mode='lines', name=name[0]['ho']['3d']))"""
+        if 'cc__el' in flags:
             code += """
 fig.add_trace(go.Scatter(x=x[0], y = y['el']['3d'], mode='lines', name=name[0]['el']['3d']))"""
+        if 'cc__di' in flags:
+            code += """
+fig.add_trace(go.Scatter(x=x[0], y = y['di']['3d'], mode='lines', name=name[0]['di']['3d']))"""
 
-    if 'dos__merged' in flags:
-        if 'for__lh' in flags:
+    if 'cos__merged' in flags:
+        if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['merged'], mode='lines', name=name[0]['lh']['merged']))"""
-        if 'for__hh' in flags:
-            code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['merged'], mode='lines', name=name[0]['hh']['merged']))"""
-        if 'for__el' in flags:
+fig.add_trace(go.Scatter(x=x[0], y = y['ho']['merged'], mode='lines', name=name[0]['ho']['merged']))"""
+        if 'cc__el' in flags:
             code += """
 fig.add_trace(go.Scatter(x=x[0], y = y['el']['merged'], mode='lines', name=name[0]['el']['merged']))"""
-
+        if 'cc__di' in flags:
+            code += """
+fig.add_trace(go.Scatter(x=x[0], y = y['di']['merged'], mode='lines', name=name[0]['di']['merged']))"""
 
     code += """
 fig.update_xaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)

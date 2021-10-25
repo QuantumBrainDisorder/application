@@ -6,6 +6,19 @@ function set__panel__bar__type(event, type) {
       panel__form__orint.style.display = "initial";
       panel__form__distribution.style.display = "initial";
       break;
+    case "phi": 
+      set__panel__bar__type__body(event, type); 
+      panel__form__temperature.style.display = 'initial';
+      panel__form__orint.style.display = "initial";
+      panel__form__ldos__parameters.style.display = 'initial';
+      panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__space__resolution.style.display = 'initial';
+      panel__form__band__parameters.style.display = 'initial';
+      panel__form__qfl.style.display = 'initial';
+      // panel__form__cc.style.display = 'initial';
+      // panel__form__cos.style.display = 'initial';
+      panel__form__phi.style.display = 'initial';
+      break;
     case "cc": 
       set__panel__bar__type__body(event, type); 
       panel__form__temperature.style.display = 'initial';
@@ -14,6 +27,9 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
+      panel__form__qfl.style.display = 'initial';
+      panel__form__cc.style.display = 'initial';
+      panel__form__cos.style.display = 'initial';
       break;
     case "cos": 
       set__panel__bar__type__body(event, type); 
@@ -24,6 +40,7 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
+      panel__form__temperature.style.display = 'initial';
       break;
     case "dos": 
       set__panel__bar__type__body(event, type); 
@@ -34,6 +51,7 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
+      panel__form__temperature.style.display = 'initial';
       break;
     case "ldos": 
       set__panel__bar__type__body(event, type); 
@@ -44,6 +62,7 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
+      panel__form__temperature.style.display = 'initial';
       break;
     case "energies": 
       set__panel__bar__type__body(event, type); 
@@ -54,6 +73,7 @@ function set__panel__bar__type(event, type) {
       panel__form__al.style.display = 'initial';
       panel__form__space__resolution.style.display = "initial";
       panel__form__wave__vector.style.display = 'initial';
+      panel__form__temperature.style.display = 'initial';
       break;
     case "profile": 
       set__panel__bar__type__body(event, type); 
@@ -68,6 +88,7 @@ function set__panel__bar__type(event, type) {
       panel__form__band__parameters.style.display = "initial";
       panel__form__space__resolution.style.display = 'initial';
       panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__temperature.style.display = 'initial';
 
   }
     // properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
@@ -110,6 +131,9 @@ function clean__panel() {
   panel__form__dos__parameters.style.display = 'none';
   panel__form__ldos__parameters.style.display = 'none';
   panel__form__temperature.style.display = 'none';
+  panel__form__qfl.style.display = 'none';
+  panel__form__cc.style.display = 'none';
+  panel__form__phi.style.display = 'none';
 }
 
 
@@ -204,40 +228,100 @@ function render__html(code) {
 
 
 
-function print__output(type, input) {
-  data__exchange(type, { 'input': input })
-  .then(data => {
-    if (data != null) {
-      if (data['meta'] != null) {
-        set__interface('meta');
-        panel__form__meta.value = data['meta']
-        panel__form__meta__height_adjust();
-      }
-      else {hide__interface('meta')};
 
-      set__interface('input');
 
-      if (data['error'] != null) {
-          set__interface('output');
-          panel__form__output.srcdoc = render__html(data['error']);
+
+
+
+
+
+var xhr = null;
+
+async function data__exchange(url_ = '', data_ = {}) {
+    data_ = JSON.stringify(data_)
+    xhr = $.ajax({
+        cache: false,
+        type: "POST",
+        contentType: "json",
+        url: url_,
+        data: data_,
+        dataType: 'json',
+        success: function(data){ data__recived(data) }
+    });
+    panel__bar__run.innerHTML = "Leave";
+}
+
+function data__recived(data) {
+  if (data != null) {
+    if (data['meta'] != null) {
+      set__interface('meta');
+      panel__form__meta.value = data['meta']
+      panel__form__meta__height_adjust();
+    }
+    else {hide__interface('meta')};
+
+    set__interface('input');
+
+    if (data['error'] != null) {
+        set__interface('output');
+        panel__form__output.srcdoc = render__html(data['error']);
+    }
+    else {
+      if (data['plot'] != null) {
+        set__interface('output')
+        panel__form__output.srcdoc = data['plot'];
       }
       else {
-        if (data['plot'] != null) {
+        if (data['output'] != null){
           set__interface('output')
-          panel__form__output.srcdoc = data['plot'];
         }
-        else {
-          if (data['output'] != null){
-            set__interface('output')
-          }
-          panel__form__output.srcdoc = render__html(data['output']);
-        }
+        panel__form__output.srcdoc = render__html(data['output']);
       }
     }
-    favicon.href = window.location.href + "site__icon.ico";
-    document.title = 'NanoTools - Material engineering application';
-  })
+  }
+  favicon.href = window.location.href + "site__icon.ico";
+  document.title = 'NanoTools - Material engineering application';
+  panel__bar__run.innerHTML = "Send";
 }
+
+
+
+
+
+// function print__output(type, input) {
+//   data__exchange(type, { 'input': input })
+//   .then(data => {
+//     if (data != null) {
+//       if (data['meta'] != null) {
+//         set__interface('meta');
+//         panel__form__meta.value = data['meta']
+//         panel__form__meta__height_adjust();
+//       }
+//       else {hide__interface('meta')};
+
+//       set__interface('input');
+
+//       if (data['error'] != null) {
+//           set__interface('output');
+//           panel__form__output.srcdoc = render__html(data['error']);
+//       }
+//       else {
+//         if (data['plot'] != null) {
+//           set__interface('output')
+//           panel__form__output.srcdoc = data['plot'];
+//         }
+//         else {
+//           if (data['output'] != null){
+//             set__interface('output')
+//           }
+//           panel__form__output.srcdoc = render__html(data['output']);
+//         }
+//       }
+//     }
+//     favicon.href = window.location.href + "site__icon.ico";
+//     document.title = 'NanoTools - Material engineering application';
+//   })
+// }
 
 
 panel__form__output.onload = function (event) {
@@ -263,39 +347,56 @@ function panel__form__meta__height_adjust() {
 
 
 panel__bar__run.onclick = function (event) {
-  favicon.href = window.location.href + "site__icon_.ico";
-  document.title = 'Computing...';
-  
-  switch(panel__bar__type.dataset.type) {
-    case 'distribution':
-      panel__bar__run__distribution(event);
-      break;
-    case 'cos':
-      panel__bar__run__cos(event);
-      break;
-    case 'dos':
-      panel__bar__run__dos(event);
-      break;
-    case 'ldos':
-      panel__bar__run__ldos(event);
-      break;
-    case 'energies':
-      panel__bar__run__energies(event);
-      break;
-    case 'profile':
-      panel__bar__run__profile(event);
-      break;
-    case 'energy__paraboloids':
-      panel__bar__run__energy__paraboloids(event);
-      break;
+  if (panel__bar__run.textContent == 'Send') {
+    favicon.href = window.location.href + "site__icon_.ico";
+    document.title = 'Computing...';
+    switch(panel__bar__type.dataset.type) {
+      case 'distribution':
+        panel__bar__run__distribution(event);
+        break;
+      case 'phi':
+        panel__bar__run__phi(event);
+        break;
+      case 'cos':
+        panel__bar__run__cos(event);
+        break;
+      case 'cc':
+        panel__bar__run__cc(event);
+          break;
+      case 'dos':
+        panel__bar__run__dos(event);
+        break;
+      case 'ldos':
+        panel__bar__run__ldos(event);
+        break;
+      case 'energies':
+        panel__bar__run__energies(event);
+        break;
+      case 'profile':
+        panel__bar__run__profile(event);
+        break;
+      case 'energy__paraboloids':
+        panel__bar__run__energy__paraboloids(event);
+        break;
+    }
   }
-
-  
+  else {
+    xhr.abort();
+    favicon.href = window.location.href + "site__icon.ico";
+    document.title = 'NanoTools - Material engineering application';
+    panel__bar__run.innerHTML = "Send";
+  }
 }
 
 function panel__bar__run__energies(event) {
   input = ''
   input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
 
   if (panel__form__band__electrons__input.checked) {
     input += get__sheet('energy__gap')
@@ -337,6 +438,8 @@ function panel__bar__run__energies(event) {
   if (panel__form__band__holes__dwf.checked) {input += '"dwf__holes": "",'}
   else if (panel__form__band__holes__dwf__normalised.checked) {input += '"dwf__normalised__holes": "",'}
 
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
   if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
@@ -344,7 +447,8 @@ function panel__bar__run__energies(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__energies', input)
+  data__exchange('run__energies', { 'input': input })
+  // print__output('run__energies', input)
 }
 
 function panel__bar__run__profile (event) {
@@ -366,7 +470,8 @@ function panel__bar__run__profile (event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__profile', input)
+  data__exchange('run__profile', { 'input': input })
+  // print__output('run__profile', input)
 }
 
 
@@ -411,7 +516,8 @@ function panel__bar__run__distribution (event) {
 
   input = '{' + input.slice(0, input.length - 1) + '}';
 
-  print__output('run__distribution', input);
+  data__exchange('run__distribution', { 'input': input })
+  // print__output('run__distribution', input);
 }
 
 
@@ -423,6 +529,12 @@ function panel__bar__run__distribution (event) {
 function panel__bar__run__energy__paraboloids(event) {
   input = ''
   input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
 
   input += get__sheet('energy__gap')
   input_ += get__sheet__unit('energy__gap');
@@ -459,17 +571,27 @@ function panel__bar__run__energy__paraboloids(event) {
 
   if (panel__form__orint__orint.checked) { input += '"orint": "",'}
 
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__energy__paraboloids', input)
+  
+  data__exchange('run__energy__paraboloids', { 'input': input })
+  // print__output('run__energy__paraboloids', input)
 }
 
 
 function panel__bar__run__dos(event) {
   input = ''
   input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
 
   if (panel__form__for__el.checked) {
     input += get__sheet('energy__gap')
@@ -520,6 +642,8 @@ function panel__bar__run__dos(event) {
   if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
   if (panel__form__for__lh.checked) {input += '"for__lh": "",'}
   if (panel__form__for__hh.checked) {input += '"for__hh": "",'}
   if (panel__form__for__el.checked) {input += '"for__el": "",'}
@@ -532,7 +656,8 @@ function panel__bar__run__dos(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__dos', input)
+  data__exchange('run__dos', { 'input': input })
+  // print__output('run__dos', input)
 }
 
 
@@ -546,6 +671,12 @@ function panel__bar__run__dos(event) {
 function panel__bar__run__ldos(event) {
   input = ''
   input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
 
   if (panel__form__for___el.checked) {
     input += get__sheet('energy__gap')
@@ -596,6 +727,8 @@ function panel__bar__run__ldos(event) {
   if (panel__form__orint__orint.checked) { input += '"orint": "",'}
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
   if (panel__form__for___lh.checked) {input += '"for___lh": "",'}
   if (panel__form__for___hh.checked) {input += '"for___hh": "",'}
   if (panel__form__for___el.checked) {input += '"for___el": "",'}
@@ -608,7 +741,8 @@ function panel__bar__run__ldos(event) {
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__ldos', input)
+  data__exchange('run__ldos', { 'input': input })
+  // print__output('run__ldos', input)
 }
 
 
@@ -618,6 +752,12 @@ function panel__bar__run__ldos(event) {
 function panel__bar__run__cos(event) {
   input = ''
   input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
 
   if (panel__form__for__el.checked) {
     input += get__sheet('energy__gap')
@@ -676,9 +816,197 @@ function panel__bar__run__cos(event) {
   if (panel__form__cos__3d.checked) {input += '"cos__3d": "",'}
   if (panel__form__cos__merged.checked) {input += '"cos__merged": "",'}
 
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
   input += get__theme();
 
   input = '{' + input.slice(0, input.length - 1) + '}';
-  print__output('run__cos', input)
+  data__exchange('run__cos', { 'input': input })
+  // print__output('run__cos', input)
 }
+
+
+
+
+
+
+
+
+function panel__bar__run__cc(event) {
+  input = ''
+  input_ = ''
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
+
+  if (panel__form__cc__el.checked) {
+    input += get__sheet('energy__gap')
+    input_ += get__sheet__unit('energy__gap');
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset');  
+  }
+  else if (panel__form__cc__di.checked){
+    input += get__sheet('energy__gap')
+    input_ += get__sheet__unit('energy__gap');
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset');  
+  }
+  else if (panel__form__cc__ho.checked) {
+    input += get__sheet('valence__band__offset');
+    input_ += get__sheet__unit('valence__band__offset')
+  }
+  
+  input += get__sheet__json('bowings');
+  input += get__sheet__json('effective__mass');
+  input += get__structure();
+
+  input_ += get__sheet__unit('effective__mass');
+  input_ += get__structure__unit();
+   
+  input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
+
+  input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
+  input_ += '"space__resolution": "m",'; 
+
+  input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
+  input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
+  input += '"energy__levels__resolution": "' + localStorage.getItem("panel__form__band__parameters__elr") + '",'; 
+
+  input += '"energy__ldos__t": "' + localStorage.getItem("panel__form__ldos__parameters__et") + '",'; 
+  input += '"energy__ldos__b": "' + localStorage.getItem("panel__form__ldos__parameters__eb") + '",'; 
+  input += '"energy__ldos__r": "' + localStorage.getItem("panel__form__ldos__parameters__er") + '",'; 
+
+  input += '"qfl__el": "' + localStorage.getItem("panel__form__qfl__el") + '",'; 
+  input += '"qfl__ho": "' + localStorage.getItem("panel__form__qfl__ho") + '",'; 
+  
+  input += '"units": {' + input_.slice(0, input_.length - 1) + '},';
+
+  input += '"wave__vector__parameters__tx": "' + localStorage.getItem("panel__form__wave__vector__parameters__tx") + '",'; 
+  input += '"wave__vector__parameters__bx": "' + localStorage.getItem("panel__form__wave__vector__parameters__bx") + '",'; 
+  input += '"wave__vector__parameters__rx": "' + localStorage.getItem("panel__form__wave__vector__parameters__rx") + '",'; 
+  
+  input += '"wave__vector__parameters__ty": "' + localStorage.getItem("panel__form__wave__vector__parameters__ty") + '",';
+  input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
+  input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
+
+
+  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+  if (panel__form__al__input.checked) {input += '"al": "",'}
+
+
+  if (panel__form__cc__el.checked) {input += '"cc__el": "",'}
+  if (panel__form__cc__ho.checked) {input += '"cc__ho": "",'}
+  if (panel__form__cc__di.checked) {input += '"cc__di": "",'}
+
+  if (panel__form__cos__2d.checked) {input += '"cos__2d": "",'}
+  if (panel__form__cos__3d.checked) {input += '"cos__3d": "",'}
+  if (panel__form__cos__merged.checked) {input += '"cos__merged": "",'}
+
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
+  input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
+  input += get__theme();
+
+  input = '{' + input.slice(0, input.length - 1) + '}';
+  data__exchange('run__cc', { 'input': input })
+  // print__output('run__cc', input)
+}
+
+
+
+
+
+
+
+
+
+
+
+function panel__bar__run__phi(event) {
+  input = ''
+  input_ = ''
+
+  
+  input += get__sheet('relative__permittivity')
+  input_ += get__sheet__unit('relative__permittivity');
+
+  input += get__sheet('alpha__varshni')
+  input_ += get__sheet__unit('alpha__varshni');
+  
+  input += get__sheet('beta__varshni')
+  input_ += get__sheet__unit('beta__varshni');
+
+  input += get__sheet('energy__gap')
+  input_ += get__sheet__unit('energy__gap');
+  input += get__sheet('valence__band__offset');
+  input_ += get__sheet__unit('valence__band__offset');  
+
+  input += get__sheet('energy__gap')
+  input_ += get__sheet__unit('energy__gap');
+  input += get__sheet('valence__band__offset');
+  input_ += get__sheet__unit('valence__band__offset');  
+
+  input += get__sheet('valence__band__offset');
+  input_ += get__sheet__unit('valence__band__offset')
+
+  
+  input += get__sheet__json('bowings');
+  input += get__sheet__json('effective__mass');
+  input += get__structure();
+
+  input_ += get__sheet__unit('effective__mass');
+  input_ += get__structure__unit();
+   
+  input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
+
+  input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
+  input_ += '"space__resolution": "m",'; 
+
+  input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
+  input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
+  input += '"energy__levels__resolution": "' + localStorage.getItem("panel__form__band__parameters__elr") + '",'; 
+
+  input += '"energy__ldos__t": "' + localStorage.getItem("panel__form__ldos__parameters__et") + '",'; 
+  input += '"energy__ldos__b": "' + localStorage.getItem("panel__form__ldos__parameters__eb") + '",'; 
+  input += '"energy__ldos__r": "' + localStorage.getItem("panel__form__ldos__parameters__er") + '",'; 
+
+  input += '"qfl__el": "' + localStorage.getItem("panel__form__qfl__el") + '",'; 
+  input += '"qfl__ho": "' + localStorage.getItem("panel__form__qfl__ho") + '",'; 
+  
+  input += '"units": {' + input_.slice(0, input_.length - 1) + '},';
+
+  input += '"wave__vector__parameters__tx": "' + localStorage.getItem("panel__form__wave__vector__parameters__tx") + '",'; 
+  input += '"wave__vector__parameters__bx": "' + localStorage.getItem("panel__form__wave__vector__parameters__bx") + '",'; 
+  input += '"wave__vector__parameters__rx": "' + localStorage.getItem("panel__form__wave__vector__parameters__rx") + '",'; 
+  
+  input += '"wave__vector__parameters__ty": "' + localStorage.getItem("panel__form__wave__vector__parameters__ty") + '",';
+  input += '"wave__vector__parameters__by": "' + localStorage.getItem("panel__form__wave__vector__parameters__by") + '",'; 
+  input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
+
+
+  input += '"phi__0": "' + localStorage.getItem("panel__form__phi__0") + '",'; 
+  input += '"phi__L": "' + localStorage.getItem("panel__form__phi__L") + '",'; 
+
+
+  if (panel__form__orint__orint.checked) { input += '"orint": "",'}
+  if (panel__form__al__input.checked) {input += '"al": "",'}
+
+
+
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
+  input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
+  input += get__theme();
+
+  input = '{' + input.slice(0, input.length - 1) + '}';
+  data__exchange('run__phi', { 'input': input })
+  // print__output('run__phi', input)
+}
+
+
+
+

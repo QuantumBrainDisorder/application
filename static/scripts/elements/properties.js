@@ -3,6 +3,7 @@ function set__property(event, property) {
     case "bowings": set__property__body(event, "<i>C</i>", property, "(*)"); break;
     case "alpha__varshni": set__property__body(event, "<i>&alpha;</i>", property, "&mu;eV/K"); break;
     case "beta__varshni": set__property__body(event, "<i>&beta;</i>", property, "K"); break;
+    case "carriers__mobility": set__property__body(event, "<i>&mu;</i>", property, "cm^2/(V*s)"); break;
     case "biaxial__deformation__potential": set__property__body(event, "<i>b</i>", property, "eV"); break;
     case "effective__mass": set__property__body(event, "<i>m*</i>", property, "m_e"); break;
     case "elastic__constant__11": set__property__body(event, "<i>c<sub>11</sub></i>", property, "TPa"); break;
