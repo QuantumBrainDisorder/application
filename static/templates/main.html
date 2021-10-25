@@ -138,6 +138,7 @@
                                 <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'ldos')" title="Density of states in the structure">Local density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'cos')" title="Concentration of states">Concentration of states</option>
+                                <option onclick="set__panel__bar__type(event, 'fds')" title="Fermi-Dirac statistics">Fermi-Dirac statistics</option>
                                 <option onclick="set__panel__bar__type(event, 'cc')" title="Carriers concentration">Carriers concentration</option>
                                 <option onclick="set__panel__bar__type(event, 'phi')" title="Electric field">Electric field</option>
                                 <!-- <optgroup label="Profiles">
@@ -328,29 +329,6 @@
 
 
                 
-
-
-                <form id="panel__form__band__electrons" class="panel__form__al" action=""  method="POST">{% csrf_token %}
-                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
-                    <hr>
-                    <label class="panel__form__al__label">Draw electrons band
-                        <input type="checkbox" id="panel__form__band__electrons__input">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label id="panel__form__band__electrons__del__label" class="panel__form__band__electrons__label_sub">Draw energy levels
-                        <input type="checkbox" id="panel__form__band__electrons__del">
-                        <span class="panel__form__band__electrons__span_sub"></span>
-                    </label><br>
-                    <label id="panel__form__band__electrons__dwf__label" class="panel__form__band__electrons__label_sub">Draw wave functions
-                        <input type="checkbox" id="panel__form__band__electrons__dwf">
-                        <span class="panel__form__band__electrons__span_sub"></span>
-                    </label><br>
-                    <label id="panel__form__band__electrons__dwf__normalised__label" class="panel__form__band__electrons__label_sub_sub">Normalised
-                        <input type="checkbox" id="panel__form__band__electrons__dwf__normalised" checked disabled>
-                        <span class="panel__form__band__electrons__span_sub_sub"></span>
-                    </label><br>
-                </form>
-
                 <form id="panel__form__band__holes" class="panel__form__al" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
                     <hr>
@@ -379,6 +357,33 @@
                         <span class="panel__form__band__electrons__span_sub_sub"></span>
                     </label><br>
                 </form>
+
+
+                
+
+
+                <form id="panel__form__band__electrons" class="panel__form__al" action=""  method="POST">{% csrf_token %}
+                    <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
+                    <hr>
+                    <label class="panel__form__al__label">Draw electrons band
+                        <input type="checkbox" id="panel__form__band__electrons__input">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label id="panel__form__band__electrons__del__label" class="panel__form__band__electrons__label_sub">Draw energy levels
+                        <input type="checkbox" id="panel__form__band__electrons__del">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__electrons__dwf__label" class="panel__form__band__electrons__label_sub">Draw wave functions
+                        <input type="checkbox" id="panel__form__band__electrons__dwf">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label id="panel__form__band__electrons__dwf__normalised__label" class="panel__form__band__electrons__label_sub_sub">Normalised
+                        <input type="checkbox" id="panel__form__band__electrons__dwf__normalised" checked disabled>
+                        <span class="panel__form__band__electrons__span_sub_sub"></span>
+                    </label><br>
+                </form>
+
+
 
                 <form id="panel__form__band__parameters" class="panel__form__space__resolution" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
@@ -518,6 +523,24 @@
                 </form>
 
 
+                <form id="panel__form__fds" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw Fermi-Dirac statistics for holes
+                        <input type="checkbox" id="panel__form__fds__ho">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw Fermi-Dirac statistics for electrons
+                        <input type="checkbox" id="panel__form__fds__el">
+                        <span class="panel__form__al__span"></span>
+                    </label>
+                    <hr>
+                    <label for="panel__form__fds__et" class="panel__form__space__resolution__label">Top limit of energy grid (eV):&ThickSpace;</label>
+                    <span id="panel__form__fds__et" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>3</span><br>
+                    <label for="panel__form__fds__eb" class="panel__form__space__resolution__label">Bottom limit of energy grid (eV):&ThickSpace;</label>
+                    <span id="panel__form__fds__eb" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-1.2</span><br>
+                    <label for="panel__form__fds__er" class="panel__form__space__resolution__label"> Energy grid resolution(eV):&ThickSpace;</label>
+                    <span id="panel__form__fds__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.06</span>
+                </form>
 
 
                 <form id="panel__form__cc" class="panel__form__al">
@@ -576,7 +599,7 @@
 
                 <form id="panel__form__orint" class="panel__form__orint" target="_blank" action = "/figure" method = "POST">
                     <hr>
-                    <label class="panel__form__orint__label">Open result in new tab
+                    <label class="panel__form__orint__label">Open figure in new tab
                         <input type="checkbox" id="panel__form__orint__orint" name="panel__form__orint__input">
                         <span class="panel__form__orint__span"></span>
                     </label><br>
@@ -623,7 +646,7 @@
                 <li style="flex: 1;">|</li>
                 <li id="LS" title="Usage of the local storage"></li>
                 <li style="flex: 1;">|</li>
-                <li id="VERSION" title="Application version">0.0.76</li>
+                <li id="VERSION" title="Application version">0.31.0</li>
             </ul>
         </div>
 
@@ -644,6 +667,7 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dos.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/cos.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/fds.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/cc.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/qfl.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/phi.js' %}"></script>

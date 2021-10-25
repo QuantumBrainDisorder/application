@@ -258,7 +258,7 @@ def cc(request):
                 ldos__ho__2d.append([])
                 for j in range(0,len(ldos__lh__2d[i])):
                     ldos__ho__2d[-1].append(ldos__lh__2d[i][j] + ldos__hh__2d[i][j])
-            cc__ho__2d = qqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
+            cc__ho__2d = meqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
         if 'cos__3d' in input.keys():
             ldos__lh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__lh[index], -valence__band__offset[index])
             ldos__hh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__hh[index], -valence__band__offset[index])
@@ -268,7 +268,7 @@ def cc(request):
                 ldos__ho__3d.append([])
                 for j in range(0,len(ldos__lh__3d[i])):
                     ldos__ho__3d[-1].append(ldos__lh__3d[i][j] + ldos__hh__3d[i][j])
-            cc__ho__3d = qqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
+            cc__ho__3d = meqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
         if 'cos__merged' in input.keys():
             if ldos__lh__2d == ...:
                 ldos__lh__2d = qqbd.ldos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
@@ -279,7 +279,7 @@ def cc(request):
                     ldos__ho__2d.append([])
                     for j in range(0,len(ldos__lh__2d[i])):
                         ldos__ho__2d[-1].append(ldos__lh__2d[i][j] + ldos__hh__2d[i][j])
-                cc__ho__2d = qqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
+                cc__ho__2d = meqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
 
             if ldos__lh__3d == ...:
                 ldos__lh__3d = qqbd.ldos__gridded__3D(eg__temp, x1, effective__mass__lh[index], -valence__band__offset[index])
@@ -290,7 +290,7 @@ def cc(request):
                     ldos__ho__3d.append([])
                     for j in range(0,len(ldos__lh__3d[i])):
                         ldos__ho__3d[-1].append(ldos__lh__3d[i][j] + ldos__hh__3d[i][j])
-                cc__ho__3d = qqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
+                cc__ho__3d = meqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
 
             ldos__lh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__lh__2d, ldos__lh__3d, valence__band__offset[index])
             ldos__hh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__hh__2d, ldos__hh__3d, valence__band__offset[index])
@@ -300,7 +300,7 @@ def cc(request):
                 ldos__ho__merged.append([])
                 for j in range(0,len(ldos__lh__merged[i])):
                     ldos__ho__merged[-1].append(ldos__lh__merged[i][j] + ldos__hh__merged[i][j])
-            cc__ho__merged = qqbd.p(ldos__grid, ldos__ho__merged, F_v, T)
+            cc__ho__merged = meqbd.p(ldos__grid, ldos__ho__merged, F_v, T)
 
 
     if 'cc__el' in input.keys() or 'cc__di' in input.keys():
@@ -310,19 +310,19 @@ def cc(request):
         index = temp.index(max(temp))
         if 'cos__2d' in input.keys():
             ldos__el__2d = qqbd.ldos__gridded__2D(ldos__grid, x1, y3, el, kx, ky, elb, elt, elr)
-            cc__el__2d = qqbd.n(ldos__grid, ldos__el__2d, F_c, T)
+            cc__el__2d = meqbd.n(ldos__grid, ldos__el__2d, F_c, T)
         if 'cos__3d' in input.keys():
             ldos__el__3d = qqbd.ldos__gridded__3D(ldos__grid, x1, effective__mass__el[index],  temp[index])
-            cc__el__3d = qqbd.n(ldos__grid, ldos__el__3d, F_c, T)
+            cc__el__3d = meqbd.n(ldos__grid, ldos__el__3d, F_c, T)
         if 'cos__merged' in input.keys():
             if ldos__el__2d == ...:
                 ldos__el__2d = qqbd.ldos__gridded__2D(ldos__grid, x1, y3, el, kx, ky, elb, elt, elr)
-                cc__el__2d = qqbd.n(ldos__grid, ldos__el__2d, F_c, T)
+                cc__el__2d = meqbd.n(ldos__grid, ldos__el__2d, F_c, T)
             if ldos__el__3d == ...:
                 ldos__el__3d = qqbd.ldos__gridded__3D(ldos__grid, x1, effective__mass__el[index],  temp[index])
-                cc__el__3d = qqbd.n(ldos__grid, ldos__el__3d, F_c, T)
+                cc__el__3d = meqbd.n(ldos__grid, ldos__el__3d, F_c, T)
             ldos__el__merged = qqbd.ldos__merge(x1, ldos__grid, ldos__el__2d, ldos__el__3d, temp[index])
-            cc__el__merged = qqbd.n(ldos__grid, ldos__el__merged, F_c, T)
+            cc__el__merged = meqbd.n(ldos__grid, ldos__el__merged, F_c, T)
        
     if 'cc__di' in input.keys():
         if 'cos__2d' in input.keys():

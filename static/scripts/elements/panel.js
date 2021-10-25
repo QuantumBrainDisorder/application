@@ -31,6 +31,13 @@ function set__panel__bar__type(event, type) {
       panel__form__cc.style.display = 'initial';
       panel__form__cos.style.display = 'initial';
       break;
+    case "fds": 
+      set__panel__bar__type__body(event, type); 
+      panel__form__temperature.style.display = 'initial';
+      panel__form__orint.style.display = "initial";
+      panel__form__fds.style.display = 'initial';
+      panel__form__qfl.style.display = 'initial';
+      break;
     case "cos": 
       set__panel__bar__type__body(event, type); 
       panel__form__orint.style.display = "initial";
@@ -134,6 +141,7 @@ function clean__panel() {
   panel__form__qfl.style.display = 'none';
   panel__form__cc.style.display = 'none';
   panel__form__phi.style.display = 'none';
+  panel__form__fds.style.display = 'none';
 }
 
 
@@ -367,12 +375,15 @@ panel__bar__run.onclick = function (event) {
       case 'phi':
         panel__bar__run__phi(event);
         break;
-      case 'cos':
-        panel__bar__run__cos(event);
-        break;
       case 'cc':
         panel__bar__run__cc(event);
           break;
+      case 'fds':
+        panel__bar__run__fds(event);
+          break;
+      case 'cos':
+        panel__bar__run__cos(event);
+        break;
       case 'dos':
         panel__bar__run__dos(event);
         break;
@@ -827,6 +838,36 @@ function panel__bar__run__cos(event) {
   data__exchange('run__cos', { 'input': input }, 'Concentration of states');
   // print__output('run__cos', input)
 }
+
+
+
+
+
+function panel__bar__run__fds(event) {
+  input = ''
+
+  input += '"et": "' + localStorage.getItem("panel__form__fds__et") + '",'; 
+  input += '"eb": "' + localStorage.getItem("panel__form__fds__eb") + '",'; 
+  input += '"er": "' + localStorage.getItem("panel__form__fds__er") + '",'; 
+  input += '"eu": "' + 'eV' + '",'; 
+
+  input += '"qfl__el": "' + localStorage.getItem("panel__form__qfl__el") + '",'; 
+  input += '"qfl__ho": "' + localStorage.getItem("panel__form__qfl__ho") + '",'; 
+  
+  if (panel__form__fds__ho.checked) {input += '"fds__ho": "",'}
+  if (panel__form__fds__el.checked) {input += '"fds__el": "",'}
+
+  input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
+  input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
+  input += get__theme();
+
+  input = '{' + input.slice(0, input.length - 1) + '}';
+  data__exchange('run__fds', { 'input': input }, 'Fermi-Dirac statistics');
+}
+
+
+
 
 
 
