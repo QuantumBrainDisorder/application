@@ -31,12 +31,8 @@ def site__icon(request):
     return FileResponse(open('./static/images/site__icon.ico', 'rb'))
 
 def main(request):
-
     return render(request, "main.html")
 
-def figure(request):
-    print('aaaaaaaaaaaaaaaaaaaa')
-    return HttpResponse(request.POST['panel__form__orint__input'])  
 
 
 def docs(request):

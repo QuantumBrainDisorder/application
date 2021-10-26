@@ -254,7 +254,8 @@ async function data__exchange(url_ = '', data_ = {}, name) {
         url: url_,
         data: data_,
         dataType: 'json',
-        success: function(data){ data__recived(data, name) }
+        success: function(data){ data__recived(data, name) },
+        error: function(jqXHR){ alert(jqXHR); console.log('ERROR')}
     });
     panel__bar__run.innerHTML = "Pass";
 }
@@ -281,9 +282,10 @@ function data__recived(data, name) {
           panel__form__output__label.style.display = 'none';
 
           const index = data['plot'].search('</head>');
-          panel__form__orint__orint.value = data['plot'].slice(0,index) + '<title>' + name + '</title>' + data['plot'].slice(index);
-          console.log(panel__form__orint__orint.value);
-          panel__form__orint.submit();
+          var winPrint = window.open('','_blank');
+          winPrint.document.write(data['plot'].slice(0,index) + '<title>' + name + '</title>' + data['plot'].slice(index));
+          winPrint.document.close();
+          winPrint.focus();
         }
         else {
           set__interface('output');

@@ -15,8 +15,6 @@ from .run import phi
 urlpatterns = [
     path('', views.main, name="main"),
 
-    path('figure', views.figure, name="plot"),
-
     path('site__icon_.ico', views.site__icon_, name="site__icon_"),
     path('site__icon.ico', views.site__icon, name="site__icon"),
     
