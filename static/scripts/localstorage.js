@@ -131,6 +131,20 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("panel__form__phi__0", '0');
         localStorage.setItem("panel__form__phi__L", '0');
         
+
+
+
+        var i = 0;
+        try {
+                for (i = 0; i <= 10000; i += 250) {
+                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
+                }
+        } 
+        catch (e) {
+                localStorage.removeItem('test');
+                localStorage.setItem('local__storage__max__size', i - 250);            
+        }    
+
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
@@ -156,57 +170,47 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         localStorage.setItem("local__storage__initialized", "true");  
 
-        var i = 0;
-        try {
-                for (i = 0; i <= 10000; i += 250) {
-                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
-                }
-        } 
-        catch (e) {
-                localStorage.removeItem('test');
-                localStorage.setItem('local__storage__max__size', i - 250);            
-        }    
 }
 
 
-async function set__default__property(property) {
-        $.ajax({
-                cache: false,
-                type: "POST",
-                contentType: "text",
-                url: scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat',
-                dataType: 'text',
-                success: function(data){ localStorage.setItem('property__' + property, data) }
-        })
-}
-async function set__default__structure() {
-        $.ajax({
-                cache: false,
-                type: "POST",
-                contentType: "text",
-                url: scripts__names.dataset.default__sheets__path + 'structure.dat',
-                dataType: 'text',
-                success: function(data){ localStorage.setItem('structure', data) }
-        })
-}
+// async function set__default__property(property) {
+//         $.ajax({
+//                 cache: false,
+//                 type: "POST",
+//                 contentType: "text",
+//                 url: scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat',
+//                 dataType: 'text',
+//                 success: function(data){ localStorage.setItem('property__' + property, data) }
+//         })
+// }
+// async function set__default__structure() {
+//         $.ajax({
+//                 cache: false,
+//                 type: "POST",
+//                 contentType: "text",
+//                 url: scripts__names.dataset.default__sheets__path + 'structure.dat',
+//                 dataType: 'text',
+//                 success: function(data){console.log(data); localStorage.setItem('structure', data) }
+//         })
+// }
 
-// function set__default__property(property) {
-//         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
-//         fetch(path).then(step__one).then(step__two);
-//         function step__one(response) {  return response.text()}
-//         function step__two(data){       localStorage.setItem('property__' + property, data)}
-// };
-
-
+function set__default__property(property) {
+        var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
+        fetch(path).then(step__one).then(step__two);
+        function step__one(response) {  return response.text()}
+        function step__two(data){       localStorage.setItem('property__' + property, data)}
+};
 
 
 
-// function set__default__structure() {
-//         var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
-//         fetch(path).then(step__one).then(step__two);
-//         function step__one(response) {  return response.text()}
-//         function step__two(data){       
-//                 localStorage.setItem('structure', data);
-//                 document.location.reload();
-//         }  
-// };
+
+
+function set__default__structure() {
+        var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
+        fetch(path).then(step__one).then(step__two);
+        function step__one(response) {  return response.text()}
+        function step__two(data){       
+                localStorage.setItem('structure', data);
+                document.location.reload();
+        }  
+};
