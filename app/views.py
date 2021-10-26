@@ -35,6 +35,7 @@ def main(request):
     return render(request, "main.html")
 
 def figure(request):
+    print('aaaaaaaaaaaaaaaaaaaa')
     return HttpResponse(request.POST['panel__form__orint__input'])  
 
 

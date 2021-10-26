@@ -282,6 +282,7 @@ function data__recived(data, name) {
 
           const index = data['plot'].search('</head>');
           panel__form__orint__orint.value = data['plot'].slice(0,index) + '<title>' + name + '</title>' + data['plot'].slice(index);
+          console.log(panel__form__orint__orint.value);
           panel__form__orint.submit();
         }
         else {
