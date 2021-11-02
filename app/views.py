@@ -38,9 +38,13 @@ def main(request):
 import os
 def set__default__structure(request):
     data = os.path.abspath(__file__)
-    # f = open("file.txt","r")
-    # data = f.readlines()
+    data = data[:data.find('views.py')]
+    data = data[:-4]
+    data = data + 'static/scripts/default__sheets/structure.dat'
 
+    f = open(data,"r")
+    data = f.readlines()
+    print(data, sys.stderr)
     return HttpResponse(data, content_type="text")
 
 def docs(request):
