@@ -19,6 +19,7 @@ urlpatterns = [
     path('site__icon.ico', views.site__icon, name="site__icon"),
     
     path('set__default__structure', views.set__default__structure, name="set__default__structure"),
+    path('set__default__property', views.set__default__property, name="set__default__property"),
     
     path('docs', views.docs, name="docs"),
 

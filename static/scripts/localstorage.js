@@ -177,16 +177,25 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 }
 
 
-// async function set__default__property(property) {
-//         $.ajax({
-//                 cache: false,
-//                 type: "POST",
-//                 contentType: "text",
-//                 url: scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat',
-//                 dataType: 'text',
-//                 success: function(data){ localStorage.setItem('property__' + property, data) }
-//         })
-// }
+function set__default__property(property_) {
+        $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "text",
+                url: "set__default__property",
+                dataType: 'text',
+                data: property_,
+                success: function(data){
+                        localStorage.setItem('property__' + property_, data);
+                        if (property_ == 'energy__gap'){ properties__textarea.value = data }
+                },
+                error: function(xhr, status, error){
+                        var errorMessage = xhr.status + ': ' + xhr.statusText
+                        alert('Error - ' + errorMessage);
+                    }
+        })
+}
+
 function set__default__structure() {
         $.ajax({
                 cache: false,
@@ -204,12 +213,12 @@ function set__default__structure() {
         })
 }
 
-function set__default__property(property) {
-        var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
-        fetch(path).then(step__one).then(step__two);
-        function step__one(response) {  return response.text()}
-        function step__two(data){       localStorage.setItem('property__' + property, data)}
-};
+// function set__default__property(property) {
+//         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
+//         fetch(path).then(step__one).then(step__two);
+//         function step__one(response) {  return response.text()}
+//         function step__two(data){       localStorage.setItem('property__' + property, data)}
+// };
 
 
 

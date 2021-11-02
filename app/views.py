@@ -35,7 +35,6 @@ def site__icon(request):
 def main(request):
     return render(request, "main.html")
 
-import os
 def set__default__structure(request):
     data = os.path.abspath(__file__)
     data = data[:data.find('views.py')]
@@ -45,6 +44,18 @@ def set__default__structure(request):
     f = open(data,"r")
     data = f.readlines()
     print(data, sys.stderr)
+    return HttpResponse(data, content_type="text")
+
+def set__default__property(request):
+    property_ = request.read().decode('UTF-8')
+
+    data = os.path.abspath(__file__)
+    data = data[:data.find('views.py')]
+    data = data[:-4]
+    data = data + 'static/scripts/default__sheets/properties/' + property_ + '.dat'
+
+    f = open(data,"r")
+    data = f.readlines()
     return HttpResponse(data, content_type="text")
 
 def docs(request):
