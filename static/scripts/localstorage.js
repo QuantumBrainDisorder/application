@@ -194,7 +194,7 @@ function set__default__structure() {
                 contentType: "text",
                 url: "set__default__structure",
                 dataType: 'text',
-                success: function(data){c
+                success: function(data){
                         structure.value = data;
                         localStorage.setItem('structure', data)},
                 error: function(xhr, status, error){
