@@ -43,7 +43,6 @@ def set__default__structure(request):
 
     f = open(data,"r")
     data = f.readlines()
-    print(data, sys.stderr)
     return HttpResponse(data, content_type="text")
 
 def set__default__property(request):

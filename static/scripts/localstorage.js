@@ -136,19 +136,6 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem("panel__form__ep__0", '0');
         localStorage.setItem("panel__form__ep__L", '0');
 
-
-
-        var i = 0;
-        try {
-                for (i = 0; i <= 10000; i += 250) {
-                localStorage.setItem('test', new Array((i * 1024) + 250).join('a'));
-                }
-        } 
-        catch (e) {
-                localStorage.removeItem('test');
-                localStorage.setItem('local__storage__max__size', i - 250);            
-        }    
-
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));
         localStorage.setItem("property__beta__varshni", set__default__property('beta__varshni'));
@@ -172,8 +159,10 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         
         set__default__structure();  
 
-        localStorage.setItem("local__storage__initialized", "true");  
+        localStorage.setItem('local__storage__max__size', 1);  
+        run__local__storage__counter();
 
+        localStorage.setItem("local__storage__initialized", "true");  
 }
 
 
@@ -233,3 +222,37 @@ function set__default__structure() {
 //                 document.location.reload();
 //         }  
 // };
+
+
+
+
+
+function run__local__storage__counter(){
+        var r = 1;
+        var max = 10000;
+        var min = 0;
+        var m = max / 2;
+        while ( max-min <= r ){
+                try {
+                        localStorage.setItem('test', new Array(i * 1024).join('a'));
+                        min = m;
+                } 
+                catch (e) {
+                        max = m;           
+                } 
+                m = (max-min)/2;
+        }
+        localStorage.removeItem('test');
+        localStorage.setItem('local__storage__max__size', m);
+}
+        // var i = 0;
+        // try {
+        //         for (i = 0; i <= 10000; i += 15) {
+        //         localStorage.setItem('test', new Array((i * 1024) + 15).join('a'));
+        //         }
+        // } 
+        // catch (e) {
+        //         localStorage.removeItem('test');
+        //         localStorage.setItem('local__storage__max__size', i - 15);            
+        // }    
+        

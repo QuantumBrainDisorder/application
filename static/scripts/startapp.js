@@ -371,8 +371,6 @@ function getCookie(name) {
 }
 
 
-
-
 // var resres = null;
 // var xhr = null;
 // async function data__exchange(url_ = '', data_ = {}) {
