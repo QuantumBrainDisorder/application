@@ -51,7 +51,9 @@ def phi(request):
 
     names = list(input['sheets'].keys())
 
-
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
+    
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
     structure__length = 0
@@ -297,19 +299,39 @@ def phi(request):
 
     phi = mqbd.poisson__1D(x1[1] - x1[0], phi__0, phi__L, rp, h)
     
-    globals()['color'] = colors['--theme4']
-    # globals()['text'] = common
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     multiplier = units_QBD.standardise(structure__unit).value
     globals()['x'] = [i / multiplier for i in x1]
     globals()['y'] = phi
     globals()['name'] = ['structure growth direction Z (' + structure__unit + ')', 'electric potential V (V)']
 
     code = """fig = go.Figure()
-fig.add_trace(go.Scatter(x=x, y = y, mode='lines'))
-fig.update_xaxes(title_text = name[0], gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-config = dict({'scrollZoom': True})"""
+fig.add_trace(go.Scatter(
+    x = x, 
+    y = y, 
+    mode='lines'))
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_traces(textposition = 'bottom right')
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color=color[4],
+    paper_bgcolor=color[0])
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""  
 
 
     meta_ = code

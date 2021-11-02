@@ -74,3 +74,49 @@ structure.onkeypress = function (event) {
       break;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+structure.ondrop = function(event) {
+  event.preventDefault();
+  var file = event.dataTransfer.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(e) { 
+    structure.value = e.target.result; 
+    localStorage.setItem("structure", e.target.result);
+  }
+  reader.readAsText(file, "UTF-8");
+}
+
+
+
+
+
+
+
+
+
+structure__input.addEventListener("input", structure__inputed);
+function structure__inputed(event) {
+  var fr=new FileReader();
+  fr.onload = function(e) { 
+    structure.value = e.target.result; 
+    localStorage.setItem("structure", e.target.result);
+  }
+  fr.readAsText(this.files[0])
+}
+structure.ondblclick = function(event){ 
+  structure__input.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+}
+

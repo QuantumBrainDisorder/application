@@ -71,7 +71,7 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         
         localStorage.setItem('panel__form__band__electrons__input', 'true');
 
-        localStorage.setItem('panel__form__space__resolution__input', '1e-11');
+        localStorage.setItem('panel__form__space__resolution__input', '0.1');
 
         localStorage.setItem('panel__form__wave__vector__input', '0e+9');
         
@@ -85,6 +85,8 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         localStorage.setItem('panel__form__wave__vector__parameters__ty', '2e+9');
         localStorage.setItem('panel__form__wave__vector__parameters__by', '-2e+9');
         localStorage.setItem('panel__form__wave__vector__parameters__ry', '0.05e+9');
+
+        localStorage.setItem('panel__form__distribution__ii__r', '0.1');
 
         localStorage.setItem('panel__form__distribution__w__axis__property__content', 'Energy Gap');
         localStorage.setItem('panel__form__distribution__w__axis__property', 'energy__gap');
@@ -130,7 +132,9 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         localStorage.setItem("panel__form__phi__0", '0');
         localStorage.setItem("panel__form__phi__L", '0');
-        
+
+        localStorage.setItem("panel__form__ep__0", '0');
+        localStorage.setItem("panel__form__ep__L", '0');
 
 
 
@@ -183,16 +187,20 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 //                 success: function(data){ localStorage.setItem('property__' + property, data) }
 //         })
 // }
-// async function set__default__structure() {
-//         $.ajax({
-//                 cache: false,
-//                 type: "POST",
-//                 contentType: "text",
-//                 url: scripts__names.dataset.default__sheets__path + 'structure.dat',
-//                 dataType: 'text',
-//                 success: function(data){console.log(data); localStorage.setItem('structure', data) }
-//         })
-// }
+function set__default__structure() {
+        $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "text",
+                url: "set__default__structure",
+                dataType: 'text',
+                success: function(data){structure.innerHTML = data},
+                error: function(xhr, status, error){
+                        var errorMessage = xhr.status + ': ' + xhr.statusText
+                        alert('Error - ' + errorMessage);
+                    }
+        })
+}
 
 function set__default__property(property) {
         var path = scripts__names.dataset.default__sheets__path + 'properties/' + property + '.dat';
@@ -205,12 +213,12 @@ function set__default__property(property) {
 
 
 
-function set__default__structure() {
-        var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
-        fetch(path).then(step__one).then(step__two);
-        function step__one(response) {  return response.text()}
-        function step__two(data){       
-                localStorage.setItem('structure', data);
-                document.location.reload();
-        }  
-};
+// function set__default__structure() {
+//         var path = scripts__names.dataset.default__sheets__path + 'structure.dat';
+//         fetch(path).then(step__one).then(step__two);
+//         function step__one(response) {  return response.text()}
+//         function step__two(data){       
+//                 localStorage.setItem('structure', data);
+//                 document.location.reload();
+//         }  
+// };

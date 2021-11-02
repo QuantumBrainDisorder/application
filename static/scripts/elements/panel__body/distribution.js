@@ -10,8 +10,18 @@
 panel__form__distribution__ii.onclick = function(event) {
     if (localStorage.getItem('panel__form__distribution__ii') == null) {
         localStorage.setItem('panel__form__distribution__ii', 'true');
+
+        panel__form__distribution__ii__r.style.display = 'initial';
+        panel__form__distribution__ii__r__label.style.display = 'initial';
+        panel__form__distribution__ii__pobd__label.style.display = 'initial';
     }
     else {
+        panel__form__distribution__ii__r.style.display = 'none';
+        
+        panel__form__distribution__ii__r__label.style.display = 'none';
+
+        panel__form__distribution__ii__pobd__label.style.display = 'none';
+
         localStorage.removeItem("panel__form__distribution__ii");
     }
 
@@ -89,5 +99,84 @@ panel__form__distribution__z__axis.onclick = function(event) {
     }
     else {
         localStorage.removeItem("panel__form__distribution__z__axis");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+panel__form__distribution__ii__r.onkeydown = function (event) {
+    if (event.keyCode === 13) {
+      if (panel__form__distribution__ii__r.textContent == "") {
+        panel__form__distribution__ii__r.textContent = "0.1";
+      };
+      panel__form__distribution__ii__r.blur();
+
+      if(isNaN(panel__form__distribution__ii__r.textContent)){
+        panel__form__distribution__ii__r.textContent = '0.1';
+        localStorage.setItem("panel__form__distribution__ii__r", panel__form__distribution__ii__r.textContent);
+      }
+    }
+}
+
+panel__form__distribution__ii__r.addEventListener('focusout', function (e) {
+      if (panel__form__distribution__ii__r.textContent == "") {
+        panel__form__distribution__ii__r.textContent = "0.1";
+      };
+      
+      if(isNaN(panel__form__distribution__ii__r.textContent)){
+        panel__form__distribution__ii__r.textContent = '0.1';
+        localStorage.setItem("panel__form__distribution__ii__r", panel__form__distribution__ii__r.textContent);
+      }
+})
+
+panel__form__distribution__ii__r.oninput = function (event) {
+  localStorage.setItem("panel__form__distribution__ii__r", panel__form__distribution__ii__r.textContent);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+panel__form__distribution__ii__pobd.onclick = function(event) {
+    if (localStorage.getItem('panel__form__distribution__ii__pobd') == null) {
+        localStorage.setItem('panel__form__distribution__ii__pobd', 'true');
+    }
+    else {
+        localStorage.removeItem("panel__form__distribution__ii__pobd");
     }
 }

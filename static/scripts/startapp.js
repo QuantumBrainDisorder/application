@@ -93,9 +93,15 @@ if (localStorage.getItem("panel__form__orint__orint") != null) {
 
 if (localStorage.getItem("panel__form__distribution__ii") != null) {
     panel__form__distribution__ii.checked = true;
+    panel__form__distribution__ii__r.style.display = 'initial';
+    panel__form__distribution__ii__r__label.style.display = 'initial';
+    panel__form__distribution__ii__pobd__label.style.display = 'initial';
 }
+panel__form__distribution__ii__r.innerHTML = localStorage.getItem('panel__form__distribution__ii__r');
 
-
+if (localStorage.getItem("panel__form__distribution__ii__pobd") != null) {
+    panel__form__distribution__ii__pobd.checked = true
+}
 
 panel__form__space__resolution__input.textContent = localStorage.getItem('panel__form__space__resolution__input');
 
@@ -317,6 +323,25 @@ if (localStorage.getItem("panel__form__distribution__z__axis") != null) {
 else {
     panel__form__distribution__z__axis.checked = false;
 }
+
+
+
+
+panel__form__ep__0.innerHTML = localStorage.getItem('panel__form__ep__0');
+panel__form__ep__L.innerHTML = localStorage.getItem('panel__form__ep__L');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

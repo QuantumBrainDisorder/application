@@ -50,6 +50,7 @@
                     </ul>
                 </legend>
                 <textarea id="structure" title="Structure" spellcheck="false"></textarea>
+                <input id="structure__input" type="file" style="display: none; padding: 0; margin: 0;" accept=".txt,.dat">
             </fieldset>
         </div>
         <div id="resizer_l" class="resizer resizer_l" onselectStart="return false">
@@ -100,6 +101,7 @@
                     </ul>
                 </legend>
                 <textarea id="properties__textarea" title="Materials properties" spellcheck="false"></textarea>
+                <input id="properties__input" type="file" style="display: none; padding: 0; margin: 0;" accept=".txt,.dat">
             </fieldset>
         </div>
 
@@ -154,15 +156,6 @@
 
 
                 
-
-
-                <form id="panel__form__temperature" class="panel__form__al">
-                    <hr>
-                    <label for="panel__form__temperature__input" class="panel__form__space__resolution__label">Structure temperature (K):&ThickSpace;</label>
-                    <span id="panel__form__temperature__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
-                </form>
-
-
 
                 <form id="panel__form__distribution" class="panel__form__distribution" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__distribution__submit" name="panel__form__distribution__submit"  type="submit" style="display: none;"></button>
@@ -272,12 +265,44 @@
                         <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
                         <span class="panel__form__distribution__span"></span>
                     </label><br>
+                    <label id="panel__form__distribution__ii__r__label" for="panel__form__distribution__ii__r" class="panel__form__space__resolution__label_sub">Compositions resolution:&ThickSpace;</label>
+                    <span id="panel__form__distribution__ii__r" class="panel__form__space__resolution__input_sub" spellcheck="false" contenteditable>0.1</span><br>
+                    <label id="panel__form__distribution__ii__pobd__label" class="panel__form__distribution__ii__pobd__label_sub"> Print only bowings-defined
+                        <input type="checkbox" id="panel__form__distribution__ii__pobd" name="panel__form__distribution__ii__pobd">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                </form>
+
+               
+
+
+
+
+
+
+                <form id="panel__form__temperature" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__temperature__input" class="panel__form__space__resolution__label">Structure temperature (K):&ThickSpace;</label>
+                    <span id="panel__form__temperature__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                </form>
+
+
+                <form id="panel__form__ep" class="panel__form__space__resolution">
+                    <hr>
+                    <label for="panel__form__ep__0" class="panel__form__space__resolution__label">&phi;<sub>ext.</sub>(0) (mV):&ThickSpace;</label>
+                    <span id="panel__form__ep__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                    <label for="panel__form__ep__L" class="panel__form__space__resolution__label">&phi;<sub>ext.</sub>(L) (mV):&ThickSpace;</label>
+                    <span id="panel__form__ep__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
                 </form>
 
 
 
-
-
+                <form id="panel__form__space__resolution" class="panel__form__space__resolution">
+                    <hr>
+                    <label id="panel__form__space__resolution__label" for="panel__form__space__resolution__input" class="panel__form__space__resolution__label">Space resolution (nm):&ThickSpace;</label>
+                    <span id="panel__form__space__resolution__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.1</span>
+                    <!-- <input type="text" id="panel__form__space__resolution__input"> -->
+                </form>
 
 
 
@@ -313,21 +338,6 @@
 
 
 
-                <form id="panel__form__al" class="panel__form__al">
-                    <hr>
-                    <label class="panel__form__al__label">Add layers labels
-                        <input type="checkbox" id="panel__form__al__input" disabled>
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                </form>
-                <form id="panel__form__space__resolution" class="panel__form__space__resolution">
-                    <hr>
-                    <label id="panel__form__space__resolution__label" for="panel__form__space__resolution__input" class="panel__form__space__resolution__label">Space interval (m):&ThickSpace;</label>
-                    <span id="panel__form__space__resolution__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>1e-11</span>
-                    <!-- <input type="text" id="panel__form__space__resolution__input"> -->
-                </form>
-
-
                 
                 <form id="panel__form__band__holes" class="panel__form__al" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
@@ -359,12 +369,8 @@
                 </form>
 
 
-                
-
-
                 <form id="panel__form__band__electrons" class="panel__form__al" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
-                    <hr>
                     <label class="panel__form__al__label">Draw electrons band
                         <input type="checkbox" id="panel__form__band__electrons__input">
                         <span class="panel__form__al__span"></span>
@@ -597,6 +603,18 @@
 
 
 
+                <form id="panel__form__al" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Add layers labels
+                        <input type="checkbox" id="panel__form__al__input" disabled>
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
+
+
                 <form id="panel__form__orint" class="panel__form__orint" target="_blank" action = "/figure" method = "POST">
                     <hr>
                     <label class="panel__form__orint__label">Open figure in new tab
@@ -615,7 +633,7 @@
                 <label id="panel__form__input__label" for="panel__form__meta">
                 <hr>Input:</label>
                 <textarea id="panel__form__meta" name="panel__form__meta" type="text" class="panel__form__meta" spellcheck="false" disabled></textarea>
-                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" spellcheck="false" rows="10"></textarea>
+                <textarea id="panel__form__input" name="panel__form__input" type="text" class="panel__form__input" spellcheck="false" rows="10" placeholder="enter your code here..."></textarea>
 
                 <label id="panel__form__output__label" for="panel__form__output">
                 <hr>Output:</label>
@@ -638,7 +656,7 @@
                 <li id="LC" title="Load the structure and all properties">
                     <label style="padding: 0; margin: 0; display: block; cursor: pointer;">
                         LC
-                        <input pattern="thx" id="LC__input" type="file" style="display: none; padding: 0; margin: 0;" accept=".json">
+                        <input id="LC__input" type="file" style="display: none; padding: 0; margin: 0;" accept=".json">
                     </label>
                 </li>
                 <li style="flex: 1;">|</li>
@@ -653,6 +671,7 @@
         <script id="scripts__names" data-default__sheets__path="{% static 'scripts/default__sheets/' %}"  type="text/javascript" src="{% static 'scripts/names.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/localstorage.js' %}"></script> 
 
+        <script type="text/javascript" src="{% static 'scripts/elements/body.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/structure.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/properties.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/resizer_l.js' %}"></script>
@@ -678,6 +697,8 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/for_.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/temperature.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector__parameters.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ep.js' %}"></script>
+
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/startapp.js' %}"></script>

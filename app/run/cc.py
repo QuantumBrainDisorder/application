@@ -79,6 +79,8 @@ def cc(request):
                 del globals()[val]
         return JsonResponse(result_, safe = False)
 
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
@@ -336,7 +338,13 @@ def cc(request):
                 cc__di__merged.append(cc__ho__merged[i] - cc__el__merged[i])
 
 
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     multiplier = units_QBD.standardise(structure__unit).value
     globals()['x'].append([i / multiplier for i in x1])
@@ -439,43 +447,97 @@ def get__code(flags):
     code = """fig = go.Figure()"""
 
     if 'cos__2d' in flags:
+        code += """
+"""
         if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['ho']['2d'], mode='lines', name=name[0]['ho']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['ho']['2d'], 
+    mode = 'lines', 
+    name = name[0]['ho']['2d']))"""
         if 'cc__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['2d'], mode='lines', name=name[0]['el']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['2d'], 
+    mode = 'lines', 
+    name = name[0]['el']['2d']))"""
         if 'cc__di' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['di']['2d'], mode='lines', name=name[0]['di']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['di']['2d'], 
+    mode = 'lines', 
+    name = name[0]['di']['2d']))"""
 
     if 'cos__3d' in flags:
+        code += """
+"""
         if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['ho']['3d'], mode='lines', name=name[0]['ho']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['ho']['3d'], 
+    mode = 'lines', 
+    name = name[0]['ho']['3d']))"""
         if 'cc__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['3d'], mode='lines', name=name[0]['el']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['3d'], 
+    mode = 'lines', 
+    name = name[0]['el']['3d']))"""
         if 'cc__di' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['di']['3d'], mode='lines', name=name[0]['di']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['di']['3d'], 
+    mode = 'lines', 
+    name = name[0]['di']['3d']))"""
 
     if 'cos__merged' in flags:
+        code += """
+"""
         if 'cc__ho' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['ho']['merged'], mode='lines', name=name[0]['ho']['merged']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['ho']['merged'], 
+    mode = 'lines', 
+    name = name[0]['ho']['merged']))"""
         if 'cc__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['merged'], mode='lines', name=name[0]['el']['merged']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['merged'], 
+    mode = 'lines', 
+    name = name[0]['el']['merged']))"""
         if 'cc__di' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['di']['merged'], mode='lines', name=name[0]['di']['merged']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['di']['merged'], 
+    mode = 'lines', 
+    name = name[0]['di']['merged']))"""
 
     code += """
-fig.update_xaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[2], gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-fig.update_traces(showlegend=True)"""
+
+fig.update_xaxes(
+    title_text = name[1], 
+    gridcolor = '#808080', 
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[2], 
+    gridcolor = '#808080', 
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0], 
+    font_color = color[4], 
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'doubleClick': 'reset+autosize'})"""
 
     return code
 

@@ -6,6 +6,7 @@ const properties__property = document.getElementById("properties__property");
 const properties__textarea = document.getElementById("properties__textarea");
 const properties__list = document.getElementById("properties__list");
 const properties__right__wall = document.getElementById("properties__right__wall");
+const properties__input = document.getElementById("properties__input");
 
 const structure = document.getElementById("structure");
 const structure__scope = document.getElementById("structure__scope");
@@ -16,6 +17,7 @@ const structure__legend__structure = document.getElementById("structure__legend_
 const structure__legend__unit = document.getElementById("structure__legend__unit");
 const structure__unit = document.getElementById("structure__unit");
 const structure__fieldset__rect = structure__fieldset.getBoundingClientRect();
+const structure__input = document.getElementById("structure__input");
 
 const margin = structure__fieldset__rect.left;
 
@@ -42,6 +44,10 @@ const panel__form__orint__orint = document.getElementById("panel__form__orint__o
 const panel__form__distribution = document.getElementById("panel__form__distribution");
 // const panel__form__distribution__al = document.getElementById("panel__form__distribution__al");
 const panel__form__distribution__ii = document.getElementById("panel__form__distribution__ii");
+const panel__form__distribution__ii__r = document.getElementById("panel__form__distribution__ii__r");
+const panel__form__distribution__ii__r__label = document.getElementById("panel__form__distribution__ii__r__label");
+const panel__form__distribution__ii__pobd = document.getElementById("panel__form__distribution__ii__pobd");
+const panel__form__distribution__ii__pobd__label = document.getElementById("panel__form__distribution__ii__pobd__label");
 const panel__form__distribution__submit = document.getElementById("panel__form__distribution__submit");
 const panel__form__distribution__w__axis = document.getElementById("panel__form__distribution__w__axis");
 const panel__form__distribution__x__axis = document.getElementById("panel__form__distribution__x__axis");
@@ -173,6 +179,19 @@ const panel__form__qfl__el = document.getElementById("panel__form__qfl__el");
 const panel__form__phi = document.getElementById("panel__form__phi");
 const panel__form__phi__0 = document.getElementById("panel__form__phi__0");
 const panel__form__phi__L = document.getElementById("panel__form__phi__L");
+
+const panel__form__ep = document.getElementById("panel__form__ep");
+const panel__form__ep__0 = document.getElementById("panel__form__ep__0");
+const panel__form__ep__L = document.getElementById("panel__form__ep__L");
+
+
+
+
+
+
+
+
+
 
 const panel__form__input__label = document.getElementById("panel__form__input__label");
 const panel__form__meta = document.getElementById("panel__form__meta");

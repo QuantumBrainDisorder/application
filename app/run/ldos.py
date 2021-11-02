@@ -80,11 +80,17 @@ def ldos(request):
                 del globals()[val]
         return JsonResponse(result_, safe = False)
 
-
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
+    
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
     structure__length = 0
     for i in structure__thicknesses:    structure__length += i
+
+    ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
+    ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
+    ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
 
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
@@ -194,6 +200,16 @@ def ldos(request):
         x1, y3 = meqbd.profile__gridded(structure__thicknesses, energy__gap, float(input['space__resolution']))
         xx, el = meqbd.profile__gridded(structure__thicknesses, effective__mass__el, float(input['space__resolution']))
         y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
+   
+   
+    for i in range(0,len(y1)):
+        if 'for___lh' in input.keys():
+            y1[i] += ep[i]
+        if 'for___hh' in input.keys():
+            y2[i] += ep[i]
+        if 'for___el' in input.keys():
+            y3[i] += ep[i]
+
 
 
 
@@ -298,7 +314,13 @@ def ldos(request):
 
 
 
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     multiplier = units_QBD.standardise(structure__unit).value
     globals()['x'].append([i / multiplier for i in x1])
@@ -321,7 +343,7 @@ def ldos(request):
             'merged': ldos__el__merged
             }
         }
-    globals()['name'] = ['energy (' + valence__band__offset__unit + ')', 'structure growth direction Z (' + structure__unit + ')', 'LDOS (m^-3*J^-1)']
+    globals()['name'] = ['energy (' + valence__band__offset__unit + ')', 'structure growth direction Z (' + structure__unit + ')', 'LDOS (m-3J-1)']
 
     code = get__code(input.keys())
 
@@ -385,43 +407,96 @@ def get__code(flags):
     if 'ldos__2d' in flags:
         if 'for___lh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['lh']['2d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['lh']['2d']))"""
         if 'for___hh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['hh']['2d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['hh']['2d']))"""
         if 'for___el' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['el']['2d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['el']['2d']))"""
+
+
+
 
     if 'ldos__3d' in flags:
         if 'for___lh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['lh']['3d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['lh']['3d']))"""
         if 'for___hh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['hh']['3d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['hh']['3d']))"""
         if 'for___el' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['el']['3d']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['el']['3d']))"""
+
+
+
 
     if 'ldos__merged' in flags:
         if 'for___lh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['lh']['merged']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['lh']['merged']))"""
         if 'for___hh' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['hh']['merged']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['hh']['merged']))"""
         if 'for___el' in flags:
             code += """
-fig.add_trace(go.Surface(x=y[0],y=x[0],z=z['el']['merged']))"""
+fig.add_trace(go.Surface(
+    x = y[0],
+    y = x[0],
+    z = z['el']['merged']))"""
 
     code += """
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)', scene = dict(xaxis_title=name[0], yaxis_title=name[1], zaxis_title=name[2]))
-#fig.update_traces(showlegend=False)
-config = dict({'scrollZoom': True})"""
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0],
+    margin_t = 0,
+    margin_b = 0,
+    margin_l = 0,
+    margin_r = 0,
+    scene = dict(
+        xaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = name[0]),
+        yaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = name[1]),
+        zaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = name[2])))
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
 
     return code
-
 
 
 

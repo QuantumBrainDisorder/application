@@ -89,7 +89,13 @@ def fds(request):
     ho = meqbd.fds__ho(energy__grid, F_v, T)
     el = meqbd.fds__el(energy__grid, F_c, T)
 
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     globals()['x'] = [i / multiplier for i in energy__grid]
     globals()['y'] = {'ho': ho, 'el': el}
@@ -127,24 +133,43 @@ def fds(request):
 
 
 def get__code(flags):
-    code = """fig = go.Figure()"""
+    code = """fig = go.Figure()
+    """
 
     if 'fds__ho' in flags:
         code += """
-fig.add_trace(go.Scatter(x=x, y = y['ho'], mode='lines', name=name[0]['ho']))"""
+fig.add_trace(go.Scatter(
+    x = x, 
+    y = y['ho'], 
+    mode = 'lines', 
+    name = name[0]['ho']))"""
     if 'fds__el' in flags:
         code += """
-fig.add_trace(go.Scatter(x=x, y = y['el'], mode='lines', name=name[0]['el']))"""
+fig.add_trace(go.Scatter(
+    x = x, 
+    y = y['el'], 
+    mode = 'lines', 
+    name = name[0]['el']))"""
 
     code += """
-fig.update_xaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
+
+fig.update_xaxes(
+    title_text = name[1], 
+    gridcolor = '#808080', 
+    zerolinecolor = color[4])
+fig.update_yaxes(   
+    gridcolor = '#808080', 
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0], 
+    font_color = color[4], 
+    paper_bgcolor = color[0])
 fig.update_traces(showlegend=True)
-config = dict({'scrollZoom': True})"""
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
 
     return code
-
 
 
 

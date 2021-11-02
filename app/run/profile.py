@@ -52,6 +52,10 @@ def profile(request):
     names.remove('structure')
     names.remove('bowings')
 
+
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
+    
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
     structure__unit = input['units']['structure']
 
@@ -82,21 +86,37 @@ def profile(request):
         
 
 
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     globals()['x'].append(x1)
     globals()['y'].append(y1)
-    globals()['name'].append('structure growth direction Z')
-    globals()['name'].append(names[0])
+    globals()['name'].append('structure growth direction Z' + ' (' + structure__unit + ')')
+    globals()['name'].append(names[0] + ' (' + property__unit + ')')
     globals()['unit'].append(structure__unit)
     globals()['unit'].append(property__unit)
 
     code = """fig = px.line(x = x[0], y = y[0])
-fig.update_xaxes(title_text = name[0] + ' (' + unit[0] + ')', gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[1] + ' (' + unit[1] + ')', gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-fig.update_traces(textposition="top right")
-config = dict({'scrollZoom': True})"""
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""  
 
     meta_ = code
     try:

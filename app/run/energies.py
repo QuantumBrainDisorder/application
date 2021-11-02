@@ -80,14 +80,16 @@ def energies(request):
                 del globals()[val]
         return JsonResponse(result_, safe = False)
 
-
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
 
 
-
-
+    ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
+    ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
+    ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
     valence__band__offset__unit = input['units']['valence__band__offset']
@@ -136,6 +138,9 @@ def energies(request):
     del xx
     x1, y1 = meqbd.profile__gridded(structure__thicknesses, valence__band__offset, float(input['space__resolution']))
     x1, y2 = meqbd.profile__gridded(structure__thicknesses, valence__band__offset, float(input['space__resolution']))
+
+
+
 
     energy__gap__dict = ...
     energy__gap__unit = ...
@@ -191,8 +196,11 @@ def energies(request):
         if 'energy__gap' in names:
             y3 = qqbd.adjust__energy__profile__to__wave__vector(y3, el, float(input['wave__vector']))
         
-
-
+    for i in range(0,len(y1)):
+        y1[i] += ep[i]
+        y2[i] += ep[i]
+        if 'energy__gap' in names:
+            y3[i] += ep[i]
 
 
 
@@ -296,7 +304,13 @@ def energies(request):
         y9[i] = [j + y6[i][0] for j in y9[i]]
 
 
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     globals()['x'].append(x1)
     globals()['xx'].append(x4)
@@ -324,6 +338,9 @@ def energies(request):
     globals()['name'].append(names4)
     globals()['name'].append(names5)
     globals()['name'].append(names6)
+    globals()['name'].append('light holes band edge')
+    globals()['name'].append('heavy holes band edge')
+    globals()['name'].append('conduction band edge')
 
     code = get__code(input.keys())
 
@@ -364,70 +381,130 @@ def energies(request):
 
 
 def get__code(flags):
-    code = """fig = go.Figure()"""
+    code = """fig = go.Figure()
+"""
 
     if 'electrons' in flags:
         if 'holes' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y=y[0], name='light holes band'))
-fig.add_trace(go.Scatter(x=x[0], y=y[1], name='heavy holes band'))
-fig.add_trace(go.Scatter(x=x[0], y=y[2], name='electrons band'))"""
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[0],
+    name = name[5]))
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[1],
+    name = name[6]))
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[2],
+    name = name[7]))
+"""
         else:            
             code += """
-fig.add_trace(go.Scatter(x=x[0], y=y[0], name='electrons band'))"""
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[0],
+    name = name[7]))
+"""
     else:
         code += """
-fig.add_trace(go.Scatter(x=x[0], y=y[0], name='light holes band'))
-fig.add_trace(go.Scatter(x=x[0], y=y[1], name='heavy holes band'))"""
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[0],
+    name = name[5]))
+fig.add_trace(go.Scatter(
+    x = x[0],
+    y = y[1],
+    name = name[6]))
+"""
 
 
 
     if 'del__holes__lh' in flags:
         code += """
-for i in range(0,len(yy[0])):
-    fig.add_trace(go.Scatter(x=xx[0], y=yy[0][i], name=name[2][i]))"""
+for i in range(0, len(yy[0])):
+    fig.add_trace(go.Scatter(
+        x = xx[0],
+        y = yy[0][i],
+        name = name[2][i]))"""
         if 'del__holes__hh' in flags:
             code += """
-for i in range(0,len(yy[1])):
-    fig.add_trace(go.Scatter(x=xx[0], y=yy[1][i], name=name[3][i]))"""
+for i in range(0, len(yy[1])):
+    fig.add_trace(go.Scatter(
+        x = xx[0],
+        y = yy[1][i],
+        name = name[3][i]))"""
     elif 'del__holes__hh' in flags:
         code += """
-for i in range(0,len(yy[0])):
-    fig.add_trace(go.Scatter(x=xx[0], y=yy[0][i], name=name[3][i]))"""
+for i in range(0, len(yy[0])):
+    fig.add_trace(go.Scatter(
+        x = xx[0],
+        y = yy[0][i],
+        name = name[3][i]))
+"""
     if 'del__electrons' in flags:
         code += """
-for i in range(0,len(yy[-1])):
-    fig.add_trace(go.Scatter(x=xx[0], y=yy[-1][i], name=name[4][i]))"""
+for i in range(0, len(yy[-1])):
+    fig.add_trace(go.Scatter(
+        x = xx[0],
+        y = yy[-1][i],
+        name = name[4][i]))
+"""
 
 
     if 'del__holes__lh' in flags:
         if 'dwf__holes' in flags:
             code += """
-for i in range(0,len(yyy[0])):
-    fig.add_trace(go.Scatter(x=x[0], y=yyy[0][i], name=name[2][i] + ' wf'))"""
+for i in range(0, len(yyy[0])):
+    fig.add_trace(go.Scatter(
+        x = x[0],
+        y = yyy[0][i],
+        name = name[2][i] + ' wf'))"""
             if 'del__holes__hh' in flags:
                 code += """
-for i in range(0,len(yyy[1])):
-    fig.add_trace(go.Scatter(x=x[0], y=yyy[1][i], name=name[3][i] + ' wf'))"""
+for i in range(0, len(yyy[1])):
+    fig.add_trace(go.Scatter(
+        x = x[0],
+        y = yyy[1][i],
+        name = name[3][i] + ' wf'))"""
     elif 'del__holes__hh' in flags:
         if 'dwf__holes' in flags:
             code += """
-for i in range(0,len(yyy[0])):
-    fig.add_trace(go.Scatter(x=x[0], y=yyy[0][i], name=name[3][i] + ' wf'))"""
+for i in range(0, len(yyy[0])):
+    fig.add_trace(go.Scatter(
+        x = x[0],
+        y = yyy[0][i],
+        name = name[3][i] + ' wf'))"""
     if 'del__electrons' in flags:
         if 'dwf__electrons' in flags:
             code += """
-for i in range(0,len(yyy[-1])):
-    fig.add_trace(go.Scatter(x=x[0], y=yyy[-1][i], name=name[4][i] + ' wf'))"""
+for i in range(0, len(yyy[-1])):
+    fig.add_trace(go.Scatter(
+        x = x[0],
+        y = yyy[-1][i],
+        name = name[4][i] + ' wf'))"""
 
 
 
     code += """
-fig.update_xaxes(title_text = name[0], gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
+
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
 fig.update_traces(showlegend=True)
-config = dict({'scrollZoom': True})"""
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
 
     return code
 

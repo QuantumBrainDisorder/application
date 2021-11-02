@@ -52,10 +52,16 @@ def energy__paraboloids(request):
 
     names = list(input['sheets'].keys())
 
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
 
+
+    ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
+    ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
+    ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
     valence__band__offset__unit = input['units']['valence__band__offset']
@@ -147,7 +153,10 @@ def energy__paraboloids(request):
     x1, y1 = meqbd.profile__gridded(structure__thicknesses, valence__band__offset, float(input['space__resolution']))
     x1, y2 = meqbd.profile__gridded(structure__thicknesses, energy__gap, float(input['space__resolution']))
     y2 = [y1[i] + y2[i] for i in range(0,len(y1))]
-
+        
+    for i in range(0,len(y1)):
+        y1[i] += ep[i]
+        y2[i] += ep[i]
 
     kxb = float(input['wave__vector__parameters__bx'])
     kxt = float(input['wave__vector__parameters__tx'])
@@ -255,8 +264,13 @@ def energy__paraboloids(request):
     paraboloids__el = list(filter(lambda x: x != [], paraboloids__el))
 
 
-
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     globals()['x'].append(paraboloids__lh_)
     globals()['x'].append(paraboloids__hh_)
@@ -268,29 +282,87 @@ def energy__paraboloids(request):
     globals()['z'].append(paraboloids__hh)
     globals()['z'].append(paraboloids__el)
 
-    globals()['name'].append('x-axis wave vector (1/m)')
-    globals()['name'].append('y-axis wave vector (1/m)')
+    globals()['name'].append('X-axis wave vector (1/m)')
+    globals()['name'].append('Y-axis wave vector (1/m)')
     globals()['name'].append('energy (eV)')
 
     code = """fig = go.Figure()
 
-for level in range(0,len(z[0])):
-    fig.add_trace(go.Scatter3d(x=x[0][level], y=y[0][level], z=z[0][level], mode='markers', name='for lh' + str(level+1)))
-for level in range(0,len(z[1])):
-    fig.add_trace(go.Scatter3d(x=x[1][level], y=y[1][level], z=z[1][level], mode='markers', name='for hh' + str(level+1)))
-for level in range(0,len(z[2])):
-    fig.add_trace(go.Scatter3d(x=x[2][level], y=y[2][level], z=z[2][level], mode='markers', name='for el' + str(level+1)))
+for level in range(0, len(z[0])):
+    fig.add_trace(go.Scatter3d(
+        x = x[0][level],
+        y = y[0][level],
+        z = z[0][level],
+        mode = 'markers',
+        name = 'for lh' + str(level + 1)))
+for level in range(0, len(z[1])):
+    fig.add_trace(go.Scatter3d(
+        x = x[1][level],
+        y = y[1][level],
+        z = z[1][level],
+        mode = 'markers',
+        name = 'for hh' + str(level + 1)))
+for level in range(0, len(z[2])):
+    fig.add_trace(go.Scatter3d(
+        x = x[2][level],
+        y = y[2][level],
+        z = z[2][level],
+        mode = 'markers',
+        name='for el' + str(level + 1)))
 
-#for level in range(0,len(z[0])):
-#    fig.add_trace(go.Mesh3d(x=x[0][level],y=y[0][level],z=z[0][level], opacity=0.7, name='for lh' + str(level+1)))
-#for level in range(0,len(z[1])):
-#    fig.add_trace(go.Mesh3d(x=x[1][level],y=y[1][level],z=z[1][level], opacity=0.7, name='for hh' + str(level+1)))
-#for level in range(0,len(z[2])):
-#    fig.add_trace(go.Mesh3d(x=x[2][level],y=y[2][level],z=z[2][level], opacity=0.7, name='for el' + str(level+1)))
+# for level in range(0, len(z[0])):
+#    fig.add_trace(go.Mesh3d(
+#     x = x[0][level],
+#     y = y[0][level],
+#     z = z[0][level],
+#     opacity = 0.7,
+#     name = 'for lh' + str(level + 1)))
+# for level in range(0, len(z[1])):
+#    fig.add_trace(go.Mesh3d(
+#     x = x[1][level],
+#     y = y[1][level],
+#     z = z[1][level],
+#     opacity = 0.7,
+#     name = 'for hh' + str(level + 1)))
+# for level in range(0, len(z[2])):
+#     fig.add_trace(go.Mesh3d(
+#         x = x[2][level],
+#         y = y[2][level],
+#         z = z[2][level], 
+#         opacity = 0.7, 
+#         name = 'for el' + str(level + 1)))
 
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)', scene = dict(xaxis_title='X-axis wave vector (1/m)', yaxis_title='Y-axis wave vector (1/m)', zaxis_title='energy (eV)'))
 fig.update_traces(showlegend=True)
-config = dict({'scrollZoom': True})"""
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0],
+    margin_t = 0,
+    margin_b = 0,
+    margin_l = 0,
+    margin_r = 0,
+    scene = dict(
+        xaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = 'X-axis wave vector (1/m)'),
+        yaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = 'Y-axis wave vector (1/m)'),
+        zaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False,
+            title = 'energy (eV)')))
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
+
+
+
+
+
+
 
     meta_ = code
     sys.stdout = mystdout = io.StringIO()

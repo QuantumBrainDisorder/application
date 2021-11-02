@@ -48,6 +48,7 @@ function set__panel__bar__type(event, type) {
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
       break;
     case "dos": 
       set__panel__bar__type__body(event, type); 
@@ -59,6 +60,7 @@ function set__panel__bar__type(event, type) {
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
       break;
     case "ldos": 
       set__panel__bar__type__body(event, type); 
@@ -70,6 +72,7 @@ function set__panel__bar__type(event, type) {
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
       break;
     case "energies": 
       set__panel__bar__type__body(event, type); 
@@ -81,6 +84,7 @@ function set__panel__bar__type(event, type) {
       panel__form__space__resolution.style.display = "initial";
       panel__form__wave__vector.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
       break;
     case "profile": 
       set__panel__bar__type__body(event, type); 
@@ -96,6 +100,7 @@ function set__panel__bar__type(event, type) {
       panel__form__space__resolution.style.display = 'initial';
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
 
   }
     // properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
@@ -142,6 +147,7 @@ function clean__panel() {
   panel__form__cc.style.display = 'none';
   panel__form__phi.style.display = 'none';
   panel__form__fds.style.display = 'none';
+  panel__form__ep.style.display = 'none';
 }
 
 
@@ -283,7 +289,7 @@ function data__recived(data, name) {
 
           const index = data['plot'].search('</head>');
           var winPrint = window.open('','_blank');
-          winPrint.document.write(data['plot'].slice(0,index) + '<title>' + name + '</title>' + data['plot'].slice(index));
+          winPrint.document.write(data['plot'].slice(0,index) + '<title>' + name + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
           winPrint.document.close();
           winPrint.focus();
         }
@@ -443,7 +449,7 @@ function panel__bar__run__energies(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
   input += '"wave__vector": "' + localStorage.getItem('panel__form__wave__vector__input') + '",'; 
   input_ += '"wave__vector": "1/m",'; 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
@@ -463,6 +469,9 @@ function panel__bar__run__energies(event) {
   else if (panel__form__band__holes__dwf__normalised.checked) {input += '"dwf__normalised__holes": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+  input += '"ep__0": "' + localStorage.getItem("panel__form__ep__0") + '",'; 
+  input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
+  input += '"ep__unit": "' + 'mV' + '",';
 
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
@@ -528,9 +537,14 @@ function panel__bar__run__distribution (event) {
     input  = '"axes": {},';
     input += '"units": {},'
  };
+  input += get__sheet__json('bowings');
 
   // if (panel__form__distribution__al.checked) {input += '"al": "",'}
-  if (panel__form__distribution__ii.checked) {input += '"ii": "",'}
+  if (panel__form__distribution__ii.checked) {
+    input += '"ii": "",';
+    input += '"r": "' + localStorage.getItem('panel__form__distribution__ii__r') + '",';
+    if (panel__form__distribution__ii__pobd.checked) { input += '"pobd": "",';}
+  }
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
 
   input += get__theme();
@@ -574,7 +588,7 @@ function panel__bar__run__energy__paraboloids(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
   input += '"wave__vector": "' + localStorage.getItem('panel__form__wave__vector__input') + '",'; 
   input_ += '"wave__vector__parameters": "1/m",'; 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
@@ -591,6 +605,10 @@ function panel__bar__run__energy__paraboloids(event) {
   input += '"wave__vector__parameters__ry": "' + localStorage.getItem("panel__form__wave__vector__parameters__ry") + '",';  
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+
+  input += '"ep__0": "' + localStorage.getItem("panel__form__ep__0") + '",'; 
+  input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
+  input += '"ep__unit": "' + 'mV' + '",';
 
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
   input += get__theme();
@@ -637,7 +655,7 @@ function panel__bar__run__dos(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
   input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
@@ -661,6 +679,9 @@ function panel__bar__run__dos(event) {
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+  input += '"ep__0": "' + localStorage.getItem("panel__form__ep__0") + '",'; 
+  input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
+  input += '"ep__unit": "' + 'mV' + '",';
 
   if (panel__form__for__lh.checked) {input += '"for__lh": "",'}
   if (panel__form__for__hh.checked) {input += '"for__hh": "",'}
@@ -721,7 +742,7 @@ function panel__bar__run__ldos(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
   input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
@@ -745,6 +766,9 @@ function panel__bar__run__ldos(event) {
   if (panel__form__al__input.checked) {input += '"al": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+  input += '"ep__0": "' + localStorage.getItem("panel__form__ep__0") + '",'; 
+  input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
+  input += '"ep__unit": "' + 'mV' + '",';
 
   if (panel__form__for___lh.checked) {input += '"for___lh": "",'}
   if (panel__form__for___hh.checked) {input += '"for___hh": "",'}
@@ -801,7 +825,7 @@ function panel__bar__run__cos(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
   input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
@@ -833,6 +857,9 @@ function panel__bar__run__cos(event) {
   if (panel__form__cos__merged.checked) {input += '"cos__merged": "",'}
 
   input += '"temperature": "' + localStorage.getItem("panel__form__temperature__input") + '",'; 
+  input += '"ep__0": "' + localStorage.getItem("panel__form__ep__0") + '",'; 
+  input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
+  input += '"ep__unit": "' + 'mV' + '",';     
 
   input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
   input += get__theme();
@@ -916,7 +943,7 @@ function panel__bar__run__cc(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
   input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 
@@ -1009,7 +1036,7 @@ function panel__bar__run__phi(event) {
   input  += '"sheets": {' + input.slice(0, input.length - 1) + '},';
 
   input += '"space__resolution": "' + localStorage.getItem('panel__form__space__resolution__input') + '",'; 
-  input_ += '"space__resolution": "m",'; 
+  input_ += '"space__resolution": "nm",'; 
 
   input += '"energy__levels__limit__top": "' + localStorage.getItem("panel__form__band__parameters__tle") + '",'; 
   input += '"energy__levels__limit__bottom": "' + localStorage.getItem("panel__form__band__parameters__ble") + '",'; 

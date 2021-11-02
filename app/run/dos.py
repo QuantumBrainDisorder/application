@@ -74,9 +74,16 @@ def dos(request):
                 del globals()[val]
         return JsonResponse(result_, safe = False)
 
+    multiplier = units_QBD.standardise(input['units']['space__resolution']).value
+    input['space__resolution'] = float(input['space__resolution']) * multiplier
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
+
+    ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
+    ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
+    ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
+
     structure__length = 0
     for i in structure__thicknesses:    structure__length += i
 
@@ -189,6 +196,14 @@ def dos(request):
         xx, el = meqbd.profile__gridded(structure__thicknesses, effective__mass__el, float(input['space__resolution']))
         y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
 
+    for i in range(0,len(y1)):
+        if 'for__lh' in input.keys():
+            y1[i] += ep[i]
+        if 'for__hh' in input.keys():
+            y2[i] += ep[i]
+        if 'energy__gap' in input.keys():
+            y3[i] += ep[i]
+
 
 
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
@@ -245,7 +260,7 @@ def dos(request):
             'merged': 'el DOS 2D & DOS 3D x L'
             }
         }
-    name = [name, 'energy (eV)', 'DOS (m^-2*J^-1)']
+    name = [name, 'energy (eV)', 'DOS (m-2J-1)']
 
     vbo__temp = [-i for i in valence__band__offset]
     index = vbo__temp.index(max(vbo__temp))
@@ -299,7 +314,13 @@ def dos(request):
                 base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
             base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
        
-    globals()['color'] = colors['--theme4']
+    globals()['color'] = {
+        0: colors['--theme0'],
+        1: colors['--theme1'],
+        2: colors['--theme2'],
+        3: colors['--theme3'],
+        4: colors['--theme4']
+        }
     # globals()['text'] = common
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     globals()['x'].append([i / multiplier for i in dos__grid])
@@ -382,47 +403,100 @@ def get__code(flags):
     code = """fig = go.Figure()"""
 
     if 'dos__2d' in flags:
+        code += """
+"""
         if 'for__lh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['2d'], mode='lines', name=name[0]['lh']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['lh']['2d'], 
+    mode = 'lines', 
+    name = name[0]['lh']['2d']))"""
         if 'for__hh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['2d'], mode='lines', name=name[0]['hh']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['hh']['2d'], 
+    mode = 'lines', 
+    name = name[0]['hh']['2d']))"""
         if 'for__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['2d'], mode='lines', name=name[0]['el']['2d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['2d'], 
+    mode = 'lines', 
+    name = name[0]['el']['2d']))"""
+
 
     if 'dos__3d' in flags:
+        code += """
+"""
         if 'for__lh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['3d'], mode='lines', name=name[0]['lh']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['lh']['3d'], 
+    mode = 'lines', 
+    name = name[0]['lh']['3d']))"""
         if 'for__hh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['3d'], mode='lines', name=name[0]['hh']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['hh']['3d'], 
+    mode = 'lines', 
+    name = name[0]['hh']['3d']))"""
         if 'for__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['3d'], mode='lines', name=name[0]['el']['3d']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['3d'], 
+    mode = 'lines', 
+    name = name[0]['el']['3d']))"""
+
+
+
 
     if 'dos__merged' in flags:
+        code += """
+"""
         if 'for__lh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['lh']['merged'], mode='lines', name=name[0]['lh']['merged']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['lh']['merged'], 
+    mode = 'lines', 
+    name = name[0]['lh']['merged']))"""
         if 'for__hh' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['hh']['merged'], mode='lines', name=name[0]['hh']['merged']))"""
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['hh']['merged'], 
+    mode = 'lines', 
+    name = name[0]['hh']['merged']))"""
         if 'for__el' in flags:
             code += """
-fig.add_trace(go.Scatter(x=x[0], y = y['el']['merged'], mode='lines', name=name[0]['el']['merged']))"""
-
+fig.add_trace(go.Scatter(
+    x = x[0], 
+    y = y['el']['merged'], 
+    mode = 'lines', 
+    name = name[0]['el']['merged']))"""
 
     code += """
-fig.update_xaxes(title_text = name[1], gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[2], gridcolor = color, zerolinecolor = color)
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-fig.update_traces(showlegend=True)"""
+
+fig.update_xaxes(
+    title_text = name[1],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[2],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'doubleClick': 'reset+autosize'})"""
 
     return code
-
-
-
-

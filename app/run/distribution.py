@@ -30,7 +30,6 @@ color = None
 
 def distribution(request):
     glob_ = list(globals().keys()).copy()
-    sys.stdout = mystdout = io.StringIO()
     input = json.load(request)
     input = json.loads(input['input'])
 
@@ -44,12 +43,18 @@ def distribution(request):
     if code_ == None: code_ = ''
 
     if len(input['axes']) == 0:
+        sys.stdout = mystdout = io.StringIO()
         if code_ != '':
             try:
                 exec(code_, globals())
             except Exception as e:
                 error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
     else:
+
+
+
+
+
         colors = input['theme']
         names = list(input['axes'].keys())
         properties = {}
@@ -62,47 +67,60 @@ def distribution(request):
                 if not material in properties[name].keys():
                     common.remove(material)
                     break
-        globals()['color'] = colors['--theme4']
+
+        # print('-------------------',sys.stderr)
+        # print(common,sys.stderr)
+        # print('-------------------',sys.stderr)
+        # bowings = input['bowings']
+        # if not 'pobd' in input:
+        #     for name in names:
+        #         if name in bowings.keys():
+        #             for material in common:
+        #                 if not material in bowings[name].keys():
+        #                     bowings[name][material] = 0
+        #                 else:
+        #                     bowings[name][material] = float(bowings[name][material])
+        #         else:
+        #             bowings[name] = {}
+        #             for material in common:
+        #                 bowings[name][material] = 0
+        #         print(bowings[name],sys.stderr)
+        # print('-------------------',sys.stderr)
+
+        x = {}
+        # if 'ii' in input:
+        #     print(input['r'],sys.stderr)
+        #     if ('pobd' in input):
+        #         print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',sys.stderr)
+        #     else:
+        #         pass
+
+
+
+        globals()['color'] = {
+            0: colors['--theme0'],
+            1: colors['--theme1'],
+            2: colors['--theme2'],
+            3: colors['--theme3'],
+            4: colors['--theme4']
+            }
         globals()['text'] = common
         for i in range(0,len(names)):
             globals()['x'].append([float(properties[names[i]][material]) for material in common])
-            globals()['name'].append(names[i])
+            globals()['name'].append(names[i]  + ' (' + input['units'][names[i]] + ')')
             globals()['unit'].append(input['units'][names[i]])
 
-        code = None
-        if len(input['axes']) == 1:
-            code = """fig = plotly.express.histogram(x = text, y = x[0])
-fig.update_xaxes(title_text = "Material")
-fig.update_yaxes(title_text = name[0] + ' (' + unit[0] + ')')
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-config = dict({'scrollZoom': True})"""
-        elif len(input['axes']) == 2:
-            code = """fig = plotly.express.scatter(x=x[0], y=x[1], text=text)
-fig.update_xaxes(title_text = name[0] + ' (' + unit[0] + ')', gridcolor = color, zerolinecolor = color)
-fig.update_yaxes(title_text = name[1] + ' (' + unit[1] + ')', gridcolor = color, zerolinecolor = color)
-fig.update_traces(textposition="bottom right")
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
-config = dict({'scrollZoom': True})"""     
-        elif len(input['axes']) == 3:
-            code = """ax_0 = name[0] + ' (' + unit[0] + ')'
-ax_1 = name[1] + ' (' + unit[1] + ')'
-ax_2 = name[2] + ' (' + unit[2] + ')'
-labels = {'x': ax_0, 'y': ax_1, 'z': ax_2}
-fig = plotly.express.scatter_3d(x=x[0], y=x[1], z=x[2], text=text, labels=labels)
-fig.update_traces(textposition="bottom right")
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color='#000000', paper_bgcolor='rgba(0,0,0,0)')
-config = dict({'scrollZoom': True})"""
-        elif len(input['axes']) == 4:
-            code = """ax_0 = name[0] + ' (' + unit[0] + ')'
-ax_1 = name[1] + ' (' + unit[1] + ')'
-ax_2 = name[2] + ' (' + unit[2] + ')'
-ax_3 = name[3] + ' (' + unit[3] + ')'
-labels = {'x': ax_0, 'y': ax_1, 'z': ax_2, 'color': ax_3}
-fig = plotly.express.scatter_3d(x=x[0], y=x[1], z=x[2], color=x[3], text=text, labels=labels)
-fig.update_traces(textposition="bottom right")
-fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color='#000000', paper_bgcolor='rgba(0,0,0,0)')
-config = dict({'scrollZoom': True})"""
+
+
+
+
+
+
+
+        code = getcode(len(input['axes']))
+   
         meta_ = code
+        sys.stdout = mystdout = io.StringIO()
         try:
             exec(code + '\n' + code_, globals())
         except Exception as e:
@@ -139,8 +157,102 @@ config = dict({'scrollZoom': True})"""
 
 
 
+def getcode(ax):
+    code = None
 
+    if ax == 1:
+        code = """fig = plotly.express.histogram(x = text, y = x[0])
+fig.update_xaxes(title_text = "Material")
+fig.update_yaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
+    elif ax == 2:
+        code = """fig = plotly.express.scatter(x=x[0], y=x[1], text=text)
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_traces(textposition = 'bottom right')
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color=color[4],
+    paper_bgcolor=color[0])
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""   
+    elif ax == 3:
+        code = """fig = plotly.express.scatter_3d(
+    x = x[0],
+    y = x[1],
+    z = x[2],
+    text = text,
+    labels = {'x': name[0], 'y': name[1], 'z': name[2]})
+fig.update_traces(textposition='bottom right')
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0],
+    margin_t = 0,
+    margin_b = 0,
+    margin_l = 0,
+    margin_r = 0,
+    scene = dict(
+        xaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False),
+        yaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False),
+        zaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False)))
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""  
+    elif ax == 4:
+        code = """fig = plotly.express.scatter_3d(
+    x=x[0],
+    y=x[1],
+    z=x[2],
+    color=x[3],
+    text=text,
+    labels = {'x': name[0], 'y': name[1], 'z': name[2], 'color': name[3]})
+fig.update_traces(textposition = 'bottom right')
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0],
+    margin_t = 0,
+    margin_b = 0,
+    margin_l = 0,
+    margin_r = 0,
+    scene = dict(
+        xaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False),
+        yaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False),
+        zaxis = dict(
+            gridcolor = '#808080',
+            showbackground = False)))
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""  
 
+    return code 
 
 
 

@@ -118,3 +118,38 @@ properties__textarea.onkeypress = function (event) {
   }
 }
 
+
+
+
+
+
+
+
+
+
+properties__textarea.ondrop = function(event) {
+  event.preventDefault();
+  var file = event.dataTransfer.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(e) { 
+    properties__textarea.value = e.target.result; 
+    localStorage.setItem("property__" + properties__property.dataset.name, properties__textarea.value);
+  }
+  reader.readAsText(file, "UTF-8");
+}
+
+
+
+properties__input.addEventListener("input", properties__inputed);
+function properties__inputed(event) {
+  var fr=new FileReader();
+  fr.onload = function(e) { 
+    properties__textarea.value = e.target.result; 
+    localStorage.setItem("property__" + properties__property.dataset.name, properties__textarea.value);
+  }
+  fr.readAsText(this.files[0])
+}
+properties__textarea.ondblclick = function(event){ 
+  properties__input.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+}

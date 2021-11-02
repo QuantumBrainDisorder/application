@@ -160,3 +160,135 @@
     text-overflow: ellipsis;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.panel__form__space__resolution__label_sub {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-left: calc(var(--fsize) * 5 / 4);
+    margin-top: calc(var(--fsize) * 5 / 16);
+    cursor: default;
+    font-size: calc(0.75 * var(--fsize));
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.panel__form__space__resolution__input_sub {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    font-size: calc(0.75 * var(--fsize));
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+
+
+
+
+
+
+.panel__form__distribution__ii__pobd__label_sub {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    margin-left: calc(var(--fsize) * 5 / 4);
+    padding-left: calc(var(--fsize) * 5 / 4);
+    cursor: pointer;
+    font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.panel__form__distribution__ii__pobd__label_sub input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.panel__form__distribution__ii__pobd__label_sub:hover input ~ .panel__form__band__electrons__span_sub {
+    background-color: var(--theme2);   
+}
+
+.panel__form__distribution__ii__pobd__label_sub input:checked ~ .panel__form__band__electrons__span_sub {
+    background-color: var(--theme1);
+}
+
+.panel__form__band__electrons__span_sub:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.panel__form__distribution__ii__pobd__label_sub input:checked ~ .panel__form__band__electrons__span_sub:after {
+    display: block;
+}
+
+.panel__form__distribution__ii__pobd__label_sub .panel__form__band__electrons__span_sub:after {
+    left: calc(9 * var(--fsize) / 25);
+    top: calc(5 * var(--fsize) / 25);
+    width: calc(5 * var(--fsize) / 25);
+    height: calc(10 * var(--fsize) / 25);
+    border: solid var(--theme4);
+    border-width: 0 calc(3 * var(--fsize) / 25) calc(3 * var(--fsize) / 25) 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

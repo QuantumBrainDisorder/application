@@ -18,6 +18,8 @@ urlpatterns = [
     path('site__icon_.ico', views.site__icon_, name="site__icon_"),
     path('site__icon.ico', views.site__icon, name="site__icon"),
     
+    path('set__default__structure', views.set__default__structure, name="set__default__structure"),
+    
     path('docs', views.docs, name="docs"),
 
     path('run__distribution', distribution.distribution, name="distribution"),
