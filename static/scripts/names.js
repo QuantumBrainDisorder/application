@@ -161,11 +161,13 @@ const panel__form__temperature = document.getElementById("panel__form__temperatu
 const panel__form__temperature__input = document.getElementById("panel__form__temperature__input");
 
 const panel__form__fds = document.getElementById("panel__form__fds");
-const panel__form__fds__ho = document.getElementById("panel__form__fds__ho");
-const panel__form__fds__el = document.getElementById("panel__form__fds__el");
-const panel__form__fds__et = document.getElementById("panel__form__fds__et");
-const panel__form__fds__eb = document.getElementById("panel__form__fds__eb");
-const panel__form__fds__er = document.getElementById("panel__form__fds__er");
+const panel__form__fds__epr = document.getElementById("panel__form__fds__epr");
+const panel__form__fds__dos = document.getElementById("panel__form__fds__dos");
+const panel__form__fds__for__el = document.getElementById("panel__form__fds__for__el");
+const panel__form__fds__for__ho = document.getElementById("panel__form__fds__for__ho");
+// const panel__form__fds__et = document.getElementById("panel__form__fds__et");
+// const panel__form__fds__eb = document.getElementById("panel__form__fds__eb");
+// const panel__form__fds__er = document.getElementById("panel__form__fds__er");
 
 const panel__form__cc = document.getElementById("panel__form__cc");
 const panel__form__cc__ho = document.getElementById("panel__form__cc__ho");

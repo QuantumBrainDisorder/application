@@ -229,6 +229,10 @@ def energies(request):
     y6 = []
     if 'del__electrons' in input.keys():
         y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
+        print(y6, sys.stderr)
+        print(elb, sys.stderr)
+        print(elt, sys.stderr)
+        print(elr, sys.stderr)
         # y6 = [[i / multiplier,i / multiplier] for i in y6]
         # for i in range(1,len(y6) + 1):
         #     names6.append('el' + str(i))
@@ -243,7 +247,9 @@ def energies(request):
         #     y7.append(qqbd.eigenfunctions_1(x1, [-i for i in y1], lh, ene))
         #     y7[-1] = [-i for i in y7[-1]]
         for ene in y4:
-            y7.append(qqbd.eigenfunctions_1(x1, [-i for i in y1], lh, ene))
+            y_ = [-i for i in y1]
+            y_min = min(y_[2:-2])
+            y7.append(qqbd.eigenfunctions_1(x1, y_, lh, ene, y_.index(y_min,2,len(y_)-2)))
             y7[-1] = [-i for i in y7[-1]]
 
     y8 = []
@@ -253,7 +259,9 @@ def energies(request):
         #     y8.append(qqbd.eigenfunctions_1(x1, [-i for i in y2], hh, ene))
         #     y8[-1] = [-i for i in y8[-1]]
         for ene in y5:
-            y8.append(qqbd.eigenfunctions_1(x1, [-i for i in y2], hh, ene))
+            y_ = [-i for i in y2]
+            y_min = min(y_[2:-2])
+            y8.append(qqbd.eigenfunctions_1(x1, y_, hh, ene, y_.index(y_min,2,len(y_)-2)))
             y8[-1] = [-i for i in y8[-1]]
 
     y9 = []
@@ -262,7 +270,8 @@ def energies(request):
         # for ene in enes:
         #     y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene))
         for ene in y6:
-            y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene))
+            y_min = min(y3[2:-2])
+            y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene,  y3.index(y_min,2,len(y3)-2)))
             
 
 

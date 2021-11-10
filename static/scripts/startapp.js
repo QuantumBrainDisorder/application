@@ -256,15 +256,21 @@ if (localStorage.getItem('panel__form__cos__merged') != null) {
 }
 
 
-if (localStorage.getItem('panel__form__fds__ho') != null) {
-    panel__form__fds__ho.checked = true;
+if (localStorage.getItem('panel__form__fds__epr') != null) {
+    panel__form__fds__epr.checked = true;
 };
-if (localStorage.getItem('panel__form__fds__el') != null) {
-    panel__form__fds__el.checked = true;
+if (localStorage.getItem('panel__form__fds__dos') != null) {
+    panel__form__fds__dos.checked = true;
 };
-panel__form__fds__et.textContent = localStorage.getItem('panel__form__fds__et');
-panel__form__fds__eb.textContent = localStorage.getItem('panel__form__fds__eb');
-panel__form__fds__er.textContent = localStorage.getItem('panel__form__fds__er');
+if (localStorage.getItem('panel__form__fds__for__el') != null) {
+    panel__form__fds__for__el.checked = true;
+};
+if (localStorage.getItem('panel__form__fds__for__ho') != null) {
+    panel__form__fds__for__ho.checked = true;
+};
+// panel__form__fds__et.textContent = localStorage.getItem('panel__form__fds__et');
+// panel__form__fds__eb.textContent = localStorage.getItem('panel__form__fds__eb');
+// panel__form__fds__er.textContent = localStorage.getItem('panel__form__fds__er');
 
 panel__form__qfl__ho.textContent = localStorage.getItem('panel__form__qfl__ho');
 panel__form__qfl__el.textContent = localStorage.getItem('panel__form__qfl__el');

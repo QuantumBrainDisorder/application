@@ -378,6 +378,31 @@ def cos(request):
         }
     multiplier = units_QBD.standardise(structure__unit).value
     globals()['x'].append([i / multiplier for i in x1])
+    multiplier = 1e-6
+    
+    if 'for__lh' in input.keys():
+        if 'cos__2d' in input.keys():
+            cos__lh__2d = [i * multiplier for i in cos__lh__2d]
+        if 'cos__3d' in input.keys():
+            cos__lh__3d = [i * multiplier for i in cos__lh__3d]
+        if 'cos__merged' in input.keys():
+            cos__lh__merged = [i * multiplier for i in cos__lh__merged]
+        
+    if 'for__hh' in input.keys():
+        if 'cos__2d' in input.keys():
+            cos__hh__2d = [i * multiplier for i in cos__hh__2d]
+        if 'cos__3d' in input.keys():
+            cos__hh__3d = [i * multiplier for i in cos__hh__3d]
+        if 'cos__merged' in input.keys():
+            cos__hh__merged = [i * multiplier for i in cos__hh__merged]
+        
+    if 'for__el' in input.keys():
+        if 'cos__2d' in input.keys():
+            cos__el__2d = [i * multiplier for i in cos__el__2d]
+        if 'cos__3d' in input.keys():
+            cos__el__3d = [i * multiplier for i in cos__el__3d]
+        if 'cos__merged' in input.keys():
+            cos__el__merged = [i * multiplier for i in cos__el__merged]
     globals()['y'] = {
         'lh': {
             '2d': cos__lh__2d,
@@ -415,7 +440,7 @@ def cos(request):
             }
         }
 
-    globals()['name'] = [name, 'structure growth direction Z (' + structure__unit + ')', 'states concentration n* (m-3)']
+    globals()['name'] = [name, 'structure growth direction Z (' + structure__unit + ')', 'states concentration n* (cm-3)']
 
     code = get__code(input.keys())
 

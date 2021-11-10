@@ -326,6 +326,40 @@ def ldos(request):
     globals()['x'].append([i / multiplier for i in x1])
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     globals()['y'].append([i / multiplier for i in ldos__grid])
+    multiplier = 1e-6 * units_QBD.standardise(valence__band__offset__unit).value
+    
+    if 'for___lh' in input.keys():
+        if 'ldos__2d' in input.keys():
+            for j in range(0,len(ldos__lh__2d)):
+                ldos__lh__2d[j] = [i * multiplier for i in ldos__lh__2d[j]]
+        if 'ldos__3d' in input.keys():
+            for j in range(0,len(ldos__lh__3d)):
+                ldos__lh__3d[j] = [i * multiplier for i in ldos__lh__3d[j]]
+        if 'ldos__merged' in input.keys():
+            for j in range(0,len(ldos__lh__merged)):
+                ldos__lh__merged[j] = [i * multiplier for i in ldos__lh__merged[j]]
+        
+    if 'for___hh' in input.keys():
+        if 'ldos__2d' in input.keys():
+            for j in range(0,len(ldos__hh__2d)):
+                ldos__hh__2d[j] = [i * multiplier for i in ldos__hh__2d[j]]
+        if 'ldos__3d' in input.keys():
+            for j in range(0,len(ldos__hh__3d)):
+                ldos__hh__3d[j] = [i * multiplier for i in ldos__hh__3d[j]]
+        if 'ldos__merged' in input.keys():
+            for j in range(0,len(ldos__hh__merged)):
+                ldos__hh__merged[j] = [i * multiplier for i in ldos__hh__merged[j]]
+        
+    if 'for___el' in input.keys():
+        if 'ldos__2d' in input.keys():
+            for j in range(0,len(ldos__el__2d)):
+                ldos__el__2d[j] = [i * multiplier for i in ldos__el__2d[j]]
+        if 'ldos__3d' in input.keys():
+            for j in range(0,len(ldos__el__3d)):
+                ldos__el__3d[j] = [i * multiplier for i in ldos__el__3d[j]]
+        if 'ldos__merged' in input.keys():
+            for j in range(0,len(ldos__el__merged)):
+                ldos__el__merged[j] = [i * multiplier for i in ldos__el__merged[j]]
     globals()['z'] = {
         'lh': {
             '2d': ldos__lh__2d,
@@ -343,7 +377,7 @@ def ldos(request):
             'merged': ldos__el__merged
             }
         }
-    globals()['name'] = ['energy (' + valence__band__offset__unit + ')', 'structure growth direction Z (' + structure__unit + ')', 'LDOS (m-3J-1)']
+    globals()['name'] = ['energy (' + valence__band__offset__unit + ')', 'structure growth direction Z (' + structure__unit + ')', 'LDOS (cm-3eV-1)']
 
     code = get__code(input.keys())
 

@@ -226,9 +226,10 @@ def dos(request):
     while ky[-1] < kyt: ky.append(ky[-1] + kyr)
     
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    dos__grid__t = float(input['energy__dos__t']) * multiplier
+    print(input.keys(),sys.stderr)
     dos__grid__b = float(input['energy__dos__b']) * multiplier
     dos__grid__r = float(input['energy__dos__r']) * multiplier
+    dos__grid__t = float(input['energy__dos__t']) * multiplier
     dos__grid = [dos__grid__b]
     maxgrid = dos__grid__t - dos__grid__r
     while dos__grid[-1] <= maxgrid: dos__grid.append(dos__grid[-1] + dos__grid__r)
@@ -260,7 +261,7 @@ def dos(request):
             'merged': 'el DOS 2D & DOS 3D x L'
             }
         }
-    name = [name, 'energy (eV)', 'DOS (m-2J-1)']
+    name = [name, 'energy (eV)', 'DOS (cm-2eV-1)']
 
     vbo__temp = [-i for i in valence__band__offset]
     index = vbo__temp.index(max(vbo__temp))
@@ -274,13 +275,13 @@ def dos(request):
             base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
             dos__lh__3d.reverse()
         if 'dos__merged' in input.keys():
-            if dos__el__2d == ...:
+            if dos__lh__2d == ...:
                 dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
                 dos__lh__2d.reverse()
-            if dos__el__3d == ...:
+            if dos__lh__3d == ...:
                 base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
                 dos__lh__3d.reverse()
-        base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
+            base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
     
     if 'for__hh' in input.keys():
         if 'dos__2d' in input.keys():
@@ -296,7 +297,7 @@ def dos(request):
             if dos__hh__3d == ...:
                 base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
                 dos__hh__3d.reverse()
-        base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
+            base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
     
     if 'for__el' in input.keys():
         temp = []
@@ -324,6 +325,32 @@ def dos(request):
     # globals()['text'] = common
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     globals()['x'].append([i / multiplier for i in dos__grid])
+    multiplier = 1e-4 * units_QBD.standardise(valence__band__offset__unit).value
+    
+    if 'for__lh' in input.keys():
+        if 'dos__2d' in input.keys():
+            dos__lh__2d = [i * multiplier for i in dos__lh__2d]
+        if 'dos__3d' in input.keys():
+            dos__lh__3d = [i * multiplier for i in dos__lh__3d]
+        if 'dos__merged' in input.keys():
+            dos__lh__merged = [i * multiplier for i in dos__lh__merged]
+        
+    if 'for__hh' in input.keys():
+        if 'dos__2d' in input.keys():
+            dos__hh__2d = [i * multiplier for i in dos__hh__2d]
+        if 'dos__3d' in input.keys():
+            dos__hh__3d = [i * multiplier for i in dos__hh__3d]
+        if 'dos__merged' in input.keys():
+            dos__hh__merged = [i * multiplier for i in dos__hh__merged]
+        
+    if 'for__el' in input.keys():
+        if 'dos__2d' in input.keys():
+            dos__el__2d = [i * multiplier for i in dos__el__2d]
+        if 'dos__3d' in input.keys():
+            dos__el__3d = [i * multiplier for i in dos__el__3d]
+        if 'dos__merged' in input.keys():
+            dos__el__merged = [i * multiplier for i in dos__el__merged]
+
     globals()['y'] = {
         'lh': {
             '2d': dos__lh__2d,
@@ -497,6 +524,7 @@ fig.update_layout(
     paper_bgcolor = color[0])
 fig.update_traces(showlegend=True)
 config = dict({
+    'scrollZoom': True,
     'doubleClick': 'reset+autosize'})"""
 
     return code
