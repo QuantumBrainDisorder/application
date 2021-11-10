@@ -26,26 +26,26 @@ panel__form__fds__dos.onclick = function(event) {
 
 
 
-panel__form__fds__for__el.onclick = function(event) {
-  if (localStorage.getItem('panel__form__fds__for__el') == null) {
-      localStorage.setItem('panel__form__fds__for__el', 'true');
-  }
-  else {
-      localStorage.removeItem("panel__form__fds__for__el");
-  }
-}
+// panel__form__fds__for__el.onclick = function(event) {
+//   if (localStorage.getItem('panel__form__fds__for__el') == null) {
+//       localStorage.setItem('panel__form__fds__for__el', 'true');
+//   }
+//   else {
+//       localStorage.removeItem("panel__form__fds__for__el");
+//   }
+// }
 
 
 
 
-panel__form__fds__for__ho.onclick = function(event) {
-  if (localStorage.getItem('panel__form__fds__for__ho') == null) {
-      localStorage.setItem('panel__form__fds__for__ho', 'true');
-  }
-  else {
-      localStorage.removeItem("panel__form__fds__for__ho");
-  }
-}
+// panel__form__fds__for__ho.onclick = function(event) {
+//   if (localStorage.getItem('panel__form__fds__for__ho') == null) {
+//       localStorage.setItem('panel__form__fds__for__ho', 'true');
+//   }
+//   else {
+//       localStorage.removeItem("panel__form__fds__for__ho");
+//   }
+// }
 
 
 

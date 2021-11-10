@@ -118,8 +118,8 @@ if (localStorage.getItem("local__storage__initialized") == null) {
 
         localStorage.setItem("panel__form__temperature__input", '300');
         
-        localStorage.setItem("panel__form__fds__for__ho", 'true');
-        localStorage.setItem("panel__form__fds__for__el", 'true');
+        // localStorage.setItem("panel__form__fds__for__ho", 'true');
+        // localStorage.setItem("panel__form__fds__for__el", 'true');
         // localStorage.setItem("panel__form__fds__et", '3');
         // localStorage.setItem("panel__form__fds__eb", '-1.2');
         // localStorage.setItem("panel__form__fds__er", '0.06');

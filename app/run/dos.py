@@ -226,7 +226,6 @@ def dos(request):
     while ky[-1] < kyt: ky.append(ky[-1] + kyr)
     
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    print(input.keys(),sys.stderr)
     dos__grid__b = float(input['energy__dos__b']) * multiplier
     dos__grid__r = float(input['energy__dos__r']) * multiplier
     dos__grid__t = float(input['energy__dos__t']) * multiplier

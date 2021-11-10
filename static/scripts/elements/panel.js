@@ -37,6 +37,7 @@ function set__panel__bar__type(event, type) {
       panel__form__orint.style.display = "initial";
       panel__form__fds.style.display = 'initial';
       // panel__form__qfl.style.display = 'initial';
+      panel__form__band__parameters.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__dos__parameters.style.display = 'initial';
@@ -293,7 +294,7 @@ function data__recived(data, name) {
 
           const index = data['plot'].search('</head>');
           var winPrint = window.open('','_blank');
-          console.log(data['plot'].slice(0,index) + '<title>' + 'Total Energies' + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
+          // console.log(data['plot'].slice(0,index) + '<title>' + 'Total Energies' + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
           winPrint.document.write(data['plot'].slice(0,index) + '<title>' + name + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
           winPrint.document.close();
           winPrint.focus();

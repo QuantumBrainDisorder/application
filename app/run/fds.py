@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import io
 import pandas as pd
 import plotly.graph_objects
+import plotly.subplots as ps
 import plotly.io
 import plotly
 import plotly.express as px
@@ -23,10 +24,9 @@ import numpy as np
 
 fig, config, names = None, None, None
 x = []
-xx = []
-y = []
-yy = []
-yyy = []
+y = {}
+yy = {}
+yyy = {}
 name = []
 unit = []
 text = None
@@ -40,10 +40,9 @@ def fds(request):
     plot_, error_, result_, meta_ = None, None, None, None
     globals()['fig'], globals()['config'] = None, None
     globals()['x'] = []
-    globals()['y'] = []
-    globals()['xx'] = []
-    globals()['yy'] = []
-    globals()['yyy'] = []
+    globals()['y'] = {}
+    globals()['yy'] = {}
+    globals()['yyy'] = {}
     globals()['name'] = []
     globals()['unit'] = []
 
@@ -55,41 +54,19 @@ def fds(request):
 
     names = list(input['sheets'].keys())
 
-
-
-
-    if not 'valence__band__offset' in names:
-        sys.stdout = mystdout = io.StringIO()
-        try:
-            exec(code_, globals())
-        except Exception as e:
-            error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
-
-        if globals()['fig'] != None:
-            try:
-                if error_ != '':    plot_ = plotly.io.to_html(globals()['fig'], globals()['config'])
-            except Exception as e:
-                plot_ = None
-                error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
-
-        output_ = mystdout.getvalue()
-        result_ = {"plot": plot_, "meta": meta_, "output": output_, "error": error_}
-        
-        for val in list(globals().keys()).copy():
-            if not val in glob_:
-                del globals()[val]
-        return JsonResponse(result_, safe = False)
-
     multiplier = units_QBD.standardise(input['units']['space__resolution']).value
     input['space__resolution'] = float(input['space__resolution']) * multiplier
 
     structure__unit = input['units']['structure']
     structure__materials, structure__thicknesses = meqbd.read__sheet(input['sheets']['structure'], input['units']['structure'])
 
-
     ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
     ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
     ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
+
+    structure__length = 0
+    for i in structure__thicknesses:    structure__length += i
+
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
     valence__band__offset__unit = input['units']['valence__band__offset']
@@ -104,8 +81,12 @@ def fds(request):
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
     valence__band__offset = [val * multiplier for val in valence__band__offset]
 
+
     effective__mass__unit = input['units']['effective__mass']
 
+    effective__mass__lh__dict = ...
+    effective__mass__lh__bowings = ...
+    effective__mass__lh = []
     effective__mass__lh__dict = input['sheets']['effective__mass']['lh']
     effective__mass__lh__dict = {key: float(value) for (key, value) in effective__mass__lh__dict.items()}
     effective__mass__lh__bowings = ...
@@ -113,34 +94,38 @@ def fds(request):
         effective__mass__lh__bowings = input['sheets']['bowings']['effective__mass']['lh']
     except Exception:
         effective__mass__lh__bowings = {}
-    effective__mass__lh = []
     for material in structure__materials:   
         effective__mass__lh.append(meqbd.interpolation__exception(material, effective__mass__lh__dict, effective__mass__lh__bowings))
     multiplier = units_QBD.standardise(effective__mass__unit).value
     effective__mass__lh = [val * multiplier for val in effective__mass__lh]
 
+
     effective__mass__hh__dict = ...
+    effective__mass__hh__bowings = ...
+    effective__mass__hh = []
     effective__mass__hh__dict = input['sheets']['effective__mass']['hh']
     effective__mass__hh__dict = {key: float(value) for (key, value) in effective__mass__hh__dict.items()}
-    effective__mass__hh__bowings = ...
     try:
         effective__mass__hh__bowings = input['sheets']['bowings']['effective__mass']['hh']
     except Exception:
         effective__mass__hh__bowings = {}
-    effective__mass__hh = []
     for material in structure__materials: 
         effective__mass__hh.append(meqbd.interpolation__exception(material, effective__mass__hh__dict, effective__mass__hh__bowings))
     multiplier = units_QBD.standardise(effective__mass__unit).value
     effective__mass__hh = [val * multiplier for val in effective__mass__hh]
 
+
+    lh = ...
+    hh = ...
+    y1 = ...
+    y2 = ...
+    xx = ...
     xx, lh = meqbd.profile__gridded(structure__thicknesses, effective__mass__lh, float(input['space__resolution']))
     xx, hh = meqbd.profile__gridded(structure__thicknesses, effective__mass__hh, float(input['space__resolution']))
+
     del xx
     x1, y1 = meqbd.profile__gridded(structure__thicknesses, valence__band__offset, float(input['space__resolution']))
     x1, y2 = meqbd.profile__gridded(structure__thicknesses, valence__band__offset, float(input['space__resolution']))
-
-
-
 
     energy__gap__dict = ...
     energy__gap__unit = ...
@@ -150,56 +135,44 @@ def fds(request):
     effective__mass__el__bowings = ...
     effective__mass__el = []
     y3, el = ..., ...
-    if 'energy__gap' in names:
-        alpha__varshni__dict = cqbd.read__sheet(input['sheets']['alpha__varshni'], 'dict')
-        beta__varshni__dict = cqbd.read__sheet(input['sheets']['beta__varshni'], 'dict')
-        T = float(input['temperature'])
-        energy__gap__dict = cqbd.read__sheet(input['sheets']['energy__gap'], 'dict')
+            
+    alpha__varshni__dict = cqbd.read__sheet(input['sheets']['alpha__varshni'], 'dict')
+    beta__varshni__dict = cqbd.read__sheet(input['sheets']['beta__varshni'], 'dict')
+    T = float(input['temperature'])
 
-        for m in alpha__varshni__dict.keys():
-            if m in beta__varshni__dict.keys():
-                energy__gap__dict[m] -= alpha__varshni__dict[m] * 1e-6 * T * T / (beta__varshni__dict[m] + T)
+    energy__gap__dict = cqbd.read__sheet(input['sheets']['energy__gap'], 'dict')
+    
+    for m in alpha__varshni__dict.keys():
+        if m in beta__varshni__dict.keys():
+            energy__gap__dict[m] -= alpha__varshni__dict[m] * 1e-6 * T * T / (beta__varshni__dict[m] + T)
 
+    energy__gap__unit = input['units']['energy__gap']
+    try:
+        energy__gap__bowings = input['sheets']['bowings']['energy__gap']
+    except Exception:
+        energy__gap__bowings = {}
+    for material in structure__materials:  
+        energy__gap.append(meqbd.interpolation__exception(material, energy__gap__dict, energy__gap__bowings))
+    multiplier = units_QBD.standardise(energy__gap__unit).value
+    energy__gap = [val * multiplier for val in energy__gap]
+    effective__mass__el__dict = input['sheets']['effective__mass']['el']
+    effective__mass__el__dict = {key: float(value) for (key, value) in effective__mass__el__dict.items()}
+    try:
+        effective__mass__el__bowings = input['sheets']['bowings']['effective__mass']['el']
+    except Exception:
+        effective__mass__el__bowings = {}
+    for material in structure__materials: 
+        effective__mass__el.append(meqbd.interpolation__exception(material, effective__mass__el__dict, effective__mass__el__bowings))
+    multiplier = units_QBD.standardise(effective__mass__unit).value
+    effective__mass__el = [val * multiplier for val in effective__mass__el]
 
-        energy__gap__unit = input['units']['energy__gap']
-        try:
-            energy__gap__bowings = input['sheets']['bowings']['energy__gap']
-        except Exception:
-            energy__gap__bowings = {}
-        for material in structure__materials:  
-            energy__gap.append(meqbd.interpolation__exception(material, energy__gap__dict, energy__gap__bowings))
-        multiplier = units_QBD.standardise(energy__gap__unit).value
-        energy__gap = [val * multiplier for val in energy__gap]
-        effective__mass__el__dict = input['sheets']['effective__mass']['el']
-        effective__mass__el__dict = {key: float(value) for (key, value) in effective__mass__el__dict.items()}
-        try:
-            effective__mass__el__bowings = input['sheets']['bowings']['effective__mass']['el']
-        except Exception:
-            effective__mass__el__bowings = {}
-        for material in structure__materials: 
-            effective__mass__el.append(meqbd.interpolation__exception(material, effective__mass__el__dict, effective__mass__el__bowings))
-        multiplier = units_QBD.standardise(effective__mass__unit).value
-        effective__mass__el = [val * multiplier for val in effective__mass__el]
+    x1, y3 = meqbd.profile__gridded(structure__thicknesses, energy__gap, float(input['space__resolution']))
+    xx, el = meqbd.profile__gridded(structure__thicknesses, effective__mass__el, float(input['space__resolution']))
+    y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
 
-        x1, y3 = meqbd.profile__gridded(structure__thicknesses, energy__gap, float(input['space__resolution']))
-        xx, el = meqbd.profile__gridded(structure__thicknesses, effective__mass__el, float(input['space__resolution']))
-        y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
-
-
-    if float(input['wave__vector']) != 0:
-        y1 = [-i for i in y1]
-        y2 = [-i for i in y2]
-        y1 = qqbd.adjust__energy__profile__to__wave__vector(y1, lh, float(input['wave__vector']))
-        y2 = qqbd.adjust__energy__profile__to__wave__vector(y2, hh, float(input['wave__vector']))
-        y1 = [-i for i in y1]
-        y2 = [-i for i in y2]
-        if 'energy__gap' in names:
-            y3 = qqbd.adjust__energy__profile__to__wave__vector(y3, el, float(input['wave__vector']))
-        
     for i in range(0,len(y1)):
-        y1[i] += ep[i]
-        y2[i] += ep[i]
-        if 'energy__gap' in names:
+            y1[i] += ep[i]
+            y2[i] += ep[i]
             y3[i] += ep[i]
 
 
@@ -211,108 +184,78 @@ def fds(request):
 
 
 
+    kxb = float(input['wave__vector__parameters__bx'])
+    kxt = float(input['wave__vector__parameters__tx'])
+    kxr = float(input['wave__vector__parameters__rx'])
+    kyb = float(input['wave__vector__parameters__by'])
+    kyt = float(input['wave__vector__parameters__ty'])
+    kyr = float(input['wave__vector__parameters__ry'])
     
-    y4 = []
-    if 'del__holes__lh' in input.keys():
-        y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, -elt, -elb, elr)
-        # y4 = [-i for i in y4]
-        # y4 = [[i / multiplier,i / multiplier] for i in y4]
-        # for i in range(1,len(y4) + 1):
-        #     names4.append('lh' + str(i))
-    y5 = []
-    if 'del__holes__hh' in input.keys():
-        y5 = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, -elt, -elb, elr)
-        # y5 = [-i for i in y5]
-        # y5 = [[i / multiplier,i / multiplier] for i in y5]
-        # for i in range(1,len(y5) + 1):
-        #     names5.append('hh' + str(i))
-    y6 = []
-    if 'del__electrons' in input.keys():
-        y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
-        print(y6, sys.stderr)
-        print(elb, sys.stderr)
-        print(elt, sys.stderr)
-        print(elr, sys.stderr)
-        # y6 = [[i / multiplier,i / multiplier] for i in y6]
-        # for i in range(1,len(y6) + 1):
-        #     names6.append('el' + str(i))
-
+    kx = [kxb]
+    while kx[-1] < kxt: kx.append(kx[-1] + kxr)
+    ky = [kyb]
+    while ky[-1] < kyt: ky.append(ky[-1] + kyr)
     
-
-
-    y7 = []
-    if 'dwf__holes' in input.keys() and 'del__holes__lh' in input.keys():
-        # enes = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, elb, elt, elr)
-        # for ene in enes:
-        #     y7.append(qqbd.eigenfunctions_1(x1, [-i for i in y1], lh, ene))
-        #     y7[-1] = [-i for i in y7[-1]]
-        for ene in y4:
-            y_ = [-i for i in y1]
-            y_min = min(y_[2:-2])
-            y7.append(qqbd.eigenfunctions_1(x1, y_, lh, ene, y_.index(y_min,2,len(y_)-2)))
-            y7[-1] = [-i for i in y7[-1]]
-
-    y8 = []
-    if 'dwf__holes' in input.keys() and 'del__holes__hh' in input.keys():
-        # enes = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, elb, elt, elr)
-        # for ene in enes:
-        #     y8.append(qqbd.eigenfunctions_1(x1, [-i for i in y2], hh, ene))
-        #     y8[-1] = [-i for i in y8[-1]]
-        for ene in y5:
-            y_ = [-i for i in y2]
-            y_min = min(y_[2:-2])
-            y8.append(qqbd.eigenfunctions_1(x1, y_, hh, ene, y_.index(y_min,2,len(y_)-2)))
-            y8[-1] = [-i for i in y8[-1]]
-
-    y9 = []
-    if 'dwf__electrons' in input.keys() and 'del__electrons' in input.keys():
-        # enes = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
-        # for ene in enes:
-        #     y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene))
-        for ene in y6:
-            y_min = min(y3[2:-2])
-            y9.append(qqbd.eigenfunctions_1(x1, y3, el, ene,  y3.index(y_min,2,len(y3)-2)))
-            
-
-
-    names4 = []
-    y4 = [[-i / multiplier,-i / multiplier] for i in y4]
-    for i in range(1,len(y4) + 1):
-        names4.append('lh' + str(i))
-    names5 = []
-    y5 = [[-i / multiplier,-i / multiplier] for i in y5]
-    for i in range(1,len(y5) + 1):
-        names5.append('hh' + str(i))
-    names6 = []
-    y6 = [[i / multiplier,i / multiplier] for i in y6]
-    for i in range(1,len(y6) + 1):
-        names6.append('el' + str(i))
-
-
-
-
-
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    y1 = [i / multiplier for i in y1]
-    y2 = [i / multiplier for i in y2]
-    if 'energy__gap' in names:
-        multiplier = units_QBD.standardise(energy__gap__unit).value
-        y3 = [i / multiplier for i in y3]  
-    multiplier = units_QBD.standardise(structure__unit).value
-    x1 = [i / multiplier for i in x1]
-    x4 = [0,x1[-1]]
+    dos__grid__b = float(input['energy__dos__b']) * multiplier
+    dos__grid__r = float(input['energy__dos__r']) * multiplier
+    dos__grid__t = float(input['energy__dos__t']) * multiplier
+    dos__grid = [dos__grid__b]
+    maxgrid = dos__grid__t - dos__grid__r
+    while dos__grid[-1] <= maxgrid: dos__grid.append(dos__grid[-1] + dos__grid__r)
 
-    for i in range(0,len(y7)):
-        y7[i] = qqbd.normalization(y7[i],x1)
-        y7[i] = [-j + y4[i][0] for j in y7[i]]
-    for i in range(0,len(y8)):
-        y8[i] = qqbd.normalization(y8[i],x1)
-        y8[i] = [-j + y5[i][0] for j in y8[i]]
-    for i in range(0,len(y9)):
-        y9[i] = qqbd.normalization(y9[i],x1)
-        y9[i] = [j + y6[i][0] for j in y9[i]]
+    dos__lh__2d = ...
+    dos__lh__3d = ...
+    dos__lh__merged = ...
+    dos__hh__2d = ...
+    dos__hh__3d = ...
+    dos__hh__merged = ...
+    dos__el__2d = ...
+    dos__el__3d = ...
+    dos__el__merged = ...
+
+    vbo__temp = [-i for i in valence__band__offset]
+    index = vbo__temp.index(max(vbo__temp))
+    eg__temp = [-i for i in dos__grid]
+    eg__temp.reverse()
+
+    dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+    dos__lh__2d.reverse()
+    base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
+    dos__lh__3d.reverse()
+    base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
+    
+    dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+    dos__hh__2d.reverse()
+    base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
+    dos__hh__3d.reverse()
+    base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
+
+    dos__ho__merged = []
+    for i in range(0,len(base)):
+        dos__ho__merged.append(dos__hh__merged[i] + dos__lh__merged[i])
 
 
+    temp = []
+    for i in range(0,len(valence__band__offset)):
+        temp.append(energy__gap[i] + valence__band__offset[i])
+    index = temp.index(max(temp))
+
+    dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+    base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
+    base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
+    
+    F_v, F_i, F_c = meqbd.F__calibration(
+        T, 
+        max(ep) - min(ep), 
+        min(y1), 
+        max(y3), 
+        dos__grid, 
+        dos__ho__merged, 
+        dos__el__merged)
+    fds__ho = meqbd.fds__ho(dos__grid, F_v, T)
+    fds__el = meqbd.fds__el(dos__grid, F_c, T)
+    
     globals()['color'] = {
         0: colors['--theme0'],
         1: colors['--theme1'],
@@ -320,47 +263,58 @@ def fds(request):
         3: colors['--theme3'],
         4: colors['--theme4']
         }
-    # globals()['text'] = common
-    globals()['x'].append(x1)
-    globals()['xx'].append(x4)
-    if 'holes' in input.keys():
-        globals()['y'].append(y1)
-        globals()['y'].append(y2)
-    if 'energy__gap' in names:
-        globals()['y'].append(y3)
-    if 'del__holes__lh' in input.keys():
-        globals()['yy'].append(y4)
-        if 'dwf__holes' in input.keys():
-            globals()['yyy'].append(y7)
-    if 'del__holes__hh' in input.keys():
-        globals()['yy'].append(y5)
-        if 'dwf__holes' in input.keys():
-            globals()['yyy'].append(y8)
-    if 'del__electrons' in input.keys():
-        globals()['yy'].append(y6)
-        if 'dwf__electrons' in input.keys():
-            globals()['yyy'].append(y9)
-    if 'energy__gap' in names:
-        globals()['y'].append(y3)
-    globals()['name'].append('structure growth direction Z (' + structure__unit +')')
-    globals()['name'].append('energy (eV)')
-    globals()['name'].append(names4)
-    globals()['name'].append(names5)
-    globals()['name'].append(names6)
-    globals()['name'].append('light holes band edge')
-    globals()['name'].append('heavy holes band edge')
-    globals()['name'].append('conduction band edge')
+    multiplier = units_QBD.standardise(valence__band__offset__unit).value
+    globals()['x'] = [i / multiplier for i in dos__grid]
+    if 'append__epr' in input.keys():
+        globals()['y'] = {
+            'ho': [i / multiplier for i in y1],
+            'el': [i / multiplier for i in y3],
+            '_': x1
+        }
+    globals()['yy'] = {
+        'ho': fds__ho,
+        'el': fds__el,
+
+        'F_c_': [F_c / multiplier] * 2,
+        'F_v_': [F_v / multiplier] * 2,
+        'F_i_': [F_i /multiplier] * 2,
+        
+        'F_c': [0,1],
+        'F_v': [0,1],
+        'F_i': [0,1]
+        }
+
+    multiplier *= 1e-4
+    if 'append__dos' in input.keys():
+        globals()['yyy'] = {
+            'ho' : [multiplier * dos__ho__merged[i] * fds__ho[i] for i in range(0,len(dos__grid))],
+            'el' : [multiplier * dos__el__merged[i] * fds__el[i] for i in range(0,len(dos__grid))]
+        }
+
+    name = {
+        1: ['holes band edge', 'electrons band edge'], 
+        2: [
+            'Fermi-Dirac statistic for holes', 
+            'Fermi-Dirac statistic for electrons', 
+            'Fermi level', 
+            'Quasi-Fermi level for holes', 
+            'Quasi-Fermi level for electrons'], 
+        3: ['DOS for holes', 'DOS for electrons']}
+    globals()['name'] = [
+        'energy (eV)', 
+        'structure growth direction Z (' + structure__unit + ')', 
+        '', 
+        'DOS (cm-2eV-1)', 
+        name]
 
     code = get__code(input.keys())
 
     meta_ = code
-    
     sys.stdout = mystdout = io.StringIO()
     try:
         exec(code + '\n' + code_, globals())
     except Exception as e:
         error_ = str(e).replace('<', '&lt;').replace('>', '&gt;')
-
     if globals()['fig'] != None:
         try:
             if error_ != '':    plot_ = plotly.io.to_html(globals()['fig'], globals()['config'])
@@ -378,134 +332,147 @@ def fds(request):
     return JsonResponse(result_, safe = False)
 
 
+        # 'lh': {
+        #     '2d': dos__lh__2d,
+        #     '3d': dos__lh__3d,
+        #     'merged': dos__lh__merged
+        #     },
+        # 'hh': {
+        #     '2d': dos__hh__2d,
+        #     '3d': dos__hh__3d,
+        #     'merged': dos__hh__merged
+        #     },
+        # 'el': {
+        #     '2d': dos__el__2d,
+        #     '3d': dos__el__3d,
+        #     'merged': dos__el__merged
+        #     }
 
+        # 'for__hh' 
+        # 'dos__3d'
 
+        #     code = """fig = go.Scatter(x = x[0], y = y[0])
+        # fig.update_xaxes(title_text = name[0] + ' (' + unit[0] + ')', gridcolor = color, zerolinecolor = color)
+        # fig.update_yaxes(title_text = name[1] + ' (' + unit[1] + ')', gridcolor = color, zerolinecolor = color)
+        # fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', font_color=color, paper_bgcolor='rgba(0,0,0,0)')
+        # fig.update_traces(textposition="top right")
+        # config = dict({'scrollZoom': True})"""
 
+        # fig.add_trace(go.Scatter(x=x[0], y=y[1], name='heavy holes band'))
 
-
-
-
-
-
-
-
+# fig.add_trace(go.Scatter(x=random_x, y=random_y0,
+#                     mode='lines',
+#                     name='lines'))
 def get__code(flags):
-    code = """fig = go.Figure()
-"""
-
-    if 'electrons' in flags:
-        if 'holes' in flags:
-            code += """
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[0],
-    name = name[5]))
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[1],
-    name = name[6]))
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[2],
-    name = name[7]))
-"""
-        else:            
-            code += """
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[0],
-    name = name[7]))
-"""
-    else:
-        code += """
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[0],
-    name = name[5]))
-fig.add_trace(go.Scatter(
-    x = x[0],
-    y = y[1],
-    name = name[6]))
-"""
+    if 'append__epr' in flags:
+        if 'append__dos' in flags:      return get__code_v1()
+        else:                           return get__code_v2()
+    elif 'append__dos' in flags:        return get__code_v3()
+    else:                               return get__code_v4()
 
 
 
-    if 'del__holes__lh' in flags:
-        code += """
-for i in range(0, len(yy[0])):
-    fig.add_trace(go.Scatter(
-        x = xx[0],
-        y = yy[0][i],
-        name = name[2][i]))"""
-        if 'del__holes__hh' in flags:
-            code += """
-for i in range(0, len(yy[1])):
-    fig.add_trace(go.Scatter(
-        x = xx[0],
-        y = yy[1][i],
-        name = name[3][i]))"""
-    elif 'del__holes__hh' in flags:
-        code += """
-for i in range(0, len(yy[0])):
-    fig.add_trace(go.Scatter(
-        x = xx[0],
-        y = yy[0][i],
-        name = name[3][i]))
-"""
-    if 'del__electrons' in flags:
-        code += """
-for i in range(0, len(yy[-1])):
-    fig.add_trace(go.Scatter(
-        x = xx[0],
-        y = yy[-1][i],
-        name = name[4][i]))
-"""
+def get__code_v1():
+        return """fig = ps.make_subplots(
+    rows = 3, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
 
+fig.add_trace(
+    go.Scatter(
+        x = y['ho'], 
+        y = y['_'],
+        mode = 'lines', 
+        name = name[4][1][0]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = y['el'], 
+        y = y['_'],
+        mode = 'lines', 
+        name = name[4][1][1]),
+    row=1, 
+    col=1)
 
-    if 'del__holes__lh' in flags:
-        if 'dwf__holes' in flags:
-            code += """
-for i in range(0, len(yyy[0])):
-    fig.add_trace(go.Scatter(
-        x = x[0],
-        y = yyy[0][i],
-        name = name[2][i] + ' wf'))"""
-            if 'del__holes__hh' in flags:
-                code += """
-for i in range(0, len(yyy[1])):
-    fig.add_trace(go.Scatter(
-        x = x[0],
-        y = yyy[1][i],
-        name = name[3][i] + ' wf'))"""
-    elif 'del__holes__hh' in flags:
-        if 'dwf__holes' in flags:
-            code += """
-for i in range(0, len(yyy[0])):
-    fig.add_trace(go.Scatter(
-        x = x[0],
-        y = yyy[0][i],
-        name = name[3][i] + ' wf'))"""
-    if 'del__electrons' in flags:
-        if 'dwf__electrons' in flags:
-            code += """
-for i in range(0, len(yyy[-1])):
-    fig.add_trace(go.Scatter(
-        x = x[0],
-        y = yyy[-1][i],
-        name = name[4][i] + ' wf'))"""
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['ho'],
+        mode = 'lines', 
+        name = name[4][2][0]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['el'],
+        mode = 'lines', 
+        name = name[4][2][1]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_c_'], 
+        y = yy['F_c'],
+        mode = 'lines', 
+        name = name[4][2][4]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_i_'], 
+        y = yy['F_i'],
+        mode = 'lines', 
+        name = name[4][2][2]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_v_'], 
+        y = yy['F_v'],
+        mode = 'lines', 
+        name = name[4][2][3]),
+    row=2, 
+    col=1)
 
-
-
-    code += """
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yyy['ho'],
+        mode = 'lines', 
+        name = name[4][3][0]),
+    row=3, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yyy['el'],
+        mode = 'lines', 
+        name = name[4][3][1]),
+    row=3, 
+    col=1)
 
 fig.update_xaxes(
     title_text = name[0],
     gridcolor = '#808080',
-    zerolinecolor = color[4])
+    zerolinecolor = color[4],
+    row = 3)
 fig.update_yaxes(
-    title_text = name[1],
     gridcolor = '#808080',
     zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1], 
+    row = 1, 
+    col = 1)
+fig.update_yaxes(
+    title_text = name[2], 
+    row = 2, 
+    col = 1)
+fig.update_yaxes(
+    title_text = name[3], 
+    row = 3, 
+    col = 1)
 fig.update_layout(
     plot_bgcolor = color[0],
     font_color = color[4],
@@ -515,8 +482,260 @@ config = dict({
     'scrollZoom': True,
     'doubleClick': 'reset+autosize'})"""
 
-    return code
+
+    
+def get__code_v2():
+    return """fig = ps.make_subplots(
+    rows = 2, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
+
+fig.add_trace(
+    go.Scatter(
+        x = y['ho'], 
+        y = y['_'],
+        mode = 'lines', 
+        name = name[4][1][0]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = y['el'], 
+        y = y['_'],
+        mode = 'lines', 
+        name = name[4][1][1]),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['ho'],
+        mode = 'lines', 
+        name = name[4][2][0]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['el'],
+        mode = 'lines', 
+        name = name[4][2][1]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_c_'], 
+        y = yy['F_c'],
+        mode = 'lines', 
+        name = name[4][2][4]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_i_'], 
+        y = yy['F_i'],
+        mode = 'lines', 
+        name = name[4][2][2]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_v_'], 
+        y = yy['F_v'],
+        mode = 'lines', 
+        name = name[4][2][3]),
+    row=2, 
+    col=1)
+
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4],
+    row = 2)
+fig.update_yaxes(
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[1], 
+    row = 1, 
+    col = 1)
+fig.update_yaxes(
+    title_text = name[2], 
+    row = 2, 
+    col = 1)
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
+
+
+def get__code_v3():
+    return """fig = ps.make_subplots(
+    rows = 2, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['ho'],
+        mode = 'lines', 
+        name = name[4][2][0]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['el'],
+        mode = 'lines', 
+        name = name[4][2][1]),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_c_'], 
+        y = yy['F_c'],
+        mode = 'lines', 
+        name = name[4][2][4]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_i_'], 
+        y = yy['F_i'],
+        mode = 'lines', 
+        name = name[4][2][2]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_v_'], 
+        y = yy['F_v'],
+        mode = 'lines', 
+        name = name[4][2][3]),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yyy['ho'],
+        mode = 'lines', 
+        name = name[4][3][0]),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yyy['el'],
+        mode = 'lines', 
+        name = name[4][3][1]),
+    row=2, 
+    col=1)
+
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4],
+    row = 2)
+fig.update_yaxes(
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name[2], 
+    row = 1, 
+    col = 1)
+fig.update_yaxes(
+    title_text = name[3], 
+    row = 2, 
+    col = 1)
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
 
 
 
+
+
+
+
+
+
+def get__code_v4():
+    return """fig = ps.make_subplots(
+    rows = 1, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['ho'],
+        mode = 'lines', 
+        name = name[4][2][0]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = yy['el'],
+        mode = 'lines', 
+        name = name[4][2][1]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_c_'], 
+        y = yy['F_c'],
+        mode = 'lines', 
+        name = name[4][2][4]),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_i_'], 
+        y = yy['F_i'],
+        mode = 'lines', 
+        name = name[4][2][2]),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = yy['F_v_'], 
+        y = yy['F_v'],
+        mode = 'lines', 
+        name = name[4][2][3]),
+    row=1, 
+    col=1)
+
+fig.update_xaxes(
+    title_text = name[0],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    gridcolor = '#808080',
+    zerolinecolor = color[4],
+    title_text = name[2],
+    row = 1,
+    col = 1)
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
 

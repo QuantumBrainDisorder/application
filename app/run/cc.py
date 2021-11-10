@@ -296,6 +296,7 @@ def cc(request):
 
             ldos__lh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__lh__2d, ldos__lh__3d, valence__band__offset[index])
             ldos__hh__merged = qqbd.ldos__merge__reversed(x1, ldos__grid, ldos__hh__2d, ldos__hh__3d, valence__band__offset[index])
+            
             for i in range(0, len(ldos__lh__merged)):
                 ldos__lh__merged[i].reverse()
                 ldos__hh__merged[i].reverse()

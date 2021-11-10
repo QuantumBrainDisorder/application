@@ -262,12 +262,12 @@ if (localStorage.getItem('panel__form__fds__epr') != null) {
 if (localStorage.getItem('panel__form__fds__dos') != null) {
     panel__form__fds__dos.checked = true;
 };
-if (localStorage.getItem('panel__form__fds__for__el') != null) {
-    panel__form__fds__for__el.checked = true;
-};
-if (localStorage.getItem('panel__form__fds__for__ho') != null) {
-    panel__form__fds__for__ho.checked = true;
-};
+// if (localStorage.getItem('panel__form__fds__for__el') != null) {
+//     panel__form__fds__for__el.checked = true;
+// };
+// if (localStorage.getItem('panel__form__fds__for__ho') != null) {
+//     panel__form__fds__for__ho.checked = true;
+// };
 // panel__form__fds__et.textContent = localStorage.getItem('panel__form__fds__et');
 // panel__form__fds__eb.textContent = localStorage.getItem('panel__form__fds__eb');
 // panel__form__fds__er.textContent = localStorage.getItem('panel__form__fds__er');

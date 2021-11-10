@@ -465,16 +465,12 @@ function panel__bar__run__energies(event) {
     input += get__sheet('beta__varshni')
     input_ += get__sheet__unit('beta__varshni');
   
-    if (panel__form__fds__for__el.checked) {
-      input += get__sheet('energy__gap')
-      input_ += get__sheet__unit('energy__gap');
-      input += get__sheet('valence__band__offset');
-      input_ += get__sheet__unit('valence__band__offset');  
-    }
-    
+    input += get__sheet('energy__gap');
+    input_ += get__sheet__unit('energy__gap');
     input += get__sheet('valence__band__offset');
-    input_ += get__sheet__unit('valence__band__offset');
-    
+    input_ += get__sheet__unit('valence__band__offset');  
+  
+  
 
     input += get__sheet__json('bowings');
     input += get__sheet__json('effective__mass');
@@ -513,11 +509,11 @@ function panel__bar__run__energies(event) {
     input += '"ep__L": "' + localStorage.getItem("panel__form__ep__L") + '",';
     input += '"ep__unit": "' + 'mV' + '",';
   
-    if (panel__form__fds__epr.checked) {input += '"for__lh": "",'}
-    if (panel__form__fds__dos.checked) {input += '"for__lh": "",'}
+    if (panel__form__fds__epr.checked) {input += '"append__epr": "",'}
+    if (panel__form__fds__dos.checked) {input += '"append__dos": "",'}
 
-    if (panel__form__fds__for__el.checked) {input += '"for__lh": "",'}
-    if (panel__form__fds__for__ho.checked) {input += '"for__hh": "",'}
+    // if (panel__form__fds__for__el.checked) {input += '"for__el": "",'}
+    // if (panel__form__fds__for__ho.checked) {input += '"for__ho": "",'}
   
     input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
     input += get__theme();
