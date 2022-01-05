@@ -138,7 +138,7 @@ function panel__bar__run__energies(event) {
   
     input = '{' + input.slice(0, input.length - 1) + '}';
     console.log(input)
-    //data__exchange('run__energies', { 'input': input }, 'Energies');
+    data__exchange('run__energies', { 'input': input }, 'Energies');
     // print__output('run__energies', input)
 }
   
