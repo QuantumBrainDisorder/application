@@ -257,7 +257,6 @@ def energies(request):
         # y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
     
 
-
     y7 = []
     if 'dwf__holes' in input.keys() and 'del__holes__lh' in input.keys():
         # enes = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, elb, elt, elr)
