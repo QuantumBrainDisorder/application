@@ -131,12 +131,14 @@ function panel__bar__run__energies(event) {
   
     if (panel__form__al__input.checked) {input += '"al": "",'}
     if (panel__form__barriers__input.checked) {input += '"barriers": "",'}
+
   
     input += '"code": "' + panel__form__input.value.replaceAll('\r', '').replaceAll('\n', '\\n') + '",' 
     input += get__theme();
   
     input = '{' + input.slice(0, input.length - 1) + '}';
-    data__exchange('run__energies', { 'input': input }, 'Energies');
+    console.log(input)
+    //data__exchange('run__energies', { 'input': input }, 'Energies');
     // print__output('run__energies', input)
 }
   
