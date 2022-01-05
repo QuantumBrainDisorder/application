@@ -28,6 +28,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/distribution.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/energies.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/dos.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'patterns/elements/panel__body/barriers.css' %}">
 
         
         <script src="{% static 'scripts/jquery-3.6.0.min.js' %}"></script>
@@ -75,22 +76,22 @@
                             <span id="properties__property" title="Material property" data-name="" contenteditable="false" spellcheck="false"></span>                          
                             <ul id="properties__list" contenteditable="false">
                                 <li onclick="set__property(event, 'bowings')" title="Alloys Bowings Parameters (*)">Alloys Bowings Parameters</li>
-                                <li onclick="set__property(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                                <li onclick="set__property(event, 'carriers__mobility')" title="Carriers Mobility u (cm^2/(V*s))">Carriers Mobility</li>
-                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
+                                <!-- <li onclick="set__property(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                                <li onclick="set__property(event, 'carriers__mobility')" title="Carriers Mobility u (cm^2/(V*s))">Carrier Mobility</li>
+                                <!-- <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
                                 <li onclick="set__property(event, 'effective__mass')" title="Effective Mass m* (m_e)">Effective Mass</li>
-                                <li onclick="set__property(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                                <li onclick="set__property(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                                <!-- <li onclick="set__property(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                                <!-- <li onclick="set__property(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                                 <li onclick="set__property(event, 'energy__gap')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                                <li onclick="set__property(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                                <li onclick="set__property(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                                <!-- <li onclick="set__property(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                                <!-- <li onclick="set__property(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                                 <li onclick="set__property(event, 'lattice__constant')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                                <li onclick="set__property(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                                <!-- <li onclick="set__property(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                                <!-- <li onclick="set__property(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                                <!-- <li onclick="set__property(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                                 <li onclick="set__property(event, 'relative__permittivity')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                                <li onclick="set__property(event, 'spin__orbit__split')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                                <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                                <!-- <li onclick="set__property(event, 'spin__orbit__split')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                                <!-- <li onclick="set__property(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                                 <li onclick="set__property(event, 'valence__band__offset')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                                 <li onclick="set__property(event, 'alpha__varshni')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                                 <li onclick="set__property(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
@@ -136,13 +137,14 @@
                                 <option onclick="set__panel__bar__type(event, 'distribution')" title="Properties distributions">Properties</option>
                                 <option onclick="set__panel__bar__type(event, 'profile')" title="Profile of the properties">Profile</option>
                                 <option onclick="set__panel__bar__type(event, 'energies')" title="Energies in the structure">Energies</option>
-                                <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Total energies">Total energies</option>
+                                <option onclick="set__panel__bar__type(event, 'energy__paraboloids')" title="Dispersion Relation">Dispersion Relation</option>
                                 <option onclick="set__panel__bar__type(event, 'dos')" title="Density of states in the structure">Density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'ldos')" title="Density of states in the structure">Local density of states</option>
                                 <option onclick="set__panel__bar__type(event, 'cos')" title="Concentration of states">Concentration of states</option>
                                 <option onclick="set__panel__bar__type(event, 'fds')" title="Fermi-Dirac statistics">Fermi-Dirac statistics</option>
                                 <option onclick="set__panel__bar__type(event, 'cc')" title="Carriers concentration">Carriers concentration</option>
-                                <option onclick="set__panel__bar__type(event, 'phi')" title="Electric field">Electric field</option>
+                                <option onclick="set__panel__bar__type(event, 'phi')" title="Electric field">Internal electric potential</option>
+                                <option onclick="set__panel__bar__type(event, 'dd')" title="">Current Density</option>
                                 <!-- <optgroup label="Profiles">
                                     <option onclick="set__panel__bar__type(event,'profiles__energy', 'profile')" title="Structure Energy Gap Profile">Energy</option>
                                 </optgroup> -->
@@ -166,20 +168,20 @@
                     </label>
                     <span id="panel__form__distribution__w__axis__property" class="panel__form__distribution__axis__property">Energy Gap</span> 
                     <ul id="panel__form__distribution__w__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
-                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'w')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'w')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'w')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'w')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'w')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'w')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'w')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'w')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'w')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'w')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'w')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'w')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'w')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'w')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'w')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'w')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'w')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'w')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'w')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'w')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'w')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'w')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'w')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'w')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'w')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'w')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'w')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'w')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
@@ -190,20 +192,20 @@
                     </label>
                     <span id="panel__form__distribution__x__axis__property" class="panel__form__distribution__axis__property">Lattice Constant</span> 
                     <ul id="panel__form__distribution__x__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
-                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'x')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'x')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'x')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'x')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'x')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'x')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'x')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'x')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'x')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'x')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'x')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'x')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'x')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'x')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'x')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'x')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'x')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'x')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'x')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'x')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'x')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'x')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'x')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'x')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'x')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'x')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
@@ -214,20 +216,20 @@
                     </label>
                     <span id="panel__form__distribution__y__axis__property" class="panel__form__distribution__axis__property">Valence Band Offset</span> 
                     <ul id="panel__form__distribution__y__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
-                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'y')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'y')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'y')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'y')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'x')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'y')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'y')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'y')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'y')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'y')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'y')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'y')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'y')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'y')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'y')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'y')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'y')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'y')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'y')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'y')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'y')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'y')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'y')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'y')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'y')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'y')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'y')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
@@ -238,30 +240,30 @@
                     </label>
                     <span id="panel__form__distribution__z__axis__property" class="panel__form__distribution__axis__property">Spin-Orbit Split</span> 
                     <ul id="panel__form__distribution__z__axis__list" class="panel__form__distribution__axis__list" contenteditable="false">
-                        <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'z')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'z')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'z')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'z')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'biaxial__deformation__potential', 'z')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__conduction__band', 'z')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__11', 'z')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'elastic__constant__12', 'z')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'energy__gap', 'z')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'z')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'z')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'matrix__element__of__kane__operator', 'z')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'kane__parameter', 'z')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'lattice__constant', 'z')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'z')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'z')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'z')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__1', 'z')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__2', 'z')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'luttinger__parameter__3', 'z')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'relative__permittivity', 'z')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'z')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                        <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'z')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'spin__orbit__split', 'z')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                        <!-- <li onclick="panel__form__distribution__set__axis(event, 'hydrostatic__deformation__potential__of__valence__band', 'z')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                         <li onclick="panel__form__distribution__set__axis(event, 'valence__band__offset', 'z')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'alpha__varshni', 'z')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__distribution__set__axis(event, 'beta__varshni', 'z')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
                     </ul>
-                    <hr>
+                    <!-- <hr> -->
                     <!-- <label class="panel__form__distribution__label">Add data labels
                         <input type="checkbox" id="panel__form__distribution__al" name="panel__form__distribution__al" disabled>
                         <span class="panel__form__distribution__span"></span>
                     </label><br> -->
-                    <label class="panel__form__distribution__label">Include interpolations
+                    <label class="panel__form__distribution__label" style="display: none;">Include interpolations
                         <input type="checkbox" id="panel__form__distribution__ii" name="panel__form__distribution__ii" disabled>
                         <span class="panel__form__distribution__span"></span>
                     </label><br>
@@ -278,24 +280,29 @@
 
 
 
-
-
-                <form id="panel__form__temperature" class="panel__form__al">
+                <form id="panel__form__al" class="panel__form__al">
                     <hr>
-                    <label for="panel__form__temperature__input" class="panel__form__space__resolution__label">Structure temperature (K):&ThickSpace;</label>
-                    <span id="panel__form__temperature__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                    <label class="panel__form__al__label">Add layers labels
+                        <input type="checkbox" id="panel__form__al__input" disabled>
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
                 </form>
 
 
-                <form id="panel__form__ep" class="panel__form__space__resolution">
+
+
+
+                <form id="panel__form__barriers" class="panel__form__al" action=""  method="POST">
                     <hr>
-                    <label for="panel__form__ep__0" class="panel__form__space__resolution__label">&phi;<sub>ext.</sub>(0) (mV):&ThickSpace;</label>
-                    <span id="panel__form__ep__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
-                    <label for="panel__form__ep__L" class="panel__form__space__resolution__label">&phi;<sub>ext.</sub>(L) (mV):&ThickSpace;</label>
-                    <span id="panel__form__ep__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                    <label class="panel__form__al__label">Append material offsets
+                        <input type="checkbox" id="panel__form__barriers__input" disabled>
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label id="panel__form__barriers__thickness__label" for="panel__form__barriers__thickness" class="panel__form__barriers__label">Thickness:&ThickSpace;</label>
+                    <span id="panel__form__barriers__thickness" class="panel__form__barriers__input" spellcheck="false" contenteditable>20</span><br>
+                    <label id="panel__form__barriers__material__label" for="panel__form__barriers__material" class="panel__form__barriers__label">Material:&ThickSpace;</label>
+                    <span id="panel__form__barriers__material" class="panel__form__barriers__input" spellcheck="false" contenteditable>GaAs.0</span><br>
                 </form>
-
-
 
                 <form id="panel__form__space__resolution" class="panel__form__space__resolution">
                     <hr>
@@ -307,27 +314,26 @@
 
 
 
-
                 <form id="panel__form__profile" class="panel__form__profile" action=""  method="POST">{% csrf_token %}
                     <button id="panel__form__profile__submit" name="panel__form__profile__submit" type="submit" style="display: none;"></button>
                     <hr>
                     <label class="panel__form__profile__parameter__label">Property:&ThickSpace;</label>
                     <span id="panel__form__profile__property" class="panel__form__profile__property">Energy Gap</span> 
                     <ul id="panel__form__profile__list" class="panel__form__profile__list" contenteditable="false">
-                        <li onclick="panel__form__profile__set(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li>
-                        <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li>
-                        <li onclick="panel__form__profile__set(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li>
-                        <li onclick="panel__form__profile__set(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li>
+                        <!-- <li onclick="panel__form__profile__set(event, 'biaxial__deformation__potential')" title="Biaxial Deformation Potential b (eV)">Biaxial Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__conduction__band')" title="Conduction Band's Hydrostatic Deformation Potential a_c (eV)">Conduction Band's Hydrostatic Deformation Potential</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'elastic__constant__11')" title="Elastic Constant (11) c_11 (TPa)">Elastic Constant (11)</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'elastic__constant__12')" title="Elastic Constant (12) c_12 (GPa)">Elastic Constant (12)</li> -->
                         <li onclick="panel__form__profile__set(event, 'energy__gap')" title="Energy Gap E_g (eV)">Energy Gap</li>
-                        <li onclick="panel__form__profile__set(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li>
-                        <li onclick="panel__form__profile__set(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li>
+                        <!-- <li onclick="panel__form__profile__set(event, 'matrix__element__of__kane__operator')" title="Kane Operator's Matrix Element E_p (eV)">Kane Operator's Matrix Element</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'kane__parameter')" title="Kane's Parameter F ()">Kane's Parameter</li> -->
                         <li onclick="panel__form__profile__set(event, 'lattice__constant')" title="Lattice Constant a_lc (&#8491;)">Lattice Constant</li>
-                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li>
-                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li>
-                        <li onclick="panel__form__profile__set(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li>
+                        <!-- <li onclick="panel__form__profile__set(event, 'luttinger__parameter__1')" title="Luttinger Parameter (1) &gamma;_1; ()">Luttinger Parameter (1)</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'luttinger__parameter__2')" title="Luttinger Parameter (2) &gamma;_2 ()">Luttinger Parameter (2)</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'luttinger__parameter__3')" title="Luttinger Parameter (3) &gamma;_3 ()">Luttinger Parameter (3)</li> -->
                         <li onclick="panel__form__profile__set(event, 'relative__permittivity')" title="Relative Permittivity &epsilon;_r ()">Relative Permittivity</li>
-                        <li onclick="panel__form__profile__set(event, 'spin__orbit__split')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li>
-                        <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li>
+                        <!-- <li onclick="panel__form__profile__set(event, 'spin__orbit__split')" title="Spin-Orbit Split &Delta;_so (meV)">Spin-Orbit Split</li> -->
+                        <!-- <li onclick="panel__form__profile__set(event, 'hydrostatic__deformation__potential__of__valence__band')" title="Valence Band's Hydrostatic Deformation Potential a_v (eV)">Valence Band's Hydrostatic Deformation Potential</li> -->
                         <li onclick="panel__form__profile__set(event, 'valence__band__offset')" title="Valence Band Offset VBO (eV)">Valence Band Offset</li>
                         <li onclick="panel__form__profile__set(event, 'alpha__varshni')" title="Varshni's Alpha &alpha; (&mu;eV/K)">Varshni's Alpha</li>
                         <li onclick="panel__form__profile__set(event, 'beta__varshni')" title="Varshni's Beta &beta; (K)">Varshni's Beta</li>
@@ -335,6 +341,13 @@
                 </form>
                 
 
+
+
+                <form id="panel__form__temperature" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__temperature__input" class="panel__form__space__resolution__label">Crystal temperature (K):&ThickSpace;</label>
+                    <span id="panel__form__temperature__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                </form>
 
 
 
@@ -391,6 +404,7 @@
 
 
 
+                
                 <form id="panel__form__band__parameters" class="panel__form__space__resolution" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
                     <hr>
@@ -401,13 +415,28 @@
                     <label for="panel__form__band__parameters__elr" class="panel__form__space__resolution__label">Energy levels resolution (eV):&ThickSpace;</label>
                     <span id="panel__form__band__parameters__elr" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.01</span>
                 </form>
-                                         
+                        
+                
 
+                
+
+                <form id="panel__form__ep" class="panel__form__space__resolution">
+                    <hr>
+                    <label for="panel__form__ep__0" class="panel__form__space__resolution__label">External electric potential &phi;<sub>ext.</sub>(0) (mV):&ThickSpace;</label>
+                    <span id="panel__form__ep__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span><br>
+                    <label for="panel__form__ep__L" class="panel__form__space__resolution__label">External electric potential &phi;<sub>ext.</sub>(L) (mV):&ThickSpace;</label>
+                    <span id="panel__form__ep__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                </form>
+
+
+                
                 <form id="panel__form__wave__vector" class="panel__form__space__resolution">
                     <hr>
                     <label id="panel__form__wave__vector__label" for="panel__form__wave__vector__input" class="panel__form__space__resolution__label">Wave vector (1/m):&ThickSpace;</label>
                     <span id="panel__form__wave__vector__input" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0e+9</span>
                 </form>
+
+
 
                 <form id="panel__form__wave__vector__parameters" class="panel__form__space__resolution" action=""  method="POST">{% csrf_token %}
                     <!-- <button id="panel__form__energies__submit" name="panel__form__energies__submit" type="submit" style="display: none;"></button> -->
@@ -429,21 +458,6 @@
 
 
 
-                <form id="panel__form__dos" class="panel__form__al">
-                    <hr>
-                    <label class="panel__form__al__label">Draw DOS 2D
-                        <input type="checkbox" id="panel__form__dos__2d">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">Draw DOS 3D &#215; L
-                        <input type="checkbox" id="panel__form__dos__3d">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">Draw merged DOSes
-                        <input type="checkbox" id="panel__form__dos__merged">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                </form>
 
                 <form id="panel__form__for" class="panel__form__al">
                     <hr>
@@ -462,7 +476,7 @@
                 </form>
 
 
-
+                
 
                 <form id="panel__form__dos__parameters" class="panel__form__al">
                     <hr>
@@ -473,6 +487,62 @@
                     <label for="panel__form__dos__parameters__er" class="panel__form__space__resolution__label"> DOS energy resolution(eV):&ThickSpace;</label>
                     <span id="panel__form__dos__parameters__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.1</span>
                 </form>
+
+
+                <form id="panel__form__dos" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw DOS 2D
+                        <input type="checkbox" id="panel__form__dos__2d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw DOS 3D &#215; L
+                        <input type="checkbox" id="panel__form__dos__3d">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw merged DOSes
+                        <input type="checkbox" id="panel__form__dos__merged">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
+
+
+
+
+                
+                <form id="panel__form__for_" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">For light holes
+                        <input type="checkbox" id="panel__form__for___lh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For heavy holes
+                        <input type="checkbox" id="panel__form__for___hh">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">For electrons
+                        <input type="checkbox" id="panel__form__for___el">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
+
+
+
+                <form id="panel__form__ldos__parameters" class="panel__form__al">
+                    <hr>
+                    <label for="panel__form__ldos__parameters__et" class="panel__form__space__resolution__label">Top limit of LDOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__et" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>3</span><br>
+                    <label for="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__label">Bottom limit of LDOS energy (eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-1.2</span><br>
+                    <label for="panel__form__ldos__parameters__er" class="panel__form__space__resolution__label"> LDOS energy resolution(eV):&ThickSpace;</label>
+                    <span id="panel__form__ldos__parameters__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.06</span>
+                </form>
+
 
 
 
@@ -488,22 +558,6 @@
                     </label><br>
                     <label class="panel__form__al__label">Draw merged LDOSes
                         <input type="checkbox" id="panel__form__ldos__merged">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                </form>
-
-                <form id="panel__form__for_" class="panel__form__al">
-                    <hr>
-                    <label class="panel__form__al__label">For light holes
-                        <input type="checkbox" id="panel__form__for___lh">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">For heavy holes
-                        <input type="checkbox" id="panel__form__for___hh">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">For electrons
-                        <input type="checkbox" id="panel__form__for___el">
                         <span class="panel__form__al__span"></span>
                     </label><br>
                 </form>
@@ -529,13 +583,34 @@
                 </form>
 
 
+                
+
+
+                <form id="panel__form__cc" class="panel__form__al">
+                    <hr>
+                    <label class="panel__form__al__label">Draw holes concentration
+                        <input type="checkbox" id="panel__form__cc__ho">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw electrons concentration
+                        <input type="checkbox" id="panel__form__cc__el">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                    <label class="panel__form__al__label">Draw concentrations difference
+                        <input type="checkbox" id="panel__form__cc__di">
+                        <span class="panel__form__al__span"></span>
+                    </label><br>
+                </form>
+
+
+
                 <form id="panel__form__fds" class="panel__form__al">
                     <hr>
                     <label class="panel__form__al__label">Append bands edges profile
                         <input type="checkbox" id="panel__form__fds__epr">
                         <span class="panel__form__al__span"></span>
                     </label><br>
-                    <label class="panel__form__al__label">Append integrated DOSes
+                    <label class="panel__form__al__label">Append integrated DOSes merged
                         <input type="checkbox" id="panel__form__fds__dos">
                         <span class="panel__form__al__span"></span>
                     </label>
@@ -558,33 +633,22 @@
                 </form>
 
 
-                <form id="panel__form__cc" class="panel__form__al">
+                
+                
+                <form id="panel__form__fds__fi" class="panel__form__al">
                     <hr>
-                    <label class="panel__form__al__label">Draw holes concentration
-                        <input type="checkbox" id="panel__form__cc__ho">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">Draw electrons concentration
-                        <input type="checkbox" id="panel__form__cc__el">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                    <label class="panel__form__al__label">Draw concentrations difference
-                        <input type="checkbox" id="panel__form__cc__di">
-                        <span class="panel__form__al__span"></span>
-                    </label><br>
-                </form>
-
-
-                <form id="panel__form__phi" class="panel__form__al">
-                    <hr>
-                    <label for="panel__form__phi__0" class="panel__form__space__resolution__label">&phi;(0) (V):&ThickSpace;</label>
-                    <span id="panel__form__phi__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                    <label for="panel__form__fds__fi__res" class="panel__form__space__resolution__label">Fermi level resolution (eV):&ThickSpace;</label>
+                    <span id="panel__form__fds__fi__res" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.0001</span>
                     <br>
-                    <label for="panel__form__phi__L" class="panel__form__space__resolution__label">&phi;(L) (V):&ThickSpace;</label>
-                    <span id="panel__form__phi__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                    <label class="panel__form__band__electrons__label_sub">Bisection method
+                        <input type="checkbox" id="panel__form__fds__fi__B">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label><br>
+                    <label class="panel__form__band__electrons__label_sub">OWS method
+                        <input type="checkbox" id="panel__form__fds__fi__OWS">
+                        <span class="panel__form__band__electrons__span_sub"></span>
+                    </label>
                 </form>
-
-
 
                 <form id="panel__form__qfl" class="panel__form__al">
                     <hr>
@@ -596,29 +660,29 @@
 
 
 
-                <form id="panel__form__ldos__parameters" class="panel__form__al">
+
+
+                <form id="panel__form__phi" class="panel__form__al">
                     <hr>
-                    <label for="panel__form__ldos__parameters__et" class="panel__form__space__resolution__label">Top limit of LDOS energy (eV):&ThickSpace;</label>
-                    <span id="panel__form__ldos__parameters__et" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>3</span><br>
-                    <label for="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__label">Bottom limit of LDOS energy (eV):&ThickSpace;</label>
-                    <span id="panel__form__ldos__parameters__eb" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>-1.2</span><br>
-                    <label for="panel__form__ldos__parameters__er" class="panel__form__space__resolution__label"> LDOS energy resolution(eV):&ThickSpace;</label>
-                    <span id="panel__form__ldos__parameters__er" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0.06</span>
+                    <label for="panel__form__phi__0" class="panel__form__space__resolution__label">Internal electric potential &phi;<sub>int.</sub>(0) (V):&ThickSpace;</label>
+                    <span id="panel__form__phi__0" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
+                    <br>
+                    <label for="panel__form__phi__L" class="panel__form__space__resolution__label">Internal electric potential &phi;<sub>int.</sub>(L) (V):&ThickSpace;</label>
+                    <span id="panel__form__phi__L" class="panel__form__space__resolution__input" spellcheck="false" contenteditable>0</span>
                 </form>
 
 
-
-
-
-
-
-                <form id="panel__form__al" class="panel__form__al">
+                <form id="panel__form__dd" class="panel__form__al">
                     <hr>
-                    <label class="panel__form__al__label">Add layers labels
-                        <input type="checkbox" id="panel__form__al__input" disabled>
+                    <label class="panel__form__al__label">Append electric potential graph
+                        <input type="checkbox" id="panel__form__dd__input">
                         <span class="panel__form__al__span"></span>
                     </label><br>
                 </form>
+
+
+
+
 
 
 
@@ -631,8 +695,6 @@
                         <span class="panel__form__orint__span"></span>
                     </label><br>
                 </form>
-
-
 
 
 
@@ -708,6 +770,8 @@
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/temperature.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/wave__vector__parameters.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/elements/panel__body/ep.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/dd.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/elements/panel__body/barriers.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'scripts/elements/footer.js' %}"></script>
 

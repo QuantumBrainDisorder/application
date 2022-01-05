@@ -175,34 +175,118 @@ def energy__paraboloids(request):
     profiles__el = qqbd.adjust__energy__profile__to__2D__wave__vector__grid(y2, el, kx, ky)  #(energy__profile__fence, effective__mass__profile__fence, wave__vector__grid__A, wave__vector__grid__B):
  
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    elt = float(input['energy__levels__limit__top']) * multiplier
-    elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elr = float(input['energy__levels__resolution']) * multiplier
+    # elt = float(input['energy__levels__limit__top']) * multiplier
+    el__el_t = float(input['energy__levels__limit__top']) * multiplier
+    el__lh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__hh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__el_b = float(input['energy__levels__limit__bottom']) * multiplier
+    el__lh_t = -float(input['energy__levels__limit__bottom']) * multiplier
+    el__hh_t = -float(input['energy__levels__limit__bottom']) * multiplier
     elr = float(input['energy__levels__resolution']) * multiplier
+    # if 'barriers' in input:
+    #     continuum_el = ...
+    #     continuum_ho = ...
 
+    #     if y1[0] <= y1[-1]: continuum_ho = -y1[-1]
+    #     else:               continuum_ho = -y1[0]
+    #     if y2[0] <= y2[-1]: continuum_el = y2[0]
+    #     else:               continuum_el = y2[-1]
+
+    #     if el__ho_t >= continuum_ho:    
+    #         el__ho_t = continuum_ho
+    #         if el__ho_b > el__ho_t:
+    #             el__ho_b = el__ho_t
+    #     if el__el_t >= continuum_el:    
+    #         el__el_t = continuum_el
+    #         if el__el_b > el__el_t:
+    #             el__el_b = el__el_t
+                    
 
     y4 = []
-    for profiles in profiles__lh:
-        y4.append([])
-        for profile in profiles:
-            y4[-1].append(qqbd.eigenvalues_1(x1, profile, lh, -elt, -elb, elr))
+    if 'barriers' in input.keys():
+        # print('aaaaa',sys.stderr)
+        for profiles in profiles__lh:
+            y4.append([])
+            for profile in profiles:
+                el__b = el__lh_b
+                el__t = el__lh_t
+                continuum = ...
+                if profile[0] <= profile[-1]:  continuum = profile[0]
+                else:                          continuum = profile[-1]
+
+                if el__t >= continuum:    
+                    el__t = continuum
+                    if el__b > el__t:
+                        el__b = el__t
+                            
+                y4[-1].append(qqbd.eigenvalues_1(x1, profile, lh, el__b, el__t, elr))
+    else:   
+        for profiles in profiles__lh:
+            y4.append([])
+            for profile in profiles:
+                y4[-1].append(qqbd.eigenvalues_1(x1, profile, lh, el__lh_b, el__lh_t, elr))
+                # y4[-1].append(qqbd.eigenvalues_1(x1, profile, lh, -elt, -elb, elr))
     for i in range(0,len(y4)):
         for j in range(0,len(y4[i])):
             y4[i][j] = [-k / multiplier for k in y4[i][j]]
 
+
+
+
     y5 = []
-    for profiles in profiles__hh:
-        y5.append([])
-        for profile in profiles:
-            y5[-1].append(qqbd.eigenvalues_1(x1, profile, hh, -elt, -elb, elr))
+    if 'barriers' in input.keys():
+        for profiles in profiles__hh:
+            y5.append([])
+            for profile in profiles:
+                el__b = el__hh_b
+                el__t = el__hh_t
+                continuum = ...
+                if profile[0] <= profile[-1]:  continuum = profile[0]
+                else:                          continuum = profile[-1]
+
+                if el__t >= continuum:    
+                    el__t = continuum
+                    if el__b > el__t:
+                        el__b = el__t
+                            
+                y5[-1].append(qqbd.eigenvalues_1(x1, profile, hh, el__b, el__t, elr))
+                # y5[-1].append(qqbd.eigenvalues_1(x1, profile, hh, -elt, -elb, elr))
+    else:
+        for profiles in profiles__hh:
+            y5.append([])
+            for profile in profiles:
+                y5[-1].append(qqbd.eigenvalues_1(x1, profile, hh, el__hh_b, el__hh_t, elr))
+                # y5[-1].append(qqbd.eigenvalues_1(x1, profile, hh, -elt, -elb, elr))
     for i in range(0,len(y5)):
         for j in range(0,len(y5[i])):
             y5[i][j] = [-k / multiplier for k in y5[i][j]]
 
     y6 = []
-    for profiles in profiles__el:
-        y6.append([])
-        for profile in profiles:
-            y6[-1].append(qqbd.eigenvalues_1(x1, profile, el, elb, elt, elr))
+    if 'barriers' in input.keys():
+        for profiles in profiles__el:
+            y6.append([])
+            for profile in profiles:
+                el__b = el__el_b
+                el__t = el__el_t
+                continuum = ...
+                if profile[0] <= profile[-1]:  continuum = profile[0]
+                else:                          continuum = profile[-1]
+
+                if el__t >= continuum:    
+                    el__t = continuum
+                    if el__b > el__t:
+                        el__b = el__t
+                            
+                y6[-1].append(qqbd.eigenvalues_1(x1, profile, el, el__b, el__t, elr))
+                # y6[-1].append(qqbd.eigenvalues_1(x1, profile, el, elb, elt, elr))
+    else:
+        for profiles in profiles__el:
+            y6.append([])
+            for profile in profiles:
+                y6[-1].append(qqbd.eigenvalues_1(x1, profile, el, el__el_b, el__el_t, elr))
+                # y6[-1].append(qqbd.eigenvalues_1(x1, profile, el, elb, elt, elr))
     for i in range(0,len(y6)):
         for j in range(0,len(y6[i])):
             y6[i][j] = [k / multiplier for k in y6[i][j]]

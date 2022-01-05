@@ -61,6 +61,13 @@ const panel__form__distribution__z__axis__property = document.getElementById('pa
 const panel__form__profile = document.getElementById("panel__form__profile");
 const panel__form__profile__submit = document.getElementById("panel__form__profile__submit");
 
+const panel__form__barriers = document.getElementById('panel__form__barriers');
+const panel__form__barriers__input = document.getElementById('panel__form__barriers__input');
+const panel__form__barriers__thickness = document.getElementById('panel__form__barriers__thickness');
+const panel__form__barriers__material = document.getElementById('panel__form__barriers__material');
+const panel__form__barriers__thickness__label = document.getElementById('panel__form__barriers__thickness__label');
+const panel__form__barriers__material__label = document.getElementById('panel__form__barriers__material__label');
+
 const panel__form__al = document.getElementById("panel__form__al");
 const panel__form__al__input = document.getElementById("panel__form__al__input");
 const panel__form__al__label = document.getElementById("panel__form__al__label");
@@ -163,6 +170,10 @@ const panel__form__temperature__input = document.getElementById("panel__form__te
 const panel__form__fds = document.getElementById("panel__form__fds");
 const panel__form__fds__epr = document.getElementById("panel__form__fds__epr");
 const panel__form__fds__dos = document.getElementById("panel__form__fds__dos");
+const panel__form__fds__fi = document.getElementById('panel__form__fds__fi');
+const panel__form__fds__fi__res = document.getElementById('panel__form__fds__fi__res');
+const panel__form__fds__fi__B = document.getElementById('panel__form__fds__fi__B');
+const panel__form__fds__fi__OWS = document.getElementById('panel__form__fds__fi__OWS');
 // const panel__form__fds__for__el = document.getElementById("panel__form__fds__for__el");
 // const panel__form__fds__for__ho = document.getElementById("panel__form__fds__for__ho");
 // const panel__form__fds__et = document.getElementById("panel__form__fds__et");
@@ -181,6 +192,9 @@ const panel__form__qfl__el = document.getElementById("panel__form__qfl__el");
 const panel__form__phi = document.getElementById("panel__form__phi");
 const panel__form__phi__0 = document.getElementById("panel__form__phi__0");
 const panel__form__phi__L = document.getElementById("panel__form__phi__L");
+
+const panel__form__dd = document.getElementById('panel__form__dd');
+const panel__form__dd__input = document.getElementById('panel__form__dd__input');
 
 const panel__form__ep = document.getElementById("panel__form__ep");
 const panel__form__ep__0 = document.getElementById("panel__form__ep__0");

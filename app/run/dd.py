@@ -17,6 +17,7 @@ import plotly.graph_objects
 import plotly.io
 import plotly
 import plotly.express as px
+import plotly.subplots as ps
 from django.http import JsonResponse
 import units_QBD
 import plotly.graph_objects as go
@@ -31,7 +32,7 @@ unit = []
 text = None
 color = None
 
-def phi(request):
+def dd(request):
     glob_ = list(globals().keys()).copy()
     input = json.load(request)
     input = json.loads(input['input'])
@@ -62,6 +63,7 @@ def phi(request):
     ep__0 = float(input['ep__0']) * units_QBD.standardise(input['ep__unit']).value
     ep__L = float(input['ep__L']) * units_QBD.standardise(input['ep__unit']).value
     ep = meqbd.external__potential__profile__gridded(ep__0, ep__L, structure__thicknesses, input['space__resolution'])
+    print(ep,sys.stderr)
 
 
     valence__band__offset__dict = cqbd.read__sheet(input['sheets']['valence__band__offset'], 'dict')
@@ -91,6 +93,74 @@ def phi(request):
     for material in structure__materials:   
         relative__permittivity.append(meqbd.interpolation__exception(material, relative__permittivity__dict, relative__permittivity__bowings))
     xx, rp = meqbd.profile__gridded(structure__thicknesses, relative__permittivity, float(input['space__resolution']))
+
+
+
+
+
+
+
+
+
+    carriers__mobility__unit = input['units']['carriers__mobility']
+
+    carriers__mobility__lh__dict = ...
+    carriers__mobility__lh__bowings = ...
+    carriers__mobility__lh = []
+
+    carriers__mobility__hh__dict = ...
+    carriers__mobility__hh__bowings = ...
+    carriers__mobility__hh = []
+
+    carriers__mobility__el__dict = ...
+    carriers__mobility__el__bowings = ...
+    carriers__mobility__el = []
+
+    carriers__mobility__lh__dict = input['sheets']['carriers__mobility']['lh']
+    carriers__mobility__lh__dict = {key: float(value) for (key, value) in carriers__mobility__lh__dict.items()}
+    carriers__mobility__lh__bowings = ...
+    try:
+        carriers__mobility__lh__bowings = input['sheets']['bowings']['carriers__mobility']['lh']
+    except Exception:
+        carriers__mobility__lh__bowings = {}
+    for material in structure__materials:   
+        carriers__mobility__lh.append(meqbd.interpolation__exception(material, carriers__mobility__lh__dict, carriers__mobility__lh__bowings))
+    multiplier = units_QBD.standardise(carriers__mobility__unit).value
+    print(carriers__mobility__lh,sys.stderr)
+    carriers__mobility__lh = [val * multiplier for val in carriers__mobility__lh]
+
+    carriers__mobility__hh__dict = input['sheets']['carriers__mobility']['hh']
+    carriers__mobility__hh__dict = {key: float(value) for (key, value) in carriers__mobility__hh__dict.items()}
+    try:
+        carriers__mobility__hh__bowings = input['sheets']['bowings']['carriers__mobility']['hh']
+    except Exception:
+        carriers__mobility__hh__bowings = {}
+    for material in structure__materials: 
+        carriers__mobility__hh.append(meqbd.interpolation__exception(material, carriers__mobility__hh__dict, carriers__mobility__hh__bowings))
+    multiplier = units_QBD.standardise(carriers__mobility__unit).value
+    carriers__mobility__hh = [val * multiplier for val in carriers__mobility__hh]
+
+    carriers__mobility__el__dict = input['sheets']['carriers__mobility']['el']
+    carriers__mobility__el__dict = {key: float(value) for (key, value) in carriers__mobility__el__dict.items()}
+    try:
+        carriers__mobility__el__bowings = input['sheets']['bowings']['carriers__mobility']['el']
+    except Exception:
+        carriers__mobility__el__bowings = {}
+    for material in structure__materials: 
+        carriers__mobility__el.append(meqbd.interpolation__exception(material, carriers__mobility__el__dict, carriers__mobility__el__bowings))
+    multiplier = units_QBD.standardise(carriers__mobility__unit).value
+    carriers__mobility__el = [val * multiplier for val in carriers__mobility__el]
+
+
+    cm_lh = ...
+    cm_hh = ...
+    cm_el = ...
+    xx = ...
+
+    xx, cm_lh = meqbd.profile__gridded(structure__thicknesses, carriers__mobility__lh, float(input['space__resolution']))
+    xx, cm_hh = meqbd.profile__gridded(structure__thicknesses, carriers__mobility__hh, float(input['space__resolution']))
+    xx, cm_el = meqbd.profile__gridded(structure__thicknesses, carriers__mobility__el, float(input['space__resolution']))
+
 
 
 
@@ -384,6 +454,10 @@ def phi(request):
             dos__el__merged,
             float(input['fi__res']) * multiplier)
 
+
+
+    cc__lh__merged = meqbd.p(ldos__grid, ldos__lh__merged, F_v__merged, T)
+    cc__hh__merged = meqbd.p(ldos__grid, ldos__hh__merged, F_v__merged, T)
     # cc__ho__2d = meqbd.p(ldos__grid, ldos__ho__2d, F_v, T)
     # cc__ho__3d = meqbd.p(ldos__grid, ldos__ho__3d, F_v, T)
     cc__ho__merged = meqbd.p(ldos__grid, ldos__ho__merged, F_v__merged, T)
@@ -405,6 +479,56 @@ def phi(request):
 
     phi = mqbd.poisson__1D(x1[1] - x1[0], phi__0, phi__L, rp, h)
     
+
+
+
+    J_dr_el = []
+    J_dr_lh = []
+    J_dr_hh = []
+    J_dr_ho = []
+
+    J_di_el = []
+    J_di_lh = []
+    J_di_hh = []
+    J_di_ho = []
+
+    dx = x1[1] - x1[0]
+    for i in range(0,len(x1)-1):
+        J_dr_el.append(units_QBD.E[0]  * cc__el__merged[i] * cm_el[i] * (phi[i+1]-phi[i]) / dx)
+        J_dr_lh.append(-units_QBD.E[0] * cc__lh__merged[i] * cm_lh[i] * (phi[i+1]-phi[i]) / dx)
+        J_dr_hh.append(-units_QBD.E[0] * cc__hh__merged[i] * cm_hh[i] * (phi[i+1]-phi[i]) / dx)
+        J_dr_ho.append(-units_QBD.E[0] * cc__ho__merged[i] * cm_hh[i] * (phi[i+1]-phi[i]) / dx)
+    
+    J_dr_el.append(J_dr_el[-1])
+    J_dr_lh.append(J_dr_lh[-1])
+    J_dr_hh.append(J_dr_hh[-1])
+    J_dr_ho.append(J_dr_hh[-1])
+
+    for i in range(0,len(x1)-1):
+        J_di_el.append(cm_el[i] * units_QBD.K_B[0] * T * (cc__el__merged[i+1]-cc__el__merged[i]) / dx)
+        J_di_lh.append(cm_lh[i] * units_QBD.K_B[0] * T * (cc__lh__merged[i+1]-cc__lh__merged[i]) / dx)
+        J_di_hh.append(cm_hh[i] * units_QBD.K_B[0] * T * (cc__hh__merged[i+1]-cc__hh__merged[i]) / dx)
+        J_di_ho.append(cm_hh[i] * units_QBD.K_B[0] * T * (cc__ho__merged[i+1]-cc__ho__merged[i]) / dx)
+    
+    J_di_el.append(J_di_el[-1])
+    J_di_lh.append(J_di_lh[-1])
+    J_di_hh.append(J_di_hh[-1])
+    J_di_ho.append(J_di_hh[-1])
+
+    # J_dr_ho = [J_dr_hh[i] + J_dr_lh[i] for i in range(0,len(x1))]
+    # J_di_ho = [J_di_hh[i] + J_di_lh[i] for i in range(0,len(x1))]
+
+
+    J_dr = [J_dr_ho[i] + J_dr_el[i] for i in range(0,len(x1))]
+    J_di = [J_di_ho[i] + J_di_el[i] for i in range(0,len(x1))]
+    
+    J = [J_dr[i] + J_di[i] for i in range(0,len(x1))]
+
+
+    ep = [i / units_QBD.E[0] for i in ep]
+    ip = [phi[i] - ep[i] for i in range(0,len(phi))]
+
+
     globals()['color'] = {
         0: colors['--theme0'],
         1: colors['--theme1'],
@@ -414,32 +538,44 @@ def phi(request):
         }
     multiplier = units_QBD.standardise(structure__unit).value
     globals()['x'] = [i / multiplier for i in x1]
-    globals()['y'] = phi
-    globals()['name'] = ['structure growth direction Z (' + structure__unit + ')', 'internal electric potential (V)']
+    globals()['y'] = {
+        'J_dr_el': J_dr_el,
+        'J_dr_lh': J_dr_lh,
+        'J_dr_hh': J_dr_hh,
+        'J_di_el': J_di_el,
+        'J_di_lh': J_di_lh,
+        'J_di_hh': J_di_hh,
+        'J_dr_ho': J_dr_ho,
+        'J_di_ho': J_di_ho,
+        'J_dr': J_dr,
+        'J_di': J_di,
+        'J': J,
+        'int.': ip,
+        'ext.': ep,
+        'tot.': phi
+    }
+    globals()['name'] = {
+        'x': 'structure growth direction Z (' + structure__unit + ')',
+        'y1': 'current density (A+1m-2)',
+        'y2': 'electric potential (V)',
+        'J_dr_el': 'electron driff',
+        'J_dr_lh': 'light holes driff',
+        'J_dr_hh': 'heavy holes driff',
+        'J_di_el': 'electrons diffusion',
+        'J_di_lh': 'light holes diffusion',
+        'J_di_hh': 'heavy holes diffusion',
+        'J_dr_ho': 'total holes driff',
+        'J_di_ho': 'total holes diffusion',
+        'J_dr': 'total driff',
+        'J_di': 'total diffusion',
+        'J': 'total current density',
+        'ext.': 'external',
+        'int.': 'internal',
+        'tot.': 'total'
+    }
 
-    code = """fig = go.Figure()
-fig.add_trace(go.Scatter(
-    x = x, 
-    y = y, 
-    mode='lines'))
-fig.update_xaxes(
-    title_text = name[0],
-    gridcolor = '#808080',
-    zerolinecolor = color[4])
-fig.update_yaxes(
-    title_text = name[1],
-    gridcolor = '#808080',
-    zerolinecolor = color[4])
-fig.update_traces(textposition = 'bottom right')
-fig.update_layout(
-    plot_bgcolor = color[0],
-    font_color=color[4],
-    paper_bgcolor=color[0])
-config = dict({
-    'scrollZoom': True,
-    'doubleClick': 'reset+autosize'})"""  
 
-
+    code = get__code(input.keys())
     meta_ = code
     sys.stdout = mystdout = io.StringIO()
     try:
@@ -462,3 +598,291 @@ config = dict({
             del globals()[val]
     return JsonResponse(result_, safe = False)
 
+
+
+
+
+
+
+
+def get__code(flags):
+    if 'add__potential' in flags:   return get__code_v3()
+    else:                           return get__code_v4()
+
+
+def get__code_v3():
+    return """fig = ps.make_subplots(
+    rows = 2, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
+
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_lh'],
+        mode = 'lines', 
+        name = name['J_dr_lh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_hh'],
+        mode = 'lines', 
+        name = name['J_dr_hh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_el'],
+        mode = 'lines', 
+        name = name['J_dr_el']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_lh'],
+        mode = 'lines', 
+        name = name['J_di_lh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_hh'],
+        mode = 'lines', 
+        name = name['J_di_hh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_el'],
+        mode = 'lines', 
+        name = name['J_di_el']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_ho'],
+        mode = 'lines', 
+        name = name['J_dr_ho']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_ho'],
+        mode = 'lines', 
+        name = name['J_di_ho']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr'],
+        mode = 'lines', 
+        name = name['J_dr']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di'],
+        mode = 'lines', 
+        name = name['J_di']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J'],
+        mode = 'lines', 
+        name = name['J']),
+    row=1, 
+    col=1)
+
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['int.'],
+        mode = 'lines', 
+        name = name['int.']),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['ext.'],
+        mode = 'lines', 
+        name = name['ext.']),
+    row=2, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['tot.'],
+        mode = 'lines', 
+        name = name['tot.']),
+    row=2, 
+    col=1)
+
+fig.update_xaxes(
+    title_text = name['x'],
+    gridcolor = '#808080',
+    zerolinecolor = color[4],
+    row = 2)
+fig.update_yaxes(
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    title_text = name['y1'], 
+    row = 1, 
+    col = 1)
+fig.update_yaxes(
+    title_text = name['y2'],
+    row = 2, 
+    col = 1)
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""
+
+
+
+
+
+
+
+
+
+def get__code_v4():
+    return """fig = ps.make_subplots(
+    rows = 1, cols = 1,
+    shared_xaxes = True,
+    vertical_spacing = 0.02)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_lh'],
+        mode = 'lines', 
+        name = name['J_dr_lh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_hh'],
+        mode = 'lines', 
+        name = name['J_dr_hh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_el'],
+        mode = 'lines', 
+        name = name['J_dr_el']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_lh'],
+        mode = 'lines', 
+        name = name['J_di_lh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_hh'],
+        mode = 'lines', 
+        name = name['J_di_hh']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_el'],
+        mode = 'lines', 
+        name = name['J_di_el']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr_ho'],
+        mode = 'lines', 
+        name = name['J_dr_ho']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di_ho'],
+        mode = 'lines', 
+        name = name['J_di_ho']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_dr'],
+        mode = 'lines', 
+        name = name['J_dr']),
+    row=1, 
+    col=1)
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J_di'],
+        mode = 'lines', 
+        name = name['J_di']),
+    row=1, 
+    col=1)
+
+fig.add_trace(
+    go.Scatter(
+        x = x, 
+        y = y['J'],
+        mode = 'lines', 
+        name = name['J']),
+    row=1, 
+    col=1)
+
+fig.update_xaxes(
+    title_text = name['x'],
+    gridcolor = '#808080',
+    zerolinecolor = color[4])
+fig.update_yaxes(
+    gridcolor = '#808080',
+    zerolinecolor = color[4],
+    title_text = name['y1'],
+    row = 1,
+    col = 1)
+fig.update_layout(
+    plot_bgcolor = color[0],
+    font_color = color[4],
+    paper_bgcolor = color[0])
+fig.update_traces(showlegend=True)
+config = dict({
+    'scrollZoom': True,
+    'doubleClick': 'reset+autosize'})"""

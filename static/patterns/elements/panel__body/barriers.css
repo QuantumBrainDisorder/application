@@ -1,0 +1,38 @@
+
+.panel__form__barriers__label {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    /* margin-left: calc(var(--fsize) * 5 / 4);
+    padding-left: calc(var(--fsize) * 5 / 4); */
+    padding-left: calc(var(--fsize) * 5 / 4);
+    cursor: pointer;
+    font-size: calc(0.75 * var(--fsize));
+    font-family: var(--ffamily);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.panel__form__barriers__input {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--fsize) * 5 / 16);
+    font-size: calc(0.75 * var(--fsize));
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+
+
+
+
+
+

@@ -186,6 +186,54 @@ def energies(request):
         y3 = [y1[i] + y3[i] for i in range(0,len(y1))]
 
 
+    for i in range(0,len(y1)):
+        y1[i] += ep[i]
+        y2[i] += ep[i]
+        if 'energy__gap' in names:
+            y3[i] += ep[i]
+
+
+
+    multiplier = units_QBD.standardise(valence__band__offset__unit).value
+    # elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elr = float(input['energy__levels__resolution']) * multiplier
+    # elt = float(input['energy__levels__limit__top']) * multiplier
+    el__el_t = float(input['energy__levels__limit__top']) * multiplier
+    el__lh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__hh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__el_b = float(input['energy__levels__limit__bottom']) * multiplier
+    el__lh_t = -float(input['energy__levels__limit__bottom']) * multiplier
+    el__hh_t = -float(input['energy__levels__limit__bottom']) * multiplier
+    elr = float(input['energy__levels__resolution']) * multiplier
+    if 'barriers' in input:
+        continuum_el = ...
+        continuum_lh = ...
+        continuum_hh = ...
+
+        if y1[0] <= y1[-1]: continuum_lh = -y1[-1]
+        else:               continuum_lh = -y1[0]
+        if y2[0] <= y2[-1]: continuum_hh = -y2[-1]
+        else:               continuum_hh = -y2[0]
+        if 'energy__gap' in names:
+            if y3[0] <= y3[-1]: continuum_el = y3[0]
+            else:               continuum_el = y3[-1]
+
+        if el__lh_t >= continuum_lh:    
+            el__lh_t = continuum_lh
+            if el__lh_b > el__lh_t:
+                el__lh_b = el__lh_t
+        if el__hh_t >= continuum_hh:    
+            el__hh_t = continuum_hh
+            if el__hh_b > el__hh_t:
+                el__hh_b = el__hh_t
+        if 'energy__gap' in names:
+            if el__el_t >= continuum_el:    
+                el__el_t = continuum_el
+                if el__el_b > el__el_t:
+                    el__el_b = el__el_t
+                           
+
+
     if float(input['wave__vector']) != 0:
         y1 = [-i for i in y1]
         y2 = [-i for i in y2]
@@ -196,47 +244,17 @@ def energies(request):
         if 'energy__gap' in names:
             y3 = qqbd.adjust__energy__profile__to__wave__vector(y3, el, float(input['wave__vector']))
         
-    for i in range(0,len(y1)):
-        y1[i] += ep[i]
-        y2[i] += ep[i]
-        if 'energy__gap' in names:
-            y3[i] += ep[i]
-
-
-
-    multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    elt = float(input['energy__levels__limit__top']) * multiplier
-    elb = float(input['energy__levels__limit__bottom']) * multiplier
-    elr = float(input['energy__levels__resolution']) * multiplier
-
-
-
-    
     y4 = []
     if 'del__holes__lh' in input.keys():
-        y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, -elt, -elb, elr)
-        # y4 = [-i for i in y4]
-        # y4 = [[i / multiplier,i / multiplier] for i in y4]
-        # for i in range(1,len(y4) + 1):
-        #     names4.append('lh' + str(i))
+        y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, el__lh_b, el__lh_t, elr)
+        # y4 = qqbd.eigenvalues_1(x1, [-i for i in y1], lh, -elt, -elb, elr)
     y5 = []
     if 'del__holes__hh' in input.keys():
-        y5 = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, -elt, -elb, elr)
-        # y5 = [-i for i in y5]
-        # y5 = [[i / multiplier,i / multiplier] for i in y5]
-        # for i in range(1,len(y5) + 1):
-        #     names5.append('hh' + str(i))
+        y5 = qqbd.eigenvalues_1(x1, [-i for i in y2], hh, el__hh_b, el__hh_t, elr)
     y6 = []
     if 'del__electrons' in input.keys():
-        y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
-        print(y6, sys.stderr)
-        print(elb, sys.stderr)
-        print(elt, sys.stderr)
-        print(elr, sys.stderr)
-        # y6 = [[i / multiplier,i / multiplier] for i in y6]
-        # for i in range(1,len(y6) + 1):
-        #     names6.append('el' + str(i))
-
+        y6 = qqbd.eigenvalues_1(x1, y3, el, el__el_b, el__el_t, elr)
+        # y6 = qqbd.eigenvalues_1(x1, y3, el, elb, elt, elr)
     
 
 
@@ -313,6 +331,21 @@ def energies(request):
         y9[i] = [j + y6[i][0] for j in y9[i]]
 
 
+    y10 = {}
+    multiplier = units_QBD.standardise(valence__band__offset__unit).value
+    if 'barriers' in input:
+        if 'del__electrons' in input.keys():
+            if el__el_t < float(input['energy__levels__limit__top']) * multiplier: 
+                y10['el'] = [el__el_t / multiplier,el__el_t / multiplier]
+        if 'del__holes__lh' in input.keys(): 
+            if -el__lh_t > float(input['energy__levels__limit__bottom']) * multiplier:    
+                y10['lh'] = [-el__lh_t / multiplier, -el__lh_t / multiplier]
+        if 'del__holes__hh' in input.keys(): 
+            if -el__hh_t > float(input['energy__levels__limit__bottom']) * multiplier:    
+                y10['hh'] = [-el__hh_t / multiplier, -el__hh_t / multiplier]
+
+
+
     globals()['color'] = {
         0: colors['--theme0'],
         1: colors['--theme1'],
@@ -342,6 +375,8 @@ def energies(request):
             globals()['yyy'].append(y9)
     if 'energy__gap' in names:
         globals()['y'].append(y3)
+    globals()['y'].append(y10)
+
     globals()['name'].append('structure growth direction Z (' + structure__unit +')')
     globals()['name'].append('energy (eV)')
     globals()['name'].append(names4)
@@ -350,6 +385,9 @@ def energies(request):
     globals()['name'].append('light holes band edge')
     globals()['name'].append('heavy holes band edge')
     globals()['name'].append('conduction band edge')
+    globals()['name'].append('light holes band continuum edge')
+    globals()['name'].append('heavy holes band continuum edge')
+    globals()['name'].append('conduction band continuum edge')
 
     code = get__code(input.keys())
 
@@ -461,6 +499,29 @@ for i in range(0, len(yy[-1])):
         name = name[4][i]))
 """
 
+    if 'barriers' in flags:
+        if 'lh' in globals()['y'][-1]:
+            code += """
+fig.add_trace(go.Scatter(
+    x = xx[0],
+    y = y[-1]['lh'],
+    name = name[8]))
+"""
+        if 'hh' in globals()['y'][-1]:
+            code += """
+fig.add_trace(go.Scatter(
+    x = xx[0],
+    y = y[-1]['hh'],
+    name = name[9]))
+"""
+        if 'el' in globals()['y'][-1]:
+            code += """
+fig.add_trace(go.Scatter(
+    x = xx[0],
+    y = y[-1]['el'],
+    name = name[10]))
+"""
+
 
     if 'del__holes__lh' in flags:
         if 'dwf__holes' in flags:
@@ -493,7 +554,6 @@ for i in range(0, len(yyy[-1])):
         x = x[0],
         y = yyy[-1][i],
         name = name[4][i] + ' wf'))"""
-
 
 
     code += """

@@ -81,7 +81,15 @@ properties__list.style.height = localStorage.getItem('properties__list__height')
 
 
 
-
+if (localStorage.getItem("panel__form__barriers__input") != null) {
+    panel__form__barriers__input.checked = true;
+    panel__form__barriers__thickness.style.display = 'initial';
+    panel__form__barriers__material.style.display = 'initial';
+    panel__form__barriers__thickness__label.style.display = 'initial';
+    panel__form__barriers__material__label.style.display = 'initial';
+}
+panel__form__barriers__thickness.textContent = localStorage.getItem('panel__form__barriers__thickness');
+panel__form__barriers__material.textContent = localStorage.getItem('panel__form__barriers__material');
 
 if (localStorage.getItem("panel__form__orint__orint") != null) {
     panel__form__orint__orint.checked = true;
@@ -114,6 +122,9 @@ if (localStorage.getItem("panel__form__al") != null) {
 panel__form__profile__property.innerHTML = localStorage.getItem('panel__form__profile__property__content');
 panel__form__profile__property.dataset.property = localStorage.getItem('panel__form__profile__property');
 
+if (localStorage.getItem('panel__form__dd__input') != null) {
+    panel__form__dd__input.checked = true;
+}
 
 // panel__form__band__electrons__del__label
 // panel__form__band__electrons__dwf__label
@@ -258,10 +269,17 @@ if (localStorage.getItem('panel__form__cos__merged') != null) {
 
 if (localStorage.getItem('panel__form__fds__epr') != null) {
     panel__form__fds__epr.checked = true;
-};
+}
 if (localStorage.getItem('panel__form__fds__dos') != null) {
     panel__form__fds__dos.checked = true;
-};
+}
+if (localStorage.getItem('panel__form__fds__fi__B') != null ) {
+    panel__form__fds__fi__B.checked = true;
+}
+if (localStorage.getItem('panel__form__fds__fi__OWS') != null ) {
+    panel__form__fds__fi__OWS.checked = true;
+}
+panel__form__fds__fi__res.textContent = localStorage.getItem('panel__form__fds__fi__res');
 // if (localStorage.getItem('panel__form__fds__for__el') != null) {
 //     panel__form__fds__for__el.checked = true;
 // };
@@ -272,8 +290,8 @@ if (localStorage.getItem('panel__form__fds__dos') != null) {
 // panel__form__fds__eb.textContent = localStorage.getItem('panel__form__fds__eb');
 // panel__form__fds__er.textContent = localStorage.getItem('panel__form__fds__er');
 
-panel__form__qfl__ho.textContent = localStorage.getItem('panel__form__qfl__ho');
-panel__form__qfl__el.textContent = localStorage.getItem('panel__form__qfl__el');
+// panel__form__qfl__ho.textContent = localStorage.getItem('panel__form__qfl__ho');
+// panel__form__qfl__el.textContent = localStorage.getItem('panel__form__qfl__el');
 
 if (localStorage.getItem('panel__form__cc__ho') != null) {
     panel__form__cc__ho.checked = true;

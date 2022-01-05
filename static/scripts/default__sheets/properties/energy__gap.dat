@@ -2,22 +2,30 @@ C    5.5
 Si   1.14
 Ge   0.67
 
-GaAs 1.51
-AlAs 3.10
-InAs 0.42
 GaP  2.89
-AlP  3.63
-InP  1.42
+GaAs 1.52
 GaSb 0.81
+
+AlP  3.63
+AlAs 3.10
 AlSb 2.39
+
+InP  1.42
+InAs 0.42
 InSb 0.23
 
-# wurtzite nitrides
-#GaN  3.51
-#AlN  6.23
-#InN  1.99
-
-# zinc blende nitrides
 GaN  3.30
 AlN  4.90
 InN  1.94
+
+ZnS  3.6
+ZnSe 2.7
+ZnTe 2.2
+
+CdS  2.4
+CdSe 1.8
+CdTe 1.5
+
+HgS  2.0
+HgSe 0.6
+HgTe 0.02

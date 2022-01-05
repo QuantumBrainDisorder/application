@@ -10,6 +10,7 @@ from .run import cos
 from .run import fds
 from .run import cc
 from .run import phi
+from .run import dd
 
 
 urlpatterns = [
@@ -33,6 +34,7 @@ urlpatterns = [
     path('run__fds', fds.fds, name="fds"),
     path('run__cc', cc.cc, name="cc"),
     path('run__phi', phi.phi, name="phi"),
+    path('run__dd', dd.dd, name="dd"),
 ]
 
 

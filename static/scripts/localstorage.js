@@ -71,6 +71,10 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         
         localStorage.setItem('panel__form__band__electrons__input', 'true');
 
+        localStorage.setItem('panel__form__barriers__input', 'true');
+        localStorage.setItem('panel__form__barriers__thickness', '20');
+        localStorage.setItem('panel__form__barriers__material', 'GaAs.0');
+
         localStorage.setItem('panel__form__space__resolution__input', '0.1');
 
         localStorage.setItem('panel__form__wave__vector__input', '0e+9');
@@ -123,18 +127,21 @@ if (localStorage.getItem("local__storage__initialized") == null) {
         // localStorage.setItem("panel__form__fds__et", '3');
         // localStorage.setItem("panel__form__fds__eb", '-1.2');
         // localStorage.setItem("panel__form__fds__er", '0.06');
-
+        localStorage.setItem('panel__form__fds__fi__res', '0.0001');
+        localStorage.setItem('panel__form__fds__fi__B', 'true');
 
         localStorage.setItem("panel__form__cc__el", 'true');
 
-        localStorage.setItem("panel__form__qfl__ho", '-1.1');
-        localStorage.setItem("panel__form__qfl__el", '2.4');
+        // localStorage.setItem("panel__form__qfl__ho", '-1.1');
+        // localStorage.setItem("panel__form__qfl__el", '2.4');
 
         localStorage.setItem("panel__form__phi__0", '0');
         localStorage.setItem("panel__form__phi__L", '0');
 
         localStorage.setItem("panel__form__ep__0", '0');
         localStorage.setItem("panel__form__ep__L", '0');
+
+
 
         localStorage.setItem("property__alpha__varshni", set__default__property('alpha__varshni'));
         localStorage.setItem("property__bowings", set__default__property('bowings'));

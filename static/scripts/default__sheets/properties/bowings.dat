@@ -14,8 +14,7 @@
     },
     "hh": {
       "GaInAs": "-0.145"
-    },
-    "so": {}
+    }
   },
   "energy__gap": {
     "AlGaAs": "-0.13",
@@ -44,39 +43,10 @@
     "InPN": "15",
     "InAsN": "4.22"
   },
-  "spin__orbit__split": {
-    "AlGaAs": "0.00",
-    "AlGaSb": "0.30",
-    "AlAsSb": "0.15",
-    "GaInAs": "0.15",
-    "GaAsSb": "0.60",
-    "GaInSb": "0.10",
-    "AlInAs": "0.15",
-    "GaInP": "0.00",
-    "AlInP": "-0.19",
-    "AlInSb": "0.25",
-    "InAsSb": "1.2",
-    "InAsP": "0.16",
-    "InPSb": "0.75"
-  },
   "valence__band__offset": {
     "AlAsSb": "-1.71",
     "GaInAs": "-0.38",
     "GaAsSb": "-1.06",
     "AlInAs": "-0.64"
-  },
-  "matrix__element__of__kane__operator": {
-    "GaInAs": "-1.48",
-    "AlInAs": "-4.81"
-  },
-  "kane__parameter": {
-    "GaInAs": "1.77",
-    "AlInAs": "-4.44",
-    "GaInP": "0.78",
-    "GaInSb": "-6.84"
-  },
-  "hydrostatic__deformation__potential__of__conduction__band": {
-    "GaInAs": "2.61",
-    "AlInAs": "-1.4"
   }
 }

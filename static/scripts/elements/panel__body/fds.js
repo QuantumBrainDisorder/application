@@ -10,9 +10,6 @@ panel__form__fds__epr.onclick = function(event) {
 }
 
 
-
-
-
 panel__form__fds__dos.onclick = function(event) {
   if (localStorage.getItem('panel__form__fds__dos') == null) {
       localStorage.setItem('panel__form__fds__dos', 'true');
@@ -50,11 +47,62 @@ panel__form__fds__dos.onclick = function(event) {
 
 
 
+panel__form__fds__fi__B.onclick = function(event) {
+  if (localStorage.getItem('panel__form__fds__fi__B') == null) {
+      localStorage.setItem('panel__form__fds__fi__B', 'true');
+      localStorage.removeItem("panel__form__fds__fi__OWS");
+      panel__form__fds__fi__OWS.checked = false;
+  }
+  else {
+      localStorage.removeItem("panel__form__fds__fi__B");
+      localStorage.setItem('panel__form__fds__fi__OWS', 'true');
+      panel__form__fds__fi__OWS.checked = true;
+  }
+}
 
 
+panel__form__fds__fi__OWS.onclick = function(event) {
+    if (localStorage.getItem('panel__form__fds__fi__OWS') == null) {
+        localStorage.setItem('panel__form__fds__fi__OWS', 'true');
+        localStorage.removeItem("panel__form__fds__fi__B");
+        panel__form__fds__fi__B.checked = false;
+    }
+    else {
+        localStorage.removeItem("panel__form__fds__fi__OWS");
+        localStorage.setItem('panel__form__fds__fi__B', 'true');
+        panel__form__fds__fi__B.checked = true;
+    }
+  }
+  
+  
+  panel__form__fds__fi__res.onkeydown = function (event) {
+    if (event.keyCode === 13) {
+      if (panel__form__fds__fi__res.textContent == "") {
+        panel__form__fds__fi__res.textContent = "0.0001";
+      };
+      panel__form__fds__fi__res.blur();
 
+      if(isNaN(panel__form__fds__fi__res.textContent)){
+        panel__form__fds__fi__res.textContent = '0.0001';
+        localStorage.setItem("panel__form__fds__fi__res", panel__form__fds__fi__res.textContent);
+      }
+    }
+}
 
+panel__form__fds__fi__res.addEventListener('focusout', function (e) {
+      if (panel__form__fds__fi__res.textContent == "") {
+        panel__form__fds__fi__res.textContent = "0.0001";
+      };
+      
+      if(isNaN(panel__form__fds__fi__res.textContent)){
+        panel__form__fds__fi__res.textContent = '0.0001';
+        localStorage.setItem("panel__form__fds__fi__res", panel__form__fds__fi__res.textContent);
+      }
+})
 
+panel__form__fds__fi__res.oninput = function (event) {
+  localStorage.setItem("panel__form__fds__fi__res", panel__form__fds__fi__res.textContent);
+};
 
 
 

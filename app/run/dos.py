@@ -201,16 +201,48 @@ def dos(request):
             y1[i] += ep[i]
         if 'for__hh' in input.keys():
             y2[i] += ep[i]
-        if 'energy__gap' in input.keys():
+        # if 'energy__gap' in input.keys():
+        if 'for__el' in input.keys():
             y3[i] += ep[i]
 
 
 
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    elt = float(input['energy__levels__limit__top']) * multiplier
-    elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elr = float(input['energy__levels__resolution']) * multiplier
+    # elt = float(input['energy__levels__limit__top']) * multiplier
+    el__el_t = float(input['energy__levels__limit__top']) * multiplier
+    el__lh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__hh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__el_b = float(input['energy__levels__limit__bottom']) * multiplier
+    el__lh_t = -float(input['energy__levels__limit__bottom']) * multiplier
+    el__hh_t = -float(input['energy__levels__limit__bottom']) * multiplier
     elr = float(input['energy__levels__resolution']) * multiplier
-
+    index_el = ...
+    index_lh = ...
+    index_hh = ...
+    if 'barriers' in input:
+        if 'for__lh' in input.keys():
+            if y1[0] <= y1[-1]: index_lh = -1
+            else:               index_lh = 0
+            # if el__lh_t >= continuum_lh:    
+            #     el__lh_t = continuum_lh
+            #     if el__lh_b > el__lh_t:
+            #         el__lh_b = el__lh_t
+        if 'for__hh' in input.keys():
+            if y2[0] <= y2[-1]: index_hh = -1
+            else:               index_hh = 0
+            # if el__hh_t >= continuum_hh:    
+            #     el__hh_t = continuum_hh
+            #     if el__hh_b > el__hh_t:
+            #         el__hh_b = el__hh_t
+        if 'for__el' in input.keys():
+            if y3[0] <= y3[-1]: index_el = 0
+            else:               index_el = -1
+            # if el__el_t >= continuum_el:    
+            #     el__el_t = continuum_el
+            #     if el__el_b > el__el_t:
+            #         el__el_b = el__el_t
 
 
     kxb = float(input['wave__vector__parameters__bx'])
@@ -263,56 +295,68 @@ def dos(request):
     name = [name, 'energy (eV)', 'DOS (cm-2eV-1)']
 
     vbo__temp = [-i for i in valence__band__offset]
-    index = vbo__temp.index(max(vbo__temp))
+    # index = vbo__temp.index(max(vbo__temp))
     eg__temp = [-i for i in dos__grid]
     eg__temp.reverse()
     if 'for__lh' in input.keys():
         if 'dos__2d' in input.keys():
-            dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+            if 'barriers' in input: dos__lh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y1], lh, kx, ky, el__lh_b, el__lh_t, elr)
+            else:                   dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, el__lh_b, el__lh_t, elr)
+            # dos__lh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
             dos__lh__2d.reverse()
         if 'dos__3d' in input.keys():
-            base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
+            base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index_lh], -y1[index_lh], structure__length)
+            # base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
             dos__lh__3d.reverse()
         if 'dos__merged' in input.keys():
             if dos__lh__2d == ...:
-                dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+                dos__lh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y1], lh, kx, ky, el__lh_b, el__lh_t, elr)
                 dos__lh__2d.reverse()
             if dos__lh__3d == ...:
-                base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
+                base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index_lh], -y1[index_lh], structure__length)
                 dos__lh__3d.reverse()
-            base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
+            dos__lh__merged = qqbd.dos__merge__reversed_(dos__lh__2d, dos__lh__3d)
+            # base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, y1[index_lh])
     
     if 'for__hh' in input.keys():
         if 'dos__2d' in input.keys():
-            dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+            if 'barriers' in input: dos__hh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y2], hh, kx, ky, el__hh_b, el__hh_t, elr)
+            else:                   dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, el__hh_b, el__hh_t, elr)            
+            # dos__hh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
             dos__hh__2d.reverse()
         if 'dos__3d' in input.keys():
-            base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
+            base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index_hh], -y2[index_hh], structure__length)
             dos__hh__3d.reverse()
         if 'dos__merged' in input.keys():
             if dos__hh__2d == ...:
-                dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+                dos__hh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y2], hh, kx, ky, el__hh_b, el__hh_t, elr)
                 dos__hh__2d.reverse()
             if dos__hh__3d == ...:
-                base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
+                base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index_hh], -y2[index_hh], structure__length)
                 dos__hh__3d.reverse()
-            base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
+            dos__hh__merged = qqbd.dos__merge__reversed_(dos__hh__2d, dos__hh__3d)
+            # base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, y2[index_hh])
     
     if 'for__el' in input.keys():
-        temp = []
-        for i in range(0,len(valence__band__offset)):
-            temp.append(energy__gap[i] + valence__band__offset[i])
-        index = temp.index(max(temp))
+        # temp = []
+        # for i in range(0,len(valence__band__offset)):
+        #     temp.append(energy__gap[i] + valence__band__offset[i])
+        # index = temp.index(max(temp))
         if 'dos__2d' in input.keys():
-            dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+            if 'barriers' in input: dos__el__2d = qqbd.dos__gridded__2D_(dos__grid, x1, y3, el, kx, ky, el__el_b, el__el_t, elr)
+            else:                   dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, el__el_b, el__el_t, elr)            
+            # dos__el__2d = qqbd.dos__gridded__2D_(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
         if 'dos__3d' in input.keys():
-            base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
+            base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index_el], y3[index_el], structure__length)
+            # base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
         if 'dos__merged' in input.keys():
             if dos__el__2d == ...:
-                dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+                dos__el__2d = qqbd.dos__gridded__2D_(dos__grid, x1, y3, el, kx, ky, el__el_b, el__el_t, elr)
             if dos__el__3d == ...:
-                base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
-            base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
+                base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index_el], y3[index_el], structure__length)
+                # base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
+            dos__el__merged = qqbd.dos__merge_(dos__el__2d, dos__el__3d)
+            # base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
        
     globals()['color'] = {
         0: colors['--theme0'],

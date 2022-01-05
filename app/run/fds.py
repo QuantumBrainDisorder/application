@@ -177,10 +177,28 @@ def fds(request):
 
 
 
+
     multiplier = units_QBD.standardise(valence__band__offset__unit).value
-    elt = float(input['energy__levels__limit__top']) * multiplier
-    elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elb = float(input['energy__levels__limit__bottom']) * multiplier
+    # elr = float(input['energy__levels__resolution']) * multiplier
+    # elt = float(input['energy__levels__limit__top']) * multiplier
+    el__el_t = float(input['energy__levels__limit__top']) * multiplier
+    el__lh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__hh_b = -float(input['energy__levels__limit__top']) * multiplier
+    el__el_b = float(input['energy__levels__limit__bottom']) * multiplier
+    el__lh_t = -float(input['energy__levels__limit__bottom']) * multiplier
+    el__hh_t = -float(input['energy__levels__limit__bottom']) * multiplier
     elr = float(input['energy__levels__resolution']) * multiplier
+    index_el = ...
+    index_lh = ...
+    index_hh = ...
+    if 'barriers' in input:
+            if y1[0] <= y1[-1]: index_lh = -1
+            else:               index_lh = 0
+            if y2[0] <= y2[-1]: index_hh = -1
+            else:               index_hh = 0
+            if y3[0] <= y3[-1]: index_el = 0
+            else:               index_el = -1
 
 
 
@@ -219,40 +237,62 @@ def fds(request):
     eg__temp = [-i for i in dos__grid]
     eg__temp.reverse()
 
-    dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
+    dos__lh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y1], lh, kx, ky, el__lh_b, el__lh_t, elr)
+    # dos__lh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y1], lh, kx, ky, -elt, -elb, elr)
     dos__lh__2d.reverse()
-    base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
+    base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index_lh], -y1[index_lh], structure__length)
+    # base, dos__lh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__lh[index], -valence__band__offset[index], structure__length)
     dos__lh__3d.reverse()
-    base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
+    dos__lh__merged = qqbd.dos__merge__reversed_(dos__lh__2d, dos__lh__3d)
+    # base, dos__lh__merged = qqbd.dos__merge__reversed(dos__grid, dos__lh__2d, dos__lh__3d, valence__band__offset[index])
     
-    dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
+    dos__hh__2d = qqbd.dos__gridded__2D_(eg__temp, x1, [-i for i in y2], hh, kx, ky, el__hh_b, el__hh_t, elr)
+    # dos__hh__2d = qqbd.dos__gridded__2D(eg__temp, x1, [-i for i in y2], hh, kx, ky, -elt, -elb, elr)
     dos__hh__2d.reverse()
-    base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
+    base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index_hh], -y2[index_hh], structure__length)
+    # base, dos__hh__3d = qqbd.dos__gridded__3D(eg__temp, effective__mass__hh[index], -valence__band__offset[index], structure__length)
     dos__hh__3d.reverse()
-    base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
+    dos__hh__merged = qqbd.dos__merge__reversed_(dos__hh__2d, dos__hh__3d)
+    # base, dos__hh__merged = qqbd.dos__merge__reversed(dos__grid, dos__hh__2d, dos__hh__3d, valence__band__offset[index])
 
     dos__ho__merged = []
     for i in range(0,len(base)):
         dos__ho__merged.append(dos__hh__merged[i] + dos__lh__merged[i])
 
 
-    temp = []
-    for i in range(0,len(valence__band__offset)):
-        temp.append(energy__gap[i] + valence__band__offset[i])
-    index = temp.index(max(temp))
+    # temp = []
+    # for i in range(0,len(valence__band__offset)):
+    #     temp.append(energy__gap[i] + valence__band__offset[i])
+    # index = temp.index(max(temp))
 
-    dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
-    base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
-    base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
+    dos__el__2d = qqbd.dos__gridded__2D_(dos__grid, x1, y3, el, kx, ky, el__el_b, el__el_t, elr)
+    # dos__el__2d = qqbd.dos__gridded__2D(dos__grid, x1, y3, el, kx, ky, elb, elt, elr)
+    base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index_el], y3[index_el], structure__length)
+    # base, dos__el__3d = qqbd.dos__gridded__3D(dos__grid, effective__mass__el[index], temp[index], structure__length)
+    dos__el__merged = qqbd.dos__merge_(dos__el__2d, dos__el__3d)
+    # base, dos__el__merged = qqbd.dos__merge(dos__grid, dos__el__2d, dos__el__3d, temp[index])
     
-    F_v, F_i, F_c = meqbd.F__calibration(
-        T, 
-        max(ep) - min(ep), 
-        min(y1), 
-        max(y3), 
-        dos__grid, 
-        dos__ho__merged, 
-        dos__el__merged)
+    F_v, F_i, F_c = ..., ..., ...
+    if input['fi__method'] == 'B':
+        F_v, F_i, F_c = meqbd.F__calibration(
+            T, 
+            max(ep) - min(ep), 
+            min(y1), 
+            max(y3), 
+            dos__grid, 
+            dos__ho__merged, 
+            dos__el__merged,
+            float(input['fi__res']) * multiplier)
+    else:
+        F_v, F_i, F_c = meqbd.F__calibration_2(
+            T, 
+            max(ep) - min(ep), 
+            min(y1), 
+            max(y3), 
+            dos__grid, 
+            dos__ho__merged, 
+            dos__el__merged,
+            float(input['fi__res']) * multiplier)
     fds__ho = meqbd.fds__ho(dos__grid, F_v, T)
     fds__el = meqbd.fds__el(dos__grid, F_c, T)
     

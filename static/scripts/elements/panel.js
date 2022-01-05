@@ -6,6 +6,20 @@ function set__panel__bar__type(event, type) {
       panel__form__orint.style.display = "initial";
       panel__form__distribution.style.display = "initial";
       break;
+  case "dd": 
+      set__panel__bar__type__body(event, type); 
+      panel__form__temperature.style.display = 'initial';
+      panel__form__orint.style.display = "initial";
+      panel__form__ldos__parameters.style.display = 'initial';
+      panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__space__resolution.style.display = 'initial';
+      panel__form__band__parameters.style.display = 'initial';
+      panel__form__phi.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
+      panel__form__fds__fi.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
+      panel__form__dd.style.display = 'initial';
+      break;
     case "phi": 
       set__panel__bar__type__body(event, type); 
       panel__form__temperature.style.display = 'initial';
@@ -14,10 +28,13 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
-      panel__form__qfl.style.display = 'initial';
+      // panel__form__qfl.style.display = 'initial';
       // panel__form__cc.style.display = 'initial';
       // panel__form__cos.style.display = 'initial';
       panel__form__phi.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
+      panel__form__fds__fi.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "cc": 
       set__panel__bar__type__body(event, type); 
@@ -27,9 +44,12 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
-      panel__form__qfl.style.display = 'initial';
+      // panel__form__qfl.style.display = 'initial';
+      panel__form__ep.style.display = 'initial';
       panel__form__cc.style.display = 'initial';
       panel__form__cos.style.display = 'initial';
+      panel__form__fds__fi.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "fds": 
       set__panel__bar__type__body(event, type); 
@@ -37,11 +57,13 @@ function set__panel__bar__type(event, type) {
       panel__form__orint.style.display = "initial";
       panel__form__fds.style.display = 'initial';
       // panel__form__qfl.style.display = 'initial';
+      panel__form__fds__fi.style.display = 'initial';
       panel__form__band__parameters.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
       panel__form__dos__parameters.style.display = 'initial';
       panel__form__wave__vector__parameters.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "cos": 
       set__panel__bar__type__body(event, type); 
@@ -54,6 +76,7 @@ function set__panel__bar__type(event, type) {
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "dos": 
       set__panel__bar__type__body(event, type); 
@@ -66,6 +89,7 @@ function set__panel__bar__type(event, type) {
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "ldos": 
       set__panel__bar__type__body(event, type); 
@@ -78,6 +102,7 @@ function set__panel__bar__type(event, type) {
       panel__form__band__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "energies": 
       set__panel__bar__type__body(event, type); 
@@ -85,18 +110,20 @@ function set__panel__bar__type(event, type) {
       panel__form__band__electrons.style.display = "initial";
       panel__form__band__holes.style.display = "initial";
       panel__form__band__parameters.style.display = "initial";
-      panel__form__al.style.display = 'initial';
+      // panel__form__al.style.display = 'initial';
       panel__form__space__resolution.style.display = "initial";
-      // panel__form__wave__vector.style.display = 'initial';
+      panel__form__wave__vector.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case "profile": 
       set__panel__bar__type__body(event, type); 
       panel__form__orint.style.display = "initial";
       panel__form__profile.style.display = "initial";
-      panel__form__al.style.display = 'initial';
+      //panel__form__al.style.display = 'initial';
       panel__form__space__resolution.style.display = 'initial';
+      panel__form__barriers.style.display = 'initial';
       break;
     case 'energy__paraboloids':
       set__panel__bar__type__body(event, type);
@@ -106,7 +133,7 @@ function set__panel__bar__type(event, type) {
       panel__form__wave__vector__parameters.style.display = 'initial';
       panel__form__temperature.style.display = 'initial';
       panel__form__ep.style.display = 'initial';
-
+      panel__form__barriers.style.display = 'initial';
   }
     // properties__list.style.width = properties__property.getBoundingClientRect().right - properties__property.getBoundingClientRect().left + "px";
     // localStorage.setItem('properties__list__width', properties__list.style.width);
@@ -153,6 +180,9 @@ function clean__panel() {
   panel__form__phi.style.display = 'none';
   panel__form__fds.style.display = 'none';
   panel__form__ep.style.display = 'none';
+  panel__form__fds__fi.style.display = 'none';
+  panel__form__barriers.style.display = 'none';
+  panel__form__dd.style.display = 'none';
 }
 
 
@@ -184,7 +214,12 @@ function get__sheet__unit(property) {
 }
 
 function get__structure() {
-  return '"structure": "' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '",'
+  if (panel__form__barriers__input.checked){
+    return '"structure": "' + localStorage.getItem('panel__form__barriers__material') + ' ' + localStorage.getItem('panel__form__barriers__thickness') + '\\n' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '\\n'  + localStorage.getItem('panel__form__barriers__material') + ' ' + localStorage.getItem('panel__form__barriers__thickness') + '",';
+  }
+  else {   
+    return '"structure": "' + localStorage.getItem('structure').replaceAll('\r', '').replaceAll('\n', '\\n') + '",';
+  }
 }
 
 function get__structure__unit() {
@@ -386,6 +421,9 @@ panel__bar__run.onclick = function (event) {
     switch(panel__bar__type.dataset.type) {
       case 'distribution':
         panel__bar__run__distribution(event);
+        break;
+      case 'dd':
+        panel__bar__run__dd(event);
         break;
       case 'phi':
         panel__bar__run__phi(event);
