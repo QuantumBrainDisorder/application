@@ -329,7 +329,7 @@ function data__recived(data, name) {
 
           const index = data['plot'].search('</head>');
           var winPrint = window.open('','_blank');
-          // console.log(data['plot'].slice(0,index) + '<title>' + 'Total Energies' + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
+          console.log(data['plot'].slice(0,index) + '<title>' + 'Total Energies' + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
           winPrint.document.write(data['plot'].slice(0,index) + '<title>' + name + '</title>' + '<style>body{margin:0}</style>' + data['plot'].slice(index));
           winPrint.document.close();
           winPrint.focus();
